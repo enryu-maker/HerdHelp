@@ -1,0 +1,177 @@
+import { View, Text, TextInput, ScrollView, TouchableOpacity ,Image,KeyboardAvoidingView} from 'react-native';
+import React from 'react';
+import Header from '../../Components/Header';
+import FormInput from '../../Components/FormInput';
+import  CustomSwitch  from '../../Components/CustomSwitch';
+import {images,COLORS,SIZES, FONTS} from '../../Components/Constants'
+import TextButton from '../../Components/TextButton';
+const Login =({navigation})=>{
+    const [email, setEmail] = React.useState("")
+    const [password, setPassword] = React.useState("")
+    const [showPass, setShowPass] = React.useState(false)
+    const [saveMe, setSaveMe] = React.useState(false)
+    function isEnableSignIn() {
+        return email != "" && password != ""
+    }
+  return (
+    <View style={{
+        marginTop:'8%',
+        // flex:1
+    }}>
+      <Header
+      img={images.logo}
+      containerStyle={{
+          margin:'10%',
+        //   marginTop:'20%'
+      }}/>
+      {/* <View  style={{flex:1}}> */}
+
+      
+      {/* <KeyboardAvoidingView
+    //  style={{flex:1}}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+    //   keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+    > */}
+        <ScrollView
+    //   style={{flex:1}}
+    >
+      
+      
+      <Text style={{
+          ...FONTS.h2,
+          alignSelf:'center',
+          marginTop:'8%'
+      }}>
+          Let's Sign You In
+      </Text>
+      <Text style={{
+          ...FONTS.body3,
+          alignSelf:'center',
+        //   marginTop:'10%'
+      }}>
+          Login account to continue!
+      </Text>
+      <View style={{
+          flex: 1,
+          marginTop: SIZES.height > 800 ? SIZES.padding * 2 : SIZES.radius
+      }}>
+      <FormInput
+    label={'Email'}
+    value={email}
+    onChange={(text)=>{setEmail(text)}}
+    placeholder={'Enter Email'}
+    keyboardType="email-address"
+    autoCompleteType="email"
+    keytype='next'
+    appendComponent={
+        <View
+            style={{
+                justifyContent: 'center'
+            }}
+        >
+            <Image
+                source={(email == "") || (email != "" ) ? images.correct : images.cancel}
+                style={{
+                    height: 20,
+                    width: 20,
+                    tintColor: (email == "") ? COLORS.gray : (email != "") ? COLORS.green : COLORS.red
+                }}
+            />
+        </View>
+    }
+    />
+      <FormInput
+      label={'Password'}
+    value={password}
+    secureTextEntry={!showPass}
+    autoCompleteType="password"
+    onChange={(value)=>{setPassword(value)}}
+    placeholder={'Enter Password'}
+    keytype="go"
+    appendComponent={
+        <TouchableOpacity
+            style={{
+                width: 40,
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+            }}
+            onPress={() => setShowPass(!showPass)}
+        >
+            <Image
+                source={showPass ? images.eye_close : images.eye}
+                style={{
+                    height: 20,
+                    width: 20,
+                    tintColor: showPass? COLORS.Primary : COLORS.gray
+                }}
+            />
+        </TouchableOpacity>
+    }
+    />
+    <View
+                    style={{
+                        flexDirection: 'row',
+                        marginTop: SIZES.radius,
+                        // justifyContent: 'center',
+                        // alignSelf:'center'
+                        // backgroundColor:'yellow',
+                        width:'88%',
+                        alignSelf:'center',
+                        marginLeft:'7%'
+                    }}
+                >
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <CustomSwitch
+                            label="Save Me"
+                            value={saveMe}
+                            onChange={(value) => setSaveMe(value)}
+                        />
+                    </View>
+                    <TextButton
+                        label="Forgot Password?"
+                        buttonContainerStyle={{
+                            backgroundColor: null
+                        }}
+                        labelStyle={{
+                            color: COLORS.gray,
+                            ...FONTS.body4
+                        }}
+                        onPress={() => navigation.navigate("ForgotPassword")}
+                    />
+                </View>
+    <TextButton
+    buttonContainerStyle={{
+        height: 55,
+        alignItems: 'center',
+        marginTop: SIZES.padding,
+        borderRadius: SIZES.radius,
+        backgroundColor: isEnableSignIn() ? COLORS.Primary : COLORS.transparentPrimary2,
+    }}
+    onPress={()=>navigation.replace('Draw')}
+      label={'Login'}/>
+      <View
+                    style={{
+                        flexDirection: 'row',
+                        marginTop: SIZES.radius,
+                        justifyContent: 'center'
+                    }}
+                >
+                    <Text style={{ color: COLORS.darkGray, ...FONTS.body3 }}>Don't have an account? </Text>
+                    <TouchableOpacity
+                    onPress={()=>{navigation.navigate("Signup")}}>
+                        <Text style={{color: COLORS.Primary,
+                            ...FONTS.h3}}>
+                            Signup
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                
+      </View>
+      </ScrollView>
+      {/* </KeyboardAvoidingView> */}
+      {/* </View> */}
+      
+    </View>
+  );
+}
+export default Login;
