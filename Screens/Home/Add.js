@@ -29,8 +29,11 @@ import SquareCard from "../../Components/SquareCard"
         }
         title={"Add Livestock"}
       />
-      <ScrollView style={{
-        // flexDirection:'column',
+      <View style={{
+        // flex:1,
+        flexDirection:"column",
+        justifyContent:'space-around',
+        alignSelf:'center'
       }}>
       <SquareCard
       Img={images.bread}
@@ -42,7 +45,7 @@ import SquareCard from "../../Components/SquareCard"
       type={"Purchased"}
       onPress={()=>{navigation.navigate("Buy")}}
       />
-      </ScrollView>
+      </View>
     </View>
   );
 }

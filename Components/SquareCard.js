@@ -4,7 +4,8 @@ import { COLORS, SIZES,images, FONTS } from './Constants';
 
 export const SquareCard=({Img,type,onPress})=>{
   return (
-    <TouchableOpacity style={{
+    <View>
+<TouchableOpacity style={{
         flexDirection:'column',
         backgroundColor:COLORS.lightGray2,
         height:150,
@@ -26,6 +27,8 @@ export const SquareCard=({Img,type,onPress})=>{
             {type}
         </Text>
     </TouchableOpacity>
+    </View>
+    
   );
 }
 export default SquareCard;

@@ -25,7 +25,8 @@ const drawerNav = () => {
         drawerLabelStyle: [FONTS.h4,{letterSpacing:2}],
         drawerType:"front",
         overlayColor: COLORS.Primary,
-        backBehavior:"history",      
+        backBehavior:"history", 
+        drawerStatusBarAnimation:"fade"     
       }}
     >
       <Drawer.Screen name='Home' component={Home} options={{

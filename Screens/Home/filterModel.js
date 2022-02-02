@@ -119,7 +119,7 @@ const FilterModal = ({ isVisible, onClose }) => {
                                 borderRadius: SIZES.base,
                                 backgroundColor: COLORS.Primary
                             }}
-                            onPress={() => console.log("Apply Filter")}
+                            onPress={() => setShowFilterModal(false)}
                         />
                     </View>
                 </Animated.View>

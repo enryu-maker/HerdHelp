@@ -15,12 +15,11 @@ export const AddPurchased = ({ navigation }) => {
   const [breed, setBreed] = useState("");
   const [tag, setTag]=useState('')
   const [name, setName]=useState('')
-  const [mother, setMother]=useState('')
-  const [father, setFather]=useState('')
   const [weight, setWeight]=useState('')
   const [date, setDate] = useState('');
   const [vacc,setVacc]=useState('')
   const [age,setAge]=useState('')
+  const AddPurchased = 2;
 
 
   const onChangeMS = (value) => {
@@ -62,10 +61,7 @@ export const AddPurchased = ({ navigation }) => {
     <View style={{flex:1}}
     >
       <ScrollView
-        // style={{flex:1}}
-        contentContainerStyle={{flexGrow:1}}
-        // showsVerticalScrollIndicator={false}
-        
+        contentContainerStyle={{paddingBottom:120}}
         >
      
       <KeyboardAvoidingView behavior="height"

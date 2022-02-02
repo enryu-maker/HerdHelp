@@ -20,6 +20,7 @@ export const AddBreed = ({ navigation }) => {
   const [date, setDate] = useState('');
   const [vacc,setVacc]=useState('')
   const [vaccdate, setVaccdate] = useState('');
+  const AddBreed = 1;
 
   
 
@@ -59,11 +60,11 @@ export const AddBreed = ({ navigation }) => {
     <View style={{flex:1}}>
       <ScrollView
         // style={{flex:1}}
-        // contentContainerStyle={{flexGrow:1}}
+        contentContainerStyle={{paddingBottom:120}}
         showsVerticalScrollIndicator={false}
         
         >
-      <KeyboardAvoidingView behavior="padding">
+      <KeyboardAvoidingView behavior="position">
 
       
       <FormInput
