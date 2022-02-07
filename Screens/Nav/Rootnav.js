@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View,StatusBar } from 'react-native'
+import { Text, StyleSheet, View,StatusBar,Image } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -7,7 +7,7 @@ import Login from '../Auth/Login';
 import {Signup} from "../Auth/Signup"
 import { Home } from '../Home/Home';
 import Add from '../Home/Add';
-import { COLORS, SIZES, FONTS } from '../../Components/Constants';
+import { COLORS, SIZES, FONTS,images } from '../../Components/Constants';
 import medication from '../Home/medication';
 import weight from '../Home/weight';
 import { Info } from '../../Components/Info';

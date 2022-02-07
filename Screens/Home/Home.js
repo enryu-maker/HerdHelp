@@ -63,6 +63,9 @@ export const Home = ({ navigation }) => {
         }
         placeholder={"Search"}
         value={searched}
+        containerStyle={{
+          paddingBottom:10
+        }}
         onChange={(value) => { setSearched(value) }}
         inputStyle={{
           marginLeft: '10%'
@@ -98,7 +101,7 @@ export const Home = ({ navigation }) => {
       Weight={listItem.weight}
       image={listItem.image}
       onPress={()=>{navigation.navigate("Info",{
-        value:listItem.Name,
+        value:listItem,
       })}}/>
       ))}
       </ScrollView>

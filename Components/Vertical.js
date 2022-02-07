@@ -2,7 +2,7 @@ import { View, Text,Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { COLORS, SIZES,images, FONTS } from './Constants';
 
-export const SquareCard=({Img,type,onPress,style})=>{
+export default function Vertical({Img,type,onPress,style}) {
   return (
     <View>
 <TouchableOpacity style={{
@@ -17,20 +17,10 @@ export const SquareCard=({Img,type,onPress,style})=>{
         ...style
     }}
     onPress={onPress}>
-        <Image
-        source={Img}
-        style={{
-            height:80,
-            width:80,
-            alignSelf:'center',
-            justifyContent:"center"
-        }}/>
         <Text style={[FONTS.h3,{alignSelf:'center'}]}>
             {type}
         </Text>
     </TouchableOpacity>
     </View>
-    
   );
 }
-export default SquareCard;
