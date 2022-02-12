@@ -186,7 +186,7 @@ export const AddBreed = ({ navigation }) => {
             setDate(date);
           }}
         />
-        <View style={[styles.container,{marginLeft:40}]}>
+        <View style={[styles.container,{marginLeft:0}]}>
         <FormInput
         prependComponent={
           <View style={{ alignSelf: 'center', justifyContent: 'center' }}>
@@ -196,18 +196,18 @@ export const AddBreed = ({ navigation }) => {
         }
         value={vacc}
         onChange={(value)=>{setVacc(value)}}
-        placeholder={"Vaccine"}
+        placeholder={"Medicine"}
         keytype={"next"}
         inputStyle={{ marginLeft: 10 }} 
         containerStyle={{borderRadius: SIZES.padding,
           // margin: 20,
-          width: 160}}
+          width: 180}}
           />
         <DatePicker
-          style={[styles.datePickerStyle,{width: 160,marginTop:22}]}
+          style={[styles.datePickerStyle,{width: 180,marginTop:22}]}
           date={vaccdate} // Initial date from state
           mode="date" // The enum of date, datetime and time
-          placeholder="Vaccine Date"
+          placeholder="Medication Date"
           format="DD-MM-YYYY"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"

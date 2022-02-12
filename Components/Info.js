@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './Header';
 import SquareCard from './SquareCard';
 import ImageCard from './ImageCard';
-import { COLORS, SIZES,images } from './Constants';
+import { COLORS, SIZES,images,FONTS } from './Constants';
 import Vertical from './Vertical';
 export const Info=({ navigation, route })=>{
   const [animal, setAnimal] = React.useState([]);
@@ -26,7 +26,6 @@ export const Info=({ navigation, route })=>{
           }}>
             <TouchableOpacity
               style={{
-                // marginTop: 20,
                 marginLeft: 25,
               }}
               onPress={() => { navigation.goBack() }}>
@@ -55,7 +54,7 @@ export const Info=({ navigation, route })=>{
         <View style={{flexDirection:'row',width:"88%",alignSelf:'center',marginTop:10,justifyContent:"space-between",height:320}}>
         <View style={{flexDirection:'column',alignSelf:'center',justifyContent:'space-evenly'}}>
         <SquareCard Img={animal.Gender} type={animal.GenderType} style={{margin:"0%",marginTop:0}}/>
-        <Vertical Img={animal.Gender} type={animal.GenderType} style={{margin:"0%",marginTop:20}}/>
+        <Vertical purchased={animal.purchased} birth={animal.bornimg} purchase={animal.cash} style={{margin:"0%",marginTop:20}}/>
         </View>
         <ImageCard Name={animal.Name} Tag={animal.Tag_number} Weight={animal.weight} purchased={animal.purchased} birth={animal.bornimg} purchase={animal.cash} species={animal.Species}/>
         </View>
@@ -67,6 +66,9 @@ export const Info=({ navigation, route })=>{
         justifyContent:'space-evenly',
         width:'88%',
         alignSelf:'center',marginTop:20,paddingBottom:20}}>
+          <Text style={[FONTS.h2,{padding:8}] }>
+          Medication
+        </Text>
         </View>
     </ScrollView>
   );

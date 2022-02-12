@@ -36,13 +36,10 @@ export const ImageCard=({Name,onPress,style,Tag,Weight, purchased, birth, purcha
             Weight: {Weight} lbs
         </Text>
         <LineDivider/>
-        {
-          purchased == 1 ? <Image source={purchase} style={{ width:80,height:80,margin:10}}/> : <Image source={birth} style={{ width:80,height:80,margin:10}}/>
-        }
-        <LineDivider/>
         <Text style={[FONTS.body3,{padding:8}]}>
         Species: {species}
         </Text>
+        <LineDivider/>
         </View>
     </TouchableOpacity>
     </View>

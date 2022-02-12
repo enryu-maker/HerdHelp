@@ -218,7 +218,7 @@ export const AddPurchased = ({ navigation }) => {
           ):(<View></View>)
         }
       </View>
-         <View style={[styles.container,{marginLeft:15}]}>
+         <View style={[styles.container,{marginLeft:10}]}>
         <FormInput
         prependComponent={
           <View style={{ alignSelf: 'center', justifyContent: 'center' }}>
@@ -228,18 +228,18 @@ export const AddPurchased = ({ navigation }) => {
         }
         value={vacc}
         onChange={(value)=>{setVacc(value)}}
-        placeholder={"Vaccine"}
+        placeholder={"Medicine"}
         keytype={"next"}
         inputStyle={{ marginLeft: 10 }} 
         containerStyle={{borderRadius: SIZES.padding,
           // margin: 20,
-          width: 160}}
+          width: 180}}
           />
         <DatePicker
           style={[styles.datePickerStyle,{width: 180,marginTop:22}]}
           date={date} // Initial date from state
           mode="date" // The enum of date, datetime and time
-          placeholder="Vaccine Date"
+          placeholder="Medication Date"
           format="DD-MM-YYYY"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"

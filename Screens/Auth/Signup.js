@@ -42,7 +42,7 @@ export  const Signup=({navigation})=>{
       }}>
     {/* Input */}
       <FormInput
-    //   label={'Email'}
+      label={'Email'}
     value={email}
     onChange={(text)=>{setEmail(text)}}
     placeholder={'Enter Email'}
@@ -66,6 +66,7 @@ export  const Signup=({navigation})=>{
     }
     />
     <FormInput
+    label={"Username"}
     value={username}
     onChange={(text)=>{setUsername(text)}}
     placeholder={'Enter Username'}
@@ -88,7 +89,7 @@ export  const Signup=({navigation})=>{
     }
     />
       <FormInput
-    //   label={'Email'}
+      label={'Password'}
     value={password}
     secureTextEntry={!showPass}
     autoCompleteType="password"

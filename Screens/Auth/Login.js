@@ -55,6 +55,7 @@ const Login =({navigation})=>{
           flex: 1,
           marginTop: SIZES.height > 800 ? SIZES.padding * 2 : SIZES.radius
       }}>
+          
       <FormInput
     label={'Email'}
     value={email}

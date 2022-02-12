@@ -183,18 +183,6 @@ export const dummydata = [
         weight:12,
         image:require("../assets/animal_logo/rabbit.png")
   },
-  {
-        Id:1,
-        Tag_number:2352,
-        Name:'Horsy',
-        Species: 'Horse',
-        purchased:0,
-        bornimg:require("../assets/animal_logo/newborn.png"),
-        cash:require("../assets/animal_logo/cash.png"),
-        Gender:require("../assets/animal_logo/male.png"),GenderType:"male",
-        weight:120,
-        image:require("../assets/animal_logo/horse.png")
-},
 ]
 export const catedata = [
     {
