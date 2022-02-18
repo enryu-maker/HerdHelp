@@ -5785,6 +5785,11 @@
     "jscodeshift" "^0.11.0"
     "nullthrows" "^1.1.1"
 
+"react-native-date-picker@^4.1.5":
+  "integrity" "sha512-JO342dCAcUpWi8kwaji9zOnidJdHagAHyhblUDUMyUfjZmEq2ZkqNnC00M7pN9Tu+D2YNs7yeAiOupMJxev9aQ=="
+  "resolved" "https://registry.npmjs.org/react-native-date-picker/-/react-native-date-picker-4.1.5.tgz"
+  "version" "4.1.5"
+
 "react-native-datepicker@^1.7.2":
   "integrity" "sha1-WNCCJZGgrJsyq6CCZQIioO4pZp0="
   "resolved" "https://registry.npmjs.org/react-native-datepicker/-/react-native-datepicker-1.7.2.tgz"

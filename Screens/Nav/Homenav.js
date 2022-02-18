@@ -8,8 +8,8 @@ import {Signup} from "../Auth/Signup"
 import { Home } from '../Home/Home';
 import Add from '../Home/Add';
 import { COLORS, SIZES, FONTS, images } from '../../Components/Constants';
-import medication from '../Home/medication';
-import weight from '../Home/weight';
+import Medication from '../Home/medication';
+import Weight from '../Home/weight';
 import { Info } from '../../Components/Info';
 import AddBreed from '../Livestocks/AddBreed';
 import AddPurchased from '../Livestocks/AddPurchased';
@@ -47,14 +47,14 @@ const DrawerNav = () => {
                 style={[{ height: 25, width: 25 }]}
               /> )       
           }} />
-       <Drawer.Screen name='Update Weight' component={weight} options={{
+       <Drawer.Screen name='Update Weight' component={Weight} options={{
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.weight}
                 style={[{ height: 25, width: 25 }]}
               /> )       
           }} />
-       <Drawer.Screen name='Add Medication' component={medication} options={{
+       <Drawer.Screen name='Add Medication' component={Medication} options={{
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.med}

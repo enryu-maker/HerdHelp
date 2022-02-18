@@ -1,132 +1,131 @@
-import React, { useState } from 'react';
-import {
-    View,
-    TouchableOpacity,
-    Image
-} from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import React, {useState} from 'react';
+import {View, TouchableOpacity, Image} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import FormInput from '../../Components/FormInput';
 
-import { COLORS, SIZES,images} from "../../Components/Constants"
+import {COLORS, SIZES, images} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 
-const MyAccountEdit = ({ navigation }) => {
-
-    const [fullName, setFullName] = useState("")
-    const [phoneNo, setPhoneNo] = useState("")
-    const [idCard, setIdCard] = useState("")
-    const [dob, setDob] = useState(null)
-    const [gender, setGender] = useState("")
-    const [email, setEmail] = useState("")
-    const [addr, setAddr] = useState("")
-    const [city, setCity] = useState("")
-    const [state, setState] = useState("")
-    const [zip, setZip] = useState("")
-    // const updateprofile = async () => {
-    //     try {
-    //       await axiosIns.patch(`/update-profile/${dummyData.userid}`,{
-    //           "Name":fullName,
-    //         //   "Phone":phoneNo,
-    //           "ShopAddress":addr,
-    //           "Email":email
-    //       }).then(()=>{alert("Details updated")})
-    //     } catch (e) {
-    //       console.log('error', e.response.data);
-    //     }
-    //   };
-    function renderHeader() {
-        return (
-            <Header
+const MyAccountEdit = ({navigation}) => {
+  const [fullName, setFullName] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
+  const [idCard, setIdCard] = useState('');
+  const [dob, setDob] = useState(null);
+  const [gender, setGender] = useState('');
+  const [email, setEmail] = useState('');
+  const [addr, setAddr] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zip, setZip] = useState('');
+  // const updateprofile = async () => {
+  //     try {
+  //       await axiosIns.patch(`/update-profile/${dummyData.userid}`,{
+  //           "Name":fullName,
+  //         //   "Phone":phoneNo,
+  //           "ShopAddress":addr,
+  //           "Email":email
+  //       }).then(()=>{alert("Details updated")})
+  //     } catch (e) {
+  //       console.log('error', e.response.data);
+  //     }
+  //   };
+  function renderHeader() {
+    return (
+      <Header
         leftComponent={
-          <View style={{
-            justifyContent: 'center',
-            position:'absolute',
-                marginTop:25,
-                zIndex: 1,
-            
-          }}>
+          <View
+            style={{
+              justifyContent: 'center',
+              position: 'absolute',
+              marginTop: 25,
+              zIndex: 1,
+            }}>
             <TouchableOpacity
               style={{
                 marginLeft: 25,
-                
               }}
-              onPressIn={() => { navigation.goBack() }}>
-               <Image source={images.back} style={{width:28,height:28,tintColor:COLORS.darkGray2}}/>
+              onPressIn={() => {
+                navigation.goBack();
+              }}>
+              <Image
+                source={images.back}
+                style={{width: 28, height: 28, tintColor: COLORS.darkGray2}}
+              />
             </TouchableOpacity>
-
           </View>
         }
-        title={"My Account"}
+        title={'My Account'}
         titleStyle={{
-            // alignSelf:"center",
-          marginLeft:50
+          // alignSelf:"center",
+          marginLeft: 50,
         }}
         rightComponent={
-            <View
+          <View
             style={{
-                width: 40
+              width: 40,
             }}
-        />}
+          />
+        }
       />
-      )}
+    );
+  }
 
-    function renderForm() {
-        return (
-            <View
-                style={{
-                    paddingVertical: SIZES.padding,
-                    paddingHorizontal: SIZES.radius,
-                    borderRadius: SIZES.radius,
-                    backgroundColor: COLORS.lightGray2
-                }}
-            >
-                {/* Name */}
-                <FormInput
-                    label="Full Name"
-                    value={fullName}
-                    onChange={(value) => {
-                        setFullName(value)
-                    }}
-                    inputContainerStyle={{
-                        backgroundColor: COLORS.white
-                    }}
-                />
+  function renderForm() {
+    return (
+      <View
+        style={{
+          paddingVertical: SIZES.padding,
+          paddingHorizontal: SIZES.radius,
+          borderRadius: SIZES.radius,
+          backgroundColor: COLORS.lightGray2,
+        }}>
+        {/* Name */}
+        <FormInput
+          label="Full Name"
+          value={fullName}
+          onChange={value => {
+            setFullName(value);
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+        />
 
-                {/* Phone Number */}
-                <FormInput
-                    label="Phone Number"
-                    value={phoneNo}
-                    onChange={(value) => {
-                        setPhoneNo(value)
-                    }}
-                    containerStyle={{
-                        marginTop: SIZES.radius
-                    }}
-                    inputContainerStyle={{
-                        backgroundColor: COLORS.white
-                    }}
-                />
+        {/* Phone Number */}
+        <FormInput
+          label="Phone Number"
+          value={phoneNo}
+          onChange={value => {
+            setPhoneNo(value);
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+        />
 
-                {/* ID Card */}
-                <FormInput
-                    label="Farm Name"
-                    value={idCard}
-                    onChange={(value) => {
-                        setIdCard(value)
-                    }}
-                    containerStyle={{
-                        marginTop: SIZES.radius
-                    }}
-                    inputContainerStyle={{
-                        backgroundColor: COLORS.white
-                    }}
-                />
+        {/* ID Card */}
+        <FormInput
+          label="Farm Name"
+          value={idCard}
+          onChange={value => {
+            setIdCard(value);
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+        />
 
-                {/* D.O.B */}
-                {/* <FormDateInput
+        {/* D.O.B */}
+        {/* <FormDateInput
                     label="Date of Birth"
                     placeholder="MM/DD/YYYY"
                     value={dob}
@@ -139,8 +138,8 @@ const MyAccountEdit = ({ navigation }) => {
                     }}
                 /> */}
 
-                {/* Gender */}
-                {/* <FormPicker
+        {/* Gender */}
+        {/* <FormPicker
                     label="Gender"
                     placeholder="Select gender"
                     modalTitle="Select Gender"
@@ -155,40 +154,40 @@ const MyAccountEdit = ({ navigation }) => {
                     }}
                 /> */}
 
-                {/* Email */}
-                <FormInput
-                    label="Email"
-                    keyboardType="email-address"
-                    autoCompleteType="email"
-                    value={email}
-                    onChange={(value) => {
-                        setEmail(value)
-                    }}
-                    containerStyle={{
-                        marginTop: SIZES.radius
-                    }}
-                    inputContainerStyle={{
-                        backgroundColor: COLORS.white
-                    }}
-                />
+        {/* Email */}
+        <FormInput
+          label="Email"
+          keyboardType="email-address"
+          autoCompleteType="email"
+          value={email}
+          onChange={value => {
+            setEmail(value);
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+        />
 
-                {/* Address */}
-                <FormInput
-                    label="Address"
-                    value={addr}
-                    onChange={(value) => {
-                        setAddr(value)
-                    }}
-                    containerStyle={{
-                        marginTop: SIZES.radius
-                    }}
-                    inputContainerStyle={{
-                        backgroundColor: COLORS.white
-                    }}
-                />
+        {/* Address */}
+        <FormInput
+          label="Address"
+          value={addr}
+          onChange={value => {
+            setAddr(value);
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+        />
 
-                {/* City */}
-                {/* <FormInput
+        {/* City */}
+        {/* <FormInput
                     label="City"
                     value={city}
                     onChange={(value) => {
@@ -202,8 +201,8 @@ const MyAccountEdit = ({ navigation }) => {
                     }}
                 /> */}
 
-                {/* State */}
-                {/* <FormPicker
+        {/* State */}
+        {/* <FormPicker
                     label="State"
                     placeholder="Select state"
                     modalTitle="Select State"
@@ -221,8 +220,8 @@ const MyAccountEdit = ({ navigation }) => {
                     }}
                 /> */}
 
-                {/* Zip */}
-                {/* <FormInput
+        {/* Zip */}
+        {/* <FormInput
                     label="Zip"
                     value={zip}
                     onChange={(value) => {
@@ -235,44 +234,44 @@ const MyAccountEdit = ({ navigation }) => {
                         backgroundColor: COLORS.white
                     }}
                 /> */}
-            </View>
-        )
-    }
+      </View>
+    );
+  }
 
-    return (
-        <View
-            style={{
-                flex: 1,
-                backgroundColor: COLORS.white
-            }}
-        >
-            {renderHeader()}
+  return (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: COLORS.white,
+      }}>
+      {renderHeader()}
 
-            <KeyboardAwareScrollView
-                keyboardDismissMode="on-drag"
-                contentContainerStyle={{
-                    marginTop: SIZES.radius,
-                    paddingHorizontal: SIZES.padding,
-                    paddingBottom: 40
-                }}
-            >
-                {renderForm()}
-            </KeyboardAwareScrollView>
+      <KeyboardAwareScrollView
+        keyboardDismissMode="on-drag"
+        contentContainerStyle={{
+          marginTop: SIZES.radius,
+          paddingHorizontal: SIZES.padding,
+          paddingBottom: 40,
+        }}>
+        {renderForm()}
+      </KeyboardAwareScrollView>
 
-            <TextButton
-                buttonContainerStyle={{
-                    height: 60,
-                    marginTop: SIZES.padding,
-                    marginHorizontal: SIZES.padding,
-                    marginBottom: SIZES.padding,
-                    borderRadius: SIZES.radius,
-                    backgroundColor: COLORS.Primary
-                }}
-                label="Save"
-                onPress={() => {updateprofile()}}
-            />
-        </View>
-    )
-}
+      <TextButton
+        buttonContainerStyle={{
+          height: 60,
+          marginTop: SIZES.padding,
+          marginHorizontal: SIZES.padding,
+          marginBottom: SIZES.padding,
+          borderRadius: SIZES.radius,
+          backgroundColor: COLORS.Primary,
+        }}
+        label="Save"
+        onPress={() => {
+          updateprofile();
+        }}
+      />
+    </View>
+  );
+};
 
 export default MyAccountEdit;

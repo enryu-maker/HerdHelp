@@ -21,7 +21,7 @@ export const Home = ({ navigation }) => {
   }
   return (
     <View 
-    style={{flex:1,backgroundColor:COLORS.layout,}}>
+    style={{flex:1,backgroundColor: COLORS.white}}>
       {showFilterModal &&
         <FilterModal
           isVisible={showFilterModal}
@@ -67,7 +67,7 @@ export const Home = ({ navigation }) => {
             }}
             onPress={()=>navigation.navigate("MyAccount")}
             >
-              <Image source={images.dog}style={{width:35,height:35,tintColor:COLORS.darkGray2}} />
+              <Image source={images.login}style={{width:35,height:35,tintColor:COLORS.darkGray2}} />
             </TouchableOpacity>
             </View>
         }
