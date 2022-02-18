@@ -32,7 +32,8 @@ export const images ={
     disease:require("../assets/Add/disease.png"),
     medicines:require("../assets/Add/medicines.png"),
     dropper:require("../assets/Add/dropper.png"),
-    withdraw:require("../assets/Add/atm.png")
+    withdraw:require("../assets/Add/atm.png"),
+    logout:require("../assets/Logo/logout.png")
 }
 export const COLORS={
     Primary:"rgb(126,204,122)",

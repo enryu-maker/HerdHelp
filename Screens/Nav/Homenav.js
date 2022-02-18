@@ -15,6 +15,7 @@ import AddBreed from '../Livestocks/AddBreed';
 import AddPurchased from '../Livestocks/AddPurchased';
 import MyAccount from '../Account/MyAccount';
 import MyAccountEdit from '../Account/MyAccountEdit';
+import Drawercontent from './Drawercontent';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -31,6 +32,7 @@ const DrawerNav = () => {
         backBehavior:"history",  
         drawerStatusBarAnimation:"fade",
       }}
+      // drawerContent={props =><Drawercontent {...props}/>}
     >
       <Drawer.Screen name='Home' component={Home} options={{
         // drawerActiveTintColor: COLORS.white,

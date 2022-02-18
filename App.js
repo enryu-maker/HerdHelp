@@ -6,7 +6,7 @@ import Rootnav from "./Screens/Nav/Rootnav"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var signal= true
 export default function App() {
-  const [Route,setRoute]=React.useState(false);
+  const [Route,setRoute]=React.useState(true);
   async function retrieveData(){
     let data
       const token = await AsyncStorage.getItem('token');
