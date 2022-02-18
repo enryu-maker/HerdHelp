@@ -8,7 +8,7 @@ export const images ={
     eye_close:require("../assets/Logo/eye_close.png"),
     correct:require("../assets/Logo/correct.png"),
     cancel:require("../assets/Logo/cancel.png"),
-    login:require("../assets/Logo/user.png"),
+    login:require("../assets/Logo/profile-user.png"),
     search:require("../assets/Logo/search.png"),
     filter:require("../assets/Logo/filter.png"),
     menu:require("../assets/Logo/menu.png"),

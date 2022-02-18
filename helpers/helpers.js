@@ -4,7 +4,7 @@ import axios from 'axios';
 let headers = {};
 
 const axiosIns = axios.create({
-    baseURL: 'https://api-apnimandi.codiux.net',
+    baseURL: 'https://herdhelp.herokuapp.com/',
     headers,
 });
 

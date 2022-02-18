@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
-import {View, TouchableOpacity, Image} from 'react-native';
+import {View, TouchableOpacity, Image,Text} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import FormInput from '../../Components/FormInput';
-
+// import ImagePicker from 'react-native-image-picker';
+import { launchImageLibrary, ImageLibraryOptions, launchCamera } from 'react-native-image-picker';
 import {COLORS, SIZES, images} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 
 const MyAccountEdit = ({navigation}) => {
+  const [pic,setPic]=React.useState("")
+  const [picdata,setPicdata]=React.useState("")
   const [fullName, setFullName] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
   const [idCard, setIdCard] = useState('');
@@ -19,8 +22,9 @@ const MyAccountEdit = ({navigation}) => {
   const [addr, setAddr] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
+  const [zip, setZip] = useState([]);
   // const updateprofile = async () => {
+  
   //     try {
   //       await axiosIns.patch(`/update-profile/${dummyData.userid}`,{
   //           "Name":fullName,
@@ -32,6 +36,45 @@ const MyAccountEdit = ({navigation}) => {
   //       console.log('error', e.response.data);
   //     }
   //   };
+  React.useEffect(()=>{
+    // updateprofile()
+  })
+  function openCamara(){
+    let options = {
+        storageOptions: {
+            path: 'images',
+            mediaType: 'photo',
+        },
+        includeBase64: true,
+    };
+    launchImageLibrary(options, response => {
+      // console.log(response.assets[0].base64)
+      if (response.assets) {
+          imageAssetsArray = response.assets[0].uri
+          setPic(imageAssetsArray)
+           setPicdata(response.assets[0].base64)
+      }
+  });
+};
+function renderFileUri() {
+    if (pic) {
+      return <Image
+        source={{ uri: pic}}
+        style={{width: 100,
+          height: 100,
+          borderRadius: 100 / 2,
+          alignSelf: 'center',}}
+      />
+    } else {
+      return <Image
+        source={images.login}
+        style={{width: 100,
+          height: 100,
+          borderRadius: 100 / 2,
+          alignSelf: 'center',}}
+      />
+    }
+  };
   function renderHeader() {
     return (
       <Header
@@ -82,6 +125,18 @@ const MyAccountEdit = ({navigation}) => {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
+          <View
+        style={{
+          marginTop: SIZES.padding,
+          borderRadius: SIZES.radius,
+          paddingHorizontal: SIZES.radius,
+          // backgroundColor: COLORS.lightGray2,
+        }}>
+                        <TouchableOpacity
+                            onPress={() => {openCamara()}}>
+                            {renderFileUri()}
+                        </TouchableOpacity>
+        </View>
         {/* Name */}
         <FormInput
           label="Full Name"
@@ -245,7 +300,6 @@ const MyAccountEdit = ({navigation}) => {
         backgroundColor: COLORS.white,
       }}>
       {renderHeader()}
-
       <KeyboardAwareScrollView
         keyboardDismissMode="on-drag"
         contentContainerStyle={{

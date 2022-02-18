@@ -4,14 +4,16 @@ import Header from '../../Components/Header';
 import FormInput from '../../Components/FormInput';
 import  CustomSwitch  from '../../Components/CustomSwitch';
 import {images,COLORS,SIZES, FONTS} from '../../Components/Constants'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextButton from '../../Components/TextButton';
 import axios from "axios"
-axios.defaults.baseURL = 'http://herdhelp.herokuapp.com';
+axios.defaults.baseURL = 'https://herdhelp.herokuapp.com/';
 const Login =({navigation})=>{
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [showPass, setShowPass] = React.useState(false)
     const [saveMe, setSaveMe] = React.useState(false)
+    const [EmailError,setEmailError]=React.useState("")
     function isEnableSignIn() {
         return email != "" && password != ""
     }
@@ -27,13 +29,10 @@ const Login =({navigation})=>{
             console.log(e)
         }
     }
-    function signin() {
+     function login() {
         if (isEnableSignIn()) {
-            console.log("here")
-            axios.post('/login/',
-                { 
-                    "username": email, 
-                    "password": password },
+             axios.post('login/',
+                { "username": email, "password": password },
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -195,7 +194,7 @@ const Login =({navigation})=>{
         borderRadius: SIZES.radius,
         backgroundColor: isEnableSignIn() ? COLORS.Primary : COLORS.transparentPrimary2,
     }}
-    onPress={()=>signin()}
+    onPress={()=>{login()}}
       label={'Login'}/>
       <View
                     style={{

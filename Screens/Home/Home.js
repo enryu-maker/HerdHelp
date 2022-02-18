@@ -5,30 +5,50 @@ import FormInput from '../../Components/FormInput';
 import { COLORS, FONTS, images, SIZES ,dummydata,CollapseExpand } from "../../Components/Constants"
 import FilterModal from './filterModel';
 import Card from '../../Components/Card';
+import TextButton from '../../Components/TextButton';
+import axiosIns from '../../helpers/helpers';
 export const Home = ({ navigation }) => {
   const [showFilterModal, setShowFilterModal] = React.useState(false)
+  const [Purchased,setPurchased]=React.useState([])
+  const [Breed,setBreed]=React.useState([])
+  const [animals,setAnimals] = React.useState([])
   const [searched, setSearched] = React.useState("")
+  const [loading,setLoading] = React.useState(false)
+  const [selectedTab, setSelectedTab] = React.useState("Breed")
   function filterList(list) {
     return list.filter(
       (listItem) =>
-        listItem.Tag_number
+        listItem.tag_number
           .toString()
           .toLowerCase()
           .includes(searched.toLowerCase()) ||
-        listItem.Name.toLowerCase().includes(searched.toLowerCase())||
-        listItem.Species.toLowerCase().includes(searched.toLowerCase())
+        listItem.name.toLowerCase().includes(searched.toLowerCase())||
+        listItem.category.toLowerCase().includes(searched.toLowerCase())
     );
   }
-  return (
-    <View 
-    style={{flex:1,backgroundColor: COLORS.white}}>
-      {showFilterModal &&
-        <FilterModal
-          isVisible={showFilterModal}
-          onClose={() => setShowFilterModal(false)}
-        />
-      }
-      <Header
+  // function allAnimals(){
+  //   let animal = Breed.concat(Purchased)
+  //   setAnimals(animal)
+  // }
+  async function fetchBred(){
+    setLoading(true)
+    let {data} = await axiosIns.get("/birthedanimals/")
+    // console.log(data)
+    return data
+  }
+  async function fetchPurchased(){
+    let {data} = await axiosIns.get("/purchasedanimals/")
+    return data 
+  }
+  React.useEffect(()=>{
+    if (!loading){
+      fetchPurchased().then(data=>{setPurchased(data)})
+      fetchBred().then(data=>{setBreed(data),setAnimals(data)})
+    }
+  })
+  function renderHeader(){
+    return(
+        <Header
         leftComponent={
           <View style={{
             justifyContent: 'center',
@@ -50,15 +70,11 @@ export const Home = ({ navigation }) => {
         }
         title={"Home"}
         titleStyle={{
-          marginLeft:50
+          marginLeft:60
         }}
         rightComponent={
           <View style={{
             justifyContent: 'center',
-            // position:'absolute',
-                // marginTop:25,
-                // zIndex: 1,
-            
           }}>
             <TouchableOpacity
             style={{
@@ -67,11 +83,16 @@ export const Home = ({ navigation }) => {
             }}
             onPress={()=>navigation.navigate("MyAccount")}
             >
-              <Image source={images.login}style={{width:35,height:35,tintColor:COLORS.darkGray2}} />
+              <Image source={images.login}style={{width:40,height:40,tintColor:COLORS.darkGray2,marginTop:10}} />
             </TouchableOpacity>
             </View>
         }
       />
+      
+    )
+  }
+  function Search(){
+    return(
       <FormInput
         prependComponent={
           <Image
@@ -84,7 +105,7 @@ export const Home = ({ navigation }) => {
             }}
           />
         }
-        placeholder={"Search"}
+        placeholder={"Search..."}
         value={searched}
         containerStyle={{
           paddingBottom:10
@@ -112,17 +133,79 @@ export const Home = ({ navigation }) => {
 
         }
       />
+    )
+  }
+  function renderTabButtons() {
+    return (
+        <View
+            style={{
+                flexDirection: 'row',
+                height: 50,
+                marginTop: SIZES.radius,
+                paddingHorizontal: SIZES.padding,
+                marginBottom:20,
+                borderBottomEndRadius:SIZES.radius,
+                borderBottomStartRadius:SIZES.radius
+            }}
+        >
+            <TextButton
+                buttonContainerStyle={{
+                    flex: 1,
+                    borderRadius: SIZES.radius,
+                    backgroundColor: (selectedTab == 'Breed') ? COLORS.Primary : COLORS.transparentPrimary2
+                }}
+                label="Breed"
+                labelStyle={{
+                    color: (selectedTab == 'Breed') ? COLORS.white : COLORS.Primary
+                }}
+                onPress={() => {
+                    setSelectedTab("Breed")
+                    setBreed(animals)
+                }}
+            />
+
+            <TextButton
+                buttonContainerStyle={{
+                    flex: 1,
+                    marginLeft: SIZES.padding,
+                    borderRadius: SIZES.radius,
+                    backgroundColor: (selectedTab == 'Purchased') ? COLORS.Primary : COLORS.transparentPrimary2
+                }}
+                label="Purchased"
+                labelStyle={{
+                    color: (selectedTab == 'Purchased') ? COLORS.white : COLORS.Primary
+                }}
+                onPress={() => {
+                    setSelectedTab("Purchased")
+                    setBreed(Purchased)
+                }}
+            />
+        </View>
+    )
+}
+  return (
+    <View 
+    style={{flex:1,backgroundColor: COLORS.white}}>
+      {showFilterModal &&
+        <FilterModal
+          isVisible={showFilterModal}
+          onClose={() => setShowFilterModal(false)}
+        />
+      }
+      {renderHeader()}
+      {Search()}
+      {renderTabButtons()}
       <ScrollView 
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ flexGrow: 1 }}>
-      {filterList(dummydata).map((listItem, index) => (
+      {filterList(Breed).map((listItem, index) => (
        <Card key={index} 
-      Name={listItem.Name} 
-      Tagnumber={listItem.Tag_number} 
-      Gender={listItem.Gender}
-      Species={listItem.Species}
+      Name={listItem.name} 
+      Tagnumber={listItem.tag_number} 
+      Gender={listItem.gender}
+      Species={listItem.category}
       Weight={listItem.weight}
-      image={listItem.image}
+      // image={listItem.image}
       onPress={()=>{navigation.navigate("Info",{
         value:listItem,
       })}}/>

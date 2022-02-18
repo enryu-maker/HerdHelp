@@ -13,7 +13,7 @@ const Card=({
 })=>{
   return (
     <TouchableOpacity style={{backgroundColor:COLORS.lightGray2,
-    height:100,
+    height:120,
     margin:SIZES.base2,
     borderRadius:SIZES.radius,
     flexDirection:'row',

@@ -1,14 +1,17 @@
 import React from 'react';
-import {View, ScrollView, TouchableOpacity, Image} from 'react-native';
+import {View, ScrollView, TouchableOpacity, Image,Text} from 'react-native';
 
 import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import InfoItem from '../../Components/InfoItem';
 import {COLORS, SIZES, images, dummyData} from '../../Components/Constants';
-
+import { launchImageLibrary, ImageLibraryOptions, launchCamera } from 'react-native-image-picker';
 import axiosIns from '../../helpers/helpers';
 
 const MyAccount = ({navigation}) => {
+  const [pic,setPic]=React.useState(null)
+  const [picdata,setPicdata]=React.useState(null)
+
   // const [user,setUser]=React.useState([])
   // const fetchprofile = async () => {
   //     try {
@@ -24,6 +27,26 @@ const MyAccount = ({navigation}) => {
   //       dummyData.userid=user.id
   //     });
   //   }, []);
+  
+function renderFileUri() {
+    if (pic) {
+      return <Image
+        source={{ uri: pic}}
+        style={{width: 100,
+          height: 100,
+          borderRadius: 100 / 2,
+          alignSelf: 'center',}}
+      />
+    } else {
+      return <Image
+        source={images.login}
+        style={{width: 100,
+          height: 100,
+          borderRadius: 100 / 2,
+          alignSelf: 'center',}}
+      />
+    }
+  };
   function renderHeader() {
     return (
       <Header
@@ -51,8 +74,7 @@ const MyAccount = ({navigation}) => {
         }
         title={'My Account'}
         titleStyle={{
-          // alignSelf:"center",
-          marginLeft: 50,
+          marginLeft: 55,
         }}
         rightComponent={
           <View
@@ -66,7 +88,7 @@ const MyAccount = ({navigation}) => {
               label="Edit"
               labelStyle={{
                 color: COLORS.Primary,
-                // marginRight:15
+                fontSize:18
               }}
               buttonContainerStyle={{
                 backgroundColor: null,
@@ -77,48 +99,24 @@ const MyAccount = ({navigation}) => {
           </View>
         }
       />
-      // <Header
-      //     title={"MY ACCOUNT"}
-      //     containerStyle={{
-      //         // height: 50,
-      //         // marginHorizontal: SIZES.padding,
-      //         // marginTop: 40
-      //     }}
-      //     leftComponent={
-      //         <View style={{
-      //           justifyContent: 'center',
-      //           position: 'absolute',
-      //           marginTop: 25,
-      //           zIndex: 1,
-      //         }}>
-      //           <TouchableOpacity
-      //             style={{
-      //               // marginTop: 20,
-      //             //   marginLeft: 25,
-      //             }}
-      //             onPress={() => { navigation.goBack() }}>
-      //              <Image source={images.back} style={{width:28,height:28,tintColor:COLORS.darkGray2}}/>
-
-      //           </TouchableOpacity>
-
-      //         </View>
-      //       }
-      //     rightComponent={
-      //         <TextButton
-      //             label="Edit"
-      //             labelStyle={{
-      //                 color: COLORS.Primary
-      //             }}
-      //             buttonContainerStyle={{
-      //                 backgroundColor: null
-      //             }}
-      //             onPress={() => navigation.navigate("MyAccountEdit")}
-      //         />
-      //     }
-      // />
     );
   }
-
+  function rederSectionZero(){
+    return(
+      <View
+        style={{
+          // marginTop: SIZES.padding,
+          borderRadius: SIZES.radius,
+          paddingHorizontal: SIZES.radius,
+          // backgroundColor: COLORS.lightGray2,
+        }}>
+                        {renderFileUri()}
+                        {/* <TouchableOpacity
+                            onPress={() => openCamara()}>
+                        </TouchableOpacity> */}
+        </View>
+    )
+  }
   function renderSectionOne() {
     return (
       <View
@@ -195,6 +193,7 @@ const MyAccount = ({navigation}) => {
         contentContainerStyle={{
           paddingHorizontal: SIZES.padding,
         }}>
+        {rederSectionZero()}
         {renderSectionOne()}
         {renderSectionTwo()}
       </ScrollView>
