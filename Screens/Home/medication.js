@@ -5,8 +5,8 @@ import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-
-export default function Medication({navigation}) {
+import { DrawerActions } from '@react-navigation/core';
+export const Medication = ({ navigation }) =>{
   const [tag, setTag] = React.useState('');
   const [treat, setTreat] = React.useState('');
   const [Dis, setDis] = React.useState('');
@@ -31,13 +31,9 @@ export default function Medication({navigation}) {
                 // marginTop: 20,
                 marginLeft: 25,
               }}
-              onPress={() => {
-                navigation.openDrawer();
-              }}>
-              <Image
-                source={images.back}
-                style={{width: 28, height: 28, tintColor: COLORS.Primary}}
-              />
+              onPress={() =>  {navigation.openDrawer()} }>
+              <Image source={images.menu} style={{width:35,height:35,tintColor:COLORS.darkGray2}}/>
+
             </TouchableOpacity>
           </View>
         }

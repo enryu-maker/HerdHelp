@@ -62,7 +62,7 @@ export const Home = ({ navigation }) => {
                 marginLeft: 25,
                 
               }}
-              onPressIn={() => { navigation.openDrawer() }}>
+              onPressIn={() => { navigation.openDrawer()}}>
                <Image source={images.menu} style={{width:35,height:35,tintColor:COLORS.darkGray2}}/>
             </TouchableOpacity>
 

@@ -8,8 +8,8 @@ import {Signup} from "../Auth/Signup"
 import { Home } from '../Home/Home';
 import Add from '../Home/Add';
 import { COLORS, SIZES, FONTS, images } from '../../Components/Constants';
-import Medication from '../Home/medication';
-import Weight from '../Home/weight';
+import {Medication} from '../Home/medication';
+import {Weight} from '../Home/weight';
 import { Info } from '../../Components/Info';
 import AddBreed from '../Livestocks/AddBreed';
 import AddPurchased from '../Livestocks/AddPurchased';
@@ -32,7 +32,11 @@ const DrawerNav = () => {
         backBehavior:"history",  
         drawerStatusBarAnimation:"fade",
       }}
-      // drawerContent={props =><Drawercontent {...props}/>}
+      drawerContent={props =><Drawercontent {...props}
+      drawerWidth= {SIZES.width- 120}
+      />
+      
+    }
     >
       <Drawer.Screen name='Home' component={Home} options={{
         // drawerActiveTintColor: COLORS.white,
@@ -76,7 +80,7 @@ export default class Homenav extends Component {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false ,stackAnimation:"fade"}}
           initialRouteName={'Draw'}>
-          <Stack.Screen name='Draw' component={DrawerNav} />
+          <Stack.Screen name='Draw' component={DrawerNav} options={{stackAnimation:"fade"}}/>
           <Stack.Screen name='Login' component={Login} options={{stackAnimation:"fade"}}/>
           <Stack.Screen name='Signup' component={Signup}options={{stackAnimation:"fade"}} />
           <Stack.Screen name='Info' component={Info} options={{stackAnimation:"default"}} />
@@ -84,6 +88,12 @@ export default class Homenav extends Component {
           <Stack.Screen name='Buy' component={AddPurchased} options={{stackAnimation:"fade"}}/>
           <Stack.Screen name='MyAccount' component={MyAccount} options={{stackAnimation:"fade"}}/>
           <Stack.Screen name='MyAccountEdit' component={MyAccountEdit} options={{stackAnimation:"fade"}}/>
+          <Stack.Screen name='Add' component={Add} options={{stackAnimation:"fade"}}/>
+          <Stack.Screen name='medication' component={Medication} options={{stackAnimation:"fade"}}/>
+          <Stack.Screen name='weight' component={Weight} options={{stackAnimation:"fade"}}/>
+
+
+
 
         </Stack.Navigator>
       </NavigationContainer>

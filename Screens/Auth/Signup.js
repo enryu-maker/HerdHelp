@@ -6,8 +6,6 @@ import {images,COLORS,SIZES, FONTS} from '../../Components/Constants'
 import TextButton from '../../Components/TextButton';
 import axios from "axios";
 axios.defaults.baseURL = 'http://herdhelp.herokuapp.com';
-
-
 export  const Signup=({navigation})=>{
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
@@ -16,9 +14,9 @@ export  const Signup=({navigation})=>{
     function isEnableSignIn() {
         return email != "" && password != "" && username != ""
     }
-    function signup  (){
+    async function signup  (){
         if (isEnableSignIn) {
-            axios.post('/register/',
+            await axios.post('/register/',
                 {
                     "username": username,
                     "password": password,

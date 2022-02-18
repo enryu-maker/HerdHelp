@@ -5,7 +5,7 @@ import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
-export default function Weight({navigation}) {
+export const Weight =({ navigation })=> {
   const [tag, setTag] = React.useState('');
   const [weight, setWeight] = React.useState('');
   function renderHeader() {
@@ -26,10 +26,8 @@ export default function Weight({navigation}) {
               onPress={() => {
                 navigation.openDrawer();
               }}>
-              <Image
-                source={images.back}
-                style={{width: 28, height: 28, tintColor: COLORS.darkGray2}}
-              />
+            <Image source={images.menu} style={{width:35,height:35,tintColor:COLORS.darkGray2}}/>
+
             </TouchableOpacity>
           </View>
         }
