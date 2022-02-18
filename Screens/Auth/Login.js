@@ -5,6 +5,8 @@ import FormInput from '../../Components/FormInput';
 import  CustomSwitch  from '../../Components/CustomSwitch';
 import {images,COLORS,SIZES, FONTS} from '../../Components/Constants'
 import TextButton from '../../Components/TextButton';
+import axios from "axios"
+axios.defaults.baseURL = 'http://herdhelp.herokuapp.com';
 const Login =({navigation})=>{
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
@@ -12,6 +14,48 @@ const Login =({navigation})=>{
     const [saveMe, setSaveMe] = React.useState(false)
     function isEnableSignIn() {
         return email != "" && password != ""
+    }
+    const storeData = async (token, refresh) => {
+        try {
+            await AsyncStorage.setItem(
+                'token', token
+            )
+            await AsyncStorage.setItem(
+                'refresh', refresh
+            )
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    function login() {
+        if (isEnableSignIn()) {
+            axios.post('/login/',
+                { "username": email, "password": password },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }).then((response) => {
+                    //const token = response.data.access
+                    console.log(response.data.access)
+                    if (response.status === 200) {
+                        storeData(response.data.access, response.data.refresh)
+                        navigation.replace("Draw")
+                    }
+                    else {
+                        setEmailError(error.response.data)
+                    }
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        console.log(error.response.data);
+                        setEmailError(error.response.data)
+                    };
+                })
+        }
+        else {
+            setEmailError(error.response.data)
+        }
     }
   return (
     <View style={{
@@ -57,10 +101,10 @@ const Login =({navigation})=>{
       }}>
           
       <FormInput
-    label={'Email'}
+    label={'Username'}
     value={email}
     onChange={(text)=>{setEmail(text)}}
-    placeholder={'Enter Email'}
+    placeholder={'Enter Username'}
     keyboardType="email-address"
     autoCompleteType="email"
     keytype='next'
@@ -148,7 +192,7 @@ const Login =({navigation})=>{
         borderRadius: SIZES.radius,
         backgroundColor: isEnableSignIn() ? COLORS.Primary : COLORS.transparentPrimary2,
     }}
-    onPress={()=>navigation.replace('Draw')}
+    onPress={()=>{login()}}
       label={'Login'}/>
       <View
                     style={{

@@ -28,7 +28,7 @@ const drawerNav = () => {
         drawerType:"front",
         overlayColor: COLORS.Primary,
         backBehavior:"history",  
-        // AnimationEffect:"fade" ,   
+        drawerStatusBarAnimation:"fade",
       }}
     >
       <Drawer.Screen name='Home' component={Home} options={{

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { View,StatusBar, SafeAreaView} from 'react-native';
 import Homenav from "./Screens/Nav/Homenav"
 import Rootnav from "./Screens/Nav/Rootnav"
-var signal= false
+var signal= true
 export default function App() {
   
   return (

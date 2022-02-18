@@ -4,6 +4,10 @@ import Header from '../../Components/Header';
 import FormInput from '../../Components/FormInput';
 import {images,COLORS,SIZES, FONTS} from '../../Components/Constants'
 import TextButton from '../../Components/TextButton';
+import axios from "axios";
+axios.defaults.baseURL = 'http://herdhelp.herokuapp.com';
+
+
 export  const Signup=({navigation})=>{
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
@@ -11,6 +15,39 @@ export  const Signup=({navigation})=>{
     const [showPass, setShowPass] = React.useState(false)
     function isEnableSignIn() {
         return email != "" && password != "" && username != ""
+    }
+    function signup  (){
+        if (isEnableSignIn) {
+            axios.post('/register/',
+                {
+                    "username": username,
+                    "password": password,
+                    "email": email,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }).then((response) => {
+                    if (response.status === 200) {
+                        // setEmailError(response.data.message)
+                        alert("User sucessfully created")
+                        //this.props.navigation.replace('Login')
+                    }
+                    else {
+                        setEmailError("else")
+                    }
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        console.log(error.response.data);
+                        setEmailError("cathc")
+                    }
+                })
+        }
+        else {
+            setEmailError("lastelse")
+        }
     }
   return (
     <ScrollView style={{
@@ -123,7 +160,7 @@ export  const Signup=({navigation})=>{
         borderRadius: SIZES.radius,
         backgroundColor: isEnableSignIn() ? COLORS.Primary : COLORS.transparentPrimary2,
     }}
-    onPress={()=>navigation.replace('Home')}
+    onPress={()=>{signup()}}
       label={'Signup'}/>
       <View
                     style={{
