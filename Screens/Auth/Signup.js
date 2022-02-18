@@ -29,6 +29,7 @@ export  const Signup=({navigation})=>{
                         'Content-Type': 'application/json',
                     }
                 }).then((response) => {
+                    console.log(response)
                     if (response.status === 200) {
                         // setEmailError(response.data.message)
                         alert("User sucessfully created")

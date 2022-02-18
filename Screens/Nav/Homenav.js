@@ -13,11 +13,12 @@ import weight from '../Home/weight';
 import { Info } from '../../Components/Info';
 import AddBreed from '../Livestocks/AddBreed';
 import AddPurchased from '../Livestocks/AddPurchased';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import MyAccount from '../Account/MyAccount';
+import MyAccountEdit from '../Account/MyAccountEdit';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-const drawerNav = () => {
+const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
       screenOptions={{
@@ -73,12 +74,15 @@ export default class Homenav extends Component {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false ,stackAnimation:"fade"}}
           initialRouteName={'Draw'}>
-          <Stack.Screen name='Draw' component={drawerNav} />
+          <Stack.Screen name='Draw' component={DrawerNav} />
           <Stack.Screen name='Login' component={Login} options={{stackAnimation:"fade"}}/>
           <Stack.Screen name='Signup' component={Signup}options={{stackAnimation:"fade"}} />
           <Stack.Screen name='Info' component={Info} options={{stackAnimation:"default"}} />
           <Stack.Screen name='Breed' component={AddBreed} options={{stackAnimation:"fade"}} />
           <Stack.Screen name='Buy' component={AddPurchased} options={{stackAnimation:"fade"}}/>
+          <Stack.Screen name='MyAccount' component={MyAccount} options={{stackAnimation:"fade"}}/>
+          <Stack.Screen name='MyAccountEdit' component={MyAccountEdit} options={{stackAnimation:"fade"}}/>
+
         </Stack.Navigator>
       </NavigationContainer>
       </View>

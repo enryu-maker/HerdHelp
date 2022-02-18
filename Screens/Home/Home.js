@@ -15,7 +15,8 @@ export const Home = ({ navigation }) => {
           .toString()
           .toLowerCase()
           .includes(searched.toLowerCase()) ||
-        listItem.Name.toLowerCase().includes(searched.toLowerCase()),
+        listItem.Name.toLowerCase().includes(searched.toLowerCase())||
+        listItem.Species.toLowerCase().includes(searched.toLowerCase())
     );
   }
   return (
@@ -48,6 +49,28 @@ export const Home = ({ navigation }) => {
           </View>
         }
         title={"Home"}
+        titleStyle={{
+          marginLeft:50
+        }}
+        rightComponent={
+          <View style={{
+            justifyContent: 'center',
+            // position:'absolute',
+                // marginTop:25,
+                // zIndex: 1,
+            
+          }}>
+            <TouchableOpacity
+            style={{
+              marginRight: 25,
+              
+            }}
+            onPress={()=>navigation.navigate("MyAccount")}
+            >
+              <Image source={images.dog}style={{width:35,height:35,tintColor:COLORS.darkGray2}} />
+            </TouchableOpacity>
+            </View>
+        }
       />
       <FormInput
         prependComponent={

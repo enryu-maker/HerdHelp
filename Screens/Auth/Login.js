@@ -27,10 +27,13 @@ const Login =({navigation})=>{
             console.log(e)
         }
     }
-    function login() {
+    function signin() {
         if (isEnableSignIn()) {
+            console.log("here")
             axios.post('/login/',
-                { "username": email, "password": password },
+                { 
+                    "username": email, 
+                    "password": password },
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -192,7 +195,7 @@ const Login =({navigation})=>{
         borderRadius: SIZES.radius,
         backgroundColor: isEnableSignIn() ? COLORS.Primary : COLORS.transparentPrimary2,
     }}
-    onPress={()=>{login()}}
+    onPress={()=>signin()}
       label={'Login'}/>
       <View
                     style={{

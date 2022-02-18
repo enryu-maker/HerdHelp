@@ -128,7 +128,8 @@ export const dummydata = [
         purchased:1,
         bornimg:require("../assets/animal_logo/newborn.png"),
         cash:require("../assets/animal_logo/cash.png"),
-        Gender:require("../assets/animal_logo/male.png"),GenderType:"male",
+        Gender:require("../assets/animal_logo/male.png"),
+        GenderType:"Male",
         weight:70,
         image:require("../assets/animal_logo/pig.png")
     },
@@ -153,7 +154,8 @@ export const dummydata = [
         purchased:0,
         bornimg:require("../assets/animal_logo/newborn.png"),
         cash:require("../assets/animal_logo/cash.png"),
-        Gender:require("../assets/animal_logo/male.png"),GenderType:"male",
+        Gender:require("../assets/animal_logo/male.png"),
+        GenderType:"Male",
         weight:70,
         image:require("../assets/animal_logo/goat.png")
     },
