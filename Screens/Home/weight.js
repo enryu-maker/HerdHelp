@@ -24,9 +24,9 @@ export const Weight =({ navigation })=> {
                 marginLeft: 25,
               }}
               onPress={() => {
-                navigation.openDrawer();
+                navigation.goBack();
               }}>
-            <Image source={images.menu} style={{width:35,height:35,tintColor:COLORS.darkGray2}}/>
+            <Image source={images.back} style={{width:30,height:30,tintColor:COLORS.darkGray2}}/>
 
             </TouchableOpacity>
           </View>

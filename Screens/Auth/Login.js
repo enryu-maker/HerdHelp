@@ -32,7 +32,7 @@ const Login =({navigation})=>{
      function login() {
         if (isEnableSignIn()) {
              axios.post('login/',
-                { "username": email, "password": password },
+                { "email": email, "password": password },
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const Login =({navigation})=>{
                     console.log(response.data.access)
                     if (response.status === 200) {
                         storeData(response.data.access, response.data.refresh)
-                        navigation.replace("Draw")
+                        navigation.replace("Main")
                     }
                     else {
                         setEmailError(error.response.data)

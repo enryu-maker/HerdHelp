@@ -22,28 +22,24 @@ export const Home = ({ navigation }) => {
           .toString()
           .toLowerCase()
           .includes(searched.toLowerCase()) ||
-        listItem.name.toLowerCase().includes(searched.toLowerCase())||
-        listItem.category.toLowerCase().includes(searched.toLowerCase())
+        listItem.name.toLowerCase().includes(searched.toLowerCase()) ||
+        listItem.species.toLowerCase().includes(searched.toLowerCase())
     );
   }
   // function allAnimals(){
   //   let animal = Breed.concat(Purchased)
   //   setAnimals(animal)
   // }
-  async function fetchBred(){
+  async function fetchanimal(){
     setLoading(true)
-    let {data} = await axiosIns.get("/birthedanimals/")
-    // console.log(data)
+    let { data } = await axiosIns.get("animals/")
+    console.log (data) 
     return data
-  }
-  async function fetchPurchased(){
-    let {data} = await axiosIns.get("/purchasedanimals/")
-    return data 
   }
   React.useEffect(()=>{
     if (!loading){
-      fetchPurchased().then(data=>{setPurchased(data)})
-      fetchBred().then(data=>{setBreed(data),setAnimals(data)})
+      fetchanimal().then(data=>{setAnimals(data)})
+      // fetchBred().then(data=>{setBreed(data),setAnimals(data)})
     }
   })
   function renderHeader(){
@@ -62,8 +58,8 @@ export const Home = ({ navigation }) => {
                 marginLeft: 25,
                 
               }}
-              onPressIn={() => { navigation.openDrawer()}}>
-               <Image source={images.menu} style={{width:35,height:35,tintColor:COLORS.darkGray2}}/>
+              onPressIn={() => { navigation.goBack()}}>
+               <Image source={images.back} style={{width:30,height:30,tintColor:COLORS.darkGray2}}/>
             </TouchableOpacity>
 
           </View>
@@ -107,6 +103,11 @@ export const Home = ({ navigation }) => {
         }
         placeholder={"Search..."}
         value={searched}
+        onPressIn={()=>{
+          <View style={{height:100,width:100,backgroundColor:"yellow"}}>
+            <Text>Hi</Text>
+          </View>
+        }}
         containerStyle={{
           paddingBottom:10
         }}
@@ -194,18 +195,18 @@ export const Home = ({ navigation }) => {
       }
       {renderHeader()}
       {Search()}
-      {renderTabButtons()}
+      {/* {renderTabButtons()} */}
       <ScrollView 
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ flexGrow: 1 }}>
-      {filterList(Breed).map((listItem, index) => (
+      {filterList(animals).map((listItem, index) => (
        <Card key={index} 
       Name={listItem.name} 
       Tagnumber={listItem.tag_number} 
       Gender={listItem.gender}
       Species={listItem.category}
       Weight={listItem.weight}
-      // image={listItem.image}
+      image={listItem.image}
       onPress={()=>{navigation.navigate("Info",{
         value:listItem,
       })}}/>

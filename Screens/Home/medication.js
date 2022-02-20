@@ -31,8 +31,8 @@ export const Medication = ({ navigation }) =>{
                 // marginTop: 20,
                 marginLeft: 25,
               }}
-              onPress={() =>  {navigation.openDrawer()} }>
-              <Image source={images.menu} style={{width:35,height:35,tintColor:COLORS.darkGray2}}/>
+              onPress={() =>  {navigation.goBack()} }>
+              <Image source={images.back} style={{width:30,height:30,tintColor:COLORS.darkGray2}}/>
 
             </TouchableOpacity>
           </View>

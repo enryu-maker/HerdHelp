@@ -22,7 +22,7 @@ const Card=({
     alignSelf:'center'}}
     onPress={onPress}>
       <View style={{justifyContent:'center',margin:SIZES.padding}}>
-          <Image source={image}
+          <Image source={{uri:image}}
           style={{height:50,width:50,}}/>
       </View>
       <View style={{
@@ -46,7 +46,7 @@ const Card=({
               {Species}
           </Text> */}
           <View style={{justifyContent:'center',margin:SIZES.padding}}>
-          <Image source={Gender}
+          <Image source={Gender=="Male"? images.male:images.female}
           style={{height:35,width:35,}}/>
       </View>
       </View>

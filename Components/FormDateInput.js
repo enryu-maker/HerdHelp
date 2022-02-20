@@ -8,7 +8,7 @@ import {
 import DatePicker from 'react-native-date-picker'
 import moment from 'moment';
 
-import { FONTS, SIZES, COLORS } from "./Constants"
+import { FONTS, SIZES, COLORS,images } from "./Constants"
 
 const FormDateInput = ({
     containerStyle,
@@ -21,11 +21,11 @@ const FormDateInput = ({
 }) => {
 
     const [open, setOpen] = useState(false)
-
     return (
         <View style={{ ...containerStyle }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>{label}</Text>
+                <Text style={{ color: COLORS.gray, ...FONTS.body4,width:"88%",
+            marginLeft:18 }}>{label}</Text>
                 <Text style={{ color: COLORS.red, ...FONTS.body4 }}>{errorMsg}</Text>
             </View>
 
@@ -42,23 +42,26 @@ const FormDateInput = ({
                 }}
                 onPress={() => setOpen(true)}
             >
+                <Image
+                    source={images.calender}
+                    style={{
+                        width: 25,
+                        height: 25,
+                        tintColor:COLORS.Primary
+                    }}
+                />
                 <Text
                     style={{
                         flex: 1,
                         color: value ? COLORS.black : COLORS.gray2,
-                        ...FONTS.body3
+                        ...FONTS.body3,
+                        marginLeft: 20
                     }}
                 >
                     {value ? moment(value).format("DD/MM/YYYY") : placeholder}
                 </Text>
 
-                <Image
-                    source={icons.calender}
-                    style={{
-                        width: 25,
-                        height: 25
-                    }}
-                />
+                
             </TouchableOpacity>
 
             <DatePicker
@@ -74,6 +77,8 @@ const FormDateInput = ({
                 onCancel={() => {
                     setOpen(false)
                 }}
+                
+                // style={{marginLeft: 20}}
             />
         </View>
     )

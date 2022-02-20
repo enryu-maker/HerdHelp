@@ -33,7 +33,11 @@ export const images ={
     medicines:require("../assets/Add/medicines.png"),
     dropper:require("../assets/Add/dropper.png"),
     withdraw:require("../assets/Add/atm.png"),
-    logout:require("../assets/Logo/logout.png")
+    logout:require("../assets/Logo/logout.png"),
+    calender:require("../assets/Logo/calendar-2.png"),
+    male:require("../assets/animal_logo/male.png"),
+    female:require("../assets/animal_logo/female.png")
+
 }
 export const COLORS={
     Primary:"rgb(126,204,122)",
@@ -189,32 +193,32 @@ export const dummydata = [
 ]
 export const catedata = [
     {
-      value: '1',
+      // value: '1',
       label: 'Cow',
       avatarSource:require("../assets/animal_logo/cow.png")
     },
     {
-      value: '2',
+      // value: '2',
       label: 'Chicken',
       avatarSource:require("../assets/animal_logo/chicken.png")
     },
     {
-      value: '3',
+      // value: '3',
       label: 'Pig',
       avatarSource: require("../assets/animal_logo/pig.png")
     },
     {
-      value: '4',
+      // value: '4',
       label: 'Sheep',
       avatarSource: require("../assets/animal_logo/sheep.png")
     },
     {
-        value: '5',
+        // value: '5',
         label: 'Goat',
         avatarSource: require("../assets/animal_logo/goat.png")
       },
     {
-        value: '6',
+        // value: '6',
         label: 'Rabbit',
         avatarSource: require("../assets/animal_logo/rabbit.png")
       },
@@ -231,7 +235,7 @@ export const catedata = [
       avatarSource:require("../assets/animal_logo/female.png")
     },
 ];
-export const Breed = [
+export const Bred = [
   {
     value: '1',
     label: 'Yes',

@@ -63,9 +63,7 @@ const FormInput = ({
                     maxLength={maxLength}
                     onChangeText={(text) => onChange(text)}
                     returnKeyType="default"
-                    
-
-                    
+                    onPressIn={onPressIn}
                 />
                 {
                     appendComponent
