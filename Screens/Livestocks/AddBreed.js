@@ -19,16 +19,17 @@ import {
   FONTS,
   genderdata,
   images,
-  Bred
+  Bred,Bought
 } from '../../Components/Constants';
 import FormInput from '../../Components/FormInput';
 
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
 import axios from 'axios';
+import ActivityIndicatorExample from '../../Components/Loading';
 const Addanimals = ({navigation}) => {
   const [bred, setBred] = useState(false);
-  const [valueMS, setValueMS] = useState('');
+  const [valueMS, setValueMS] = useState("");
   const [valueBS, setValueBS] = useState('');
   const [age, setAge] = useState('');
   const [Breed, setBreed] = useState('');
@@ -37,15 +38,23 @@ const Addanimals = ({navigation}) => {
   const [mother, setMother] = useState('');
   const [father, setFather] = useState('');
   const [weight, setWeight] = useState('');
+  const [name, setName] = useState('');
   const [dob, setDob] = useState(null);
-  const [vaccinated,setVaccinated] =useState("")
-  const [loading,setLoading] = React.useState("")
+  const [vaccinated,setVaccinated] =useState(false)
+  const [vaccinateddate,setVaccinateddate] =useState(null)
+  const [bought,setBought] =useState(false)
+  const [loading,setLoading] = React.useState(false)
+  const [send,setSend] = React.useState(false)
   const [animals,setAnimals] = React.useState([])
+
   const onChangeMS = (value) => {
+    // console.log(value)
     setValueMS(value);
   };
   const onChangeVacc = (value) => {
     setVaccinated(value);
+    // console.log(value)
+
   };
   const onChangeBS = (value) => {
     setValueBS(value);
@@ -53,20 +62,40 @@ const Addanimals = ({navigation}) => {
   const onChangeB = (value) => {
     setBred(value);
   };
+  const onChangebought = (value) => {
+    setBought(value);
+  };
   async function fetchanimal(){
-    setLoading(true)
     let { data } = await axiosIns.get("getcategories/")
+    setLoading(true)
     return data
   }
   async function postAnimal(){
-    await axiosIns('animals/',{
-      
+   const res = await axiosIns.post('animals/',{
+        "name":name ,
+        "tag_number": tag,
+        "gender": valueBS,
+        "species": valueMS,
+        "birth_date": dob,
+        "mother_tagnumber": mother,
+        "father_tagnumber":father,
+        "breed": Breed,
+        "weight": weight,
+        "bred": bred,
+        "age": age,
+        "vaccinated": vaccinated,
+        "vaccination_date": vaccinateddate,
+        "price": price,
+        "bought": bought
     })
+    setSend(true)
+    return res
   }
   React.useEffect(()=>{
     if (!loading){
       fetchanimal().then(data=>{setAnimals(data)})
     }
+    // console.log(animals)
   })
   function renderHeader() {
     return (
@@ -127,16 +156,38 @@ const Addanimals = ({navigation}) => {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
+        <FormInput
+          prependComponent={
+            <View style={{alignSelf: 'center', justifyContent: 'center'}}>
+              <Image
+                source={images.tag}
+                style={{width: 26, height: 26, tintColor: COLORS.Primary}}
+              />
+            </View>
+          }
+          label="Name"
+          value={name}
+          onChange={value => {
+            setName(value);
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+        />
     <Dropdown
           label="Species"
           borderRadius={SIZES.radius}
-          data={animals}
+          data={catedata}
           textInputStyle={FONTS.body2, { letterSpacing: 2 }}
           selectedItemTextStyle={FONTS.body3, { color: COLORS.white ,letterSpacing: 2,alignSelf:"center"}}
           selectedItemViewStyle={{ backgroundColor: COLORS.Primary, margin: 5, borderRadius: SIZES.radius }}
-          enableAvatar
+          // enableAvatar
           required
-          // showLoader
+          // showLoader={1000}
           mode="outlined"
           disableSelectionTick
           primaryColor={COLORS.Primary}
@@ -370,6 +421,23 @@ const Addanimals = ({navigation}) => {
           }}
           itemContainerStyle={{ backgroundColor: COLORS.white, margin: 5, borderRadius: SIZES.radius }}
         />
+        <FormDateInput
+          label="Date of Vaccination"
+          placeholder="MM/DD/YYYY"
+          value={vaccinateddate}
+          setDate={setVaccinateddate}
+          containerStyle={{
+            marginTop: SIZES.radius,
+            // marginLeft:20
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+            width: '88%',
+            alignSelf: 'center',
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+          
+        />
         <FormInput
           prependComponent={
             <View
@@ -398,6 +466,32 @@ const Addanimals = ({navigation}) => {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
+        <Dropdown
+          label="Purchased?"
+          borderRadius={SIZES.radius}
+          data={Bought}
+          textInputStyle={FONTS.body2, { letterSpacing: 2 }}
+          selectedItemTextStyle={FONTS.body3, { color: COLORS.white ,letterSpacing: 2,alignSelf:"center"}}
+          selectedItemViewStyle={{ backgroundColor: COLORS.Primary, margin: 5, borderRadius: SIZES.radius }}
+          enableAvatar
+          required
+          // showLoader
+          mode="outlined"
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
+          value={bought}
+          onChange={onChangebought}
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: "88%",
+            alignSelf:"center",
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{ backgroundColor: COLORS.white, margin: 5 }}
+        />
       </View>
     );
   }
@@ -421,7 +515,9 @@ const Addanimals = ({navigation}) => {
 
       <TextButton
         onPress={() => {
-          console.log([bred, vaccinated,valueBS]);
+          // console.log(valueMS)
+          // send==false?<ActivityIndicatorExample/>: 
+          postAnimal().then(res=>{console.log(res.data)})
         }}
         buttonContainerStyle={{
           // flex:1,
@@ -433,6 +529,7 @@ const Addanimals = ({navigation}) => {
           backgroundColor: COLORS.Primary,
         }}
         label={'Add Animals'}
+        // label2={true}
       />
     </View>
   );

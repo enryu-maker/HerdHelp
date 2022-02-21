@@ -1,9 +1,11 @@
 import React from 'react';
 import {
     TouchableOpacity,
-    Text
+    Text,
+    View
 } from 'react-native';
 import { FONTS, COLORS ,SIZES} from "./Constants";
+import ActivityIndicatorExample from './Loading';
 
 const TextButton = ({
     buttonContainerStyle,
@@ -17,6 +19,7 @@ const TextButton = ({
     return (
         <TouchableOpacity
             style={{
+                flexDirection:"row",
                 alignItems: 'center',
                 justifyContent: 'center',
                 backgroundColor: COLORS.Primary,
@@ -33,18 +36,18 @@ const TextButton = ({
                 {label}
             </Text>
 
-            {label2 != "" &&
-                <Text
+            {label2 != false &&
+                <View
                     style={{
                         flex: 1,
-                        textAlign: 'right',
+                        alignSelf: "flex-end",
                         color: COLORS.white,
-                        ...FONTS.h3,
-                        ...label2Style
+                        // ...FONTS.h3,
+                        // ...label2Style
                     }}
                 >
-                    {label2}
-                </Text>
+                    <ActivityIndicatorExample/>
+            </View>
             }
         </TouchableOpacity>
     )

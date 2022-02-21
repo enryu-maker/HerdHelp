@@ -17,7 +17,7 @@ class ActivityIndicatorExample extends Component {
          <View style = {styles.container}>
             <ActivityIndicator
                animating = {animating}
-               color = {COLORS.Primary}
+               color = {COLORS.white}
                size = "large"
                style = {styles.activityIndicator}/>
          </View>
