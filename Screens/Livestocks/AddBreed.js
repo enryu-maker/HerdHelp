@@ -27,7 +27,7 @@ import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
 import axios from 'axios';
 const Addanimals = ({navigation}) => {
-  const [bred, setBred] = useState("");
+  const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
   const [valueBS, setValueBS] = useState('');
   const [age, setAge] = useState('');
@@ -39,7 +39,7 @@ const Addanimals = ({navigation}) => {
   const [weight, setWeight] = useState('');
   const [dob, setDob] = useState(null);
   const [vaccinated,setVaccinated] =useState("")
-  const [loading,setLoading] = React.useState(false)
+  const [loading,setLoading] = React.useState("")
   const [animals,setAnimals] = React.useState([])
   const onChangeMS = (value) => {
     setValueMS(value);
@@ -421,7 +421,7 @@ const Addanimals = ({navigation}) => {
 
       <TextButton
         onPress={() => {
-          alert([tag, weight]);
+          console.log([bred, vaccinated,valueBS]);
         }}
         buttonContainerStyle={{
           // flex:1,

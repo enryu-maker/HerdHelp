@@ -13,7 +13,7 @@ export default function App() {
       const refresh = await AsyncStorage.getItem('refresh');
       if (token !== null && refresh !== null) {
          setRoute(true);
-         console.log(token)
+        //  console.log(token)
       }
       return data;
   };

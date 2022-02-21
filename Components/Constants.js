@@ -225,12 +225,12 @@ export const catedata = [
   ];
   export const genderdata = [
     {
-      value: '1',
+      value: '0',
       label: 'Male',
       avatarSource:require("../assets/animal_logo/male.png")
     },
     {
-      value: '2',
+      value: '1',
       label: 'Female',
       avatarSource:require("../assets/animal_logo/female.png")
     },
@@ -242,7 +242,7 @@ export const Bred = [
     avatarSource:require("../assets/animal_logo/yes.png")
   },
   {
-    value: '2',
+    value: '0',
     label: 'No',
     avatarSource:require("../assets/animal_logo/no.png")
   },

@@ -120,11 +120,6 @@ export const Home = ({navigation}) => {
         }
         placeholder={'Search...'}
         value={searched}
-        onPressIn={() => {
-          <View style={{height: 100, width: 100, backgroundColor: 'yellow'}}>
-            <Text>Hi</Text>
-          </View>;
-        }}
         containerStyle={{
           paddingBottom: 10,
         }}
@@ -241,7 +236,7 @@ export const Home = ({navigation}) => {
             />
           ))}
         </ScrollView>
-      )}
+       )}
     </View>
   );
 };

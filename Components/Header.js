@@ -15,7 +15,7 @@ const Header = ({ containerStyle, title, titleStyle, leftComponent, rightCompone
                 flexDirection: 'row',
                 ...containerStyle,
                 alignSelf:'center',
-                marginTop:Platform.OS="android"? '5%' :0
+                marginTop:Platform.OS=="android"? '0%' :'10%'
             }}
         >
             {
