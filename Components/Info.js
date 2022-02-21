@@ -4,72 +4,182 @@ import Header from './Header';
 import SquareCard from './SquareCard';
 import ImageCard from './ImageCard';
 import { COLORS, SIZES,images,FONTS } from './Constants';
-import Vertical from './Vertical';
+import InfoItem from './InfoItem';
+import TextButton from './TextButton';
+import axiosIns from '../helpers/helpers';
 export const Info=({ navigation, route })=>{
   const [animal, setAnimal] = React.useState([]);
+  function getMedication(){
+    let {data} = axiosIns.get('medication/')
+    return data
+  }
   React.useEffect(() => {
-    setAnimal(route.params.value)
+    let {value} = route.params
+    setAnimal(value)
+    console.log(animal)
 }, [])
+function renderSectionOne() {
   return (
-    <ScrollView style={{
-        flex:1
-        }}>
+    <View
+      style={{
+        marginTop: SIZES.padding,
+        borderRadius: SIZES.radius,
+        paddingHorizontal: SIZES.radius,
+        backgroundColor: COLORS.lightGray2,
+      }}>
+      <InfoItem label="Name" value={animal?.name} />
+      <InfoItem label="Gender" value={animal?.gender} />
+
+      <InfoItem label="Tag Number" value={animal?.tag_number} />
       
-      <Header 
-      leftComponent={
-        <View style={{
-            justifyContent: 'center',
-            position:'absolute',
-                marginTop:25,
-                zIndex: 1,
-                
-          }}>
-            <TouchableOpacity
-              style={{
-                marginLeft: 25,
-              }}
-              onPress={() => { navigation.goBack() }}>
-              <Image source={images.back} style={{width:28,height:28,tintColor:COLORS.darkGray2}}/>
-
-            </TouchableOpacity>
-
-          </View>
-      }
-      title={"More Info"}
-    />
-    <View style={{backgroundColor:COLORS.lightGray2,
-        height:150,
-        margin:SIZES.base2,
-        borderRadius:SIZES.radius,
-        flexDirection:'row',
-        justifyContent:'space-evenly',
-        width:'88%',
-        alignSelf:'center',paddingVertical:25}}>
-          <Image source={animal.image} style={{
-              width:100,
-              height:100,
-              justifyContent:'center'
-          }}/>
-        </View>
-        <View style={{flexDirection:'row',width:"88%",alignSelf:'center',marginTop:10,justifyContent:"space-between",height:320}}>
-        <View style={{flexDirection:'column',alignSelf:'center',justifyContent:'space-evenly'}}>
-        <SquareCard Img={animal.Gender} type={animal.GenderType} style={{margin:"0%",marginTop:0}}/>
-        <Vertical purchased={animal.purchased} birth={animal.bornimg} purchase={animal.cash} style={{margin:"0%",marginTop:20}}/>
-        </View>
-        <ImageCard Name={animal.Name} Tag={animal.Tag_number} Weight={animal.weight} purchased={animal.purchased} birth={animal.bornimg} purchase={animal.cash} species={animal.Species}/>
-        </View>
-        <View style={{backgroundColor:COLORS.lightGray2,
-        height:200,
-        margin:SIZES.base2,
-        borderRadius:SIZES.radius,
-        flexDirection:'row',
-        justifyContent:'space-evenly',
-        width:'88%',
-        alignSelf:'center',marginTop:20,paddingBottom:20}}>
-          <Text style={[FONTS.h2,{padding:8}] }>
-          Medication
-        </Text>
-        </View>
-    </ScrollView>
+      <InfoItem
+        label="Mother Tag"
+        value={animal?.mother_tagnumber}
+        // withDivider={false}
+      />
+      <InfoItem
+        label="Father Tag"
+        value={animal?.father_tagnumber}
+      />
+      <InfoItem
+        label="Date Of Birth"
+        value={animal?.birth_date}
+        withDivider={false}
+      />
+    </View>
   );
 }
+function renderSectionZero() {
+  return (
+    <View
+      style={{
+        marginTop: SIZES.padding,
+        borderRadius: SIZES.radius,
+        paddingHorizontal: SIZES.radius,
+        backgroundColor: COLORS.lightGray2,
+      }}>
+        <Image source={{uri:animal?.image}} style={{width: 100,
+          height: 100,
+          margin:10,
+          // borderRadius: 100 / 2,
+          alignSelf: 'center',}} />
+      </View>
+    )}
+function renderSectionTwo() {
+  return (
+    <View
+      style={{
+        marginTop: SIZES.padding,
+        borderRadius: SIZES.radius,
+        paddingHorizontal: SIZES.radius,
+        backgroundColor: COLORS.lightGray2,
+      }}>
+      <InfoItem
+        label="Vaccinated?"
+        value={animal?.vaccinated?"Yes":"No"}
+      />
+      <InfoItem label="vaccination Date" value={animal?.vaccination_date} withDivider={false} />
+    </View>
+  );
+}
+function renderSectionThree() {
+  return (
+    <View
+      style={{
+        marginTop: SIZES.padding,
+        borderRadius: SIZES.radius,
+        paddingHorizontal: SIZES.radius,
+        backgroundColor: COLORS.lightGray2,
+      }}>
+      <InfoItem
+        label="Weight?"
+        value={`${animal?.weight} lbs`}
+      />
+      <InfoItem label="Price" value={ `$ ${animal?.price}`} />
+      <InfoItem label="Type" value={animal?.bought==false?"Birth":"Purchased" } withDivider={false} />
+    </View>
+  );
+}
+function renderSectionFour() {
+  return (
+    <View
+      style={{
+        marginTop: SIZES.padding,
+        borderRadius: SIZES.radius,
+        paddingHorizontal: SIZES.radius,
+        backgroundColor: COLORS.lightGray2,
+      }}>
+      <InfoItem label="Breed" value={ animal?.breed} />
+      <InfoItem label="Bred" value={animal?.bred==false?"No":"Yes"} withDivider={false} />
+    </View>
+  );
+}
+function medication() {
+  return (
+    <View
+      style={{
+        marginTop: SIZES.padding,
+        borderRadius: SIZES.radius,
+        paddingHorizontal: SIZES.radius,
+        backgroundColor: COLORS.lightGray2,
+      }}>
+      <InfoItem label="Breed" value={ animal?.breed} />
+      <InfoItem label="Bred" value={animal?.bred==false?"No":"Yes"} withDivider={false} />
+    </View>
+  );
+}
+function renderHeader() {
+  return (
+    <Header
+      leftComponent={
+        <View
+          style={{
+            justifyContent: 'center',
+            position: 'absolute',
+            marginTop: 25,
+            zIndex: 1,
+          }}>
+          <TouchableOpacity
+            style={{
+              marginLeft: 25,
+            }}
+            onPressIn={() => {
+              navigation.goBack();
+            }}>
+            <Image
+              source={images.back}
+              style={{width: 28, height: 28, tintColor: COLORS.darkGray2}}
+            />
+          </TouchableOpacity>
+        </View>
+      }
+      title={'More Info'}
+      titleStyle={{
+        // marginLeft: 55,
+      }}
+      
+    />
+  );
+}
+  return (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: COLORS.white,
+      }}>
+      {renderHeader()}
+
+      <ScrollView
+        contentContainerStyle={{
+          paddingHorizontal: SIZES.padding,
+        }}>
+       {renderSectionZero()}
+        {renderSectionOne()}
+        {renderSectionThree()}
+        {renderSectionFour()}
+        {renderSectionTwo()}
+      </ScrollView>
+    </View>
+  );
+};
+

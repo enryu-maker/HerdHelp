@@ -25,23 +25,25 @@ import FormInput from '../../Components/FormInput';
 
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
-import axios from 'axios';
-import ActivityIndicatorExample from '../../Components/Loading';
+// import axios from 'axios';
+// import ActivityIndicatorExample from '../../Components/Loading';
 const Addanimals = ({navigation}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState("");
-  const [valueBS, setValueBS] = useState('');
-  const [age, setAge] = useState('');
-  const [Breed, setBreed] = useState('');
-  const [tag, setTag] = useState('');
-  const [price, setPrice] = useState('');
-  const [mother, setMother] = useState('');
-  const [father, setFather] = useState('');
-  const [weight, setWeight] = useState('');
-  const [name, setName] = useState('');
-  const [dob, setDob] = useState(null);
+  const [valueBS, setValueBS] = useState("");
+  const [age, setAge] = useState(0);
+  const [Breed, setBreed] = useState("");
+  const [tag, setTag] = useState("");
+  const [price, setPrice] = useState(0);
+  const [mother, setMother] = useState("");
+  const [father, setFather] = useState("");
+  const [weight, setWeight] = useState(0);
+  const [name, setName] = useState("");
+  const [dob, setDob] = useState("");
+  const [dobt, setDobt] = useState("");
   const [vaccinated,setVaccinated] =useState(false)
-  const [vaccinateddate,setVaccinateddate] =useState(null)
+  const [vaccinateddate,setVaccinateddate] =useState("")
+  const [vaccinateddatet,setVaccinateddatet] =useState("")
   const [bought,setBought] =useState(false)
   const [loading,setLoading] = React.useState(false)
   const [send,setSend] = React.useState(false)
@@ -70,26 +72,37 @@ const Addanimals = ({navigation}) => {
     setLoading(true)
     return data
   }
-  async function postAnimal(){
-   const res = await axiosIns.post('animals/',{
-        "name":name ,
-        "tag_number": tag,
-        "gender": valueBS,
-        "species": valueMS,
-        "birth_date": dob,
-        "mother_tagnumber": mother,
-        "father_tagnumber":father,
-        "breed": Breed,
-        "weight": weight,
-        "bred": bred,
-        "age": age,
-        "vaccinated": vaccinated,
-        "vaccination_date": vaccinateddate,
-        "price": price,
-        "bought": bought
-    })
-    setSend(true)
-    return res
+  const data = 
+  JSON.stringify(
+    {
+      "name":name ,
+      "tag_number": tag,
+      "gender": valueBS,
+      "species": valueMS,
+      "birth_date": dobt,
+      "mother_tagnumber": mother,
+      "father_tagnumber":father,
+      "breed": Breed,
+      "weight": weight,
+      "bred": bred,
+      "age": age,
+      "vaccinated": vaccinated,
+      "vaccination_date": vaccinateddatet,
+      "price": price,
+      "bought": bought
+  }
+  )
+    
+   function postAnimal(){
+    axiosIns.post('animals/',data, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(response => {
+          console.log(response.status)
+            alert("Animal added sucessfully")
+        }).catch(err => console.log("api Erorr: ", err.response))
+    // return res
   }
   React.useEffect(()=>{
     if (!loading){
@@ -181,11 +194,11 @@ const Addanimals = ({navigation}) => {
     <Dropdown
           label="Species"
           borderRadius={SIZES.radius}
-          data={catedata}
+          data={animals}
           textInputStyle={FONTS.body2, { letterSpacing: 2 }}
           selectedItemTextStyle={FONTS.body3, { color: COLORS.white ,letterSpacing: 2,alignSelf:"center"}}
           selectedItemViewStyle={{ backgroundColor: COLORS.Primary, margin: 5, borderRadius: SIZES.radius }}
-          // enableAvatar
+          enableAvatar
           required
           // showLoader={1000}
           mode="outlined"
@@ -231,9 +244,10 @@ const Addanimals = ({navigation}) => {
         />
         <FormDateInput
           label="Date of Birth"
-          placeholder="MM/DD/YYYY"
+          placeholder="YYYY/MM/DD"
           value={dob}
           setDate={setDob}
+          formatDate={setDobt}
           containerStyle={{
             marginTop: SIZES.radius,
             // marginLeft:20
@@ -423,9 +437,10 @@ const Addanimals = ({navigation}) => {
         />
         <FormDateInput
           label="Date of Vaccination"
-          placeholder="MM/DD/YYYY"
+          placeholder="YYYY/MM/DD"
           value={vaccinateddate}
           setDate={setVaccinateddate}
+          formatDate={setVaccinateddatet}
           containerStyle={{
             marginTop: SIZES.radius,
             // marginLeft:20
@@ -515,9 +530,10 @@ const Addanimals = ({navigation}) => {
 
       <TextButton
         onPress={() => {
-          // console.log(valueMS)
+          // let d =JSON.stringify(dob).slice(0,11)+`"`
+          // console.log(data)
           // send==false?<ActivityIndicatorExample/>: 
-          postAnimal().then(res=>{console.log(res.data)})
+          postAnimal()
         }}
         buttonContainerStyle={{
           // flex:1,

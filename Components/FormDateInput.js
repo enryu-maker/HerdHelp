@@ -18,6 +18,7 @@ const FormDateInput = ({
     setDate,
     value,
     errorMsg = "",
+    formatDate
 }) => {
 
     const [open, setOpen] = useState(false)
@@ -58,7 +59,7 @@ const FormDateInput = ({
                         marginLeft: 20
                     }}
                 >
-                    {value ? moment(value).format("DD/MM/YYYY") : placeholder}
+                    {value ? moment(value).format("YYYY/MM/DD") : placeholder}
                 </Text>
 
                 
@@ -73,6 +74,8 @@ const FormDateInput = ({
                 onConfirm={(date) => {
                     setOpen(false)
                     setDate(date)
+                    formatDate(date.toJSON().slice(0,10))
+
                 }}
                 onCancel={() => {
                     setOpen(false)

@@ -17,13 +17,16 @@ const Login =({navigation})=>{
     function isEnableSignIn() {
         return email != "" && password != ""
     }
-    const storeData = async (token, refresh) => {
+    const storeData = async (token, refresh,id) => {
         try {
             await AsyncStorage.setItem(
                 'token', token
             )
             await AsyncStorage.setItem(
                 'refresh', refresh
+            )
+            await AsyncStorage.setItem(
+                'id',JSON.stringify(id) 
             )
         } catch (e) {
             console.log(e)
@@ -39,9 +42,10 @@ const Login =({navigation})=>{
                     }
                 }).then((response) => {
                     //const token = response.data.access
-                    console.log(response.data.access)
+                    // console.log(response.data)
                     if (response.status === 200) {
-                        storeData(response.data.access, response.data.refresh)
+                        storeData(response.data.access, response.data.refresh,response.data.userid)
+                        // console.log("here")
                         navigation.replace("Main")
                     }
                     else {

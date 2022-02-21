@@ -17,8 +17,8 @@ const InfoItem = ({ label, value, withDivider = true }) => {
                     alignItems: 'center',
                 }}
             >
-                <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>{label}</Text>
-                <Text style={{ flex: 1, textAlign: 'right', ...FONTS.body3 }}>{value}</Text>
+                <Text style={{ color: COLORS.gray, ...FONTS.h2 }}>{label}</Text>
+                <Text style={{ flex: 1, textAlign: 'right', ...FONTS.body2 }}>{value}</Text>
             </View>
 
             {withDivider &&

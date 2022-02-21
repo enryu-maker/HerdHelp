@@ -16,7 +16,7 @@ import {
 import { Dropdown } from 'sharingan-rn-modal-dropdown'
 import FormInput from '../../Components/FormInput';
 export const Finance = ({navigation})=>{
-    const [cat,setCat] = React.useState("")
+    const [cat,setCat] = React.useState(1)
     const [Qty,setQty] = React.useState("")
     const [price,setPrice] = React.useState("")
     const [loading,setLoading] = React.useState(false)
@@ -26,10 +26,21 @@ export const Finance = ({navigation})=>{
       const {data} = await axiosIns.get("getfinancecategories/")
       return data
     }
-    async function postfinance(){
-      await axiosIns.post("finance/",{
-
-      })
+    const data =JSON.stringify(
+      {
+        "price":price,
+        "category":cat,
+        "quantity":Qty
+      }
+    )
+     function postfinance(){
+      axiosIns.post('finance/',data, {
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(response => {
+        alert("Finance added sucessfully")
+    }).catch(err => console.log("api Erorr: ", err.response))
     }
     React.useEffect(()=>{
       if (!loading){
@@ -167,7 +178,7 @@ export const Finance = ({navigation})=>{
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {
-          alert([tag, weight]);
+          postfinance();
         }}
         buttonContainerStyle={{
           // flex:1,

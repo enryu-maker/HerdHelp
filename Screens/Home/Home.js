@@ -49,7 +49,7 @@ export const Home = ({navigation}) => {
         setAnimals(data);
       });
     }
-    console.log(animals)
+    // console.log(animals)
   });
   function renderHeader() {
     return (

@@ -28,7 +28,7 @@ export  const Signup=({navigation})=>{
                     }
                 }).then((response) => {
                     console.log(response)
-                    if (response.status === 200) {
+                    if (response.status === 201) {
                         // setEmailError(response.data.message)
                         alert("User sucessfully created")
                         //this.props.navigation.replace('Login')
