@@ -1,94 +1,111 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
 import FormInput from '../../Components/FormInput';
-import { COLORS, FONTS, images, SIZES ,dummydata,CollapseExpand } from "../../Components/Constants"
+import {
+  COLORS,
+  FONTS,
+  images,
+  SIZES,
+  dummydata,
+  CollapseExpand,
+} from '../../Components/Constants';
 import FilterModal from './filterModel';
 import Card from '../../Components/Card';
 import TextButton from '../../Components/TextButton';
 import axiosIns from '../../helpers/helpers';
-export const Home = ({ navigation }) => {
-  const [showFilterModal, setShowFilterModal] = React.useState(false)
-  const [Purchased,setPurchased]=React.useState([])
-  const [Breed,setBreed]=React.useState([])
-  const [animals,setAnimals] = React.useState([])
-  const [searched, setSearched] = React.useState("")
-  const [loading,setLoading] = React.useState(false)
-  const [selectedTab, setSelectedTab] = React.useState("Breed")
+import ActivityIndicatorExample from '../../Components/Loading';
+export const Home = ({navigation}) => {
+  const [showFilterModal, setShowFilterModal] = React.useState(false);
+  const [Purchased, setPurchased] = React.useState([]);
+  const [Breed, setBreed] = React.useState([]);
+  const [animals, setAnimals] = React.useState([]);
+  const [searched, setSearched] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [selectedTab, setSelectedTab] = React.useState('Breed');
   function filterList(list) {
     return list.filter(
-      (listItem) =>
+      listItem =>
         listItem.tag_number
           .toString()
           .toLowerCase()
           .includes(searched.toLowerCase()) ||
         listItem.name.toLowerCase().includes(searched.toLowerCase()) ||
-        listItem.species.toLowerCase().includes(searched.toLowerCase())
+        listItem.species.toLowerCase().includes(searched.toLowerCase()),
     );
   }
   // function allAnimals(){
   //   let animal = Breed.concat(Purchased)
   //   setAnimals(animal)
   // }
-  async function fetchanimal(){
-    setLoading(true)
-    let { data } = await axiosIns.get("animals/")
-    console.log (data) 
-    return data
+  async function fetchanimal() {
+    let {data} = await axiosIns.get('animals/');
+    setLoading(true);
+    return data;
   }
-  React.useEffect(()=>{
-    if (!loading){
-      fetchanimal().then(data=>{setAnimals(data)})
-      // fetchBred().then(data=>{setBreed(data),setAnimals(data)})
+  React.useEffect(() => {
+    if (!loading) {
+      fetchanimal().then(data => {
+        setAnimals(data);
+      });
     }
-  })
-  function renderHeader(){
-    return(
-        <Header
+  });
+  function renderHeader() {
+    return (
+      <Header
         leftComponent={
-          <View style={{
-            justifyContent: 'center',
-            position:'absolute',
-                marginTop:25,
-                zIndex: 1,
-            
-          }}>
+          <View
+            style={{
+              justifyContent: 'center',
+              position: 'absolute',
+              marginTop: 25,
+              zIndex: 1,
+            }}>
             <TouchableOpacity
               style={{
                 marginLeft: 25,
-                
               }}
-              onPressIn={() => { navigation.goBack()}}>
-               <Image source={images.back} style={{width:30,height:30,tintColor:COLORS.darkGray2}}/>
+              onPressIn={() => {
+                navigation.goBack();
+              }}>
+              <Image
+                source={images.back}
+                style={{width: 30, height: 30, tintColor: COLORS.darkGray2}}
+              />
             </TouchableOpacity>
-
           </View>
         }
-        title={"Home"}
+        title={'Home'}
         titleStyle={{
-          marginLeft:60
+          marginLeft: 60,
         }}
         rightComponent={
-          <View style={{
-            justifyContent: 'center',
-          }}>
-            <TouchableOpacity
+          <View
             style={{
-              marginRight: 25,
-              
-            }}
-            onPress={()=>navigation.navigate("MyAccount")}
-            >
-              <Image source={images.login}style={{width:40,height:40,tintColor:COLORS.darkGray2,marginTop:10}} />
+              justifyContent: 'center',
+            }}>
+            <TouchableOpacity
+              style={{
+                marginRight: 25,
+              }}
+              onPress={() => navigation.navigate('MyAccount')}>
+              <Image
+                source={images.login}
+                style={{
+                  width: 40,
+                  height: 40,
+                  tintColor: COLORS.darkGray2,
+                  marginTop: 10,
+                }}
+              />
             </TouchableOpacity>
-            </View>
+          </View>
         }
       />
-      
-    )
+    );
   }
-  function Search(){
-    return(
+  function Search() {
+    return (
       <FormInput
         prependComponent={
           <Image
@@ -97,29 +114,31 @@ export const Home = ({ navigation }) => {
               height: 20,
               width: 20,
               tintColor: COLORS.darkGray2,
-              alignSelf: 'center'
+              alignSelf: 'center',
             }}
           />
         }
-        placeholder={"Search..."}
+        placeholder={'Search...'}
         value={searched}
-        onPressIn={()=>{
-          <View style={{height:100,width:100,backgroundColor:"yellow"}}>
+        onPressIn={() => {
+          <View style={{height: 100, width: 100, backgroundColor: 'yellow'}}>
             <Text>Hi</Text>
-          </View>
+          </View>;
         }}
         containerStyle={{
-          paddingBottom:10
+          paddingBottom: 10,
         }}
-        onChange={(value) => { setSearched(value) }}
+        onChange={value => {
+          setSearched(value);
+        }}
         inputStyle={{
-          marginLeft: '10%'
-
+          marginLeft: '10%',
         }}
         appendComponent={
-          <TouchableOpacity style={{
-            alignSelf: 'center'
-          }}
+          <TouchableOpacity
+            style={{
+              alignSelf: 'center',
+            }}
             onPress={() => setShowFilterModal(true)}>
             <Image
               source={images.filter}
@@ -127,91 +146,102 @@ export const Home = ({ navigation }) => {
                 height: 20,
                 width: 20,
                 tintColor: COLORS.darkGray2,
-                alignSelf: 'center'
+                alignSelf: 'center',
               }}
             />
           </TouchableOpacity>
-
         }
       />
-    )
+    );
   }
   function renderTabButtons() {
     return (
-        <View
-            style={{
-                flexDirection: 'row',
-                height: 50,
-                marginTop: SIZES.radius,
-                paddingHorizontal: SIZES.padding,
-                marginBottom:20,
-                borderBottomEndRadius:SIZES.radius,
-                borderBottomStartRadius:SIZES.radius
-            }}
-        >
-            <TextButton
-                buttonContainerStyle={{
-                    flex: 1,
-                    borderRadius: SIZES.radius,
-                    backgroundColor: (selectedTab == 'Breed') ? COLORS.Primary : COLORS.transparentPrimary2
-                }}
-                label="Breed"
-                labelStyle={{
-                    color: (selectedTab == 'Breed') ? COLORS.white : COLORS.Primary
-                }}
-                onPress={() => {
-                    setSelectedTab("Breed")
-                    setBreed(animals)
-                }}
-            />
+      <View
+        style={{
+          flexDirection: 'row',
+          height: 50,
+          marginTop: SIZES.radius,
+          paddingHorizontal: SIZES.padding,
+          marginBottom: 20,
+          borderBottomEndRadius: SIZES.radius,
+          borderBottomStartRadius: SIZES.radius,
+        }}>
+        <TextButton
+          buttonContainerStyle={{
+            flex: 1,
+            borderRadius: SIZES.radius,
+            backgroundColor:
+              selectedTab == 'Breed'
+                ? COLORS.Primary
+                : COLORS.transparentPrimary2,
+          }}
+          label="Breed"
+          labelStyle={{
+            color: selectedTab == 'Breed' ? COLORS.white : COLORS.Primary,
+          }}
+          onPress={() => {
+            setSelectedTab('Breed');
+            setBreed(animals);
+          }}
+        />
 
-            <TextButton
-                buttonContainerStyle={{
-                    flex: 1,
-                    marginLeft: SIZES.padding,
-                    borderRadius: SIZES.radius,
-                    backgroundColor: (selectedTab == 'Purchased') ? COLORS.Primary : COLORS.transparentPrimary2
-                }}
-                label="Purchased"
-                labelStyle={{
-                    color: (selectedTab == 'Purchased') ? COLORS.white : COLORS.Primary
-                }}
-                onPress={() => {
-                    setSelectedTab("Purchased")
-                    setBreed(Purchased)
-                }}
-            />
-        </View>
-    )
-}
+        <TextButton
+          buttonContainerStyle={{
+            flex: 1,
+            marginLeft: SIZES.padding,
+            borderRadius: SIZES.radius,
+            backgroundColor:
+              selectedTab == 'Purchased'
+                ? COLORS.Primary
+                : COLORS.transparentPrimary2,
+          }}
+          label="Purchased"
+          labelStyle={{
+            color: selectedTab == 'Purchased' ? COLORS.white : COLORS.Primary,
+          }}
+          onPress={() => {
+            setSelectedTab('Purchased');
+            setBreed(Purchased);
+          }}
+        />
+      </View>
+    );
+  }
   return (
-    <View 
-    style={{flex:1,backgroundColor: COLORS.white}}>
-      {showFilterModal &&
+    <View style={{flex: 1, backgroundColor: COLORS.white}}>
+      {showFilterModal && (
         <FilterModal
           isVisible={showFilterModal}
           onClose={() => setShowFilterModal(false)}
         />
-      }
+      )}
       {renderHeader()}
       {Search()}
       {/* {renderTabButtons()} */}
-      <ScrollView 
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ flexGrow: 1 }}>
-      {filterList(animals).map((listItem, index) => (
-       <Card key={index} 
-      Name={listItem.name} 
-      Tagnumber={listItem.tag_number} 
-      Gender={listItem.gender}
-      Species={listItem.category}
-      Weight={listItem.weight}
-      image={listItem.image}
-      onPress={()=>{navigation.navigate("Info",{
-        value:listItem,
-      })}}/>
-      ))}
-      </ScrollView>
+      {loading == false ? (
+        <ActivityIndicatorExample />
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{flexGrow: 1}}>
+          {filterList(animals).map((listItem, index) => (
+            <Card
+              key={index}
+              Name={listItem.name}
+              Tagnumber={listItem.tag_number}
+              Gender={listItem.gender}
+              Species={listItem.category}
+              Weight={listItem.weight}
+              image={listItem.image}
+              onPress={() => {
+                navigation.navigate('Info', {
+                  value: listItem,
+                });
+              }}
+            />
+          ))}
+        </ScrollView>
+      )}
     </View>
   );
-}
+};

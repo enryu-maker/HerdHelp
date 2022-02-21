@@ -2,11 +2,12 @@ import React from 'react';
 import { 
     View,
     Text,
-    Image
+    Image,
+    Platform
 } from 'react-native';
 import { COLORS, FONTS } from "./Constants"
 
-const Header = ({ containerStyle, title, titleStyle, leftComponent, rightComponent,img }) => {
+const Header = ({ containerStyle, title, titleStyle, leftComponent, rightComponent,img ,imgstyle}) => {
     return (
         <View
             style={{
@@ -14,7 +15,7 @@ const Header = ({ containerStyle, title, titleStyle, leftComponent, rightCompone
                 flexDirection: 'row',
                 ...containerStyle,
                 alignSelf:'center',
-                marginTop:'8%'
+                marginTop:Platform.OS="android"? '5%' :0
             }}
         >
             {
@@ -30,7 +31,8 @@ const Header = ({ containerStyle, title, titleStyle, leftComponent, rightCompone
                         resizeMode="contain"
                         style={{
                             height: 200,
-                            width: 250
+                            width: 250,
+                            ...imgstyle
                         }}
                     />
             </View>

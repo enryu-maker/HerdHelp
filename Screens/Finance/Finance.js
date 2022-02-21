@@ -21,14 +21,19 @@ export const Finance = ({navigation})=>{
     const [price,setPrice] = React.useState("")
     const [loading,setLoading] = React.useState(false)
     const [animals,setAnimals] = React.useState([])
-    async function postfinance(){
+    async function getfinance(){
       setLoading(true)
-      await axiosIns.post("finance/")
+      const {data} = await axiosIns.get("getfinancecategories/")
       return data
+    }
+    async function postfinance(){
+      await axiosIns.post("finance/",{
+
+      })
     }
     React.useEffect(()=>{
       if (!loading){
-        // fetchanimal().then(data=>{setAnimals(data)})
+        getfinance().then(data=>{setAnimals(data)})
       }
       // console.log (animals) 
 
@@ -77,11 +82,11 @@ export const Finance = ({navigation})=>{
             <Dropdown
             label="Category"
             borderRadius={SIZES.radius}
-            data={Bred}
+            data={animals}
             textInputStyle={FONTS.body2, { letterSpacing: 2 }}
             selectedItemTextStyle={FONTS.body3, { color: COLORS.white }}
             selectedItemViewStyle={{ backgroundColor: COLORS.Primary, margin: 5, borderRadius: SIZES.radius }}
-            enableAvatar
+            // enableAvatar
             required
             disableSelectionTick
             primaryColor={COLORS.Primary}

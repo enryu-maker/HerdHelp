@@ -56,11 +56,12 @@ const Addanimals = ({navigation}) => {
   async function fetchanimal(){
     setLoading(true)
     let { data } = await axiosIns.get("getcategories/")
-    // console.log (data) 
     return data
   }
-  function postAnimal(){
-    
+  async function postAnimal(){
+    await axiosIns('animals/',{
+      
+    })
   }
   React.useEffect(()=>{
     if (!loading){
@@ -315,7 +316,7 @@ const Addanimals = ({navigation}) => {
             alignSelf:"center",
             marginTop: SIZES.height > 800 ? SIZES.base : 10,
           }}
-          itemContainerStyle={{ backgroundColor: COLORS.lightGray2, margin: 5, borderRadius: SIZES.radius }}
+          itemContainerStyle={{ backgroundColor: COLORS.white, margin: 5, borderRadius: SIZES.radius }}
         />
         <FormInput
           prependComponent={
@@ -367,7 +368,7 @@ const Addanimals = ({navigation}) => {
             alignSelf:"center",
             marginTop: SIZES.height > 800 ? SIZES.base : 10,
           }}
-          itemContainerStyle={{ backgroundColor: COLORS.lightGray2, margin: 5, borderRadius: SIZES.radius }}
+          itemContainerStyle={{ backgroundColor: COLORS.white, margin: 5, borderRadius: SIZES.radius }}
         />
         <FormInput
           prependComponent={

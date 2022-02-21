@@ -1,17 +1,18 @@
-import { View, Text,Image } from 'react-native'
+import { View, Text,Image, ScrollView } from 'react-native'
 import React from 'react'
 import TextButton from '../../Components/TextButton'
 import Header from '../../Components/Header'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {images,COLORS,SIZES, FONTS} from '../../Components/Constants'
 export default function Main({navigation}) {
   return (
     <View style={{flex:1,backgroundColor:COLORS.white}}>
       <Header
       img={images.logo}
-      containerStyle={{
-          margin:'10%',
+      imgstyle={{
+        marginTop:'18%'
       }}/>
-      <View style={{marginVertical:40}}>
+      <ScrollView style={{marginVertical:0, marginTop:'30%'}}>
       <TextButton
       label={"MY HERDS"}
       onPress={()=>{navigation.navigate("Home")}}
@@ -49,18 +50,18 @@ export default function Main({navigation}) {
           />
           <TextButton
       label={"ALERTS"}
-      onPress={()=>{navigation.navigate("Home")}}
+      onPress={()=>{navigation.navigate("Alerts")}}
       buttonContainerStyle={{
         marginTop:12,
         // width:120
     }}
           />
           
-      </View>
+      </ScrollView>
       <View style={{flex:1,justifyContent:'flex-end'}}>
           <TextButton
       label={"LOGOUT"}
-      onPress={()=>{navigation.replace("Login")}}
+      onPress={()=>{navigation.replace("Login"),AsyncStorage.clear}}
       buttonContainerStyle={{
         marginBottom:20
     }}

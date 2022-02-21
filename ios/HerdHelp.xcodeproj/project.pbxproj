@@ -114,7 +114,6 @@
 				118709F786FA4738ABA3374E /* Pods-HerdHelp-HerdHelpTests.debug.xcconfig */,
 				1E3905D143DA8686314FB42E /* Pods-HerdHelp-HerdHelpTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -155,7 +154,6 @@
 			children = (
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

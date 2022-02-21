@@ -16,6 +16,7 @@ import MyAccount from '../Account/MyAccount';
 import MyAccountEdit from '../Account/MyAccountEdit';
 import Main from '../Home/main';
 import { Finance } from '../Finance/Finance';
+import Alerts from '../Alerts/Alerts';
 const Stack = createNativeStackNavigator();
 
 export default class Homenav extends Component {
@@ -39,6 +40,7 @@ export default class Homenav extends Component {
           <Stack.Screen name='medication' component={Medication} options={{stackAnimation:"fade"}}/>
           <Stack.Screen name='weight' component={Weight} options={{stackAnimation:"fade"}}/>
           <Stack.Screen name='Finance' component={Finance} options={{stackAnimation:"fade"}}/>
+          <Stack.Screen name='Alerts' component={Alerts} options={{stackAnimation:"fade"}}/>
 
         </Stack.Navigator>
       </NavigationContainer>

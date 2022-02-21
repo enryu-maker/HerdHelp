@@ -5,7 +5,8 @@ import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import { DrawerActions } from '@react-navigation/core';
+import FormDateInput from '../../Components/FormDateInput';
+
 export const Medication = ({ navigation }) =>{
   const [tag, setTag] = React.useState('');
   const [treat, setTreat] = React.useState('');
@@ -66,7 +67,7 @@ export const Medication = ({ navigation }) =>{
           }}
           inputContainerStyle={{
             backgroundColor: COLORS.white,
-            justifyContent: 'center',
+            // justifyContent: 'center',
           }}
           containerStyle={{
             marginTop: SIZES.radius,
@@ -83,7 +84,7 @@ export const Medication = ({ navigation }) =>{
               />
             </View>
           }
-          label="Disease"
+          label="Reason for Medication?"
           value={Dis}
           onChange={value => {
             setDis(value);
@@ -157,11 +158,28 @@ export const Medication = ({ navigation }) =>{
           onChange={value => {
             setWithdraw(value);
           }}
-          label={'Withdraw'}
+          label={'Withdrawal'}
           inputContainerStyle={{
             backgroundColor: COLORS.white,
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
+        />
+        <FormDateInput
+          label="Withdrawal Date"
+          placeholder="MM/DD/YYYY"
+          value={date}
+          setDate={setDate}
+          containerStyle={{
+            marginTop: SIZES.radius,
+            // marginLeft:20
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+            width: '88%',
+            alignSelf: 'center',
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+          
         />
       </View>
     );
