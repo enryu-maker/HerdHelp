@@ -13,7 +13,6 @@ export default function App() {
       const refresh = await AsyncStorage.getItem('refresh');
       if (token !== null && refresh !== null) {
          setRoute(true);
-        //  console.log(token)
       }
       return data;
   };
@@ -25,9 +24,9 @@ export default function App() {
   return (
         <View style={{flex:1,}}>
           <StatusBar
-          style="dark"/>
+          style="auto"/>
           {
-            Route?  <Homenav/>:<Rootnav/> 
+            Route?  <Homenav/> : <Rootnav/> 
           }
         </View>
         

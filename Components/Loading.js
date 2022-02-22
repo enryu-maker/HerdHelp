@@ -5,7 +5,7 @@ class ActivityIndicatorExample extends Component {
     _isMounted = false;
    state = { animating: true }
    closeActivityIndicator = () => setTimeout(() => this.setState({
-   animating: false }), 20000)
+   animating: false }), 60000)
    componentDidMount (){
     this._isMounted = true;
     this.closeActivityIndicator()

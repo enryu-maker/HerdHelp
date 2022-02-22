@@ -29,18 +29,17 @@ export default class Homenav extends Component {
         <Stack.Navigator screenOptions={{ headerShown: false}}
           initialRouteName={'Main'}>
           <Stack.Screen name='Main' component={Main} />
-          <Stack.Screen name='Home' component={Home} options={{stackAnimation:"fade"}}/>
-          <Stack.Screen name='Login' component={Login} options={{stackAnimation:"fade"}}/>
-          <Stack.Screen name='Signup' component={Signup}options={{stackAnimation:"fade"}} />
-          <Stack.Screen name='Info' component={Info} options={{stackAnimation:"default"}} />
-          <Stack.Screen name='Animals' component={Addanimals} options={{stackAnimation:"default"}} />
-          <Stack.Screen name='MyAccount' component={MyAccount} options={{stackAnimation:"fade"}}/>
-          <Stack.Screen name='MyAccountEdit' component={MyAccountEdit} options={{stackAnimation:"fade"}}/>
-          <Stack.Screen name='Add' component={Add} options={{stackAnimation:"fade"}}/>
-          <Stack.Screen name='medication' component={Medication} options={{stackAnimation:"fade"}}/>
-          <Stack.Screen name='weight' component={Weight} options={{stackAnimation:"fade"}}/>
-          <Stack.Screen name='Finance' component={Finance} options={{stackAnimation:"fade"}}/>
-          <Stack.Screen name='Alerts' component={Alerts} options={{stackAnimation:"fade"}}/>
+          <Stack.Screen name='Home' component={Home}/>
+          <Stack.Screen name='Login' component={Login} />
+          <Stack.Screen name='Signup' component={Signup} />
+          <Stack.Screen name='Info' component={Info}/>
+          <Stack.Screen name='Animals' component={Addanimals}  />
+          <Stack.Screen name='MyAccount' component={MyAccount} />
+          <Stack.Screen name='MyAccountEdit' component={MyAccountEdit} />
+          <Stack.Screen name='medication' component={Medication} />
+          <Stack.Screen name='weight' component={Weight} />
+          <Stack.Screen name='Finance' component={Finance} />
+          <Stack.Screen name='Alerts' component={Alerts} />
 
         </Stack.Navigator>
       </NavigationContainer>

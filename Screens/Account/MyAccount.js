@@ -4,7 +4,7 @@ import {View, ScrollView, TouchableOpacity, Image,Text} from 'react-native';
 import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import InfoItem from '../../Components/InfoItem';
-import {COLORS, SIZES, images, dummyData} from '../../Components/Constants';
+import {COLORS, SIZES, images, dummyData, FONTS} from '../../Components/Constants';
 import { launchImageLibrary, ImageLibraryOptions, launchCamera } from 'react-native-image-picker';
 import axiosIns from '../../helpers/helpers';
 
@@ -74,29 +74,18 @@ function renderFileUri() {
         }
         title={'My Account'}
         titleStyle={{
-          marginLeft: 55,
+          // alignSelf:"center",
+          marginLeft:75
         }}
         rightComponent={
-          <View
-            style={{
-              justifyContent: 'center',
-              // position:'absolute',
-              // marginTop:25,
-              // zIndex: 1,
-            }}>
-            <TextButton
-              label="Edit"
-              labelStyle={{
-                color: COLORS.Primary,
-                fontSize:18
-              }}
-              buttonContainerStyle={{
-                backgroundColor: null,
-                marginRight: 25,
-              }}
-              onPress={() => navigation.navigate('MyAccountEdit')}
-            />
-          </View>
+          <Text
+          style={{
+            padding:SIZES.padding,
+            color:COLORS.Primary,
+            ...FONTS.h3
+          }}
+          onPress={()=>navigation.navigate("MyAccountEdit")}
+          >EDIT</Text>
         }
       />
     );

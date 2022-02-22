@@ -22,7 +22,7 @@ import {
   Bred,Bought
 } from '../../Components/Constants';
 import FormInput from '../../Components/FormInput';
-
+import datacat from '../../Components/Constants';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
 // import axios from 'axios';
@@ -194,21 +194,21 @@ const Addanimals = ({navigation}) => {
     <Dropdown
           label="Species"
           borderRadius={SIZES.radius}
-          data={animals}
+          data={datacat}
           textInputStyle={FONTS.body2, { letterSpacing: 2 }}
           selectedItemTextStyle={FONTS.body3, { color: COLORS.white ,letterSpacing: 2,alignSelf:"center"}}
           selectedItemViewStyle={{ backgroundColor: COLORS.Primary, margin: 5, borderRadius: SIZES.radius }}
-          enableAvatar
+          // enableAvatar
           required
           // showLoader={1000}
-          mode="outlined"
+          // mode="outlined"
           disableSelectionTick
           primaryColor={COLORS.Primary}
-          avatarSize={28}
+          // avatarSize={28}
           value={valueMS}
           onChange={onChangeMS}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          // animationIn="zoomIn"
+          // animationOut="zoomOut"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: "88%",
@@ -226,14 +226,14 @@ const Addanimals = ({navigation}) => {
           selectedItemViewStyle={{ backgroundColor: COLORS.Primary, marginTop: 5, borderRadius: SIZES.radius,height:40 }}
           enableAvatar
           required
-          mode="outlined"
+          // mode="outlined"
           disableSelectionTick
           primaryColor={COLORS.Primary}
-          avatarSize={28}
+          // avatarSize={28}
           value={valueBS}
           onChange={onChangeBS}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          // animationIn="zoomIn"
+          // animationOut="zoomOut"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: "88%",
@@ -372,8 +372,8 @@ const Addanimals = ({navigation}) => {
           avatarSize={28}
           value={bred}
           onChange={onChangeB}
-          animationIn="bounceIn"
-          animationOut="bounceOut"
+          // animationIn="bounceIn"
+          // animationOut="bounceOut"
           mode="outlined"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
@@ -424,8 +424,8 @@ const Addanimals = ({navigation}) => {
           avatarSize={28}
           value={vaccinated}
           onChange={onChangeVacc}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          // animationIn="zoomIn"
+          // animationOut="zoomOut"
           mode="outlined"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
@@ -491,14 +491,14 @@ const Addanimals = ({navigation}) => {
           enableAvatar
           required
           // showLoader
-          mode="outlined"
+          // mode="outlined"
           disableSelectionTick
           primaryColor={COLORS.Primary}
-          avatarSize={28}
+          // avatarSize={28}
           value={bought}
           onChange={onChangebought}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          // animationIn="zoomIn"
+          // animationOut="zoomOut"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: "88%",

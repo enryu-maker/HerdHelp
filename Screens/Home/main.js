@@ -3,8 +3,24 @@ import React from 'react'
 import TextButton from '../../Components/TextButton'
 import Header from '../../Components/Header'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import {images,COLORS,SIZES, FONTS} from '../../Components/Constants'
-export default function Main({navigation}) {
+import {images,COLORS,SIZES, FONTS, dummydata} from '../../Components/Constants'
+import axiosIns from '../../helpers/helpers'
+import datacat from '../../Components/Constants'
+ const  Main = ({navigation}) => {
+  const [animals,setAnimals] = React.useState([])
+  const [loading,setLoading] = React.useState(false)
+  async function fetchanimal(){
+    let { data } = await axiosIns.get("getcategories/")
+    setLoading(true)
+    return data
+  }
+  React.useEffect(()=>{
+    if (!loading){
+      fetchanimal().then(data=>
+        datacat = data  )
+    }
+    // console.log(animals)
+  })
   return (
     <View style={{flex:1,backgroundColor:COLORS.white}}>
       <Header
@@ -61,7 +77,7 @@ export default function Main({navigation}) {
       <View style={{flex:1,justifyContent:'flex-end'}}>
           <TextButton
       label={"LOGOUT"}
-      onPress={()=>{navigation.replace("Login"),AsyncStorage.clear}}
+      onPress={()=>{navigation.replace("Login"),AsyncStorage.clear()}}
       buttonContainerStyle={{
         marginBottom:20
     }}
@@ -70,3 +86,4 @@ export default function Main({navigation}) {
     </View>
   )
 }
+export default Main;

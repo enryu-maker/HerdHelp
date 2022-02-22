@@ -191,37 +191,40 @@ export const dummydata = [
         image:require("../assets/animal_logo/rabbit.png")
   },
 ]
-export const catedata = [
-    {
-      value: '1',
-      label: 'Cow',
-      avatarSource:require("../assets/animal_logo/cow.png")
-    },
-    {
-      value: '2',
-      label: 'Chicken',
-      avatarSource:require("../assets/animal_logo/chicken.png")
-    },
-    {
-      value: '3',
-      label: 'Pig',
-      avatarSource: require("../assets/animal_logo/pig.png")
-    },
-    {
-      value: '4',
-      label: 'Sheep',
-      avatarSource: require("../assets/animal_logo/sheep.png")
-    },
-    {
-        value: '5',
-        label: 'Goat',
-        avatarSource: require("../assets/animal_logo/goat.png")
-      },
-    {
-        value: '6',
-        label: 'Rabbit',
-        avatarSource: require("../assets/animal_logo/rabbit.png")
-      },
+const datacat = [
+
+]
+const catedata = [
+    // {
+    //   value: '1',
+    //   label: 'Cow',
+    //   avatarSource:require("../assets/animal_logo/cow.png")
+    // },
+    // {
+    //   value: '2',
+    //   label: 'Chicken',
+    //   avatarSource:require("../assets/animal_logo/chicken.png")
+    // },
+    // {
+    //   value: '3',
+    //   label: 'Pig',
+    //   avatarSource: require("../assets/animal_logo/pig.png")
+    // },
+    // {
+    //   value: '4',
+    //   label: 'Sheep',
+    //   avatarSource: require("../assets/animal_logo/sheep.png")
+    // },
+    // {
+    //     value: '5',
+    //     label: 'Goat',
+    //     avatarSource: require("../assets/animal_logo/goat.png")
+    //   },
+    // {
+    //     value: '6',
+    //     label: 'Rabbit',
+    //     avatarSource: require("../assets/animal_logo/rabbit.png")
+    //   },
   ];
   export const genderdata = [
     {
@@ -259,3 +262,4 @@ export const Bought = [
     avatarSource:images.bread
   },
 ];
+export default datacat
