@@ -71,7 +71,9 @@ function renderFileUri() {
         style={{width: 100,
           height: 100,
           borderRadius: 100 / 2,
-          alignSelf: 'center',}}
+          alignSelf: 'center',
+          tintColor:COLORS.Primary
+        }}
       />
     }
   };
@@ -100,7 +102,7 @@ function renderFileUri() {
             </TouchableOpacity>
           </View>
         }
-        title={'My Account'}
+        title={'Edit Account'}
         titleStyle={{
           // alignSelf:"center",
           marginLeft: 50,

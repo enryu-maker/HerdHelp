@@ -36,7 +36,15 @@ export const images ={
     logout:require("../assets/Logo/logout.png"),
     calender:require("../assets/Logo/calendar-2.png"),
     male:require("../assets/animal_logo/male.png"),
-    female:require("../assets/animal_logo/female.png")
+    female:require("../assets/animal_logo/female.png"),
+    bell:require("../assets/Logo/bell.png"),
+    herd:require("../assets/Logo/dog.png"),
+    money:require("../assets/Logo/money.png"),
+    herdhelp:require("../assets/Logo/Herd-Help-Logo.png"),
+    log:require("../assets/Logo/user.png"),
+    sign:require("../assets/Logo/add-user.png"),
+
+
 
 }
 export const COLORS={

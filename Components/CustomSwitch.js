@@ -31,7 +31,9 @@ const CustomSwitch = ({ label = "", onChange, value }) => {
                         style={{
                             color: value ? COLORS.Primary : COLORS.gray,
                             marginLeft: SIZES.base,
-                            ...FONTS.body4
+                            ...FONTS.h4,
+                            letterSpacing:2
+                            
                         }}
                     >
                         {label}

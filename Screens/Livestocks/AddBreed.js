@@ -50,13 +50,10 @@ const Addanimals = ({navigation}) => {
   const [animals,setAnimals] = React.useState([])
 
   const onChangeMS = (value) => {
-    // console.log(value)
     setValueMS(value);
   };
   const onChangeVacc = (value) => {
     setVaccinated(value);
-    // console.log(value)
-
   };
   const onChangeBS = (value) => {
     setValueBS(value);
@@ -92,7 +89,6 @@ const Addanimals = ({navigation}) => {
       "bought": bought
   }
   )
-    
    function postAnimal(){
     axiosIns.post('animals/',data, {
             headers: {
@@ -102,7 +98,6 @@ const Addanimals = ({navigation}) => {
           console.log(response.status)
             alert("Animal added sucessfully")
         }).catch(err => console.log("api Erorr: ", err.response))
-    // return res
   }
   React.useEffect(()=>{
     if (!loading){
@@ -374,7 +369,7 @@ const Addanimals = ({navigation}) => {
           onChange={onChangeB}
           // animationIn="bounceIn"
           // animationOut="bounceOut"
-          mode="outlined"
+          // mode="outlined"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: "88%",
@@ -426,7 +421,7 @@ const Addanimals = ({navigation}) => {
           onChange={onChangeVacc}
           // animationIn="zoomIn"
           // animationOut="zoomOut"
-          mode="outlined"
+          // mode="outlined"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: "88%",

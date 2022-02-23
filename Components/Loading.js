@@ -5,7 +5,7 @@ class ActivityIndicatorExample extends Component {
     _isMounted = false;
    state = { animating: true }
    closeActivityIndicator = () => setTimeout(() => this.setState({
-   animating: false }), 60000)
+   animating: false }), 6000)
    componentDidMount (){
     this._isMounted = true;
     this.closeActivityIndicator()
@@ -17,7 +17,7 @@ class ActivityIndicatorExample extends Component {
          <View style = {styles.container}>
             <ActivityIndicator
                animating = {animating}
-               color = {COLORS.white}
+               color = {COLORS.Primary}
                size = "large"
                style = {styles.activityIndicator}/>
          </View>

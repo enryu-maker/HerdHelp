@@ -43,7 +43,9 @@ function renderFileUri() {
         style={{width: 100,
           height: 100,
           borderRadius: 100 / 2,
-          alignSelf: 'center',}}
+          alignSelf: 'center',
+          tintColor:COLORS.Primary
+        }}
       />
     }
   };
@@ -75,14 +77,14 @@ function renderFileUri() {
         title={'My Account'}
         titleStyle={{
           // alignSelf:"center",
-          marginLeft:75
+          marginLeft:90
         }}
         rightComponent={
           <Text
           style={{
             padding:SIZES.padding,
             color:COLORS.Primary,
-            ...FONTS.h3
+            ...FONTS.h2
           }}
           onPress={()=>navigation.navigate("MyAccountEdit")}
           >EDIT</Text>

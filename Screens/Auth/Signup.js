@@ -11,6 +11,10 @@ export  const Signup=({navigation})=>{
     const [password, setPassword] = React.useState("")
     const [username, setUsername] = React.useState("")
     const [showPass, setShowPass] = React.useState(false)
+    const [loading, setLoading] = React.useState(false)
+    const [EmailError, setEmailError] = React.useState("")
+
+
     function isEnableSignIn() {
         return email != "" && password != "" && username != ""
     }
@@ -27,34 +31,34 @@ export  const Signup=({navigation})=>{
                         'Content-Type': 'application/json',
                     }
                 }).then((response) => {
-                    console.log(response)
                     if (response.status === 201) {
-                        // setEmailError(response.data.message)
+                        setLoading(true)
                         alert("User sucessfully created")
-                        //this.props.navigation.replace('Login')
                     }
                     else {
-                        setEmailError("else")
+                        setEmailError("User Already Registered")
                     }
                 })
                 .catch((error) => {
                     if (error.response) {
-                        console.log(error.response.data);
-                        setEmailError("cathc")
+                        // console.log(error.response.data);
+                        setEmailError("Invalid Input")
                     }
                 })
         }
         else {
-            setEmailError("lastelse")
+            setEmailError("Invalid Input")
         }
     }
   return (
     <ScrollView style={{
-        marginTop:'8%'
+        flex:1,
+        // marginTop:'8%',
+        backgroundColor:COLORS.white
     }}>
         {/* Header */}
       <Header
-      img={images.logo}
+      img={images.herdhelp}
       containerStyle={{
           margin:'10%',
         //   marginTop:'20%'
@@ -76,6 +80,7 @@ export  const Signup=({navigation})=>{
           flex: 1,
           marginTop: SIZES.height > 800 ? SIZES.padding * 2 : SIZES.radius
       }}>
+        <Text style={{color:COLORS.red,alignSelf: 'center',...FONTS.body3}}>{EmailError}</Text>
     {/* Input */}
       <FormInput
       label={'Email'}
@@ -152,6 +157,7 @@ export  const Signup=({navigation})=>{
     }
     />
     <TextButton
+    icon={images.sign}
     buttonContainerStyle={{
         height: 55,
         alignItems: 'center',

@@ -77,31 +77,6 @@ export const Home = ({navigation}) => {
           </View>
         }
         title={'Home'}
-        titleStyle={{
-          marginLeft: 60,
-        }}
-        rightComponent={
-          <View
-            style={{
-              justifyContent: 'center',
-            }}>
-            <TouchableOpacity
-              style={{
-                marginRight: 25,
-              }}
-              onPress={() => navigation.navigate('MyAccount')}>
-              <Image
-                source={images.login}
-                style={{
-                  width: 40,
-                  height: 40,
-                  tintColor: COLORS.darkGray2,
-                  marginTop: 10,
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-        }
       />
     );
   }

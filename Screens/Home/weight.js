@@ -4,10 +4,33 @@ import Header from '../../Components/Header';
 import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import axiosIns from '../../helpers/helpers';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 export const Weight =({ navigation })=> {
   const [tag, setTag] = React.useState('');
-  const [weight, setWeight] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [weight, setWeight] = React.useState(0);
+  const [err, setErr] = React.useState("");
+  async function updateWeight(){
+    if (tag!="",weight!=0){
+      try{
+        let {resp} = await axiosIns.patch(`"animals/"${tag}`).then((Response)=>{
+          if (Response.status==200){
+            alert("Weight Updated")
+          }
+        })
+        setLoading(true)
+        return resp
+      }catch(err){
+        if(err){
+          setErr(`Animal with tag ${tag} not found`)
+        }
+      }
+    }
+    else{
+      setErr("Please Enter valid Data")
+    }
+  }
   function renderHeader() {
     return (
       <Header
@@ -44,6 +67,7 @@ export const Weight =({ navigation })=> {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
+        <Text style={{color:COLORS.red,alignSelf: 'center',...FONTS.body3}}>{err}</Text>
         <FormInput
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
@@ -113,7 +137,7 @@ export const Weight =({ navigation })=> {
 
       <TextButton
         onPress={() => {
-          alert([tag, weight]);
+          updateWeight()
         }}
         buttonContainerStyle={{
           // flex:1,
