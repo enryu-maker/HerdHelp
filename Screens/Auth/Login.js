@@ -106,7 +106,6 @@ const Login = ({navigation}) => {
           style={{
             ...FONTS.body3,
             alignSelf: 'center',
-            //   marginTop:'10%'
           }}>
           Login account to continue!
         </Text>

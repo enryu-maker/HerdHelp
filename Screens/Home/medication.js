@@ -6,6 +6,7 @@ import TextButton from '../../Components/TextButton';
 import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FormDateInput from '../../Components/FormDateInput';
+import axiosIns from '../../helpers/helpers';
 
 export const Medication = ({ navigation }) =>{
   const [tag, setTag] = React.useState('');
@@ -15,7 +16,26 @@ export const Medication = ({ navigation }) =>{
   const [dos, setDos] = React.useState('');
   const [withdraw, setWithdraw] = React.useState('');
   const [date, setDate] = React.useState('');
-
+  function addMedical(){
+    axiosIns.post("medication/",{
+        "tag_number": tag,
+        "medication_name": med,
+        "medication_date": treat,
+        "dosage": dos,
+        "disease": Dis,
+        "withdrawal": withdraw,
+        "withdrawal_date": date
+    },{
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(response => {
+      if (response.status == 200) {
+        alert('Medication added sucessfully');
+      }
+    })
+    .catch(err => console.log('api Erorr: ', err.response));
+  }
   function renderheader() {
     return (
       <Header
@@ -119,6 +139,21 @@ export const Medication = ({ navigation }) =>{
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
+        <FormDateInput
+          label="Medication Date"
+          placeholder="YYYY/MM/DD"
+          value={treat}
+          setDate={setTreat}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+            width: '88%',
+            alignSelf: 'center',
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+        />
         <FormInput
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
@@ -129,7 +164,6 @@ export const Medication = ({ navigation }) =>{
             </View>
           }
           value={dos}
-          // keyboardType="numeric"
           onChange={value => {
             setDos(value);
           }}
@@ -166,12 +200,11 @@ export const Medication = ({ navigation }) =>{
         />
         <FormDateInput
           label="Withdrawal Date"
-          placeholder="MM/DD/YYYY"
+          placeholder="YYYY/MM/DD"
           value={date}
           setDate={setDate}
           containerStyle={{
             marginTop: SIZES.radius,
-            // marginLeft:20
           }}
           inputContainerStyle={{
             backgroundColor: COLORS.white,
@@ -179,7 +212,6 @@ export const Medication = ({ navigation }) =>{
             alignSelf: 'center',
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
-          
         />
       </View>
     );
@@ -202,8 +234,9 @@ export const Medication = ({ navigation }) =>{
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {
-          alert([tag, med, dos, withdraw, date, Dis]);
+          addMedical();
         }}
+        icon={images.med}
         buttonContainerStyle={{
           // flex:1,
           height: 60,

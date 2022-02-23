@@ -43,6 +43,8 @@ export const images ={
     herdhelp:require("../assets/Logo/Herd-Help-Logo.png"),
     log:require("../assets/Logo/user.png"),
     sign:require("../assets/Logo/add-user.png"),
+    update:require("../assets/Logo/refresh.png"),
+
 
 
 

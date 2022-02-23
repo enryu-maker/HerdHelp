@@ -180,6 +180,7 @@ export const Finance = ({ navigation })=>{
         onPress={() => {
           postfinance();
         }}
+        icon={images.money}
         buttonContainerStyle={{
           // flex:1,
           height: 60,

@@ -139,6 +139,8 @@ export const Weight =({ navigation })=> {
         onPress={() => {
           updateWeight()
         }}
+        icon={images.weight}
+
         buttonContainerStyle={{
           // flex:1,
           height: 60,

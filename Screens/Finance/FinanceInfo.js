@@ -76,6 +76,7 @@ export default function FinanceInfo({navigation}) {
         onPress={() => {
           navigation.replace('Finance');
         }}
+        icon={images.money}
         buttonContainerStyle={{
           //   flex:1,
           height: 60,
