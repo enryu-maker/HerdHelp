@@ -8,30 +8,18 @@ import {COLORS, SIZES, images, dummyData, FONTS} from '../../Components/Constant
 import { launchImageLibrary, ImageLibraryOptions, launchCamera } from 'react-native-image-picker';
 import axiosIns from '../../helpers/helpers';
 
-const MyAccount = ({navigation}) => {
-  const [pic,setPic]=React.useState(null)
-  const [picdata,setPicdata]=React.useState(null)
-
-  // const [user,setUser]=React.useState([])
-  // const fetchprofile = async () => {
-  //     try {
-  //       const {data} = await axiosIns.get('profile/');
-  //       return data;
-  //     } catch (e) {
-  //       console.log('error', e.response.data.detail);
-  //     }
-  //   };
-  //   React.useEffect(() => {
-  //     fetchprofile().then(data => {
-  //       setUser(data[0]);
-  //       dummyData.userid=user.id
-  //     });
-  //   }, []);
+const MyAccount = ({navigation,route}) => {
+  const [user,setUser]=React.useState([])
+    React.useEffect(() => {
+      let {user} = route.params
+      setUser(user)
+    }, []);
   
 function renderFileUri() {
-    if (pic) {
+    if (user) {
       return <Image
-        source={{ uri: pic}}
+        source={{ uri: user.profile_picture}}
+        resizeMode="contain"
         style={{width: 100,
           height: 100,
           borderRadius: 100 / 2,
@@ -86,7 +74,9 @@ function renderFileUri() {
             color:COLORS.Primary,
             ...FONTS.h2
           }}
-          onPress={()=>navigation.navigate("MyAccountEdit")}
+          onPress={()=>navigation.navigate("MyAccountEdit",{
+            user:user
+          })}
           >EDIT</Text>
         }
       />
@@ -117,16 +107,16 @@ function renderFileUri() {
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        <InfoItem label="Full Name" value="Akif Khan" />
-        <InfoItem label="Username" value="Akif" />
+        <InfoItem label="Full Name" value={user.fullname} />
+        <InfoItem label="Username" value={user.username} />
         <InfoItem
           label="Phone Number"
-          value="12345"
+          value={user.phone}
           // withDivider={false}
         />
         <InfoItem
           label="Email"
-          value="test_mail@gmail.com"
+          value={user.email}
           withDivider={false}
         />
       </View>
@@ -142,32 +132,14 @@ function renderFileUri() {
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        {/* <InfoItem
-                    label="ID Card"
-                    value="Not updated"
-                />
-
-                <InfoItem
-                    label="Date of Birth"
-                    value="03/03/1990"
-                />
-
-                <InfoItem
-                    label="Gender"
-                    value="Male"
-                /> */}
-
-        {/* <InfoItem
-                    label="Joined"
-                    value="March 2017"
-                /> */}
 
         <InfoItem
           label="Farm Name"
-          value="Robbins farm"
+          value={user.farm_name}
+
           // withDivider={false}
         />
-        <InfoItem label="Address" value="usa" withDivider={false} />
+        <InfoItem label="Address"value={user.address} withDivider={false} />
       </View>
     );
   }

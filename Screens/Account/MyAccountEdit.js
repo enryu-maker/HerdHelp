@@ -8,41 +8,43 @@ import FormInput from '../../Components/FormInput';
 // import ImagePicker from 'react-native-image-picker';
 import {
   launchImageLibrary,
-  ImageLibraryOptions,
-  launchCamera,
 } from 'react-native-image-picker';
 import {COLORS, SIZES, images} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 
-const MyAccountEdit = ({navigation}) => {
+const MyAccountEdit = ({navigation,route}) => {
   const [pic, setPic] = React.useState('');
   const [picdata, setPicdata] = React.useState('');
-  const [fullName, setFullName] = useState('');
-  const [phoneNo, setPhoneNo] = useState('');
-  const [idCard, setIdCard] = useState('');
-  const [dob, setDob] = useState(null);
-  const [gender, setGender] = useState('');
-  const [email, setEmail] = useState('');
-  const [addr, setAddr] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zip, setZip] = useState([]);
-  // const updateprofile = async () => {
+  const [fullName, setFullName] = useState(route.params.user.fullname);
+  const [phoneNo, setPhoneNo] = useState(route.params.user.phone);
+  const [idCard, setIdCard] = useState(route.params.user.farm_name);
+  const [addr, setAddr] = useState(route.params.user.address);
+  const [user,setUser]=React.useState([])
 
-  //     try {
-  //       await axiosIns.patch(`/update-profile/${dummyData.userid}`,{
-  //           "Name":fullName,
-  //         //   "Phone":phoneNo,
-  //           "ShopAddress":addr,
-  //           "Email":email
-  //       }).then(()=>{alert("Details updated")})
-  //     } catch (e) {
-  //       console.log('error', e.response.data);
-  //     }
-  //   };
+  const updateprofile = async () => {
+      try {
+        await axiosIns.patch(`updateprofile/2`,
+        {
+          "fullname": fullName,
+          "phone": phoneNo,
+          "farm_name": idCard,
+          "address": addr,
+          "profile_picture":picdata
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        ).then(()=>{alert("Details updated")})
+      } catch (e) {
+        console.log('error', e.response.data);
+      }
+    };
   React.useEffect(() => {
-    // updateprofile()
-  });
+    let { user } = route.params
+    console.log(user)
+    setUser(user)
+  },[]);
   function openCamara() {
     let options = {
       storageOptions: {
@@ -52,7 +54,6 @@ const MyAccountEdit = ({navigation}) => {
       includeBase64: true,
     };
     launchImageLibrary(options, response => {
-      // console.log(response.assets[0].base64)
       if (response.assets) {
         imageAssetsArray = response.assets[0].uri;
         setPic(imageAssetsArray);
@@ -61,7 +62,7 @@ const MyAccountEdit = ({navigation}) => {
     });
   }
   function renderFileUri() {
-    if (pic) {
+    if (pic!="") {
       return (
         <Image
           source={{uri: pic}}
@@ -76,13 +77,13 @@ const MyAccountEdit = ({navigation}) => {
     } else {
       return (
         <Image
-          source={images.login}
+          source={{uri: user.profile_picture}}
           style={{
             width: 100,
             height: 100,
             borderRadius: 100 / 2,
             alignSelf: 'center',
-            tintColor: COLORS.Primary,
+            // tintColor: COLORS.Primary,
           }}
         />
       );
@@ -180,23 +181,6 @@ const MyAccountEdit = ({navigation}) => {
             backgroundColor: COLORS.white,
           }}
         />
-        {/* Email */}
-        <FormInput
-          label="Email"
-          keyboardType="email-address"
-          autoCompleteType="email"
-          value={email}
-          onChange={value => {
-            setEmail(value);
-          }}
-          containerStyle={{
-            marginTop: SIZES.radius,
-          }}
-          inputContainerStyle={{
-            backgroundColor: COLORS.white,
-          }}
-        />
-
         {/* Address */}
         <FormInput
           label="Address"

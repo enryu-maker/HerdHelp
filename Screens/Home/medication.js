@@ -11,26 +11,29 @@ import axiosIns from '../../helpers/helpers';
 export const Medication = ({ navigation }) =>{
   const [tag, setTag] = React.useState('');
   const [treat, setTreat] = React.useState('');
+  const [treatt, setTreatt] = React.useState('');
   const [Dis, setDis] = React.useState('');
   const [med, setMed] = React.useState('');
   const [dos, setDos] = React.useState('');
   const [withdraw, setWithdraw] = React.useState('');
   const [date, setDate] = React.useState('');
+  const [datet, setDatet] = React.useState('');
+
   function addMedical(){
     axiosIns.post("medication/",{
         "tag_number": tag,
         "medication_name": med,
-        "medication_date": treat,
+        "medication_date": treatt,
         "dosage": dos,
         "disease": Dis,
         "withdrawal": withdraw,
-        "withdrawal_date": date
+        "withdrawal_date": datet
     },{
       headers: {
         'Content-Type': 'application/json',
       },
     }).then(response => {
-      if (response.status == 200) {
+      if (response.status == 201) {
         alert('Medication added sucessfully');
       }
     })
@@ -71,6 +74,7 @@ export const Medication = ({ navigation }) =>{
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
+
         <FormInput
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
@@ -144,6 +148,7 @@ export const Medication = ({ navigation }) =>{
           placeholder="YYYY/MM/DD"
           value={treat}
           setDate={setTreat}
+          formatDate={setTreatt}
           containerStyle={{
             marginTop: SIZES.radius,
           }}
@@ -203,6 +208,7 @@ export const Medication = ({ navigation }) =>{
           placeholder="YYYY/MM/DD"
           value={date}
           setDate={setDate}
+          formatDate={setDatet}
           containerStyle={{
             marginTop: SIZES.radius,
           }}

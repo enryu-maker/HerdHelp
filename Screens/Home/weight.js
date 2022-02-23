@@ -14,17 +14,26 @@ export const Weight =({ navigation })=> {
   async function updateWeight(){
     if (tag!="",weight!=0){
       try{
-        let {resp} = await axiosIns.patch(`"animals/"${tag}`).then((Response)=>{
+        let {resp} = await axiosIns.patch(`animals/${ tag }`,{
+          'weight':weight
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then((Response)=>{
           if (Response.status==200){
             alert("Weight Updated")
+          }
+          else{
+          setErr(`Animal with tag ${tag} not found`)
           }
         })
         setLoading(true)
         return resp
       }catch(err){
-        if(err){
-          setErr(`Animal with tag ${tag} not found`)
-        }
+        // if(err){
+        //   setErr(`Animal with tag ${tag} not found`)
+        // }
       }
     }
     else{

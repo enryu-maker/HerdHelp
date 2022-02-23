@@ -41,13 +41,12 @@ const Addanimals = ({navigation}) => {
   const [weight, setWeight] = useState(0);
   const [name, setName] = useState('');
   const [dob, setDob] = useState('');
-  const [dobt, setDobt] = useState('');
+  const [dobt, setDobt] = useState(null);
   const [vaccinated, setVaccinated] = useState(false);
   const [vaccinateddate, setVaccinateddate] = useState('');
-  const [vaccinateddatet, setVaccinateddatet] = useState('');
+  const [vaccinateddatet, setVaccinateddatet] = useState(null);
   const [bought, setBought] = useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [send, setSend] = React.useState(false);
   const [animals, setAnimals] = React.useState([]);
 
   const onChangeMS = value => {
@@ -95,7 +94,7 @@ const Addanimals = ({navigation}) => {
         },
       })
       .then(response => {
-        if (response.status == 200) {
+        if (response.status == 201) {
           alert('Animal added sucessfully');
         }
       })
@@ -288,7 +287,7 @@ const Addanimals = ({navigation}) => {
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
-        {bought ? (
+        {bought!=true? (
           <View>
             <FormDateInput
               label="Date of Birth"
