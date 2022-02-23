@@ -194,7 +194,7 @@ const Addanimals = ({navigation}) => {
     <Dropdown
           label="Species"
           borderRadius={SIZES.radius}
-          data={datacat}
+          data={animals}
           textInputStyle={FONTS.body2, { letterSpacing: 2 }}
           selectedItemTextStyle={FONTS.body3, { color: COLORS.white ,letterSpacing: 2,alignSelf:"center"}}
           selectedItemViewStyle={{ backgroundColor: COLORS.Primary, margin: 5, borderRadius: SIZES.radius }}
