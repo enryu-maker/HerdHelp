@@ -17,6 +17,7 @@ import MyAccountEdit from '../Account/MyAccountEdit';
 import Main from '../Home/main';
 import { Finance } from '../Finance/Finance';
 import Alerts from '../Alerts/Alerts';
+import FinanceInfo from '../Finance/FinanceInfo';
 const Stack = createNativeStackNavigator();
 
 export default class Homenav extends Component {
@@ -40,6 +41,8 @@ export default class Homenav extends Component {
           <Stack.Screen name='weight' component={Weight} />
           <Stack.Screen name='Finance' component={Finance} />
           <Stack.Screen name='Alerts' component={Alerts} />
+          <Stack.Screen name='FinanceInfo' component={FinanceInfo} />
+
 
         </Stack.Navigator>
       </NavigationContainer>

@@ -9,18 +9,18 @@ import datacat from '../../Components/Constants'
  const  Main = ({navigation}) => {
   const [animals,setAnimals] = React.useState([])
   const [loading,setLoading] = React.useState(false)
-  async function fetchanimal(){
-    let { data } = await axiosIns.get("getcategories/")
-    setLoading(true)
-    return data
-  }
-  React.useEffect(()=>{
-    if (!loading){
-      fetchanimal().then(data=>
-        datacat = data  )
-    }
-    // console.log(animals)
-  })
+  // async function fetchanimal(){
+  //   let { data } = await axiosIns.get("getcategories/")
+  //   setLoading(true)
+  //   return data
+  // }
+  // React.useEffect(()=>{
+  //   if (!loading){
+  //     fetchanimal().then(data=>
+  //       datacat = data  )
+  //   }
+  //   // console.log(animals)
+  // })
   return (
     <View style={{flex:1,backgroundColor:COLORS.white}}>
       <Header
@@ -59,7 +59,7 @@ import datacat from '../../Components/Constants'
           />
           <TextButton
       label={"FINANCES"}
-      onPress={()=>{navigation.navigate("Finance")}}
+      onPress={()=>{navigation.navigate("FinanceInfo")}}
       buttonContainerStyle={{
         marginTop:12
     }}

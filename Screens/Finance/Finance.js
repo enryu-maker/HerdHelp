@@ -15,7 +15,7 @@ import {
   } from '../../Components/Constants';
 import { Dropdown } from 'sharingan-rn-modal-dropdown'
 import FormInput from '../../Components/FormInput';
-export const Finance = ({navigation})=>{
+export const Finance = ({ navigation })=>{
     const [cat,setCat] = React.useState(1)
     const [Qty,setQty] = React.useState("")
     const [price,setPrice] = React.useState("")
@@ -68,7 +68,7 @@ export const Finance = ({navigation})=>{
                     marginLeft: 25,
                   }}
                   onPress={() => {
-                    navigation.goBack();
+                    navigation.replace("FinanceInfo");
                   }}>
                   <Image
                     source={images.back}
@@ -77,7 +77,7 @@ export const Finance = ({navigation})=>{
                 </TouchableOpacity>
               </View>
             }
-            title={'Finance'}
+            title={'Add Finance'}
           />
         );
       }
@@ -185,12 +185,13 @@ export const Finance = ({navigation})=>{
           height: 60,
           marginTop: SIZES.padding,
           marginHorizontal: SIZES.padding,
-          marginBottom: SIZES.padding + 10,
+          marginBottom: SIZES.padding + 20,
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.Primary,
         }}
         label={"Add Finance"}
         />
+        
     </View>
   )
 }
