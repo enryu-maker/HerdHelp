@@ -39,7 +39,9 @@ import {images,COLORS,SIZES, FONTS, dummydata} from '../../Components/Constants'
         </View>
       }
       />
-      <ScrollView style={{
+      <ScrollView 
+      showsVerticalScrollIndicator={false}
+      style={{
         // marginVertical:0, 
         width:"88%",
         marginTop:'25%',

@@ -168,7 +168,7 @@ const Addanimals = ({navigation}) => {
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
               <Image
-                source={images.tag}
+                source={images.name}
                 style={{width: 26, height: 26, tintColor: COLORS.Primary}}
               />
             </View>

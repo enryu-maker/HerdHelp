@@ -73,6 +73,8 @@ function renderSectionTwo() {
         borderRadius: SIZES.radius,
         paddingHorizontal: SIZES.radius,
         backgroundColor: COLORS.lightGray2,
+        marginBottom:SIZES.padding
+
       }}>
       <InfoItem
         label="Vaccinated?"
@@ -122,6 +124,7 @@ function medication() {
         borderRadius: SIZES.radius,
         paddingHorizontal: SIZES.radius,
         backgroundColor: COLORS.lightGray2,
+        paddingBottom:SIZES.padding
       }}>
       <InfoItem label="Breed" value={ animal?.breed} />
       <InfoItem label="Bred" value={animal?.bred==false?"No":"Yes"} withDivider={false} />
@@ -170,6 +173,7 @@ function renderHeader() {
       {renderHeader()}
 
       <ScrollView
+      showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingHorizontal: SIZES.padding,
         }}>
