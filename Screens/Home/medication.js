@@ -224,6 +224,7 @@ export const Medication = ({ navigation }) =>{
       }}>
       {renderheader()}
       <KeyboardAwareScrollView
+      showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"
         contentContainerStyle={{
           marginTop: SIZES.radius,
