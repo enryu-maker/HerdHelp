@@ -19,8 +19,7 @@ export default function FinanceInfo({navigation}) {
     if (!loading) {
       loadFinance().then(data => setFinance(data));
     }
-    // console.log(finance)
-  });
+  },[]);
   function renderHeader() {
     return (
       <Header

@@ -45,10 +45,8 @@ export const Finance = ({ navigation })=>{
     React.useEffect(()=>{
       if (!loading){
         getfinance().then(data=>{setAnimals(data)})
-      }
-      // console.log (animals) 
-
-    })
+      } 
+    },[])
     const onChangeB = (value) => {
         setCat(value);
       };

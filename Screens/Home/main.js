@@ -25,12 +25,11 @@ const Main = ({navigation}) => {
         const {data} = await axiosIns.get('profile/');
         return data;
       } catch (e) {
-        console.log('error', e.response.data.detail);
+       alert("Something Went Wrong")
       }
     };
     React.useEffect(() => {
       fetchprofile().then(data => {
-        // console.log(data)
         setUser(data[0]);
       });
     }, []);

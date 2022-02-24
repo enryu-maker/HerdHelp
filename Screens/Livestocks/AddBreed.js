@@ -23,11 +23,8 @@ import {
   Bought,
 } from '../../Components/Constants';
 import FormInput from '../../Components/FormInput';
-import datacat from '../../Components/Constants';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
-// import axios from 'axios';
-// import ActivityIndicatorExample from '../../Components/Loading';
 const Addanimals = ({navigation}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
@@ -107,7 +104,7 @@ const Addanimals = ({navigation}) => {
       });
     }
     // console.log(animals)
-  });
+  },[]);
   function renderHeader() {
     return (
       <Header

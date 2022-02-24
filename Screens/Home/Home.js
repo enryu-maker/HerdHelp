@@ -34,10 +34,6 @@ export const Home = ({navigation}) => {
         listItem.species.toLowerCase().includes(searched.toLowerCase()),
     );
   }
-  // function allAnimals(){
-  //   let animal = Breed.concat(Purchased)
-  //   setAnimals(animal)
-  // }
   async function fetchanimal() {
     let {data} = await axiosIns.get('animals/');
     setLoading(true);
@@ -50,7 +46,7 @@ export const Home = ({navigation}) => {
       });
     }
     // console.log(animals)
-  });
+  },[]);
   function renderHeader() {
     return (
       <Header

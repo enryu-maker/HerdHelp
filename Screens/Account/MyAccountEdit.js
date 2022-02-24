@@ -42,7 +42,6 @@ const MyAccountEdit = ({navigation,route}) => {
     };
   React.useEffect(() => {
     let { user } = route.params
-    console.log(user)
     setUser(user)
   },[]);
   function openCamara() {
