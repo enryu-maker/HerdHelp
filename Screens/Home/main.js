@@ -19,22 +19,26 @@ import {
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 const Main = ({navigation}) => {
-  const [user,setUser]=React.useState([])
-  const fetchprofile = async () => {
-      try {
-        const {data} = await axiosIns.get('profile/');
-        // console.log(data)
-        return data;
-      } catch (e) {
-       alert("Something Went Wrong")
-      }
-    };
-    React.useEffect(() => {
-      fetchprofile().then(data => {
-        setUser(data[0]);
+  const [loading, setLoading] = React.useState(false);
+  const [species, setSpcies] = React.useState([]);
+  const [id, setId] = React.useState("");
+  async function fetchanimal() {
+    let {data} = await axiosIns.get('getcategories/');
+    setLoading(true);
+    return data;
+  }
+  async function loadId(){
+    setId(await AsyncStorage.getItem("id"))
+  }
+  React.useEffect(() => {
+    if (!loading) {
+      fetchanimal().then(data => {
+        setSpcies(data);
       });
-      // console.log(user)
-    }, []);
+      loadId();
+    }
+    // console.log(animals)
+  },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <Header
@@ -53,9 +57,9 @@ const Main = ({navigation}) => {
               style={{
                 marginRight: 25,
               }}
-              onPress={() => navigation.navigate('MyAccount',{user:user})}>
+              onPress={() => navigation.navigate('MyAccount')}>
               <Image
-                source={{uri:"https://joeschmoe.io/api/v1/" + user.fullname}}
+                source={{uri:"https://joeschmoe.io/api/v1/test"}}
                 resizeMode="center"
                 style={{
                   width: 55,
@@ -106,7 +110,10 @@ const Main = ({navigation}) => {
           icon={images.med}
           label={'ADD MEDICATION'}
           onPress={() => {
-            navigation.navigate('medication');
+            navigation.navigate('medication',{
+              sep:species,
+              id:id
+            });
           }}
           buttonContainerStyle={{
             marginTop: 12,
@@ -116,7 +123,10 @@ const Main = ({navigation}) => {
           icon={images.weight}
           label={'ADD CURRENT WEIGHT'}
           onPress={() => {
-            navigation.navigate('weight');
+            navigation.navigate('weight',{
+              sep:species,
+              id:id
+            });
           }}
           buttonContainerStyle={{
             marginTop: 12,

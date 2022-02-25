@@ -10,9 +10,20 @@ import axiosIns from '../../helpers/helpers';
 
 const MyAccount = ({navigation,route}) => {
   const [user,setUser]=React.useState([])
+  const fetchprofile = async () => {
+      try {
+        const {data} = await axiosIns.get('profile/');
+        console.log(data)
+        return data;
+      } catch (e) {
+       alert("Something Went Wrong")
+      }
+    };
     React.useEffect(() => {
-      let {user} = route.params
-      setUser(user)
+      fetchprofile().then(data => {
+        setUser(data[0]);
+      });
+      // console.log(user)
     }, []);
   
 function renderFileUri() {
@@ -53,7 +64,7 @@ function renderFileUri() {
                 marginLeft: 25,
               }}
               onPressIn={() => {
-                navigation.goBack();
+                navigation.replace("Main");
               }}>
               <Image
                 source={images.back}
@@ -86,15 +97,10 @@ function renderFileUri() {
     return(
       <View
         style={{
-          // marginTop: SIZES.padding,
           borderRadius: SIZES.radius,
           paddingHorizontal: SIZES.radius,
-          // backgroundColor: COLORS.lightGray2,
         }}>
-                        {renderFileUri()}
-                        {/* <TouchableOpacity
-                            onPress={() => openCamara()}>
-                        </TouchableOpacity> */}
+        {renderFileUri()}
         </View>
     )
   }
@@ -112,7 +118,6 @@ function renderFileUri() {
         <InfoItem
           label="Phone Number"
           value={user.phone}
-          // withDivider={false}
         />
         <InfoItem
           label="Email"

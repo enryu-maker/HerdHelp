@@ -7,8 +7,8 @@ import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FormDateInput from '../../Components/FormDateInput';
 import axiosIns from '../../helpers/helpers';
-
-export const Medication = ({ navigation }) =>{
+import {Dropdown} from 'sharingan-rn-modal-dropdown';
+export const Medication = ({ navigation,route }) =>{
   const [tag, setTag] = React.useState('');
   const [treat, setTreat] = React.useState('');
   const [treatt, setTreatt] = React.useState('');
@@ -18,10 +18,20 @@ export const Medication = ({ navigation }) =>{
   const [withdraw, setWithdraw] = React.useState('');
   const [date, setDate] = React.useState('');
   const [datet, setDatet] = React.useState('');
+  const [animals, setAnimals] = React.useState([]);
+  const [species, setSpcies] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [err,setErr] = React.useState("")
+  const [id, setId] = React.useState("");
 
+  const onChangeSpec = value => {
+    setSpcies(value);
+  };
+
+  
   function addMedical(){
     axiosIns.post("medication/",{
-        "tag_number": tag,
+        "tag_number": `${id}${species}${tag}`,
         "medication_name": med,
         "medication_date": treatt,
         "dosage": dos,
@@ -36,9 +46,21 @@ export const Medication = ({ navigation }) =>{
       if (response.status == 201) {
         alert('Medication added sucessfully');
       }
+      else{
+        setErr(`Animal Not Found`)
+      }
     })
-    .catch(err => console.log('api Erorr: ', err.response));
+    .catch(err => {setErr("Something went wrong")});
   }
+  React.useEffect(() => {
+    if (!loading) {
+      let {sep}=route.params
+      let {id}=route.params
+      setId(id)
+      setAnimals(sep)
+    }
+    // console.log(animals)
+  },[]);
   function renderheader() {
     return (
       <Header
@@ -74,7 +96,33 @@ export const Medication = ({ navigation }) =>{
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-
+        <Text style={{color:COLORS.red,alignSelf: 'center',...FONTS.body3}}>{err}</Text>
+        <Dropdown
+          label="Species"
+          borderRadius={SIZES.radius}
+          data={animals}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={
+            (FONTS.body3,
+            {color: COLORS.white, letterSpacing: 2, alignSelf: 'center'})
+          }
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          value={species}
+          onChange={onChangeSpec}
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
+        />
         <FormInput
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
@@ -87,7 +135,9 @@ export const Medication = ({ navigation }) =>{
           label="Tag Number"
           value={tag}
           onChange={value => {
+            // console.log(value)
             setTag(value);
+
           }}
           inputContainerStyle={{
             backgroundColor: COLORS.white,
@@ -145,7 +195,7 @@ export const Medication = ({ navigation }) =>{
         />
         <FormDateInput
           label="Medication Date"
-          placeholder="YYYY/MM/DD"
+          placeholder="YYYY-MM-DD"
           value={treat}
           setDate={setTreat}
           formatDate={setTreatt}
@@ -205,7 +255,7 @@ export const Medication = ({ navigation }) =>{
         />
         <FormDateInput
           label="Withdrawal Date"
-          placeholder="YYYY/MM/DD"
+          placeholder="YYYY-MM-DD"
           value={date}
           setDate={setDate}
           formatDate={setDatet}
@@ -241,6 +291,8 @@ export const Medication = ({ navigation }) =>{
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {
+          // alert(`${id}${species}${tag}`)
+          // setSupportTag(`${species}${tag}`)
           addMedical();
         }}
         icon={images.med}

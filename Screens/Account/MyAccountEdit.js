@@ -105,7 +105,7 @@ const MyAccountEdit = ({navigation,route}) => {
                 marginLeft: 25,
               }}
               onPressIn={() => {
-                navigation.goBack();
+                navigation.replace("MyAccount");
               }}>
               <Image
                 source={images.back}

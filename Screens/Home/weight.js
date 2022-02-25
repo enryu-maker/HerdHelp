@@ -6,11 +6,30 @@ import TextButton from '../../Components/TextButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import axiosIns from '../../helpers/helpers';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
+import {Dropdown} from 'sharingan-rn-modal-dropdown';
+
 export const Weight =({ navigation })=> {
   const [tag, setTag] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [weight, setWeight] = React.useState(0);
   const [err, setErr] = React.useState("");
+  const [species, setSpcies] = React.useState([]);
+  // const [loading, setLoading] = React.useState(false);
+  const [supportTag,setSupportTag] = React.useState("")
+  const [animals, setAnimals] = React.useState([]);
+  const [id, setId] = React.useState("");
+  React.useEffect(() => {
+    if (!loading) {
+      let {sep}=route.params
+      let {id}=route.params
+      setId(id)
+      setAnimals(sep)
+    }
+    // console.log(animals)
+  },[]);
+  const onChangeSpec = value => {
+    setSpcies(value);
+  };
   async function updateWeight(){
     if (tag!="",weight!=0){
       try{
@@ -77,6 +96,32 @@ export const Weight =({ navigation })=> {
           backgroundColor: COLORS.lightGray2,
         }}>
         <Text style={{color:COLORS.red,alignSelf: 'center',...FONTS.body3}}>{err}</Text>
+        <Dropdown
+          label="Species"
+          borderRadius={SIZES.radius}
+          data={animals}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={
+            (FONTS.body3,
+            {color: COLORS.white, letterSpacing: 2, alignSelf: 'center'})
+          }
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          value={species}
+          onChange={onChangeSpec}
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
+        />
         <FormInput
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
