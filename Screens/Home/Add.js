@@ -1,53 +1,83 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
-import React from 'react';
+import { View, Text ,TouchableOpacity,Image,ScrollView} from 'react-native'
+import React from 'react'
 import Header from '../../Components/Header';
-import { images, COLORS, SIZES, FONTS } from "../../Components/Constants"
-import SquareCard from "../../Components/SquareCard"
- const Add = ({ navigation }) => {
-  return (
-    <View >
+import Card from '../../Components/Card';
+import ActivityIndicatorExample from '../../Components/Loading';
+import {
+  COLORS,
+  FONTS,
+  images,
+  SIZES,
+} from '../../Components/Constants';
+export default function Add({navigation,route}) {
+  const [label,setLabel]=React.useState("")
+  const [loading,setLoading]=React.useState(false)
+  const [data,setData]=React.useState([])
+
+  React.useEffect(()=>{
+    
+    let {label} = route.params
+    let {data} =route.params
+    if (!loading){
+      setLabel(label)
+      setData(data)
+    }
+    
+
+  },[])
+  function renderHeader() {
+    return (
       <Header
         leftComponent={
-          <View style={{
-            justifyContent: 'center',
-            position:'absolute',
-            marginTop:25,
-            zIndex: 1,
-
-          }}>
+          <View
+            style={{
+              justifyContent: 'center',
+              position: 'absolute',
+              marginTop: 25,
+              zIndex: 1,
+            }}>
             <TouchableOpacity
               style={{
-                // marginTop: 20,
                 marginLeft: 25,
-
               }}
-              onPress={() => { navigation.openDrawer() }}>
-                <Image source={images.back} style={{width:28,height:28,tintColor:COLORS.darkGray2}}/>
-
+              onPressIn={() => {
+                navigation.goBack();
+              }}>
+              <Image
+                source={images.back}
+                style={{width: 30, height: 30, tintColor: COLORS.darkGray2}}
+              />
             </TouchableOpacity>
           </View>
         }
-        title={"Add Livestock"}
+        title={label}
       />
-      <View style={{
-        // flex:1,
-        flexDirection:"column",
-        justifyContent:'space-around',
-        alignSelf:'center'
-      }}>
-      <SquareCard
-      Img={images.bread}
-      type={"Birthed"}
-      onPress={()=>{navigation.navigate("Breed")}}
-      />
-      <SquareCard
-      Img={images.purchased}
-      type={"Purchased"}
-      onPress={()=>{navigation.navigate("Buy")}}
-      />
-      </View>
+    );
+  }
+  return (
+    <View style={{flex: 1, backgroundColor: COLORS.white}}>
+      {renderHeader()} 
+      
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{flexGrow: 1}}>
+          {data.map((listItem, index) => (
+            <Card
+              key={index}
+              Name={listItem.name}
+              Tagnumber={listItem.tag_number}
+              Gender={listItem.gender}
+              Species={listItem.category}
+              Weight={listItem.weight}
+              image={listItem.image}
+              onPress={() => {
+                navigation.navigate('Info', {
+                  value: listItem,
+                });
+              }}
+            />
+          ))}
+        </ScrollView>
     </View>
-  );
+  )
 }
-export default Add;
-

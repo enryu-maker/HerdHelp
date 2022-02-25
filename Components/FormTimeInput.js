@@ -10,7 +10,7 @@ import moment from 'moment';
 
 import { FONTS, SIZES, COLORS,images } from "./Constants"
 
-const FormDateInput = ({
+const FormTimeInput = ({
     containerStyle,
     inputContainerStyle,
     label,
@@ -44,7 +44,7 @@ const FormDateInput = ({
                 onPress={() => setOpen(true)}
             >
                 <Image
-                    source={images.calender}
+                    source={images.clock}
                     style={{
                         width: 25,
                         height: 25,
@@ -59,7 +59,7 @@ const FormDateInput = ({
                         marginLeft: 20
                     }}
                 >
-                    {value ? moment(value).format("YYYY/MM/DD") : placeholder}
+                    {value ? moment(value).format("hh:mm") : placeholder}
                 </Text>
 
                 
@@ -69,21 +69,23 @@ const FormDateInput = ({
                 modal
                 open={open}
                 date={value ? value : new Date()}
-                mode="date"
+                mode="time"
                 title={label}
+                // is24Hour={t}
                 onConfirm={(date) => {
                     setOpen(false)
                     setDate(date)
-                    formatDate(date.toJSON().slice(0,10))
+                    // console.log(date)
+                    formatDate(`${date.getHours()}:${date.getMinutes()}`)
+                    // console.log(formatDate)
+
                 }}
                 onCancel={() => {
                     setOpen(false)
                 }}
-                
-                // style={{marginLeft: 20}}
             />
         </View>
     )
 }
 
-export default FormDateInput;
+export default FormTimeInput;

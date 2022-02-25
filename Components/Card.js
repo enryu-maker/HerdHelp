@@ -22,7 +22,7 @@ const Card=({
     alignSelf:'center'}}
     onPress={onPress}>
       <View style={{justifyContent:'center',margin:SIZES.padding}}>
-          <Image source={{uri:image}}
+          <Image source={{uri:"http://herdhelp.herokuapp.com" + image}}
           style={{height:50,width:50,}}/>
       </View>
       <View style={{

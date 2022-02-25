@@ -16,7 +16,7 @@ export const Info=({ navigation, route })=>{
   React.useEffect(() => {
     let {value} = route.params
     setAnimal(value)
-    console.log(animal)
+    // console.log(animal)
 }, [])
 function renderSectionOne() {
   return (
@@ -58,8 +58,12 @@ function renderSectionZero() {
         paddingHorizontal: SIZES.radius,
         backgroundColor: COLORS.lightGray2,
       }}>
-        <Image source={{uri:animal?.image}} style={{width: 100,
-          height: 100,
+        <Image 
+        // source={{uri:}} 
+        source={{uri:"http://herdhelp.herokuapp.com" + animal?.image}}
+
+        style={{width: 80,
+          height: 80,
           margin:10,
           // borderRadius: 100 / 2,
           alignSelf: 'center',}} />

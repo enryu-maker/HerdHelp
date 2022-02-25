@@ -2,6 +2,13 @@ import {Animated} from 'react-native'
 import React, { useRef } from 'react'
 import { Dimensions,Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
+export const animalImages = {
+  Chicken:require("../assets/animal/chicken.png"),
+  Cow:require("../assets/animal/cow.png"),
+  Goat:require("../assets/animal/goat.png"),
+  Horse:require("../assets/animal/horse.png"),
+
+}
 export const images ={
     logo:require("../assets/Logo/Logo01.png"),
     eye:require("../assets/Logo/eye.png"),
@@ -44,10 +51,9 @@ export const images ={
     log:require("../assets/Logo/user.png"),
     sign:require("../assets/Logo/add-user.png"),
     update:require("../assets/Logo/refresh.png"),
-
-
-
-
+    aler:require("../assets/Add/alert.png"),
+    clock:require("../assets/Add/clock.png"),
+    // mark:require("../assets/Add/mark.png"),
 }
 export const COLORS={
     Primary:"rgb(126,204,122)",
@@ -100,13 +106,13 @@ export const FONTS = {
     h1: { fontFamily: type.bold, fontSize: SIZES.h1, lineHeight: 36, fontWeight:'bold'},
     h2: { fontFamily: type.bold, fontSize: SIZES.h2, lineHeight: 30 , fontWeight:'bold'},
     h3: { fontFamily: type.bold, fontSize: SIZES.h3, lineHeight: 22 , fontWeight:'bold'},
-    h4: { fontFamily: type.bold, fontSize: SIZES.h4, lineHeight: 22 , fontWeight:'bold'},
-    h5: { fontFamily: type.bold, fontSize: SIZES.h5, lineHeight: 22 , fontWeight:'bold'},
+    h4: { fontFamily: type.bold, fontSize: SIZES.h4, lineHeight: 20 , fontWeight:'bold'},
+    h5: { fontFamily: type.bold, fontSize: SIZES.h5, lineHeight: 18 , fontWeight:'bold'},
     body1: { fontFamily: type.base, fontSize: SIZES.body1, lineHeight: 36 },
     body2: { fontFamily:type.base, fontSize: SIZES.body2, lineHeight: 30 },
     body3: { fontFamily:type.base, fontSize: SIZES.body3, lineHeight: 22 },
-    body4: { fontFamily:type.base, fontSize: SIZES.body4, lineHeight: 22 },
-    body5: { fontFamily:type.base, fontSize: SIZES.body5, lineHeight: 22 },
+    body4: { fontFamily:type.base, fontSize: SIZES.body4, lineHeight: 20 },
+    body5: { fontFamily:type.base, fontSize: SIZES.body5, lineHeight: 18 },
 };
 export const dummydata = [
     {

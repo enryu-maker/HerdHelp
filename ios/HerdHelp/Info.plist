@@ -33,6 +33,7 @@
         <key>NSExceptionDomains</key>
             <dict>
                 <key>herdhelp.herokuapp.com</key>
+				<key>https://joeschmoe.io/api/v1/</key>
                 <dict>
                     <key>NSIncludesSubdomains</key>
                     <true/>

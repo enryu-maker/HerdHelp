@@ -23,6 +23,7 @@ const Main = ({navigation}) => {
   const fetchprofile = async () => {
       try {
         const {data} = await axiosIns.get('profile/');
+        // console.log(data)
         return data;
       } catch (e) {
        alert("Something Went Wrong")
@@ -32,6 +33,7 @@ const Main = ({navigation}) => {
       fetchprofile().then(data => {
         setUser(data[0]);
       });
+      // console.log(user)
     }, []);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -53,12 +55,12 @@ const Main = ({navigation}) => {
               }}
               onPress={() => navigation.navigate('MyAccount',{user:user})}>
               <Image
-                source={{uri:user.profile_picture}}
+                source={{uri:"https://joeschmoe.io/api/v1/" + user.fullname}}
                 resizeMode="center"
                 style={{
                   width: 55,
                   height: 55,
-                  tintColor: COLORS.lightGray2,
+                  // tintColor: COLORS.lightGray2,
                   marginTop: 10,
                   borderRadius: 55 / 2,
                 }}
@@ -134,7 +136,7 @@ const Main = ({navigation}) => {
           label={'ALERTS'}
           icon={images.bell}
           onPress={() => {
-            navigation.navigate('Alerts');
+            navigation.navigate('LoadAlert');
           }}
           buttonContainerStyle={{
             marginTop: 12,

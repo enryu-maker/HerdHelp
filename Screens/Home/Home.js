@@ -7,45 +7,29 @@ import {
   FONTS,
   images,
   SIZES,
-  dummydata,
-  CollapseExpand,
+  
 } from '../../Components/Constants';
 import FilterModal from './filterModel';
 import Card from '../../Components/Card';
 import TextButton from '../../Components/TextButton';
 import axiosIns from '../../helpers/helpers';
 import ActivityIndicatorExample from '../../Components/Loading';
+// import { Item } from 'react-native-paper/lib/typescript/components/List/List';
 export const Home = ({navigation}) => {
   const [showFilterModal, setShowFilterModal] = React.useState(false);
-  const [Purchased, setPurchased] = React.useState([]);
-  const [Breed, setBreed] = React.useState([]);
   const [animals, setAnimals] = React.useState([]);
   const [searched, setSearched] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-  const [selectedTab, setSelectedTab] = React.useState('Breed');
-  function filterList(list) {
-    return list.filter(
-      listItem =>
-        listItem.tag_number
-          .toString()
-          .toLowerCase()
-          .includes(searched.toLowerCase()) ||
-        listItem.name.toLowerCase().includes(searched.toLowerCase()) ||
-        listItem.species.toLowerCase().includes(searched.toLowerCase()),
-    );
-  }
+  const [available,setAvailable] = React.useState([])
   async function fetchanimal() {
     let {data} = await axiosIns.get('animals/');
     setLoading(true);
     return data;
   }
   React.useEffect(() => {
-    if (!loading) {
-      fetchanimal().then(data => {
+      fetchanimal().then((data) => {
         setAnimals(data);
       });
-    }
-    // console.log(animals)
   },[]);
   function renderHeader() {
     return (
@@ -72,143 +56,56 @@ export const Home = ({navigation}) => {
             </TouchableOpacity>
           </View>
         }
-        title={'Home'}
+        title={'My Herds'}
       />
     );
   }
-  function Search() {
-    return (
-      <FormInput
-        prependComponent={
-          <Image
-            source={images.search}
-            style={{
-              height: 20,
-              width: 20,
-              tintColor: COLORS.darkGray2,
-              alignSelf: 'center',
-            }}
-          />
-        }
-        placeholder={'Search...'}
-        value={searched}
-        containerStyle={{
-          paddingBottom: 10,
-        }}
-        onChange={value => {
-          setSearched(value);
-        }}
-        inputStyle={{
-          marginLeft: '10%',
-        }}
-        appendComponent={
-          <TouchableOpacity
-            style={{
-              alignSelf: 'center',
-            }}
-            onPress={() => setShowFilterModal(true)}>
-            <Image
-              source={images.filter}
-              style={{
-                height: 20,
-                width: 20,
-                tintColor: COLORS.darkGray2,
-                alignSelf: 'center',
-              }}
-            />
-          </TouchableOpacity>
-        }
-      />
-    );
-  }
-  function renderTabButtons() {
-    return (
-      <View
-        style={{
-          flexDirection: 'row',
-          height: 50,
-          marginTop: SIZES.radius,
-          paddingHorizontal: SIZES.padding,
-          marginBottom: 20,
-          borderBottomEndRadius: SIZES.radius,
-          borderBottomStartRadius: SIZES.radius,
-        }}>
-        <TextButton
-          buttonContainerStyle={{
-            flex: 1,
-            borderRadius: SIZES.radius,
-            backgroundColor:
-              selectedTab == 'Breed'
-                ? COLORS.Primary
-                : COLORS.transparentPrimary2,
-          }}
-          label="Breed"
-          labelStyle={{
-            color: selectedTab == 'Breed' ? COLORS.white : COLORS.Primary,
-          }}
-          onPress={() => {
-            setSelectedTab('Breed');
-            setBreed(animals);
-          }}
-        />
-
-        <TextButton
-          buttonContainerStyle={{
-            flex: 1,
-            marginLeft: SIZES.padding,
-            borderRadius: SIZES.radius,
-            backgroundColor:
-              selectedTab == 'Purchased'
-                ? COLORS.Primary
-                : COLORS.transparentPrimary2,
-          }}
-          label="Purchased"
-          labelStyle={{
-            color: selectedTab == 'Purchased' ? COLORS.white : COLORS.Primary,
-          }}
-          onPress={() => {
-            setSelectedTab('Purchased');
-            setBreed(Purchased);
-          }}
-        />
-      </View>
-    );
-  }
+console.log(available)
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-      {showFilterModal && (
-        <FilterModal
-          isVisible={showFilterModal}
-          onClose={() => setShowFilterModal(false)}
-        />
-      )}
-      {renderHeader()}
-      {Search()}
-      {/* {renderTabButtons()} */}
-      {loading == false ? (
-        <ActivityIndicatorExample />
-      ) : (
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{flexGrow: 1}}>
-          {filterList(animals).map((listItem, index) => (
-            <Card
-              key={index}
-              Name={listItem.name}
-              Tagnumber={listItem.tag_number}
-              Gender={listItem.gender}
-              Species={listItem.category}
-              Weight={listItem.weight}
-              image={listItem.image}
-              onPress={() => {
-                navigation.navigate('Info', {
-                  value: listItem,
-                });
-              }}
-            />
-          ))}
-        </ScrollView>
-       )}
+      {renderHeader()} 
+      {
+        loading==false?(
+          <ActivityIndicatorExample/>
+        ):(
+<View
+        // showsVerticalScrollIndicator={false}
+        style={{
+          marginVertical:0,
+          width: '88%',
+          // marginTop: '20%',
+          paddingVertical: SIZES.padding,
+          paddingHorizontal: SIZES.radius,
+          borderRadius: SIZES.radius,
+          backgroundColor: COLORS.lightGray2,
+          alignSelf: 'center',
+          // height:100
+        }}>
+      {
+        animals.map((a)=>{
+          if(a.data.length!=0){
+            return(
+          <TextButton
+          buttonContainerStyle={{
+            marginTop:SIZES.padding
+          }}
+          icon={{uri:"http://herdhelp.herokuapp.com"+a.data[0].image}}
+          key={a.id}
+          label={`My ${a.label}'s`}
+          onPress={()=>{navigation.navigate("Add",{
+            label:`My ${a.label}'s`,
+            data:a.data
+          })}}
+          />
+            )
+          
+          }
+        })
+      }
+      </View>  
+        )
+      }
+           
     </View>
   );
 };

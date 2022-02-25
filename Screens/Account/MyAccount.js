@@ -18,7 +18,7 @@ const MyAccount = ({navigation,route}) => {
 function renderFileUri() {
     if (user) {
       return <Image
-        source={{ uri: user.profile_picture}}
+      source={{uri:`https://joeschmoe.io/api/v1/ + ${user.fullname}`}}
         resizeMode="contain"
         style={{width: 100,
           height: 100,
@@ -27,7 +27,7 @@ function renderFileUri() {
       />
     } else {
       return <Image
-        source={images.login}
+      source={{uri:`https://joeschmoe.io/api/v1/ + ${user.fullname}`}}
         style={{width: 100,
           height: 100,
           borderRadius: 100 / 2,

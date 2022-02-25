@@ -28,8 +28,7 @@ const MyAccountEdit = ({navigation,route}) => {
           "fullname": fullName,
           "phone": phoneNo,
           "farm_name": idCard,
-          "address": addr,
-          "profile_picture":picdata
+          "address": addr
           }, {
             headers: {
               'Content-Type': 'application/json',
@@ -64,7 +63,8 @@ const MyAccountEdit = ({navigation,route}) => {
     if (pic!="") {
       return (
         <Image
-          source={{uri: pic}}
+        source={{uri:"https://joeschmoe.io/api/v1/" + user.fullname}}
+
           style={{
             width: 100,
             height: 100,
@@ -76,7 +76,8 @@ const MyAccountEdit = ({navigation,route}) => {
     } else {
       return (
         <Image
-          source={{uri: user.profile_picture}}
+        source={{uri:"https://joeschmoe.io/api/v1/" + user.fullname}}
+
           style={{
             width: 100,
             height: 100,
@@ -205,20 +206,6 @@ const MyAccountEdit = ({navigation,route}) => {
         backgroundColor: COLORS.white,
       }}>
       {renderHeader()}
-      <View
-          style={{
-            marginBottom: SIZES.padding-10,
-            borderRadius: SIZES.radius,
-            paddingHorizontal: SIZES.radius,
-            // backgroundColor: COLORS.lightGray2,
-          }}>
-          <TouchableOpacity
-            onPress={() => {
-              openCamara();
-            }}>
-            {renderFileUri()}
-          </TouchableOpacity>
-        </View>
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"

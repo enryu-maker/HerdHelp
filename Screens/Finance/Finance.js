@@ -104,7 +104,7 @@ export const Finance = ({ navigation })=>{
             onChange={onChangeB}
             animationIn="zoomIn"
             animationOut="zoomOut"
-            mode="outlined"
+            // mode="outlined"
             mainContainerStyle={{
               borderRadius: SIZES.padding,
               width: "88%",

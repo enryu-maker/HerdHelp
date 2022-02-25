@@ -53,7 +53,7 @@ const FilterModal = ({ isVisible, onClose }) => {
                 useNativeDriver: false
             }).start(() => onClose());
         }
-        console.log(isVisible)
+        // console.log(isVisible)
     }, [showFilterModal])
 
     const modalY = modalAnimatedValue.interpolate({
