@@ -18,6 +18,7 @@ import {
   dummydata,
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
+import ActivityIndicatorExample from '../../Components/Loading';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [species, setSpcies] = React.useState([]);
@@ -36,6 +37,9 @@ const Main = ({navigation}) => {
         setSpcies(data);
       });
       loadId();
+    }
+    else{
+      <ActivityIndicatorExample/>
     }
     // console.log(animals)
   },[]);
@@ -84,7 +88,7 @@ const Main = ({navigation}) => {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
           alignSelf: 'center',
-          height: 280,
+          height: 300,
         }}>
         <TextButton
           icon={images.herd}
@@ -93,7 +97,7 @@ const Main = ({navigation}) => {
             navigation.navigate('Home');
           }}
           buttonContainerStyle={{
-            marginTop: 12,
+            marginTop: 18,
           }}
         />
         <TextButton

@@ -46,6 +46,8 @@ const Addanimals = ({navigation,route}) => {
   const [loading, setLoading] = React.useState(false);
   const [animals, setAnimals] = React.useState([]);
   const [id,setId] = React.useState("")
+  const [registration,setRegistration] = React.useState("")
+
 
   const onChangeMS = value => {
     setValueMS(value);
@@ -65,6 +67,7 @@ const Addanimals = ({navigation,route}) => {
   const data = JSON.stringify({
     name: name,
     tag_number:` ${id}${valueMS}${tag}`,
+    registration:"",
     support_tag: tag,
     gender: valueBS,
     species: valueMS,
@@ -352,7 +355,33 @@ const Addanimals = ({navigation,route}) => {
         ) : (
           <View></View>
         )}
-
+        <FormInput
+          prependComponent={
+            <View
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                marginLeft: 0,
+              }}>
+              <Image
+                source={images.name}
+                style={{width: 28, height: 28, tintColor: COLORS.Primary}}
+              />
+            </View>
+          }
+          label="Registration"
+          value={registration}
+          onChange={value => {
+            setRegistration(value);
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+        />
         <FormInput
           prependComponent={
             <View
@@ -367,7 +396,7 @@ const Addanimals = ({navigation,route}) => {
               />
             </View>
           }
-          label="Breed*"
+          label="Breed"
           value={Breed}
           onChange={value => {
             setBreed(value);
@@ -394,7 +423,7 @@ const Addanimals = ({navigation,route}) => {
               />
             </View>
           }
-          label="Weight*"
+          label="Weight"
           value={weight}
           onChange={value => {
             setWeight(value);
@@ -419,7 +448,7 @@ const Addanimals = ({navigation,route}) => {
             borderRadius: SIZES.radius,
           }}
           enableAvatar
-          required
+          // required
           disableSelectionTick
           primaryColor={COLORS.Primary}
           avatarSize={28}
@@ -454,7 +483,7 @@ const Addanimals = ({navigation,route}) => {
               />
             </View>
           }
-          label="Age*"
+          label="Age"
           value={age}
           onChange={value => {
             setAge(value);
@@ -479,7 +508,7 @@ const Addanimals = ({navigation,route}) => {
             borderRadius: SIZES.radius,
           }}
           enableAvatar
-          required
+          // required
           disableSelectionTick
           primaryColor={COLORS.Primary}
           avatarSize={28}
@@ -499,7 +528,7 @@ const Addanimals = ({navigation,route}) => {
         />
         {vaccinated ? (
           <FormDateInput
-            label="Date of Vaccination*"
+            label="Date of Vaccination"
             placeholder="YYYY/MM/DD"
             value={vaccinateddate}
             setDate={setVaccinateddate}
@@ -533,7 +562,7 @@ const Addanimals = ({navigation,route}) => {
               />
             </View>
           }
-          label="Price*"
+          label="Price"
           value={price}
           onChange={value => {
             setPrice(value);

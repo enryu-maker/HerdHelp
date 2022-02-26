@@ -91,6 +91,8 @@ apply from: "../../node_modules/react-native/react.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
+implementation("com.squareup.okhttp3:okhttp:4.9.1")
+implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.1")
 def enableSeparateBuildPerCPUArchitecture = false
 
 /**
