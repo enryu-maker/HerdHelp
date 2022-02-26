@@ -91,8 +91,7 @@ apply from: "../../node_modules/react-native/react.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-implementation("com.squareup.okhttp3:okhttp:4.9.1")
-implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.1")
+
 def enableSeparateBuildPerCPUArchitecture = false
 
 /**
@@ -128,6 +127,9 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitectures")
 
 android {
+    dexOptions {
+       javaMaxHeapSize "3g"
+    }
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -194,7 +196,8 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-
+implementation "com.squareup.okhttp3:okhttp:4.9.1" 
+implementation "com.squareup.okhttp3:okhttp-urlconnection:4.9.1"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
