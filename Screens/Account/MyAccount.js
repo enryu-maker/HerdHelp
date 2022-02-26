@@ -27,27 +27,17 @@ const MyAccount = ({navigation,route}) => {
     }, []);
   
 function renderFileUri() {
-    if (user) {
       return <Image
-      source={{uri:`https://joeschmoe.io/api/v1/ + ${user.fullname}`}}
+      source={images.login}
         resizeMode="contain"
         style={{width: 100,
           height: 100,
           borderRadius: 100 / 2,
-          alignSelf: 'center',}}
-      />
-    } else {
-      return <Image
-      source={{uri:`https://joeschmoe.io/api/v1/ + ${user.fullname}`}}
-        style={{width: 100,
-          height: 100,
-          borderRadius: 100 / 2,
           alignSelf: 'center',
-          tintColor:COLORS.Primary
+          tintColor:COLORS.lightGray1
         }}
       />
-    }
-  };
+    };
   function renderHeader() {
     return (
       <Header

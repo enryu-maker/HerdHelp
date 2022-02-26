@@ -60,7 +60,7 @@ export const Home = ({navigation}) => {
       />
     );
   }
-console.log(available)
+// console.log(available)
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       {renderHeader()} 

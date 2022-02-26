@@ -38,7 +38,8 @@ const Card=({
           <Text style={FONTS.h4,{letterSpacing:3}}>
               {Weight} lbs
           </Text>
-      </View><View style={{
+      </View>
+      <View style={{
           flexDirection:'column',
           justifyContent:'center'
       }}>

@@ -8,7 +8,7 @@ import axiosIns from '../../helpers/helpers';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 
-export const Weight =({ navigation })=> {
+export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [weight, setWeight] = React.useState(0);
@@ -33,7 +33,7 @@ export const Weight =({ navigation })=> {
   async function updateWeight(){
     if (tag!="",weight!=0){
       try{
-        let {resp} = await axiosIns.patch(`animals/${ tag }`,{
+        let {resp} = await axiosIns.patch(`animals/${id}${species}${tag}`,{
           'weight':weight
         }, {
           headers: {
@@ -118,7 +118,7 @@ export const Weight =({ navigation })=> {
             borderRadius: SIZES.padding,
             width: '88%',
             alignSelf: 'center',
-            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+            // marginTop: SIZES.height > 800 ? SIZES.base : 10,
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
@@ -136,8 +136,14 @@ export const Weight =({ navigation })=> {
           onChange={value => {
             setTag(value);
           }}
+          containerStyle={{
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+
+          }}
           inputContainerStyle={{
             backgroundColor: COLORS.white,
+            // marginTop: SIZES.height > 800 ? SIZES.base : 10,
+
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />

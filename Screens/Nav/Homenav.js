@@ -19,6 +19,7 @@ import { Finance } from '../Finance/Finance';
 import Alerts from '../Alerts/Alerts';
 import FinanceInfo from '../Finance/FinanceInfo';
 import LoadAlert from '../Alerts/LoadAlert';
+import MedCard from '../../Components/MedCard';
 const Stack = createNativeStackNavigator();
 
 export default class Homenav extends Component {
@@ -45,10 +46,7 @@ export default class Homenav extends Component {
           <Stack.Screen name='FinanceInfo' component={FinanceInfo} />
           <Stack.Screen name='LoadAlert' component={LoadAlert}/>
           <Stack.Screen name='Add' component={Add}/>
-
-
-
-
+          <Stack.Screen name='MedCard' component={MedCard}/>
         </Stack.Navigator>
       </NavigationContainer>
       </View>

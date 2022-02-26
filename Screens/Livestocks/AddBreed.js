@@ -25,7 +25,7 @@ import {
 import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
-const Addanimals = ({navigation}) => {
+const Addanimals = ({navigation,route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
   const [valueBS, setValueBS] = useState('');
@@ -45,6 +45,7 @@ const Addanimals = ({navigation}) => {
   const [bought, setBought] = useState(false);
   const [loading, setLoading] = React.useState(false);
   const [animals, setAnimals] = React.useState([]);
+  const [id,setId] = React.useState("")
 
   const onChangeMS = value => {
     setValueMS(value);
@@ -61,14 +62,10 @@ const Addanimals = ({navigation}) => {
   const onChangebought = value => {
     setBought(value);
   };
-  async function fetchanimal() {
-    let {data} = await axiosIns.get('getcategories/');
-    setLoading(true);
-    return data;
-  }
   const data = JSON.stringify({
     name: name,
-    tag_number: tag,
+    tag_number:` ${id}${valueMS}${tag}`,
+    support_tag: tag,
     gender: valueBS,
     species: valueMS,
     birth_date: dobt,
@@ -99,9 +96,13 @@ const Addanimals = ({navigation}) => {
   }
   React.useEffect(() => {
     if (!loading) {
-      fetchanimal().then(data => {
-        setAnimals(data);
-      });
+      // fetchanimal().then(data => {
+      //   setAnimals(data);
+      // });
+      let { id } = route.params
+      setId(id)
+      let {sep} = route.params
+      setAnimals(sep)
     }
     // console.log(animals)
   },[]);
@@ -569,6 +570,7 @@ const Addanimals = ({navigation}) => {
 
       <TextButton
         onPress={() => {
+          // alert(` ${id}${valueMS}${tag}`)
           postAnimal();
         }}
         icon={images.add}

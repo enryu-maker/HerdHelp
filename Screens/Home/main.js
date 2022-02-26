@@ -59,12 +59,12 @@ const Main = ({navigation}) => {
               }}
               onPress={() => navigation.navigate('MyAccount')}>
               <Image
-                source={{uri:"https://joeschmoe.io/api/v1/test"}}
+                source={images.login}
                 resizeMode="center"
                 style={{
                   width: 55,
                   height: 55,
-                  // tintColor: COLORS.lightGray2,
+                  tintColor: COLORS.lightGray1,
                   marginTop: 10,
                   borderRadius: 55 / 2,
                 }}
@@ -100,7 +100,10 @@ const Main = ({navigation}) => {
           icon={images.add}
           label={'ADD ANIMALS'}
           onPress={() => {
-            navigation.navigate('Animals');
+            navigation.navigate('Animals',{
+              sep:species,
+              id:id
+            });
           }}
           buttonContainerStyle={{
             marginTop: 12,
