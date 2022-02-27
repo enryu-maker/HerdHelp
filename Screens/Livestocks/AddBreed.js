@@ -25,6 +25,7 @@ import {
 import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
+import Loader from '../../Components/Loader';
 const Addanimals = ({navigation,route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
@@ -43,7 +44,7 @@ const Addanimals = ({navigation,route}) => {
   const [vaccinateddate, setVaccinateddate] = useState('');
   const [vaccinateddatet, setVaccinateddatet] = useState(null);
   const [bought, setBought] = useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [animals, setAnimals] = React.useState([]);
   const [id,setId] = React.useState("")
   const [registration,setRegistration] = React.useState("")
@@ -84,6 +85,7 @@ const Addanimals = ({navigation,route}) => {
     bought: bought,
   });
   function postAnimal() {
+    setLoading(false)
     axiosIns
       .post('animals/', data, {
         headers: {
@@ -92,21 +94,19 @@ const Addanimals = ({navigation,route}) => {
       })
       .then(response => {
         if (response.status == 201) {
+          setLoading(true)
           alert('Animal added sucessfully');
         }
       })
-      .catch(err => console.log('api Erorr: ', err.response));
+      .catch(err => console.log('api Erorr: ', err.response),
+      setLoading(true)
+      );
   }
   React.useEffect(() => {
-    if (!loading) {
-      // fetchanimal().then(data => {
-      //   setAnimals(data);
-      // });
       let { id } = route.params
       setId(id)
       let {sep} = route.params
       setAnimals(sep)
-    }
     // console.log(animals)
   },[]);
   function renderHeader() {
@@ -584,11 +584,12 @@ const Addanimals = ({navigation,route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
+        <Loader loading={loading}/>
       {renderHeader()}
 
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
-        keyboardDismissMode="on-drag"
+        keyboardDismissMode="interactive"
         contentContainerStyle={{
           marginTop: SIZES.radius,
           paddingHorizontal: SIZES.padding,

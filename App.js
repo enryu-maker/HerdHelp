@@ -4,6 +4,7 @@ import { View,StatusBar, SafeAreaView} from 'react-native';
 import Homenav from "./Screens/Nav/Homenav"
 import Rootnav from "./Screens/Nav/Rootnav"
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SplashScreen from 'react-native-splash-screen'
 var signal= true
 export default function App() {
   const [Route,setRoute]=React.useState(false);
@@ -17,12 +18,12 @@ export default function App() {
       return data;
   };
   React.useEffect(() => {
-    // SplashScreen.hide();
+    SplashScreen.hide();
     retrieveData()
     
   },[Route]);
   return (
-        <View style={{flex:1,}}>
+        <View style={{flex:1}}>
           <StatusBar
           style="auto"/>
           {

@@ -7,7 +7,7 @@ const Loader = (props) => {
   return (
     <Modal
       transparent={true}
-      animationType={'none'}
+      animationType={"fade"}
       visible={loading}
       onRequestClose={() => {
         console.log('close modal');
@@ -17,7 +17,7 @@ const Loader = (props) => {
           <ActivityIndicator
             animating={true}
             color={COLORS.Primary}
-            size="small"
+            size="large"
             style={styles.activityIndicator}
           />
         </View>

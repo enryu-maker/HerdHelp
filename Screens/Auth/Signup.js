@@ -12,7 +12,6 @@ export  const Signup=({navigation})=>{
     const [password, setPassword] = React.useState("")
     const [username, setUsername] = React.useState("")
     const [showPass, setShowPass] = React.useState(false)
-    // const [loading, setLoading] = React.useState(false)
     const [EmailError, setEmailError] = React.useState("")
     const [loading,setLoading] = React.useState(false)
 
