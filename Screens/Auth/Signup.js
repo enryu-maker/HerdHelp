@@ -5,21 +5,23 @@ import FormInput from '../../Components/FormInput';
 import {images,COLORS,SIZES, FONTS} from '../../Components/Constants'
 import TextButton from '../../Components/TextButton';
 import axios from "axios";
+import Loader from '../../Components/Loader';
 axios.defaults.baseURL = 'http://herdhelp.herokuapp.com';
 export  const Signup=({navigation})=>{
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [username, setUsername] = React.useState("")
     const [showPass, setShowPass] = React.useState(false)
-    const [loading, setLoading] = React.useState(false)
+    // const [loading, setLoading] = React.useState(false)
     const [EmailError, setEmailError] = React.useState("")
-
+    const [loading,setLoading] = React.useState(false)
 
     function isEnableSignIn() {
         return email != "" && password != "" && username != ""
     }
     async function signup  (){
         if (isEnableSignIn) {
+      setLoading(true)
             await axios.post('/register/',
                 {
                     "username": username,
@@ -32,21 +34,23 @@ export  const Signup=({navigation})=>{
                     }
                 }).then((response) => {
                     if (response.status === 201) {
-                        setLoading(true)
+                        setLoading(false)
                         alert("User sucessfully created")
                     }
                     else {
+                        setLoading(false)
                         setEmailError("User Already Registered")
                     }
                 })
                 .catch((error) => {
                     if (error.response) {
-                        // console.log(error.response.data);
+                        setLoading(false)
                         setEmailError("Invalid Input")
                     }
                 })
         }
         else {
+            setLoading(false)
             setEmailError("Invalid Input")
         }
     }
@@ -56,7 +60,7 @@ export  const Signup=({navigation})=>{
         // marginTop:'8%',
         backgroundColor:COLORS.white
     }}>
-        {/* Header */}
+    <Loader loading={loading}/>
       <Header
       img={images.herdhelp}
       containerStyle={{

@@ -15,6 +15,7 @@ import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextButton from '../../Components/TextButton';
 import axios from 'axios';
+import Loader from '../../Components/Loader';
 axios.defaults.baseURL = 'https://herdhelp.herokuapp.com/';
 const Login = ({navigation}) => {
   const [email, setEmail] = React.useState('');
@@ -22,6 +23,7 @@ const Login = ({navigation}) => {
   const [showPass, setShowPass] = React.useState(false);
   const [saveMe, setSaveMe] = React.useState(false);
   const [EmailError, setEmailError] = React.useState('');
+  const [loading,setLoading] = React.useState(false)
   function isEnableSignIn() {
     return email != '' && password != '';
   }
@@ -29,13 +31,14 @@ const Login = ({navigation}) => {
     try {
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('refresh', refresh);
-      await AsyncStorage.setItem('id', JSON.stringify(id));
+      await AsyncStorage.setItem('id', id);
     } catch (e) {
       console.log(e);
     }
   };
   function login() {
     if (isEnableSignIn()) {
+      setLoading(true)
       axios
         .post(
           'login/',
@@ -47,53 +50,47 @@ const Login = ({navigation}) => {
           },
         )
         .then(response => {
-          //const token = response.data.access
-          // console.log(response.data)
           if (response.status === 200) {
             storeData(
               response.data.access,
               response.data.refresh,
-              response.data.userid,
-            );
-            navigation.replace('Main');
+              response.data.userid.toString(),
+            ).then(() => {
+              navigation.replace('Main');
+            });
+            setLoading(false)
           } else {
-            setEmailError("User Not Registered")
+            setEmailError('User Not Registered');
+            setLoading(false)
           }
         })
         .catch(error => {
           if (error.response) {
-            setEmailError("Something Went Wrong")
+            setEmailError('Something Went Wrong');
+            setLoading(false)
           }
         });
     } else {
-      setEmailError("Invalid Input")
+      setEmailError('Invalid Input');
+      setLoading(false)
     }
   }
   return (
     <View
       style={{
-        flex:1,
+        flex: 1,
         // marginTop: '8%',
-        backgroundColor:COLORS.white
+        backgroundColor: COLORS.white,
         // flex:1
       }}>
+      <Loader loading={loading} />
       <Header
         img={images.herdhelp}
         containerStyle={{
           margin: '10%',
-          //   marginTop:'20%'
         }}
       />
-      {/* <View  style={{flex:1}}> */}
-
-      {/* <KeyboardAvoidingView
-    //  style={{flex:1}}
-      behavior={Platform.OS === "ios" ? "padding" : null}
-    //   keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
-    > */}
-      <ScrollView
-      //   style={{flex:1}}
-      >
+      <ScrollView>
         <Text
           style={{
             ...FONTS.h2,
@@ -204,7 +201,7 @@ const Login = ({navigation}) => {
             />
           </View>
           <TextButton
-          icon={images.log}
+            icon={images.log}
             buttonContainerStyle={{
               height: 55,
               alignItems: 'center',
@@ -237,8 +234,6 @@ const Login = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
-      {/* </KeyboardAvoidingView> */}
-      {/* </View> */}
     </View>
   );
 };
