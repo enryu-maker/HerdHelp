@@ -5,20 +5,19 @@ import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import FinanceCard from './FinanceCard';
 import {COLORS, SIZES, images} from '../../Components/Constants';
-import ActivityIndicatorExample from '../../Components/Loading';
+import Loader from '../../Components/Loader';
 export default function FinanceInfo({navigation}) {
   const [finance, setFinance] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
   async function loadFinance() {
-    let {data} = await axiosIns.get('finance/');
     setLoading(true)
+    let {data} = await axiosIns.get('finance/');
     return data;
   }
   React.useEffect(() => {
-    if (!loading) {
-      loadFinance().then(data => setFinance(data));
-    }
+      loadFinance().then(data => setFinance(data),setLoading(false));
+    
   },[]);
   function renderHeader() {
     return (
@@ -51,8 +50,8 @@ export default function FinanceInfo({navigation}) {
   }
   return (
     <View style={{flex: 1}}>
+      <Loader loading={loading}/>
       {renderHeader()}
-      {loading? (
         <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1}}>
@@ -66,11 +65,6 @@ export default function FinanceInfo({navigation}) {
           />
         ))}
       </ScrollView>
-      ) : (
-        
-        <ActivityIndicatorExample />
-      )}
-
       <TextButton
         onPress={() => {
           navigation.replace('Finance');

@@ -98,9 +98,9 @@ export const SIZES = {
     width,
     height
 };
-const type = { base: (Platform.OS === "ios" ? "Helvetica Neue" : "sans-serif"), 
-bold: (Platform.OS === "ios" ? "HelveticaNeue-Bold" : "sans-serif-condensed"), 
-emphasis: (Platform.OS === "ios" ? "HelveticaNeue-Italic" : "sans-serif") }
+const type = { base: (Platform.OS === "ios" ? "Helvetica Neue" : "monospace"), 
+bold: (Platform.OS === "ios" ? "HelveticaNeue-Bold" : "monospace"), 
+emphasis: (Platform.OS === "ios" ? "HelveticaNeue-Italic" : "monospace") }
 export const FONTS = {
     largeTitle: { fontFamily: type.bold, fontSize: SIZES.largeTitle },
     h1: { fontFamily: type.bold, fontSize: SIZES.h1, lineHeight: 36, fontWeight:'bold'},

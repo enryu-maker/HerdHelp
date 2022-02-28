@@ -56,9 +56,10 @@ const Login = ({navigation}) => {
               response.data.refresh,
               response.data.userid.toString(),
             ).then(() => {
-              navigation.replace('Main');
+              navigation.replace('Main'),
+              setLoading(false)
             });
-            setLoading(false)
+            
           } else {
             setEmailError('User Not Registered');
             setLoading(false)

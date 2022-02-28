@@ -43,10 +43,11 @@ const Main = ({navigation}) => {
       <Header
         img={images.herdhelp}
         imgstyle={{
-          marginTop: '10%',
+          marginTop: '15%',
           tintColor: COLORS.black,
         }}
         containerStyle={{
+          // marginTop: Platform.OS == 'ios' ? 50 : 30,
           marginBottom: Platform.OS == 'ios' ? 10 : 30,
 
         }}
@@ -54,7 +55,7 @@ const Main = ({navigation}) => {
           <View
             style={{
               justifyContent: 'center',
-              marginTop: '10%',
+              marginTop: '15%',
             }}>
             <TouchableOpacity
               style={{
@@ -80,7 +81,7 @@ const Main = ({navigation}) => {
       <View 
         style={{
             width: '88%',
-            marginTop: '10%',
+            marginTop: '15%',
             paddingVertical: SIZES.padding,
             paddingHorizontal: SIZES.radius,
             borderRadius: SIZES.radius,

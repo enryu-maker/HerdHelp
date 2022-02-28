@@ -23,10 +23,15 @@ export const Home = ({navigation}) => {
     return data;
   }
   React.useEffect(() => {
-    fetchanimal().then(data => {
-      setAnimals(data),
-      setLoading(false);
-    });
+    setLoading(false);
+    setAnimals([]);
+    if(!loading){
+      fetchanimal().then(data => {
+        setLoading(false);
+        setAnimals(data);
+      });
+    }
+    
   }, []);
   function renderHeader() {
     return (

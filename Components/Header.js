@@ -5,17 +5,21 @@ import {
     Image,
     Platform
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, FONTS } from "./Constants"
 
 const Header = ({ containerStyle, title, titleStyle, leftComponent, rightComponent,img ,imgstyle}) => {
     return (
+        
+
+       
         <View
             style={{
                 height: 80,
                 flexDirection: 'row',
                 ...containerStyle,
                 alignSelf:'center',
-                marginTop:Platform.OS=="android"? '0%' :5
+                marginTop:Platform.OS=="android"? '0%' :12
             }}
         >
             {
@@ -43,6 +47,7 @@ const Header = ({ containerStyle, title, titleStyle, leftComponent, rightCompone
             }
 
         </View>
+        
     )
 }
 
