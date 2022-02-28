@@ -34,17 +34,8 @@ const Main = ({navigation}) => {
     global.id = await AsyncStorage.getItem("id")
   }
   React.useEffect(() => {
-    if (!loading) {
       fetchanimal()
-      
-      //   setSpcies(data);
-      // });
       loadId();
-    }
-    else{
-      <ActivityIndicatorExample/>
-    }
-    // console.log(animals)
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -52,18 +43,22 @@ const Main = ({navigation}) => {
       <Header
         img={images.herdhelp}
         imgstyle={{
-          marginTop: '15%',
+          marginTop: '10%',
           tintColor: COLORS.black,
+        }}
+        containerStyle={{
+          marginBottom: Platform.OS == 'ios' ? 10 : 30,
+
         }}
         rightComponent={
           <View
             style={{
               justifyContent: 'center',
-              marginTop: '15%',
+              marginTop: '10%',
             }}>
             <TouchableOpacity
               style={{
-                marginRight: 25,
+                marginRight: 10,
               }}
               onPress={() => navigation.navigate('MyAccount')}>
               <Image
@@ -81,23 +76,18 @@ const Main = ({navigation}) => {
           </View>
         }
       />
-      <KeyboardAwareScrollView
-        showsVerticalScrollIndicator={false}
-        keyboardDismissMode="on-drag"
-        contentContainerStyle={{
-          
-            // marginVertical:0,
+      <ScrollView showsVerticalScrollIndicator={false}>
+      <View 
+        style={{
             width: '88%',
-            marginTop: '20%',
+            marginTop: '10%',
             paddingVertical: SIZES.padding,
             paddingHorizontal: SIZES.radius,
             borderRadius: SIZES.radius,
             backgroundColor: COLORS.lightGray2,
             alignSelf: 'center',
-            // height: 300,
-          
         }}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
         <TextButton
           icon={images.herd}
           label={'MY HERDS'}
@@ -112,11 +102,8 @@ const Main = ({navigation}) => {
           icon={images.add}
           label={'ADD ANIMALS'}
           onPress={() => {
-            navigation.navigate('Animals',{
-              sep:species,
-              id:id
-            });
-          }}
+            navigation.navigate('Animals'
+          )}}
           buttonContainerStyle={{
             marginTop: 12,
           }}
@@ -125,24 +112,16 @@ const Main = ({navigation}) => {
           icon={images.med}
           label={'ADD MEDICATION'}
           onPress={() => {
-            navigation.navigate('medication')
-            //   sep:species,
-            //   id:id
-            // });
-          }}
+            navigation.navigate('medication')}}
           buttonContainerStyle={{
             marginTop: 12,
           }}
         />
         <TextButton
           icon={images.weight}
-          label={'ADD CURRENT WEIGHT'}
+          label={'UPDATE WEIGHT'}
           onPress={() => {
             navigation.navigate('weight'
-            
-            //   sep:species,
-            //   id:id
-            // }
             );
           }}
           buttonContainerStyle={{
@@ -164,19 +143,16 @@ const Main = ({navigation}) => {
           icon={images.bell}
           onPress={() => {
             navigation.navigate('LoadAlert'
-            // ,{
-            //   sep:species,
-            //   id:id
-            // }
             );
           }}
           buttonContainerStyle={{
             marginTop: 12,
+            marginBottom: 12,
             // width:120
           }}
         />
-      </ScrollView>
-      </KeyboardAwareScrollView>
+     </ScrollView>
+      </View>
 
       <View style={{flex: 1, justifyContent: 'flex-end'}}>
         <TextButton
@@ -186,11 +162,14 @@ const Main = ({navigation}) => {
             navigation.replace('Login'), AsyncStorage.clear();
           }}
           buttonContainerStyle={{
-            marginBottom: Platform.OS == 'ios' ? 60 : 30,
+            marginBottom: Platform.OS == 'ios' ? 20 : 30,
+            marginTop: Platform.OS == 'ios' ? 20 : 30,
+
             backgroundColor: '#ff5b5b',
           }}
         />
       </View>
+      </ScrollView>
     </View>
   );
 };

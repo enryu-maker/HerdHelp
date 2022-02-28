@@ -19,12 +19,13 @@ export const Home = ({navigation}) => {
   async function fetchanimal() {
     setLoading(true);
     let {data} = await axiosIns.get('animals/');
-    setLoading(false);
+    
     return data;
   }
   React.useEffect(() => {
     fetchanimal().then(data => {
-      setAnimals(data);
+      setAnimals(data),
+      setLoading(false);
     });
   }, []);
   function renderHeader() {

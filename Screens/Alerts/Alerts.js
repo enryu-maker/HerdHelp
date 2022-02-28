@@ -242,7 +242,7 @@ export default function Alerts({navigation,route}) {
           height: 60,
           marginTop: SIZES.padding,
           marginHorizontal: SIZES.padding,
-          marginBottom: SIZES.padding + 10,
+          marginBottom: SIZES.padding,
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.Primary,
         }}

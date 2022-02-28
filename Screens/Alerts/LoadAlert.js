@@ -102,7 +102,7 @@ export default function LoadAlert({ navigation , route}) {
           height: 60,
           marginTop: SIZES.padding,
           marginHorizontal: SIZES.padding,
-          marginBottom: SIZES.padding + 20,
+          marginBottom: SIZES.padding,
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.Primary,
         }}

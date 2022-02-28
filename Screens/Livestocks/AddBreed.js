@@ -103,11 +103,8 @@ const Addanimals = ({navigation,route}) => {
       );
   }
   React.useEffect(() => {
-      let { id } = route.params
-      setId(id)
-      let {sep} = route.params
-      setAnimals(sep)
-    // console.log(animals)
+      setId(global.id)
+      setAnimals(global.species)
   },[]);
   function renderHeader() {
     return (
