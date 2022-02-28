@@ -62,6 +62,9 @@ export  const Signup=({navigation})=>{
     <Loader loading={loading}/>
       <Header
       img={images.herdhelp}
+      imgstyle={{
+        marginTop: 80,
+      }}
       containerStyle={{
           margin:'10%',
         //   marginTop:'20%'

@@ -87,8 +87,12 @@ const Login = ({navigation}) => {
       <Loader loading={loading} />
       <Header
         img={images.herdhelp}
+        imgstyle={{
+          marginTop: 80,
+        }}
         containerStyle={{
-          margin: '10%',
+          // margin: '10%',
+          // marginTop: 120,
         }}
       />
       <ScrollView>
@@ -96,7 +100,7 @@ const Login = ({navigation}) => {
           style={{
             ...FONTS.h2,
             alignSelf: 'center',
-            marginTop: '8%',
+            marginTop: '15%',
           }}>
           Let's Sign You In
         </Text>
