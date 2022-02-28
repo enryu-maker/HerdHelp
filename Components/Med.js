@@ -12,7 +12,7 @@ const Med=({
 })=>{
     return(
         <View style={{backgroundColor:COLORS.lightGray2,
-            height:120,
+            height:140,
             margin:SIZES.base2,
             borderRadius:SIZES.radius,
             width:'88%',

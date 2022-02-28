@@ -10,6 +10,7 @@ import React from 'react';
 import TextButton from '../../Components/TextButton';
 import Header from '../../Components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   images,
   COLORS,
@@ -26,16 +27,18 @@ const Main = ({navigation}) => {
   async function fetchanimal() {
     let {data} = await axiosIns.get('getcategories/');
     setLoading(true);
+    global.species = data
     return data;
   }
   async function loadId(){
-    setId(await AsyncStorage.getItem("id"))
+    global.id = await AsyncStorage.getItem("id")
   }
   React.useEffect(() => {
     if (!loading) {
-      fetchanimal().then(data => {
-        setSpcies(data);
-      });
+      fetchanimal()
+      
+      //   setSpcies(data);
+      // });
       loadId();
     }
     else{
@@ -45,6 +48,7 @@ const Main = ({navigation}) => {
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
+      
       <Header
         img={images.herdhelp}
         imgstyle={{
@@ -77,19 +81,23 @@ const Main = ({navigation}) => {
           </View>
         }
       />
-      <ScrollView
+      <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
-        style={{
-          // marginVertical:0,
-          width: '88%',
-          marginTop: '20%',
-          paddingVertical: SIZES.padding,
-          paddingHorizontal: SIZES.radius,
-          borderRadius: SIZES.radius,
-          backgroundColor: COLORS.lightGray2,
-          alignSelf: 'center',
-          height: 300,
+        keyboardDismissMode="on-drag"
+        contentContainerStyle={{
+          
+            // marginVertical:0,
+            width: '88%',
+            marginTop: '20%',
+            paddingVertical: SIZES.padding,
+            paddingHorizontal: SIZES.radius,
+            borderRadius: SIZES.radius,
+            backgroundColor: COLORS.lightGray2,
+            alignSelf: 'center',
+            // height: 300,
+          
         }}>
+          <ScrollView>
         <TextButton
           icon={images.herd}
           label={'MY HERDS'}
@@ -117,10 +125,10 @@ const Main = ({navigation}) => {
           icon={images.med}
           label={'ADD MEDICATION'}
           onPress={() => {
-            navigation.navigate('medication',{
-              sep:species,
-              id:id
-            });
+            navigation.navigate('medication')
+            //   sep:species,
+            //   id:id
+            // });
           }}
           buttonContainerStyle={{
             marginTop: 12,
@@ -130,10 +138,12 @@ const Main = ({navigation}) => {
           icon={images.weight}
           label={'ADD CURRENT WEIGHT'}
           onPress={() => {
-            navigation.navigate('weight',{
-              sep:species,
-              id:id
-            });
+            navigation.navigate('weight'
+            
+            //   sep:species,
+            //   id:id
+            // }
+            );
           }}
           buttonContainerStyle={{
             marginTop: 12,
@@ -153,7 +163,12 @@ const Main = ({navigation}) => {
           label={'ALERTS'}
           icon={images.bell}
           onPress={() => {
-            navigation.navigate('LoadAlert');
+            navigation.navigate('LoadAlert'
+            // ,{
+            //   sep:species,
+            //   id:id
+            // }
+            );
           }}
           buttonContainerStyle={{
             marginTop: 12,
@@ -161,6 +176,8 @@ const Main = ({navigation}) => {
           }}
         />
       </ScrollView>
+      </KeyboardAwareScrollView>
+
       <View style={{flex: 1, justifyContent: 'flex-end'}}>
         <TextButton
           label={'LOGOUT'}

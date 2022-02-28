@@ -11,20 +11,27 @@ import Header from '../../Components/Header';
 import AlertCard from './AlertCard';
 import ActivityIndicatorExample from '../../Components/Loading';
 import TextButton from '../../Components/TextButton';
-export default function LoadAlert({ navigation }) {
+export default function LoadAlert({ navigation , route}) {
   const [alert, setAlerts] = React.useState([]);
+  const [species, setSpcies] = React.useState([]);
+  const [id,setId] = React.useState(null)
   const [loading, setLoading] = React.useState(false);
+
   async function loadFinance() {
     let {data} = await axiosIns.get('alerts/');
     setLoading(true);
     return data;
   }
   React.useEffect(() => {
-    if (!loading) {
+    // if (!loading) {
       // setInterval(()=>{
+        // let {id} = route.params
+        setId(global.id)
+        // let {sep} = route.params
+        setSpcies(global.species)
         loadFinance().then(data => {setAlerts(data)});
       // },6000)
-    }
+    // }
     // console.log(alert)
   },[]);
   
@@ -84,7 +91,10 @@ export default function LoadAlert({ navigation }) {
 
       <TextButton
         onPress={() => {
-          navigation.replace('Alerts');
+          navigation.replace('Alerts',{
+            sep:species,
+            id:id
+          });
         }}
         icon={images.bell}
         buttonContainerStyle={{

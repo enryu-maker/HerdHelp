@@ -8,7 +8,8 @@ import TextButton from '../../Components/TextButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FormTimeInput from '../../Components/FormTimeInput';
 import axiosIns from '../../helpers/helpers';
-export default function Alerts({navigation}) {
+import { Dropdown } from 'sharingan-rn-modal-dropdown';
+export default function Alerts({navigation,route}) {
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
   const [tag, setTag] = React.useState('');
@@ -17,12 +18,19 @@ export default function Alerts({navigation}) {
   const [time, setTime] = React.useState(null);
   const [timet, setTimet] = React.useState(null);
   const [err, setErr] = React.useState('');
+  const [species, setSpcies] = React.useState([]);
+  const [animals, setAnimals] = React.useState("");
+  
+  const [id,setId] = React.useState(null)
+  const onChangeSpec = value => {
+    setAnimals(value);
+  };
 
     const data =JSON.stringify(
       {
         "title": title,
         "content": content,
-        "tag_number": tag,
+        "tag_number": ` ${id}${animals}${tag}`,
         "alert_date": datet,
         "alert_time": timet,
       },
@@ -36,6 +44,12 @@ export default function Alerts({navigation}) {
         alert("Alerts added sucessfully")
     }).catch(err => console.log("api Erorr: ", err.response))
     }
+    React.useEffect(()=>{
+      // let {id} = route.params
+        setId(global.id)
+        // let {sep} = route.params
+        setSpcies(global.species)
+    })
   function renderHeader() {
     return (
       <Header
@@ -77,6 +91,32 @@ export default function Alerts({navigation}) {
         <Text style={{color: COLORS.red, ...FONTS.h3, alignSelf: 'center'}}>
           {err}
         </Text>
+        <Dropdown
+          label="Species"
+          borderRadius={SIZES.radius}
+          data={species}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={
+            (FONTS.body3,
+            {color: COLORS.white, letterSpacing: 2, alignSelf: 'center'})
+          }
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          value={species}
+          onChange={onChangeSpec}
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
+        />
         <FormInput
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
@@ -193,7 +233,7 @@ export default function Alerts({navigation}) {
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {
-          // alert(data)
+          // alert(id)
           postAlert();
         }}
         icon={images.bell}

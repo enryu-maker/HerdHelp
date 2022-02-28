@@ -8,6 +8,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FormDateInput from '../../Components/FormDateInput';
 import axiosIns from '../../helpers/helpers';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
+import Loader from '../../Components/Loader';
 export const Medication = ({ navigation,route }) =>{
   const [tag, setTag] = React.useState('');
   const [treat, setTreat] = React.useState('');
@@ -30,6 +31,7 @@ export const Medication = ({ navigation,route }) =>{
 
   
   function addMedical(){
+    setLoading(true)
     axiosIns.post("medication/",{
         "tag_number": `${id}${species}${tag}`,
         "medication_name": med,
@@ -44,21 +46,25 @@ export const Medication = ({ navigation,route }) =>{
       },
     }).then(response => {
       if (response.status == 201) {
+        setLoading(false)
         alert('Medication added sucessfully');
       }
       else{
+        setLoading(false)
         setErr(`Animal Not Found`)
       }
     })
-    .catch(err => {setErr("Something went wrong")});
+        .catch(err => {setErr("Something went wrong"),
+        setLoading(false)
+      });
   }
   React.useEffect(() => {
-    if (!loading) {
-      let {sep}=route.params
-      let {id}=route.params
-      setId(id)
-      setAnimals(sep)
-    }
+  
+      // let {sep}=route.params
+      // let {id}=route.params
+      setId(global.id)
+      setAnimals(global.species)
+    
     // console.log(animals)
   },[]);
   function renderheader() {
@@ -278,6 +284,7 @@ export const Medication = ({ navigation,route }) =>{
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
+        <Loader loading={loading}/>
       {renderheader()}
       <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}

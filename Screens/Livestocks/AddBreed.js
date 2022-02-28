@@ -44,7 +44,7 @@ const Addanimals = ({navigation,route}) => {
   const [vaccinateddate, setVaccinateddate] = useState('');
   const [vaccinateddatet, setVaccinateddatet] = useState(null);
   const [bought, setBought] = useState(false);
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   const [animals, setAnimals] = React.useState([]);
   const [id,setId] = React.useState("")
   const [registration,setRegistration] = React.useState("")
@@ -85,7 +85,7 @@ const Addanimals = ({navigation,route}) => {
     bought: bought,
   });
   function postAnimal() {
-    setLoading(false)
+    setLoading(true)
     axiosIns
       .post('animals/', data, {
         headers: {
@@ -94,12 +94,12 @@ const Addanimals = ({navigation,route}) => {
       })
       .then(response => {
         if (response.status == 201) {
-          setLoading(true)
+          setLoading(false)
           alert('Animal added sucessfully');
         }
       })
       .catch(err => console.log('api Erorr: ', err.response),
-      setLoading(true)
+      setLoading(false)
       );
   }
   React.useEffect(() => {
@@ -584,7 +584,7 @@ const Addanimals = ({navigation,route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-        <Loader loading={loading}/>
+      <Loader loading={loading}/>
       {renderHeader()}
 
       <KeyboardAwareScrollView

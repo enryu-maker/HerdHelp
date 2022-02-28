@@ -53,7 +53,7 @@ export const images ={
     update:require("../assets/Logo/refresh.png"),
     aler:require("../assets/Add/alert.png"),
     clock:require("../assets/Add/clock.png"),
-    // mark:require("../assets/Add/mark.png"),
+    mark:require("../assets/Add/mark.png"),
 }
 export const COLORS={
     Primary:"rgb(126,204,122)",

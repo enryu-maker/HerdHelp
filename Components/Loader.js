@@ -3,7 +3,7 @@ import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
 import { COLORS } from './Constants';
 
 const Loader = (props) => {
-  const {loading, ...attributes} = props;
+  const {loading,boxstyle, ...attributes} = props;
   return (
     <Modal
       transparent={true}
@@ -13,11 +13,12 @@ const Loader = (props) => {
         console.log('close modal');
       }}>
       <View style={styles.modalBackground}>
-        <View style={styles.activityIndicatorWrapper}>
+        <View style={[styles.activityIndicatorWrapper,{...boxstyle}]}>
           <ActivityIndicator
             animating={true}
             color={COLORS.Primary}
             size="large"
+
             style={styles.activityIndicator}
           />
         </View>
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-around',
+    // ...boxstyle
   },
   activityIndicator: {
     alignItems: 'center',

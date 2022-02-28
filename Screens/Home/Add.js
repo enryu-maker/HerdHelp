@@ -65,7 +65,7 @@ export default function Add({navigation,route}) {
             <Card
               key={index}
               Name={listItem.name}
-              Tagnumber={listItem.tag_number}
+              Tagnumber={listItem.support_tag}
               Gender={listItem.gender}
               Species={listItem.category}
               Weight={listItem.weight}

@@ -7,31 +7,26 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import axiosIns from '../../helpers/helpers';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
-
+import Loader from '../../Components/Loader';
 export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [weight, setWeight] = React.useState(0);
   const [err, setErr] = React.useState("");
   const [species, setSpcies] = React.useState([]);
-  // const [loading, setLoading] = React.useState(false);
   const [supportTag,setSupportTag] = React.useState("")
   const [animals, setAnimals] = React.useState([]);
   const [id, setId] = React.useState("");
   React.useEffect(() => {
-    if (!loading) {
-      let {sep}=route.params
-      let {id}=route.params
-      setId(id)
-      setAnimals(sep)
-    }
-    // console.log(animals)
+      setId(global.id)
+      setAnimals(global.species)
   },[]);
   const onChangeSpec = value => {
     setSpcies(value);
   };
   async function updateWeight(){
     if (tag!="",weight!=0){
+      setLoading(true)
       try{
         let {resp} = await axiosIns.patch(`animals/${id}${species}${tag}`,{
           'weight':weight
@@ -41,15 +36,16 @@ export const Weight =({ navigation,route})=> {
           },
         }).then((Response)=>{
           if (Response.status==200){
+            setLoading(false)
             alert("Weight Updated")
           }
           else{
+          setLoading(false)
           setErr(`Animal with tag ${tag} not found`)
           }
         })
-        setLoading(true)
-        return resp
       }catch(err){
+        setLoading(false)
         // if(err){
         //   setErr(`Animal with tag ${tag} not found`)
         // }
@@ -57,6 +53,7 @@ export const Weight =({ navigation,route})=> {
     }
     else{
       setErr("Please Enter valid Data")
+      setLoading(false)
     }
   }
   function renderHeader() {
@@ -183,6 +180,7 @@ export const Weight =({ navigation,route})=> {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
+        <Loader loading={loading}/>
       {renderHeader()}
 
       <KeyboardAwareScrollView

@@ -93,7 +93,7 @@ export const Info = ({navigation, route}) => {
           <View style={{flexDirection: 'column'}}>
             <Text
               style={{color: COLORS.white, ...FONTS.h3, alignSelf: 'center'}}>
-              medication
+              Med
             </Text>
             <Text
               style={{color: COLORS.white, ...FONTS.h3, alignSelf: 'center'}}>
