@@ -197,10 +197,13 @@ const Login = ({navigation}) => {
               label="Forgot Password?"
               buttonContainerStyle={{
                 backgroundColor: null,
+                width:160,
+                // marginRight:120
               }}
               labelStyle={{
                 color: COLORS.Primary,
                 ...FONTS.h4,
+                marginRight:50
               }}
               onPress={() => navigation.navigate('ForgotPassword')}
             />
