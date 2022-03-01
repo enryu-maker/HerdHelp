@@ -209,8 +209,8 @@ const Addanimals = ({navigation,route}) => {
           // avatarSize={28}
           value={valueMS}
           onChange={onChangeMS}
-          // animationIn="zoomIn"
-          // animationOut="zoomOut"
+          animationIn="zoomIn"
+          animationOut="zoomOut"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -242,8 +242,8 @@ const Addanimals = ({navigation,route}) => {
           // avatarSize={28}
           value={valueBS}
           onChange={onChangeBS}
-          // animationIn="zoomIn"
-          // animationOut="zoomOut"
+          animationIn="zoomIn"
+          animationOut="zoomOut"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -275,8 +275,8 @@ const Addanimals = ({navigation,route}) => {
           // avatarSize={28}
           value={bought}
           onChange={onChangebought}
-          // animationIn="zoomIn"
-          // animationOut="zoomOut"
+          animationIn="zoomIn"
+          animationOut="zoomOut"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
