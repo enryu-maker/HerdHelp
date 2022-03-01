@@ -26,6 +26,7 @@ const Main = ({navigation}) => {
   const [id, setId] = React.useState("");
   async function fetchanimal() {
     let {data} = await axiosIns.get('getcategories/');
+    console.log(data)
     setLoading(true);
     global.species = data
     return data;

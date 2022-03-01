@@ -20,7 +20,6 @@ export default function App() {
   React.useEffect(() => {
     SplashScreen.hide();
     retrieveData()
-    
   },[Route]);
   return (
         <View style={{flex:1}}>
