@@ -18,7 +18,9 @@ export default function App() {
       return data;
   };
   React.useEffect(() => {
-    SplashScreen.hide();
+    setTimeout(()=>{
+      SplashScreen.hide();
+    },3000)
     retrieveData()
   },[Route]);
   return (
