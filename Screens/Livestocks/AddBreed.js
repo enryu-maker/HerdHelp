@@ -26,6 +26,8 @@ import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
 import Loader from '../../Components/Loader';
+import LoaderOp from '../../Components/LoaderOp';
+
 const Addanimals = ({navigation,route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
@@ -48,8 +50,9 @@ const Addanimals = ({navigation,route}) => {
   const [animals, setAnimals] = React.useState([]);
   const [id,setId] = React.useState("")
   const [registration,setRegistration] = React.useState("")
-
-
+  const [show, setShow] = React.useState(false);
+  const [validation, setValidation] = React.useState(false);
+  const [dataText,setDataText] = React.useState("")
   const onChangeMS = value => {
     setValueMS(value);
   };
@@ -65,6 +68,18 @@ const Addanimals = ({navigation,route}) => {
   const onChangebought = value => {
     setBought(value);
   };
+  const clear=()=>{
+    setSpcies([])
+    setWeight()
+    setTag()
+    setRegistration()
+    setAge()
+    setBreed()
+    setMother()
+    setFather()
+    setPrice()
+    setName()
+  }
   const data = JSON.stringify({
     name: name,
     tag_number:` ${id}${valueMS}${tag}`,
@@ -95,11 +110,19 @@ const Addanimals = ({navigation,route}) => {
       .then(response => {
         if (response.status == 201) {
           setLoading(false)
-          alert('Animal added sucessfully');
+          setValidation(true);
+            setShow(true)
+            setDataText('Animal added');
+            setInterval(()=>{
+              setShow(false)
+              },3000)
+            clear()
         }
       })
       .catch(err => console.log('api Erorr: ', err.response),
-      setLoading(false)
+      setLoading(false),
+      setValidation(false),
+      setShow(false)
       );
   }
   React.useEffect(() => {
@@ -289,7 +312,7 @@ const Addanimals = ({navigation,route}) => {
           <View>
             <FormDateInput
               label="Date of Birth"
-              placeholder="YYYY/MM/DD"
+              placeholder="YYYY-MM-DD"
               value={dob}
               setDate={setDob}
               formatDate={setDobt}
@@ -526,7 +549,7 @@ const Addanimals = ({navigation,route}) => {
         {vaccinated ? (
           <FormDateInput
             label="Date of Vaccination"
-            placeholder="YYYY/MM/DD"
+            placeholder="YYYY-MM-DD"
             value={vaccinateddate}
             setDate={setVaccinateddate}
             formatDate={setVaccinateddatet}
@@ -581,6 +604,9 @@ const Addanimals = ({navigation,route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
+        {show &&
+            <LoaderOp showing={show} validation={validation} dataText={dataText} />
+            } 
       <Loader loading={loading}/>
       {renderHeader()}
 

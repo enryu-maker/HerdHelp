@@ -9,6 +9,8 @@ import FormDateInput from '../../Components/FormDateInput';
 import axiosIns from '../../helpers/helpers';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import Loader from '../../Components/Loader';
+import LoaderOp from '../../Components/LoaderOp';
+
 export const Medication = ({ navigation,route }) =>{
   const [tag, setTag] = React.useState('');
   const [treat, setTreat] = React.useState('');
@@ -24,10 +26,21 @@ export const Medication = ({ navigation,route }) =>{
   const [loading, setLoading] = React.useState(false);
   const [err,setErr] = React.useState("")
   const [id, setId] = React.useState("");
+  const [show, setShow] = React.useState(false);
+  const [validation, setValidation] = React.useState(false);
+  const [dataText,setDataText] = React.useState("")
 
   const onChangeSpec = value => {
     setSpcies(value);
   };
+  const clear=()=>{
+    // setAnimals()
+    setMed()
+    setWithdraw()
+    setDis()
+    setTag()
+    setDos()
+  }
 
   
   function addMedical(){
@@ -47,15 +60,27 @@ export const Medication = ({ navigation,route }) =>{
     }).then(response => {
       if (response.status == 201) {
         setLoading(false)
-        alert('Medication added sucessfully');
+        setValidation(true);
+            setShow(true)
+            setDataText("Medication added")
+            setInterval(()=>{
+              setShow(false)
+              },4000)
+            clear()
       }
       else{
         setLoading(false)
+        setValidation(false);
+            setShow(true)
+            setDataText("Animal Not Found")
         setErr(`Animal Not Found`)
       }
     })
         .catch(err => {setErr("Something went wrong"),
         setLoading(false)
+        setShow(true)
+            setDataText("Animal Not Found")
+        setErr(`Animal Not Found`)
       });
   }
   React.useEffect(() => {
@@ -102,6 +127,7 @@ export const Medication = ({ navigation,route }) =>{
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
+
         <Text style={{color:COLORS.red,alignSelf: 'center',...FONTS.body3}}>{err}</Text>
         <Dropdown
           label="Species"
@@ -118,6 +144,8 @@ export const Medication = ({ navigation,route }) =>{
             borderRadius: SIZES.radius,
           }}
           disableSelectionTick
+          animationIn="zoomIn"
+            animationOut="zoomOut"
           primaryColor={COLORS.Primary}
           value={species}
           onChange={onChangeSpec}
@@ -284,6 +312,9 @@ export const Medication = ({ navigation,route }) =>{
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
+        {show &&
+            <LoaderOp showing={show} validation={validation} dataText={dataText} />
+            } 
         <Loader loading={loading}/>
       {renderheader()}
       <KeyboardAwareScrollView

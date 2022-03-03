@@ -8,6 +8,7 @@ import axiosIns from '../../helpers/helpers';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import Loader from '../../Components/Loader';
+import LoaderOp from '../../Components/LoaderOp';
 export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -17,6 +18,9 @@ export const Weight =({ navigation,route})=> {
   const [supportTag,setSupportTag] = React.useState("")
   const [animals, setAnimals] = React.useState([]);
   const [id, setId] = React.useState("");
+  const [show, setShow] = React.useState(false);
+  const [validation, setValidation] = React.useState(false);
+  const [dataText,setDataText] = React.useState("")
   React.useEffect(() => {
       setId(global.id)
       setAnimals(global.species)
@@ -24,6 +28,11 @@ export const Weight =({ navigation,route})=> {
   const onChangeSpec = value => {
     setSpcies(value);
   };
+  const clear=()=>{
+    setSpcies([])
+    setWeight()
+    setTag()
+  }
   async function updateWeight(){
     if (tag!="",weight!=0){
       setLoading(true)
@@ -37,15 +46,25 @@ export const Weight =({ navigation,route})=> {
         }).then((Response)=>{
           if (Response.status==200){
             setLoading(false)
-            alert("Weight Updated")
+            setValidation(true);
+            setShow(true)
+            setDataText("Weight Updated")
+            setInterval(()=>{
+              setShow(false)
+              },4000)
+            clear()
           }
           else{
           setLoading(false)
+          setValidation(true);
+            setShow(true)
           setErr(`Animal with tag ${tag} not found`)
           }
         })
       }catch(err){
         setLoading(false)
+        setValidation(true);
+            setShow(true)
         // if(err){
         //   setErr(`Animal with tag ${tag} not found`)
         // }
@@ -53,6 +72,8 @@ export const Weight =({ navigation,route})=> {
     }
     else{
       setErr("Please Enter valid Data")
+      setValidation(true);
+            setShow(true)
       setLoading(false)
     }
   }
@@ -180,6 +201,10 @@ export const Weight =({ navigation,route})=> {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
+        
+        {show &&
+            <LoaderOp showing={show} validation={validation} dataText={dataText} />
+            } 
         <Loader loading={loading}/>
       {renderHeader()}
 
