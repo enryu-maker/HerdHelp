@@ -5,7 +5,7 @@ import Homenav from "./Screens/Nav/Homenav"
 import Rootnav from "./Screens/Nav/Rootnav"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen'
-var signal= true
+// var signal= true
 export default function App() {
   const [Route,setRoute]=React.useState(false);
   async function retrieveData(){
