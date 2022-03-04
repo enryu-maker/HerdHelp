@@ -17,18 +17,21 @@ const Med=({
             borderRadius:SIZES.radius,
             width:'88%',
             alignSelf:'center'}}>
-            <Text style={{letterSpacing:2,padding:10,...FONTS.h2,color:COLORS.green}}>
+          <Text style={Platform.OS=="android"?{letterSpacing:2,padding:10,...FONTS.h3,color:COLORS.green}:{letterSpacing:2,padding:10,...FONTS.h2,color:COLORS.green}}>
               {disease}     {dosage}
           </Text>
     <View style={{
           flexDirection:'row',
           justifyContent:"space-between",
       }}>
-            <Text style={{letterSpacing:2,paddingLeft:10,...FONTS.body2,color:COLORS.black}}>
+            <Text style={Platform.OS=="android"?{letterSpacing:2,padding:10,...FONTS.body3,color:COLORS.black}:{letterSpacing:2,padding:10,...FONTS.body2,color:COLORS.black}}>
+
 
               {medication_name}
           </Text>
-          <Text style={{letterSpacing:2,paddingRight:10,...FONTS.h2,color:COLORS.green}}>
+
+          <Text style={Platform.OS=="android"?{letterSpacing:2,padding:10,...FONTS.h3,color:COLORS.green}:{letterSpacing:2,padding:10,...FONTS.h2,color:COLORS.green}}>
+
 
               {medication_date}
           </Text>
@@ -37,11 +40,11 @@ const Med=({
           flexDirection:'row',
           justifyContent:"space-between",
       }}>
-            <Text style={{letterSpacing:2,padding:10,...FONTS.body2,color:COLORS.black}}>
-
+            <Text style={Platform.OS=="android"?{letterSpacing:2,padding:10,...FONTS.body3,color:COLORS.black}:{letterSpacing:2,padding:10,...FONTS.body2,color:COLORS.black}}>
               {withdrawal}
           </Text>
-          <Text style={{letterSpacing:2,padding:10,...FONTS.h2,color:COLORS.red}}>
+
+          <Text style={Platform.OS=="android"?{letterSpacing:2,padding:10,...FONTS.h3,color:COLORS.red}:{letterSpacing:2,padding:10,...FONTS.h2,color:COLORS.red}}>
 
               {withdrawal_date}
           </Text>
