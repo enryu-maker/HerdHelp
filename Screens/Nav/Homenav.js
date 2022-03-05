@@ -24,6 +24,7 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 import Setting from '../Setting/Setting';
 import Drawercontent from './Drawercontent';
+
 const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
@@ -53,6 +54,7 @@ const DrawerNav = () => {
           }} />
       </Drawer.Navigator>)}
 export default class Homenav extends Component {
+  
   render() {
     return (
       <View style={{flex:1}}>

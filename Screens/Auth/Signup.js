@@ -60,7 +60,7 @@ export const Signup = ({navigation}) => {
             setEmailError("User created")
             setInterval(()=>{
             setShow(false)
-            },4000)
+            },3000)
             
           } else {
             setLoading(false);

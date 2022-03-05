@@ -22,20 +22,20 @@ const Card=({
     alignSelf:'center'}}
     onPress={onPress}>
       <View style={{justifyContent:'center',margin:SIZES.padding}}>
-          <Image source={{uri:"http://herdhelp.herokuapp.com" + image}}
+          <Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + image}}
           style={{height:50,width:50,}}/>
       </View>
       <View style={{
           flexDirection:'column',
           justifyContent:"space-evenly"
       }}>
-          <Text style={FONTS.h4,{letterSpacing:3}}>
+          <Text style={[FONTS.h4,{letterSpacing:3}]}>
               {Tagnumber}
           </Text>
-          <Text style={FONTS.h4,{letterSpacing:3,fontWeight:'700'}}>
+          <Text style={[FONTS.h4,{letterSpacing:3,fontWeight:'700'}]}>
               {Name}
           </Text>
-          <Text style={FONTS.h4,{letterSpacing:3}}>
+          <Text style={[FONTS.h4,{letterSpacing:3}]}>
               {Weight} lbs
           </Text>
       </View>

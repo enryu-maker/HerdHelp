@@ -14,25 +14,21 @@ export const Home = ({navigation}) => {
   const [showFilterModal, setShowFilterModal] = React.useState(false);
   const [animals, setAnimals] = React.useState([]);
   const [searched, setSearched] = React.useState('');
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [available, setAvailable] = React.useState([]);
   async function fetchanimal() {
-    setLoading(true);
+    // setLoading(true);
     let {data} = await axiosIns.get('animals/');
-    
+    // console.log(data[0].data)
     return data;
   }
   React.useEffect(() => {
-    setLoading(false);
-    setAnimals([]);
-    if(!loading){
       fetchanimal().then(data => {
         setLoading(false);
         setAnimals(data);
       });
-    }
-    
   }, []);
+  // console.log(loading)
   function renderHeader() {
     return (
       <Header
@@ -65,8 +61,7 @@ export const Home = ({navigation}) => {
   // console.log(available)
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-      <Loader loading={loading} boxstyle={{
-      }}/>
+      {/* <Loader loading={loading}/> */}
       {renderHeader()}
 
       <View
@@ -89,7 +84,7 @@ export const Home = ({navigation}) => {
                 buttonContainerStyle={{
                   marginTop: SIZES.padding,
                 }}
-                icon={{uri: 'http://herdhelp.herokuapp.com' + a.data[0].image}}
+                icon={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + a.data[0].image}}
                 key={a.id}
                 label={`My ${a.label}'s`}
                 onPress={() => {

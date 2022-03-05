@@ -21,7 +21,37 @@ import FinanceInfo from '../Finance/FinanceInfo';
 import LoadAlert from '../Alerts/LoadAlert';
 import MedCard from '../../Components/MedCard';
 const Stack = createNativeStackNavigator();
-
+const Drawer = createDrawerNavigator();
+import Setting from '../Setting/Setting';
+import Drawercontent from './Drawercontent';
+const DrawerNav = () => {
+  return (
+    <Drawer.Navigator initialRouteName='Home'
+      screenOptions={{
+        headerShown: false, drawerActiveBackgroundColor: COLORS.Primary,
+        drawerActiveTintColor: COLORS.white,
+        drawerStyle:[{backgroundColor:COLORS.transparent},styles.drawerStyle],
+        drawerLabelStyle: [FONTS.body3,{letterSpacing:2}],
+        drawerType:"front",
+        overlayColor: COLORS.Primary,
+        backBehavior:"history",  
+        drawerStatusBarAnimation:"fade",
+      }}
+      drawerContent={props =><Drawercontent {...props}
+      drawerWidth= {SIZES.width- 120}
+      />
+      
+    }
+    >
+      <Drawer.Screen name='Main' component={Main} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.home}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+      </Drawer.Navigator>)}
 export default class Rootnav extends Component {
   render() {
     return (
@@ -30,8 +60,8 @@ export default class Rootnav extends Component {
           style="auto"/>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false}}
-          initialRouteName={'Login'}>
-          <Stack.Screen name='Main' component={Main} />
+          initialRouteName={'Draw'}>
+          <Stack.Screen name='Draw' component={DrawerNav} />
           <Stack.Screen name='Home' component={Home}/>
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />
@@ -43,10 +73,11 @@ export default class Rootnav extends Component {
           <Stack.Screen name='weight' component={Weight} />
           <Stack.Screen name='Finance' component={Finance} />
           <Stack.Screen name='Alerts' component={Alerts} />
-          <Stack.Screen name='FinanceInfo' component={FinanceInfo}/>
+          <Stack.Screen name='FinanceInfo' component={FinanceInfo} />
           <Stack.Screen name='LoadAlert' component={LoadAlert}/>
           <Stack.Screen name='Add' component={Add}/>
           <Stack.Screen name='MedCard' component={MedCard}/>
+          <Stack.Screen name='Setting' component={Setting}/>
         </Stack.Navigator>
       </NavigationContainer>
       </View>

@@ -36,6 +36,7 @@ const Main = ({navigation}) => {
   async function loadUser(){
     try {
       let {data} = await axiosIns.get('profile/');
+      // console.log(data)
       return data;
     } catch (e) {
      alert("Something Went Wrong")
@@ -49,7 +50,7 @@ const Main = ({navigation}) => {
       fetchanimal();
       loadId();
       loadUser().then(data=>{
-        global.userData=data,
+        global.userData=data
         console.log(data)
       })
   },[]);

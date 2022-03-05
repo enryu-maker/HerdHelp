@@ -2,11 +2,13 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import React from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {COLORS, SIZES, FONTS, images} from '../../Components/Constants';
+import userData from '../../Components/Constants';
 import {Caption, Drawer, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axiosIns from '../../helpers/helpers';
 export default function Drawercontent(props) {
-  // console.log(props)
+  
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -24,13 +26,13 @@ export default function Drawercontent(props) {
                 }}
               />
               <View />
-              <View style={{marginLeft: 20}}>
-                <Title style={styles.title}>Akif khan</Title>
+              {/* <View style={{marginLeft: 20}}>
+                <Title style={styles.title}>{user[0].fullname}</Title>
                 <Caption style={[styles.caption, {color: COLORS.gray}]}>
-                  Robbins Farm
+                {user[0].farm_name}
                 </Caption>
-                <Caption style={styles.caption}>@ Akif</Caption>
-              </View>
+                <Caption style={styles.caption}>{`@ ${user[0].username}`}</Caption>
+              </View> */}
             </View>
           </View>
         </View>

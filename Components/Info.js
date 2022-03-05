@@ -58,7 +58,7 @@ export const Info = ({navigation, route}) => {
           }}>
           <Image
             // source={{uri:}}
-            source={{uri: 'http://herdhelp.herokuapp.com' + animal?.image}}
+            source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + animal?.image}}
             style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}
           />
           <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>

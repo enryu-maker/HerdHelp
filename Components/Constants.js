@@ -2,10 +2,6 @@ import {Animated} from 'react-native'
 import React, { useRef } from 'react'
 import { Dimensions,Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
-
-export var userData=[
-
-]
 export const images ={
     logo:require("../assets/Logo/Logo01.png"),
     eye:require("../assets/Logo/eye.png"),
@@ -112,9 +108,7 @@ export const FONTS = {
     body5: { fontFamily:type.base, fontSize: SIZES.body5, lineHeight: 18 },
 };
 
-const datacat = [
 
-]
 
   export const genderdata = [
     {
@@ -152,4 +146,3 @@ export const Bought = [
     avatarSource:images.bread
   },
 ];
-export default datacat
