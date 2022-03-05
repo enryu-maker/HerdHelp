@@ -13,7 +13,6 @@ const MyAccount = ({navigation,route}) => {
   const fetchprofile = async () => {
       try {
         const {data} = await axiosIns.get('profile/');
-        console.log(data)
         return data;
       } catch (e) {
        alert("Something Went Wrong")
