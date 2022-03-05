@@ -14,7 +14,7 @@ import TextButton from '../../Components/TextButton';
 import axios from 'axios';
 import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
-axios.defaults.baseURL = 'http://herdhelp.herokuapp.com';
+axios.defaults.baseURL = 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/';
 export const Signup = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');

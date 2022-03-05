@@ -4,7 +4,7 @@ import axios from 'axios';
 let headers = {};
 
 const axiosIns = axios.create({
-    baseURL: 'https://herdhelp.herokuapp.com/',
+    baseURL: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/',
     headers,
 });
 

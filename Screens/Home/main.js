@@ -17,9 +17,11 @@ import {
   SIZES,
   FONTS,
   dummydata,
+  userData
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import ActivityIndicatorExample from '../../Components/Loading';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [species, setSpcies] = React.useState([]);
@@ -31,20 +33,31 @@ const Main = ({navigation}) => {
     global.species = data
     return data;
   }
+  async function loadUser(){
+    try {
+      let {data} = await axiosIns.get('profile/');
+      return data;
+    } catch (e) {
+     alert("Something Went Wrong")
+    }
+  };
+  
   async function loadId(){
     global.id = await AsyncStorage.getItem("id")
   }
   React.useEffect(() => {
-      fetchanimal()
+      fetchanimal();
       loadId();
+      loadUser().then(data=>{
+        global.userData=data,
+        console.log(data)
+      })
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-      <TouchableOpacity
-      onPress={()=>navigation.openDrawer()}
-      >
-
-     
+      <TouchableWithoutFeedback
+      onPress={()=>{navigation.openDrawer()}}
+      >     
       <Header
         img={images.herdhelp}
         imgstyle={{
@@ -82,7 +95,7 @@ const Main = ({navigation}) => {
         //   </View>
         // }
       />
-       </TouchableOpacity>
+       </TouchableWithoutFeedback>
       <ScrollView showsVerticalScrollIndicator={false}>
       <View 
         style={{

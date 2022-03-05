@@ -2,13 +2,10 @@ import {Animated} from 'react-native'
 import React, { useRef } from 'react'
 import { Dimensions,Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
-export const animalImages = {
-  Chicken:require("../assets/animal/chicken.png"),
-  Cow:require("../assets/animal/cow.png"),
-  Goat:require("../assets/animal/goat.png"),
-  Horse:require("../assets/animal/horse.png"),
 
-}
+export var userData=[
+
+]
 export const images ={
     logo:require("../assets/Logo/Logo01.png"),
     eye:require("../assets/Logo/eye.png"),
