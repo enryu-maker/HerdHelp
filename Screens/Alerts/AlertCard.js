@@ -27,7 +27,7 @@ const AlertCard=({
     >
         
         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-            <View style={{flexDirection:"column",padding:10}}>
+            <View style={{flexDirection:"column"}}>
             <Text style={{...FONTS.h2}}>{title}</Text>
             <Text style={{...FONTS.body3}}>{content}</Text>
             <Text style={{...FONTS.h3}}>{`${tag}`}</Text>

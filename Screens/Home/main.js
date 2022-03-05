@@ -40,11 +40,15 @@ const Main = ({navigation}) => {
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-      
+      <TouchableOpacity
+      onPress={()=>navigation.openDrawer()}
+      >
+
+     
       <Header
         img={images.herdhelp}
         imgstyle={{
-          marginTop: '15%',
+          marginTop: '25%',
           tintColor: COLORS.black,
         }}
         containerStyle={{
@@ -52,37 +56,38 @@ const Main = ({navigation}) => {
           marginBottom: Platform.OS == 'ios' ? 10 : 30,
 
         }}
-        rightComponent={
-          <View
-            style={{
-              justifyContent: 'center',
-              marginTop: '15%',
-            }}>
-            <TouchableOpacity
-              style={{
-                marginRight: 10,
-              }}
-              onPress={() => navigation.navigate('MyAccount')}>
-              <Image
-                source={images.login}
-                resizeMode="center"
-                style={{
-                  width: 55,
-                  height: 55,
-                  tintColor: COLORS.lightGray1,
-                  marginTop: 10,
-                  borderRadius: 55 / 2,
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-        }
+        // rightComponent={
+        //   <View
+        //     style={{
+        //       justifyContent: 'center',
+        //       marginTop: '15%',
+        //     }}>
+        //     <TouchableOpacity
+        //       style={{
+        //         marginRight: 10,
+        //       }}
+        //       onPress={() => navigation.navigate('MyAccount')}>
+        //       <Image
+        //         source={images.login}
+        //         resizeMode="center"
+        //         style={{
+        //           width: 55,
+        //           height: 55,
+        //           tintColor: COLORS.lightGray1,
+        //           marginTop: 10,
+        //           borderRadius: 55 / 2,
+        //         }}
+        //       />
+        //     </TouchableOpacity>
+        //   </View>
+        // }
       />
+       </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
       <View 
         style={{
             width: '88%',
-            marginTop: '15%',
+            marginTop: '25%',
             paddingVertical: SIZES.padding,
             paddingHorizontal: SIZES.radius,
             borderRadius: SIZES.radius,
@@ -156,7 +161,7 @@ const Main = ({navigation}) => {
      </ScrollView>
       </View>
 
-      <View style={{flex: 1, justifyContent: 'flex-end'}}>
+      {/* <View style={{flex: 1, justifyContent: 'flex-end'}}>
         <TextButton
           label={'LOGOUT'}
           icon={images.logout}
@@ -170,7 +175,7 @@ const Main = ({navigation}) => {
             backgroundColor: '#ff5b5b',
           }}
         />
-      </View>
+      </View> */}
       </ScrollView>
     </View>
   );

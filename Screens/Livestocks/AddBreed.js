@@ -70,15 +70,15 @@ const Addanimals = ({navigation,route}) => {
   };
   const clear=()=>{
     setSpcies([])
-    setWeight()
-    setTag()
-    setRegistration()
-    setAge()
-    setBreed()
-    setMother()
-    setFather()
-    setPrice()
-    setName()
+    setWeight("")
+    setTag("")
+    setRegistration("")
+    setAge("")
+    setBreed("")
+    setMother("")
+    setFather("")
+    setPrice("")
+    setName("")
   }
   const data = JSON.stringify({
     name: name,

@@ -4,7 +4,8 @@ import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {COLORS, SIZES, FONTS, images} from '../../Components/Constants';
 import {Caption, Drawer, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
-export default function Drawercontent(props) {
+import AsyncStorage from '@react-native-async-storage/async-storage';
+export default function Drawercontent({ props }) {
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props} style={{borderBottomWidth:0,borderBottomColor:"none"}}>
@@ -46,47 +47,6 @@ export default function Drawercontent(props) {
         <DrawerItem
           icon={({color, size}) => (
 <Image
-                source={images.add}
-                style={[{ height: 25, width: 25 }]}
-              />
-          )}
-          label="Add Livestock"
-          labelStyle={[FONTS.body3, {letterSpacing: 2}]}
-          onPress={() => {
-            props.navigation.navigate('Add');
-          }}
-        />
-        <DrawerItem
-          icon={({color, size}) => (
-<Image
-                source={images.weight}
-                style={[{ height: 25, width: 25 }]}
-              /> 
-          )}
-          label="Update Weight"
-          labelStyle={[FONTS.body3, {letterSpacing: 2}]}
-          onPress={() => {
-            props.navigation.navigate('weight');
-          }}
-        />
-        <DrawerItem
-          icon={({color, size}) => (
-<Image
-                source={images.med}
-                style={[{ height: 25, width: 25 }]}
-              />
-          )}
-          label="Add Medication"
-          labelStyle={[FONTS.body3, {letterSpacing: 2}]}
-          onPress={() => {
-            props.navigation.navigate('medication');
-          }}
-        />
-                </Drawer.Section>
-        <LineDivider lineStyle={{alignSelf: 'center', width: '95%'}} />
-        <DrawerItem
-          icon={({color, size}) => (
-<Image
                 source={images.med}
                 style={[{ height: 25, width: 25 }]}
               />
@@ -97,6 +57,9 @@ export default function Drawercontent(props) {
             props.navigation.navigate('medication');
           }}
         />
+                </Drawer.Section>
+
+        
 
       </DrawerContentScrollView>
       
@@ -105,11 +68,12 @@ export default function Drawercontent(props) {
         <LineDivider lineStyle={{alignSelf: 'center', width: '95%'}} />
         <DrawerItem
           icon={({color, size}) => (
-            <Image source={images.logout} style={[{height: 25, width: 25}]} />
+            <Image source={images.logout} style={[{height: 25, width: 25,tintColor:COLORS.red}]} />
           )}
           label="Logout"
-          labelStyle={[FONTS.body3, {letterSpacing: 2}]}
+          labelStyle={[FONTS.body3, {letterSpacing: 2,color:COLORS.red,fontWeight:"bold"}]}
           onPress={() => {
+            AsyncStorage.clear()
             props.navigation.replace('Login');
           }}
         />
