@@ -47,6 +47,10 @@ export const images ={
     aler:require("../assets/Add/alert.png"),
     clock:require("../assets/Add/clock.png"),
     mark:require("../assets/Add/mark.png"),
+    HH:require("../assets/Logo/logo.png"),
+    setting:require("../assets/Logo/settings.png"),
+    file:require("../assets/Logo/file.png")
+
 }
 export const COLORS={
     Primary:"rgb(126,204,122)",

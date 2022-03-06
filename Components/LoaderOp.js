@@ -25,7 +25,7 @@ function LoaderOp ({
     // React.useEffect(()=>{
     //     setShow(showing)
     // },[])
-  console.log(show)
+  // console.log(show)
   return (
     <Modal
       transparent={true}

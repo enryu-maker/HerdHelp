@@ -16,16 +16,13 @@ import {
   COLORS,
   SIZES,
   FONTS,
-  dummydata,
-  userData
+  
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
-import ActivityIndicatorExample from '../../Components/Loading';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import Drawer from '../Custom/Drawer';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
-  const [species, setSpcies] = React.useState([]);
-  const [id, setId] = React.useState("");
+  const [show, setShow] = React.useState(false);
   async function fetchanimal() {
     let {data} = await axiosIns.get('getcategories/');
     // console.log(data)
@@ -51,57 +48,50 @@ const Main = ({navigation}) => {
       loadId();
       loadUser().then(data=>{
         global.userData=data
-        console.log(data)
+        // console.log(data)
       })
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-      <TouchableWithoutFeedback
-      onPress={()=>{navigation.openDrawer()}}
-      >     
+    <Drawer setShow={setShow} show={show} navigation={navigation}/>
       <Header
-        img={images.herdhelp}
-        imgstyle={{
-          marginTop: '25%',
-          tintColor: COLORS.black,
-        }}
-        containerStyle={{
-          // marginTop: Platform.OS == 'ios' ? 50 : 30,
-          marginBottom: Platform.OS == 'ios' ? 10 : 30,
+        title={"HerdHelp"}
+        titleStyle={{
+          marginTop:30,
+          marginRight: 70,
+          color:COLORS.black,
+          ...FONTS.h1
 
         }}
-        // rightComponent={
-        //   <View
-        //     style={{
-        //       justifyContent: 'center',
-        //       marginTop: '15%',
-        //     }}>
-        //     <TouchableOpacity
-        //       style={{
-        //         marginRight: 10,
-        //       }}
-        //       onPress={() => navigation.navigate('MyAccount')}>
-        //       <Image
-        //         source={images.login}
-        //         resizeMode="center"
-        //         style={{
-        //           width: 55,
-        //           height: 55,
-        //           tintColor: COLORS.lightGray1,
-        //           marginTop: 10,
-        //           borderRadius: 55 / 2,
-        //         }}
-        //       />
-        //     </TouchableOpacity>
-        //   </View>
-        // }
+        leftComponent={
+          <View
+            style={{
+              justifyContent: 'center',
+              // marginTop: '15%',
+            }}>
+            <TouchableOpacity
+              style={{
+                marginLeft: 30,
+              }}
+              onPress={() => {setShow(true)}}>
+              <Image
+                source={images.HH}
+                resizeMode="center"
+                style={{
+                  width: 55,
+                  height: 55,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        }
       />
-       </TouchableWithoutFeedback>
+
       <ScrollView showsVerticalScrollIndicator={false}>
       <View 
         style={{
             width: '88%',
-            marginTop: '25%',
+            marginTop:SIZES.height*.1225 ,
             paddingVertical: SIZES.padding,
             paddingHorizontal: SIZES.radius,
             borderRadius: SIZES.radius,
