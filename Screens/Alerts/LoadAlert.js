@@ -23,17 +23,11 @@ export default function LoadAlert({ navigation , route}) {
     return data;
   }
   React.useEffect(() => {
-    // if (!loading) {
-      // setInterval(()=>{
-        // let {id} = route.params
         setId(global.id)
-        // let {sep} = route.params
         setSpcies(global.species)
         loadFinance().then(data => {setAlerts(data)});
-      // },6000)
-    // }
-    // console.log(alert)
-  },[]);
+        global.alertlength=alert
+  },[alert]);
   
     function renderHeader() {
         return (

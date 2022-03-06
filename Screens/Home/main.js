@@ -32,37 +32,23 @@ const Main = ({navigation}) => {
     setLoading(true);
     global.species = data
     return data;
-  }
-  async function loadUser(){
-    try {
-      let {data} = await axiosIns.get('profile/');
-      setLoading(false)
-      return data;
-    } catch (e) {
-     alert("Something Went Wrong")
-    }
-  };
-  
+  } 
   async function loadId(){
     global.id = await AsyncStorage.getItem("id")
   }
   React.useEffect(() => {
       fetchanimal();
       loadId();
-      loadUser().then(data=>{
-        setUser(data)
-        // console.log(data)
-      })
+      global.alertlength;
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
     {/* <Loader loading={loading}/> */}
-    
       <Header
         title={"HerdHelp"}
         titleStyle={{
           marginTop:30,
-          marginRight: 70,
+          marginRight: 65,
           color:COLORS.black,
           ...FONTS.h1
 
@@ -71,7 +57,7 @@ const Main = ({navigation}) => {
           <View
             style={{
               justifyContent: 'center',
-              // marginTop: '15%',
+              marginTop: '8%',
             }}>
             <TouchableOpacity
               style={{
@@ -79,11 +65,10 @@ const Main = ({navigation}) => {
               }}
               onPress={() => {setShow(true)}}>
               <Image
-                source={images.HH}
-                resizeMode="center"
+                source={images.menu}
                 style={{
-                  width: 55,
-                  height: 55,
+                  width: 35,
+                  height: 35,
                 }}
               />
             </TouchableOpacity>
@@ -156,36 +141,31 @@ const Main = ({navigation}) => {
           }}
         />
         <TextButton
-          label={'ALERTS'}
+          label={`ALERTS  `}
           icon={images.bell}
+          iconStyle={{
+            // tintColor:global.alertlength.length>0?COLORS.red:COLORS.white
+          }}
           onPress={() => {
             navigation.navigate('LoadAlert'
             );
           }}
+          // label2={`${global.alertlength.length}`}
+          // buttonContainerStyle2={{
+          //   backgroundColor:global.alertlength.length>0?COLORS.red:COLORS.Primary
+          // }}
+          // label2Style={{
+          //   color:global.alertlength.length>0?COLORS.white:COLORS.Primary
+          // }}
           buttonContainerStyle={{
             marginTop: 12,
             marginBottom: 12,
-            // width:120
+            // borderColor:global.alertlength.length>0?COLORS.red:COLORS.white,
+            // borderWidth:2
           }}
         />
      </ScrollView>
       </View>
-
-      {/* <View style={{flex: 1, justifyContent: 'flex-end'}}>
-        <TextButton
-          label={'LOGOUT'}
-          icon={images.logout}
-          onPress={() => {
-            navigation.replace('Login'), AsyncStorage.clear();
-          }}
-          buttonContainerStyle={{
-            marginBottom: Platform.OS == 'ios' ? 20 : 30,
-            marginTop: Platform.OS == 'ios' ? 20 : 30,
-
-            backgroundColor: '#ff5b5b',
-          }}
-        />
-      </View> */}
       </ScrollView>
     </View>
   );

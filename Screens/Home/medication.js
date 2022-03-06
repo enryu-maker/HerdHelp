@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../../Components/Header';
 import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
-import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
+import {images, COLORS, SIZES, FONTS, Bred} from '../../Components/Constants';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FormDateInput from '../../Components/FormDateInput';
 import axiosIns from '../../helpers/helpers';
@@ -11,87 +11,90 @@ import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
 
-export const Medication = ({ navigation,route }) =>{
+export const Medication = ({navigation, route}) => {
   const [tag, setTag] = React.useState('');
   const [treat, setTreat] = React.useState('');
   const [treatt, setTreatt] = React.useState('');
   const [Dis, setDis] = React.useState('');
   const [med, setMed] = React.useState('');
   const [dos, setDos] = React.useState('');
-  const [withdraw, setWithdraw] = React.useState('');
+  const [withdraw, setWithdraw] = React.useState(false);
   const [date, setDate] = React.useState('');
   const [datet, setDatet] = React.useState('');
   const [animals, setAnimals] = React.useState([]);
   const [species, setSpcies] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  const [err,setErr] = React.useState("")
-  const [id, setId] = React.useState("");
+  const [err, setErr] = React.useState('');
+  const [id, setId] = React.useState('');
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
-  const [dataText,setDataText] = React.useState("")
+  const [dataText, setDataText] = React.useState('');
 
   const onChangeSpec = value => {
     setSpcies(value);
   };
-  const clear=()=>{
+  const clear = () => {
     // setAnimals()
-    setMed()
-    setWithdraw()
-    setDis()
-    setTag()
-    setDos()
-  }
+    setMed();
+    setWithdraw();
+    setDis();
+    setTag();
+    setDos();
+  };
 
-  
-  function addMedical(){
-    setLoading(true)
-    axiosIns.post("medication/",{
-        "tag_number": `${id}${species}${tag}`,
-        "medication_name": med,
-        "medication_date": treatt,
-        "dosage": dos,
-        "disease": Dis,
-        "withdrawal": withdraw,
-        "withdrawal_date": datet
-    },{
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(response => {
-      if (response.status == 201) {
-        setLoading(false)
-        setValidation(true);
-            setShow(true)
-            setDataText("Medication added")
-            setInterval(()=>{
-              setShow(false)
-              },4000)
-            clear()
-      }
-      else{
-        setLoading(false)
-        setValidation(false);
-            setShow(true)
-            setDataText("Animal Not Found")
-        setErr(`Animal Not Found`)
-      }
-    })
-        .catch(err => {setErr("Something went wrong"),
-        setLoading(false)
-        setShow(true)
-            setDataText("Animal Not Found")
-        setErr(`Animal Not Found`)
+  function addMedical() {
+    setLoading(true);
+    axiosIns
+      .post(
+        'medication/',
+        {
+          tag_number: `${id}${species}${tag}`,
+          medication_name: med,
+          medication_date: treatt,
+          dosage: dos,
+          disease: Dis,
+          withdrawal: withdraw,
+          withdrawal_date: datet,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .then(response => {
+        if (response.status == 201) {
+          setLoading(false);
+          setValidation(true);
+          setShow(true);
+          setDataText('Medication added');
+          setInterval(() => {
+            setShow(false);
+          }, 2000);
+          clear();
+        } else {
+          setLoading(false);
+          setValidation(false);
+          setShow(true);
+          setDataText('Animal Not Found');
+          setErr(`Animal Not Found`);
+        }
+      })
+      .catch(err => {
+        setErr('Something went wrong'), setLoading(false);
+        setShow(true);
+        setDataText('Animal Not Found');
+        setErr(`Animal Not Found`);
       });
   }
   React.useEffect(() => {
-  
-      // let {sep}=route.params
-      // let {id}=route.params
-      setId(global.id)
-      setAnimals(global.species)
-    
+    // let {sep}=route.params
+    // let {id}=route.params
+    setId(global.id);
+    setAnimals(global.species);
+
     // console.log(animals)
-  },[]);
+  }, []);
   function renderheader() {
     return (
       <Header
@@ -108,9 +111,13 @@ export const Medication = ({ navigation,route }) =>{
                 // marginTop: 20,
                 marginLeft: 25,
               }}
-              onPress={() =>  {navigation.goBack()} }>
-              <Image source={images.back} style={{width:30,height:30,tintColor:COLORS.darkGray2}}/>
-
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <Image
+                source={images.back}
+                style={{width: 30, height: 30, tintColor: COLORS.darkGray2}}
+              />
             </TouchableOpacity>
           </View>
         }
@@ -127,8 +134,9 @@ export const Medication = ({ navigation,route }) =>{
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-
-        <Text style={{color:COLORS.red,alignSelf: 'center',...FONTS.body3}}>{err}</Text>
+        <Text style={{color: COLORS.red, alignSelf: 'center', ...FONTS.body3}}>
+          {err}
+        </Text>
         <Dropdown
           label="Species"
           borderRadius={SIZES.radius}
@@ -145,7 +153,7 @@ export const Medication = ({ navigation,route }) =>{
           }}
           disableSelectionTick
           animationIn="zoomIn"
-            animationOut="zoomOut"
+          animationOut="zoomOut"
           primaryColor={COLORS.Primary}
           value={species}
           onChange={onChangeSpec}
@@ -171,7 +179,6 @@ export const Medication = ({ navigation,route }) =>{
           onChange={value => {
             // console.log(value)
             setTag(value);
-
           }}
           inputContainerStyle={{
             backgroundColor: COLORS.white,
@@ -265,44 +272,59 @@ export const Medication = ({ navigation,route }) =>{
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
-        <FormInput
-          prependComponent={
-            <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-              <Image
-                source={images.withdraw}
-                style={{width: 28, height: 28, tintColor: COLORS.Primary}}
-              />
-            </View>
-          }
-          value={withdraw}
-          containerStyle={{
-            marginTop: SIZES.radius,
+        <Dropdown
+          label="Withdrawal"
+          borderRadius={SIZES.radius}
+          data={Bred}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
           }}
+          enableAvatar
+          // required
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
+          value={withdraw}
           onChange={value => {
             setWithdraw(value);
           }}
-          label={'Withdrawal'}
-          inputContainerStyle={{
-            backgroundColor: COLORS.white,
-          }}
-          inputStyle={{marginLeft: 20, fontSize: 16}}
-        />
-        <FormDateInput
-          label="Withdrawal Date"
-          placeholder="YYYY-MM-DD"
-          value={date}
-          setDate={setDate}
-          formatDate={setDatet}
-          containerStyle={{
-            marginTop: SIZES.radius,
-          }}
-          inputContainerStyle={{
-            backgroundColor: COLORS.white,
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
             width: '88%',
             alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
           }}
-          inputStyle={{marginLeft: 20, fontSize: 16}}
+          itemContainerStyle={{
+            backgroundColor: COLORS.white,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
         />
+
+        {dos ? (
+          <FormDateInput
+            label="Withdrawal Date"
+            placeholder="YYYY-MM-DD"
+            value={date}
+            setDate={setDate}
+            formatDate={setDatet}
+            containerStyle={{
+              marginTop: SIZES.radius,
+            }}
+            inputContainerStyle={{
+              backgroundColor: COLORS.white,
+              width: '88%',
+              alignSelf: 'center',
+            }}
+            inputStyle={{marginLeft: 20, fontSize: 16}}
+          />
+        ) : (
+          <View></View>
+        )}
       </View>
     );
   }
@@ -312,13 +334,13 @@ export const Medication = ({ navigation,route }) =>{
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-        {show &&
-            <LoaderOp showing={show} validation={validation} dataText={dataText} />
-            } 
-        <Loader loading={loading}/>
+      {show && (
+      <LoaderOp showing={show} validation={validation} dataText={dataText} />
+      )}
+      <Loader loading={loading} />
       {renderheader()}
       <KeyboardAwareScrollView
-      showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"
         contentContainerStyle={{
           marginTop: SIZES.radius,
@@ -347,4 +369,4 @@ export const Medication = ({ navigation,route }) =>{
       />
     </View>
   );
-}
+};

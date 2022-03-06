@@ -109,6 +109,7 @@ const Addanimals = ({navigation,route}) => {
       })
       .then(response => {
         if (response.status == 201) {
+          clear()
           setLoading(false)
           setValidation(true);
             setShow(true)
@@ -116,7 +117,7 @@ const Addanimals = ({navigation,route}) => {
             setInterval(()=>{
               setShow(false)
               },3000)
-            clear()
+            
         }
       })
       .catch(err => console.log('api Erorr: ', err.response),
@@ -625,6 +626,7 @@ const Addanimals = ({navigation,route}) => {
         onPress={() => {
           // alert(` ${id}${valueMS}${tag}`)
           postAnimal();
+          clear();
         }}
         icon={images.add}
         buttonContainerStyle={{

@@ -15,14 +15,18 @@ import {
   } from '../../Components/Constants';
 import { Dropdown } from 'sharingan-rn-modal-dropdown'
 import FormInput from '../../Components/FormInput';
+import LoaderOp from '../../Components/LoaderOp';
+import Loader from '../../Components/Loader';
 export const Finance = ({ navigation })=>{
     const [cat,setCat] = React.useState(1)
     const [Qty,setQty] = React.useState("")
     const [price,setPrice] = React.useState("")
     const [loading,setLoading] = React.useState(false)
     const [animals,setAnimals] = React.useState([])
+    const [show, setShow] = React.useState(false);
+  const [validation, setValidation] = React.useState(false);
+  const [dataText, setDataText] = React.useState('');
     async function getfinance(){
-      setLoading(true)
       const {data} = await axiosIns.get("getfinancecategories/")
       return data
     }
@@ -33,19 +37,29 @@ export const Finance = ({ navigation })=>{
         "quantity":Qty
       }
     )
-     function postfinance(){
-      axiosIns.post('finance/',data, {
+    async function postfinance(){
+      setLoading(true)
+      await axiosIns.post('finance/',data, {
         headers: {
             "Content-Type": "application/json",
         }
-    }).then(response => {
-        alert("Finance added sucessfully")
-    }).catch(err => console.log("api Erorr: ", err.response))
+    }).then(Response => {
+      if (Response.status==201){
+      setLoading(false)
+      setShow(true)
+      setDataText("Finance added")
+      setValidation(true)
+      setInterval(() => {
+        setShow(false);
+      }, 2000);}
+    }).catch(err => console.log("api Erorr: ", err.response),
+    setValidation(false),
+    setShow(true),
+    setDataText("Error")
+    )
     }
     React.useEffect(()=>{
-      if (!loading){
         getfinance().then(data=>{setAnimals(data)})
-      } 
     },[])
     const onChangeB = (value) => {
         setCat(value);
@@ -92,8 +106,8 @@ export const Finance = ({ navigation })=>{
             label="Category"
             borderRadius={SIZES.radius}
             data={animals}
-            textInputStyle={FONTS.body2, { letterSpacing: 2 }}
-            selectedItemTextStyle={FONTS.body3, { color: COLORS.white }}
+            textInputStyle={[FONTS.body3, { letterSpacing: 2 }]}
+            selectedItemTextStyle={[FONTS.body3, { color: COLORS.white }]}
             selectedItemViewStyle={{ backgroundColor: COLORS.Primary, margin: 5, borderRadius: SIZES.radius }}
             // enableAvatar
             required
@@ -164,6 +178,8 @@ export const Finance = ({ navigation })=>{
       }
   return (
     <View style={{flex:1}}>
+      <Loader loading={loading}/>
+      <LoaderOp showing={false} validation={validation} dataText={dataText}/>
       {renderHeader()}
       <KeyboardAwareScrollView
         keyboardDismissMode="on-drag"

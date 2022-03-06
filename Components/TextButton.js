@@ -17,7 +17,8 @@ const TextButton = ({
     label2Style,
     onPress,
     icon,
-    iconStyle
+    iconStyle,
+    buttonContainerStyle2
 }) => {
     return (
         <TouchableOpacity
@@ -47,7 +48,7 @@ const TextButton = ({
                         // ...label2Style
                     }}
                 >
-                    <Image source={icon} style={{...iconStyle,height:25,width:25,tintColor:COLORS.white}}/>
+                    <Image source={icon} style={{height:25,width:25,tintColor:COLORS.white,...iconStyle}}/>
             </View>
             }
             <Text style={{ color: COLORS.white, ...FONTS.h3, ...labelStyle,letterSpacing:2 }}>
@@ -57,13 +58,19 @@ const TextButton = ({
             {label2 != false &&
                 <View
                     style={{
-                        flex: 1,
-                        alignSelf: "flex-end",
-                        color: COLORS.white,
-                        // ...FONTS.h3,
-                        // ...label2Style
+                        
+                        backgroundColor: COLORS.red,
+                        height:20,
+                        width:20,
+                        borderRadius:20/2,
+                        alignSelf:"center",justifyContent:"center",
+                        ...buttonContainerStyle2
+                        
                     }}
                 >
+                <Text style={{ color: COLORS.white, ...FONTS.h3, ...label2Style,letterSpacing:2,alignSelf:"center",justifyContent:"center" }}>
+                  {label2}
+            </Text>
             </View>
             }
         </TouchableOpacity>

@@ -22,18 +22,15 @@ const MyAccount = ({navigation,route}) => {
       fetchprofile().then(data => {
         setUser(data[0]);
       });
-      // console.log(user)
     }, []);
   
 function renderFileUri() {
       return <Image
-      source={images.login}
-        resizeMode="contain"
+      source={{uri:"https://picsum.photos/"+global.id}}
         style={{width: 100,
           height: 100,
           borderRadius: 100 / 2,
           alignSelf: 'center',
-          tintColor:COLORS.lightGray1
         }}
       />
     };

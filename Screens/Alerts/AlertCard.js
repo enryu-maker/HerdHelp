@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity,Platform } from 'react-native';
 import React from 'react';
 import moment from 'moment';
 
@@ -27,13 +27,23 @@ const AlertCard=({
     >
         
         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-            <View style={{flexDirection:"column"}}>
-            <Text style={{...FONTS.h2}}>{title}</Text>
-            <Text style={{...FONTS.body3}}>{content}</Text>
-            <Text style={{...FONTS.h3}}>{`${tag}`}</Text>
+            <View style={{flexDirection:"column",padding:10}}>
+            <Text style={
+              Platform.OS=="android"?{...FONTS.h2}:{...FONTS.h2}
+                }>{title}</Text>
+            <Text style={
+                Platform.OS=="android"?{...FONTS.body3}:{...FONTS.body2}
+            }>{content}</Text>
+            <Text style={
+                Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h2}
+            }>{`${tag}`}</Text>
             <View style={{flexDirection:"row",justifyContent:"space-between",width:"55%"}}>
-            <Text style={{...FONTS.h3,color:COLORS.Primary}}>{date}</Text>
-            <Text style={{...FONTS.h3}}>  {time}</Text>
+            <Text style={
+                Platform.OS=="android"?{...FONTS.h3,color:COLORS.Primary}:{...FONTS.h2,color:COLORS.Primary}
+            }>{date}</Text>
+            <Text style={
+                Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h2}
+            }>    {time}</Text>
             </View>
             </View>
             <TouchableOpacity style={{backgroundColor:'#ff5b5b',height:110,width:75,alignSelf:"flex-end",borderRadius:SIZES.radius,margin:5,flexDirection:"column",justifyContent:"space-evenly"}}

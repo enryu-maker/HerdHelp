@@ -9,15 +9,16 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FormTimeInput from '../../Components/FormTimeInput';
 import axiosIns from '../../helpers/helpers';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
+import { set } from 'react-native-reanimated';
 export default function Alerts({navigation,route}) {
-  const [title, setTitle] = React.useState('');
-  const [content, setContent] = React.useState('');
-  const [tag, setTag] = React.useState('');
+  const [title, setTitle] = React.useState("");
+  const [content, setContent] = React.useState("");
+  const [tag, setTag] = React.useState("");
   const [date, setDate] = React.useState(null);
   const [datet, setDatet] = React.useState(null);
   const [time, setTime] = React.useState(null);
   const [timet, setTimet] = React.useState(null);
-  const [err, setErr] = React.useState('');
+  const [err, setErr] = React.useState("");
   const [species, setSpcies] = React.useState([]);
   const [animals, setAnimals] = React.useState("");
   
@@ -25,12 +26,16 @@ export default function Alerts({navigation,route}) {
   const onChangeSpec = value => {
     setAnimals(value);
   };
+  const clear=()=>{
+    setTitle("")
+    setContent("")
+  }
 
     const data =JSON.stringify(
       {
         "title": title,
         "content": content,
-        "tag_number": ` ${id}${animals}${tag}`,
+        "tag_number":tag?`${id}${animals}${tag}`:"",
         "alert_date": datet,
         "alert_time": timet,
       },
@@ -41,13 +46,12 @@ export default function Alerts({navigation,route}) {
             "Content-Type": "application/json",
         }
     }).then(response => {
+      clear()
         alert("Alerts added sucessfully")
     }).catch(err => console.log("api Erorr: ", err.response))
     }
     React.useEffect(()=>{
-      // let {id} = route.params
         setId(global.id)
-        // let {sep} = route.params
         setSpcies(global.species)
     })
   function renderHeader() {

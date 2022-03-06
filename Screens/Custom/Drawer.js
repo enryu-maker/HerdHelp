@@ -18,21 +18,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axiosIns from '../../helpers/helpers';
 import react from 'react';
 export default function Drawer({setShow, show, navigation}) {
-  const [real,setReal] = React.useState([])
-  async function loadUser(){
-    try {
-      let {data} = await axiosIns.get('profile/');
-      return data;
-    } catch (e) {
-     alert("Something Went Wrong")
-    }
-  };
-  react.useEffect(()=>{
-    loadUser().then(data=>{
-      setReal(data)
-      console.log(data)
-    })
-  },[])
   return (
     <Modal
       transparent={true}
@@ -75,8 +60,6 @@ export default function Drawer({setShow, show, navigation}) {
             />
           </TouchableOpacity> */}
             <TouchableOpacity style={{
-                // flexDirection:"row",
-                    // marginLeft:25,
                     marginBottom:10,
                 marginTop:Platform.OS=="android"?0:45, 
             }}
@@ -93,22 +76,10 @@ export default function Drawer({setShow, show, navigation}) {
                     margin:10,
                     alignSelf:"center",
                     borderRadius:75/2
-                    
-                    
                 }}/>
-                <View style={{
-                    flexDirection:"column",
-                    padding:3
-                }}>
-                  {/* <Text>{real[0].fullname}</Text> */}
-                {/* <Title style={styles.title}>{
-                real[0].fullname
-                }</Title>
-                <Caption style={[styles.caption, {color: COLORS.gray}]}>
-                {real[0].farm_name}
-                </Caption>
-                <Caption style={styles.caption}>{`@ ${real[0].username}`}</Caption> */}
-                </View>
+                <Text style={{...FONTS.h3,color:COLORS.Primary,alignSelf:"center"}}>
+                  Edit
+                  </Text>
                 </TouchableOpacity>
           <LineDivider lineStyle={{
               marginBottom:10,
