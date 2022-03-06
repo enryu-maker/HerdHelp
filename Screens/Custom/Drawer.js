@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import React from 'react';
-import {COLORS, images, SIZES} from '../../Components/Constants';
+import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
 import {Caption, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
 import DrawerCard from './DrawerCard';
@@ -96,15 +96,17 @@ export default function Drawer({setShow, show, navigation}) {
           <DrawerCard name={"Reports"} img={images.file}
           onPress={()=>navigation.replace("Setting")}
           />
-          <DrawerCard name={"Setting"} img={images.setting}
-          onPress={()=>navigation.replace("Setting")}
-          />
+          
           <LineDivider lineStyle={{
               backgroundColor:COLORS.black,
               width:"90%",
               alignSelf:"center",
-              marginTop:10
+              marginTop:10,
+              marginBottom:10
           }}/>
+          <DrawerCard name={"Setting"} img={images.setting}
+          onPress={()=>navigation.replace("Setting")}
+          />
           <View style={{flex:1,justifyContent:"flex-end",marginBottom:10}}>
           <LineDivider lineStyle={{
               backgroundColor:COLORS.black,
@@ -124,12 +126,10 @@ export default function Drawer({setShow, show, navigation}) {
               navigation.replace("Login")
           }}
           />
-
         </View>
         </View>
-        <TouchableOpacity
-        accessibilityRole="adjustable"
-        onPress={()=>{setShow(false)}}
+        <View
+        onTouchStart={()=>{setShow(false)}}
           style={{
             backgroundColor: COLORS.white,
             width: '30%',
@@ -137,9 +137,32 @@ export default function Drawer({setShow, show, navigation}) {
             justifyContent:"center",
             borderBottomStartRadius: SIZES.radius + 10,
             borderTopLeftRadius: SIZES.radius + 10,
-            alignSelf:"center"
+            alignSelf:"center",
+            
           }}
-        />
+        >
+            <Image source={images.HH} style={{
+                alignSelf:"center",
+                justifyContent:"center",
+                width:40,
+                height:40
+            }}/>
+            <Text style={{
+                alignSelf:"center",
+                justifyContent:"center",
+                fontSize:30,
+            }}>
+                H {"\n"}
+                E {"\n"}
+                R {"\n"}
+                D {"\n"}
+                H {"\n"}
+                E {"\n"}
+                L {"\n"}
+                P{"\n"}
+            </Text>
+            
+        </View>
       </View>
     </Modal>
   );
