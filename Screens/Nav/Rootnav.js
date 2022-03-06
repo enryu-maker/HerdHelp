@@ -20,6 +20,7 @@ import Alerts from '../Alerts/Alerts';
 import FinanceInfo from '../Finance/FinanceInfo';
 import LoadAlert from '../Alerts/LoadAlert';
 import MedCard from '../../Components/MedCard';
+import Report from '../Report/Report';
 const Stack = createNativeStackNavigator();
 import Setting from '../Setting/Setting';
 
@@ -49,6 +50,8 @@ export default class Rootnav extends Component {
           <Stack.Screen name='Add' component={Add}/>
           <Stack.Screen name='MedCard' component={MedCard}/>
           <Stack.Screen name='Setting' component={Setting}/>
+          <Stack.Screen name='Report' component={Report}/>
+
         </Stack.Navigator>
       </NavigationContainer>
       </View>

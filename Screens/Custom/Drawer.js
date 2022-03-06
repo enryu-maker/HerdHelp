@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Platform
 } from 'react-native';
 import React from 'react';
 import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
@@ -14,7 +15,24 @@ import {Caption, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
 import DrawerCard from './DrawerCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axiosIns from '../../helpers/helpers';
+import react from 'react';
 export default function Drawer({setShow, show, navigation}) {
+  const [real,setReal] = React.useState([])
+  async function loadUser(){
+    try {
+      let {data} = await axiosIns.get('profile/');
+      return data;
+    } catch (e) {
+     alert("Something Went Wrong")
+    }
+  };
+  react.useEffect(()=>{
+    loadUser().then(data=>{
+      setReal(data)
+      console.log(data)
+    })
+  },[])
   return (
     <Modal
       transparent={true}
@@ -27,17 +45,19 @@ export default function Drawer({setShow, show, navigation}) {
         style={{
           height: '100%',
           width: '100%',
-        backgroundColor:COLORS.Primary,
+        backgroundColor:"#00000040",
           flexDirection: 'row',
-        }}>
+        }}
+        // onTouchStart={()=>{setShow(false)}}
+        >
         <View
           style={{
             width: '75%',
-            backgroundColor: COLORS.Primary,
-            // borderBottomEndRadius: SIZES.radius + 10,
-            // borderTopRightRadius: SIZES.radius + 10,
+            backgroundColor: COLORS.white,
+            borderBottomEndRadius: SIZES.radius + 10,
+            borderTopRightRadius: SIZES.radius + 10,
           }}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               setShow(false);
             }}
@@ -48,24 +68,31 @@ export default function Drawer({setShow, show, navigation}) {
                 alignSelf: 'flex-end',
                 height: 30,
                 width: 30,
-                //   marginTop:15,
+                marginTop:Platform.OS=="android"?0:35,
                 margin: 15,
                 tintColor: COLORS.red,
               }}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
             <TouchableOpacity style={{
-                flexDirection:"row",
-                    marginLeft:25,
-                    marginBottom:10
-                
+                // flexDirection:"row",
+                    // marginLeft:25,
+                    marginBottom:10,
+                marginTop:Platform.OS=="android"?0:45, 
             }}
-            onPress={()=>{navigation.navigate("MyAccount")}}
+            onPress={()=>
+              {navigation.navigate("MyAccount"),
+              setShow(false)}
+            }
             >
-                <Image source={images.login} style={{
+                <Image source={{uri:"https://picsum.photos/"+global.id}} 
+                resizeMode="cover"
+                style={{
                     width:75,
                     height:75,
                     margin:10,
+                    alignSelf:"center",
+                    borderRadius:75/2
                     
                     
                 }}/>
@@ -73,18 +100,19 @@ export default function Drawer({setShow, show, navigation}) {
                     flexDirection:"column",
                     padding:3
                 }}>
-                <Title style={styles.title}>{
-                global.userData[0].fullname
+                  {/* <Text>{real[0].fullname}</Text> */}
+                {/* <Title style={styles.title}>{
+                real[0].fullname
                 }</Title>
                 <Caption style={[styles.caption, {color: COLORS.gray}]}>
-                {global.userData[0].farm_name}
+                {real[0].farm_name}
                 </Caption>
-                <Caption style={styles.caption}>{`@ ${global.userData[0].username}`}</Caption>
+                <Caption style={styles.caption}>{`@ ${real[0].username}`}</Caption> */}
                 </View>
                 </TouchableOpacity>
           <LineDivider lineStyle={{
               marginBottom:10,
-              backgroundColor:COLORS.black,
+              // backgroundColor:COLORS.black,
               width:"90%",
               alignSelf:"center"
           }}/>
@@ -94,11 +122,11 @@ export default function Drawer({setShow, show, navigation}) {
           }}
           />
           <DrawerCard name={"Reports"} img={images.file}
-          onPress={()=>navigation.replace("Setting")}
+          onPress={()=>navigation.replace("Report")}
           />
           
           <LineDivider lineStyle={{
-              backgroundColor:COLORS.black,
+              // backgroundColor:COLORS.black,
               width:"90%",
               alignSelf:"center",
               marginTop:10,
@@ -115,12 +143,16 @@ export default function Drawer({setShow, show, navigation}) {
               marginBottom:10
           }}/>
           <DrawerCard name={"Logout"} namestyle={{
-              color:"#ff5b5b"
+              color:COLORS.white
           }} 
           imgstyle={{
-              tintColor:"#ff5b5b"
+              tintColor:COLORS.white
           }}
           img={images.logout}
+          contstyle={{
+            backgroundColor:"#ff5b5b",
+            marginBottom:20
+          }}
           onPress={()=>{
               AsyncStorage.clear()
               navigation.replace("Login")
@@ -131,9 +163,9 @@ export default function Drawer({setShow, show, navigation}) {
         <View
         onTouchStart={()=>{setShow(false)}}
           style={{
-            backgroundColor: COLORS.white,
+            backgroundColor:"transparent",
             width: '30%',
-            height: '80%',
+            height: '100%',
             justifyContent:"center",
             borderBottomStartRadius: SIZES.radius + 10,
             borderTopLeftRadius: SIZES.radius + 10,
@@ -144,13 +176,16 @@ export default function Drawer({setShow, show, navigation}) {
             <Image source={images.HH} style={{
                 alignSelf:"center",
                 justifyContent:"center",
-                width:40,
-                height:40
+                width:50,
+                height:50,
+                tintColor:COLORS.white
+                // backgroundColor:COLORS.Primary
             }}/>
             <Text style={{
                 alignSelf:"center",
                 justifyContent:"center",
-                fontSize:30,
+                fontSize:35,
+                color:COLORS.white
             }}>
                 H {"\n"}
                 E {"\n"}

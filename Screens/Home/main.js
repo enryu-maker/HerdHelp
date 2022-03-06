@@ -20,9 +20,12 @@ import {
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import Drawer from '../Custom/Drawer';
+import ActivityIndicatorExample from '../../Components/Loading';
+import Loader from '../../Components/Loader';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [show, setShow] = React.useState(false);
+  const [user,setUser] = React.useState([])
   async function fetchanimal() {
     let {data} = await axiosIns.get('getcategories/');
     // console.log(data)
@@ -33,7 +36,7 @@ const Main = ({navigation}) => {
   async function loadUser(){
     try {
       let {data} = await axiosIns.get('profile/');
-      // console.log(data)
+      setLoading(false)
       return data;
     } catch (e) {
      alert("Something Went Wrong")
@@ -47,13 +50,14 @@ const Main = ({navigation}) => {
       fetchanimal();
       loadId();
       loadUser().then(data=>{
-        global.userData=data
+        setUser(data)
         // console.log(data)
       })
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-    <Drawer setShow={setShow} show={show} navigation={navigation}/>
+    {/* <Loader loading={loading}/> */}
+    
       <Header
         title={"HerdHelp"}
         titleStyle={{
@@ -86,7 +90,9 @@ const Main = ({navigation}) => {
           </View>
         }
       />
-
+      {
+    <Drawer setShow={setShow} show={show} navigation={navigation} user={user}/>
+      }
       <ScrollView showsVerticalScrollIndicator={false}>
       <View 
         style={{

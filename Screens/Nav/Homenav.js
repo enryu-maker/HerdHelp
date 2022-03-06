@@ -22,6 +22,7 @@ import LoadAlert from '../Alerts/LoadAlert';
 import MedCard from '../../Components/MedCard';
 const Stack = createNativeStackNavigator();
 import Setting from '../Setting/Setting';
+import Report from '../Report/Report';
 export default class Homenav extends Component {
   render() {
     return (
@@ -48,7 +49,7 @@ export default class Homenav extends Component {
           <Stack.Screen name='Add' component={Add}/>
           <Stack.Screen name='MedCard' component={MedCard}/>
           <Stack.Screen name='Setting' component={Setting}/>
-
+          <Stack.Screen name='Report' component={Report}/>
         </Stack.Navigator>
       </NavigationContainer>
       </View>
