@@ -121,7 +121,9 @@ export default function Drawer({setShow, show, navigation}) {
           }}
           img={images.logout}
           contstyle={{
-            backgroundColor:"#ff5b5b",
+            backgroundColor:COLORS.red,
+
+            // backgroundColor:"#ff5b5b",
             marginBottom:20
           }}
           onPress={()=>{

@@ -53,7 +53,8 @@ export const images ={
 
 }
 export const COLORS={
-    Primary:"rgb(126,204,122)",
+    // Primary:"rgb(126,204,122)",
+    Primary:"#0DB44C",
     transparentPrimary: "#d6f5d6",
     transparentPrimary2: "#eaf7e9",
     white:"#ffffff",
