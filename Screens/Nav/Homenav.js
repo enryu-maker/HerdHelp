@@ -23,6 +23,7 @@ import MedCard from '../../Components/MedCard';
 const Stack = createNativeStackNavigator();
 import Setting from '../Setting/Setting';
 import Report from '../Report/Report';
+import ReportOP from '../Report/ReportOP';
 export default class Homenav extends Component {
   render() {
     return (
@@ -50,6 +51,8 @@ export default class Homenav extends Component {
           <Stack.Screen name='MedCard' component={MedCard}/>
           <Stack.Screen name='Setting' component={Setting}/>
           <Stack.Screen name='Report' component={Report}/>
+          <Stack.Screen name='ReportOP' component={ReportOP}/>
+
         </Stack.Navigator>
       </NavigationContainer>
       </View>

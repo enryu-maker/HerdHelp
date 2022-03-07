@@ -18,7 +18,7 @@ export default function DrawerCard({img,name,imgstyle,namestyle,onPress,contstyl
             borderRadius:10,
             margin:5,
             alignContent:"center",
-            height:50,
+            height: Platform.OS="android"?45:50,
             ...contstyle
         }}>
             <Image source={img} style={{
@@ -27,13 +27,22 @@ export default function DrawerCard({img,name,imgstyle,namestyle,onPress,contstyl
                 height:25,
                 ...imgstyle
             }}/>
-            <Text style={{
+            <Text style={
+                Platform.OS="android"?
+                {
                 paddingLeft:15,
                 letterSpacing:2,
                 color:COLORS.white,
                 ...namestyle,
-                ...FONTS.h2,
-            }}>{name}</Text>
+                ...FONTS.h3,
+            }:{
+            paddingLeft:15,
+            letterSpacing:2,
+            color:COLORS.white,
+            ...namestyle,
+            ...FONTS.h2,
+        }
+            }>{name}</Text>
         </View>
     </TouchableOpacity>
   )

@@ -305,7 +305,7 @@ export const Medication = ({navigation, route}) => {
           }}
         />
 
-        {dos ? (
+        {withdraw ? (
           <FormDateInput
             label="Withdrawal Date"
             placeholder="YYYY-MM-DD"

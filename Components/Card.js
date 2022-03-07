@@ -22,7 +22,9 @@ const Card=({
     alignSelf:'center'}}
     onPress={onPress}>
       <View style={{justifyContent:'center',margin:SIZES.padding}}>
-          <Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + image}}
+          {/* <Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + image}} */}
+          <Image source={{uri: image}}
+
           style={{height:50,width:50,}}/>
       </View>
       <View style={{
