@@ -17,7 +17,6 @@ export default function Report({navigation}) {
             }}>
             <TouchableOpacity
               style={{
-                // marginTop: 20,
                 marginLeft: 25,
               }}
               onPress={() =>  {navigation.replace("Main")} }>

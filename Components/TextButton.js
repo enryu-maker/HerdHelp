@@ -41,11 +41,6 @@ const TextButton = ({
                 <View
                     style={{
                         margin:10
-                        // flex: 1,
-                        // alignSelf: "flex-start",
-                        // color: COLORS.white,
-                        // ...FONTS.h3,
-                        // ...label2Style
                     }}
                 >
                     <Image source={icon} style={{height:25,width:25,tintColor:COLORS.white,...iconStyle}}/>
