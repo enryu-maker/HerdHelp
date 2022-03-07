@@ -59,24 +59,27 @@ export default function Drawer({setShow, show, navigation}) {
               }}
             />
           </TouchableOpacity> */}
-            <TouchableOpacity style={{
-                    marginBottom:10,
-                marginTop:Platform.OS=="android"?0:45, 
-            }}
-            onPress={()=>
-              {navigation.navigate("MyAccount"),
-              setShow(false)}
-            }
-            >
-                <Image source={{uri:"https://picsum.photos/"+global.id}} 
+          <Image source={{uri:"https://picsum.photos/"+global.id}} 
                 resizeMode="cover"
                 style={{
+                marginTop:Platform.OS=="android"? 0:45, 
+
                     width:75,
                     height:75,
-                    margin:10,
+                    // margin:10,
                     alignSelf:"center",
                     borderRadius:75/2
                 }}/>
+            <TouchableOpacity style={{
+                    marginBottom:10,
+                // marginTop:Platform.OS=="android"?0:45, 
+            }}
+            onPress={()=>
+              {setShow(false),navigation.navigate("MyAccount")
+              }
+            }
+            >
+                
                 <Text style={{...FONTS.h3,color:COLORS.Primary,alignSelf:"center"}}>
                   Edit
                   </Text>

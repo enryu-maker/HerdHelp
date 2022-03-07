@@ -18,7 +18,7 @@ export default function DrawerCard({img,name,imgstyle,namestyle,onPress,contstyl
             borderRadius:10,
             margin:5,
             alignContent:"center",
-            height: Platform.OS="android"?45:45,
+            height: Platform.OS="android"?45:50,
             ...contstyle
         }}>
             <Image source={img} style={{
