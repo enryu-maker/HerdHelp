@@ -37,10 +37,10 @@ export default function Drawer({setShow, show, navigation}) {
         >
         <View
           style={{
-            width: '75%',
+            width: '85%',
             backgroundColor: COLORS.white,
-            borderBottomEndRadius: SIZES.radius + 10,
-            borderTopRightRadius: SIZES.radius + 10,
+            borderBottomEndRadius: SIZES.radius,
+            borderTopRightRadius: SIZES.radius,
           }}>
           {/* <TouchableOpacity
             onPress={() => {
@@ -144,15 +144,15 @@ export default function Drawer({setShow, show, navigation}) {
             
           }}
         >
-            <Image source={images.HH} style={{
+            {/* <Image source={images.HH} style={{
                 alignSelf:"center",
                 justifyContent:"center",
                 width:50,
                 height:50,
                 tintColor:COLORS.white
                 // backgroundColor:COLORS.Primary
-            }}/>
-            <Text style={{
+            }}/> */}
+            {/* <Text style={{
                 alignSelf:"center",
                 justifyContent:"center",
                 fontSize:35,
@@ -166,7 +166,7 @@ export default function Drawer({setShow, show, navigation}) {
                 E {"\n"}
                 L {"\n"}
                 P{"\n"}
-            </Text>
+            </Text> */}
             
         </View>
       </View>

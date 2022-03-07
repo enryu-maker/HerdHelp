@@ -69,7 +69,7 @@ const Addanimals = ({navigation,route}) => {
     setBought(value);
   };
   const clear=()=>{
-    setSpcies([])
+    // setSpcies([])
     setWeight("")
     setTag("")
     setRegistration("")
@@ -475,8 +475,8 @@ const Addanimals = ({navigation,route}) => {
           avatarSize={28}
           value={bred}
           onChange={onChangeB}
-          // animationIn="bounceIn"
-          // animationOut="bounceOut"
+          animationIn="zoomIn"
+          animationOut="zoomOut"
           // mode="outlined"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
@@ -531,6 +531,8 @@ const Addanimals = ({navigation,route}) => {
           enableAvatar
           // required
           disableSelectionTick
+          animationIn="zoomIn"
+          animationOut="zoomOut"
           primaryColor={COLORS.Primary}
           avatarSize={28}
           value={vaccinated}
@@ -626,7 +628,7 @@ const Addanimals = ({navigation,route}) => {
         onPress={() => {
           // alert(` ${id}${valueMS}${tag}`)
           postAnimal();
-          clear();
+          // clear();
         }}
         icon={images.add}
         buttonContainerStyle={{

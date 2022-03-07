@@ -2,6 +2,7 @@ import { View, Text,Image,TouchableOpacity } from 'react-native'
 import React from 'react'
 import { images,COLORS } from '../../Components/Constants';
 import Header from '../../Components/Header';
+import ReportB from './ReportB';
 export default function Report({navigation}) {
   function renderheader() {
     return (
@@ -29,9 +30,18 @@ export default function Report({navigation}) {
       />
     );
   }
+  function renderButtons(){
+    return(
+      <ReportB
+      img={images.weight}
+      reportText={"Weight History"}
+      />
+    )
+  }
   return (
     <View style={{flex:1}}>
       {renderheader()}
+      {renderButtons()}
     </View>
   )
 }
