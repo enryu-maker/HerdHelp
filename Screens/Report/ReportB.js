@@ -28,15 +28,10 @@ const  ReportB=({
               flexDirection:'column',
               justifyContent:"space-evenly"
           }}>
-              <Text style={[FONTS.h4,{letterSpacing:3}]}>
-                  {/* {Tagnumber} */}
-              </Text>
-              <Text style={[FONTS.h2,{letterSpacing:1,fontWeight:'900'}]}>
+              <Text style={[FONTS.h2,{letterSpacing:1,fontWeight:'600'}]}>
                   {reportText}
               </Text>
-              <Text style={[FONTS.h4,{letterSpacing:3}]}>
-                  {/* {Weight} lbs */}
-              </Text>
+              
           </View>
         </TouchableOpacity>
     

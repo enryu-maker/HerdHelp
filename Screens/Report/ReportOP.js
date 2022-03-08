@@ -17,7 +17,7 @@ export default function ReportOP({navigation,route}) {
   const [api,setApi] = React.useState("")
 async function getData(api){
     let {data} =  await axiosIns.get(api)
-    console.log(data)
+    // console.log(data)
     return data
  }
 //  console.log(api)
