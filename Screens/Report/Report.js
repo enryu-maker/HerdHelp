@@ -14,6 +14,7 @@ export default function Report({navigation}) {
   React.useEffect(() => {
     getReports().then(data => {
       setReport(data);
+      // console.log(data)
     });
   }, []);
   function renderheader() {
@@ -57,7 +58,8 @@ export default function Report({navigation}) {
           onPress={()=>{
             navigation.navigate("ReportOP",{
               label:listItem.name,
-              api:listItem.api.toString()
+              api:listItem.api.toString(),
+              cond:false
             })
           }}
           />

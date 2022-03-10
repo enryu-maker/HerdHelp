@@ -10,7 +10,7 @@ const Loader = (props) => {
       animationType={"fade"}
       visible={loading}
       onRequestClose={() => {
-        console.log('close modal');
+        // console.log('close modal');
       }}>
       <View style={styles.modalBackground}>
         <View style={[styles.activityIndicatorWrapper,{...boxstyle}]}>

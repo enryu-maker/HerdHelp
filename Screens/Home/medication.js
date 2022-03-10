@@ -10,6 +10,7 @@ import axiosIns from '../../helpers/helpers';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
+import CustomAlert from '../../Components/CustomAlert';
 
 export const Medication = ({navigation, route}) => {
   const [tag, setTag] = React.useState('');
@@ -34,21 +35,19 @@ export const Medication = ({navigation, route}) => {
     setSpcies(value);
   };
   const clear = () => {
-    // setAnimals()
-    setMed();
-    setWithdraw();
-    setDis();
-    setTag();
-    setDos();
+    setMed("");
+    setWithdraw("");
+    setDis("");
+    setTag("");
+    setDos("");
   };
-
   function addMedical() {
-    setLoading(true);
+    setLoading(true),
     axiosIns
       .post(
         'medication/',
         {
-          tag_number: `${id}${species}${tag}`,
+          tag_number: `${global.id}${species}${tag}`,
           medication_name: med,
           medication_date: treatt,
           dosage: dos,
@@ -63,37 +62,31 @@ export const Medication = ({navigation, route}) => {
         },
       )
       .then(response => {
-        if (response.status == 201) {
-          setLoading(false);
-          setValidation(true);
-          setShow(true);
-          setDataText('Medication added');
-          setInterval(() => {
-            setShow(false);
-          }, 2000);
-          clear();
+        if (response.status == 200) {
+          setLoading(false),
+          setValidation(true),
+          setShow(true),
+          setDataText('Medication added'),
+          clear()
         } else {
-          setLoading(false);
-          setValidation(false);
-          setShow(true);
-          setDataText('Animal Not Found');
-          setErr(`Animal Not Found`);
+          setLoading(false),
+          setValidation(false),
+          setShow(true),
+          setDataText('Not Found'),
+          setErr(`Animal Not Found`)
         }
       })
       .catch(err => {
-        setErr('Something went wrong'), setLoading(false);
+        setErr('Something went wrong'), 
+        setLoading(false);
         setShow(true);
-        setDataText('Animal Not Found');
-        setErr(`Animal Not Found`);
+        setDataText('Invalid Input');
+        setErr(`Invalid Input`);
       });
   }
   React.useEffect(() => {
-    // let {sep}=route.params
-    // let {id}=route.params
     setId(global.id);
     setAnimals(global.species);
-
-    // console.log(animals)
   }, []);
   function renderheader() {
     return (
@@ -334,11 +327,12 @@ export const Medication = ({navigation, route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-      {show && (
-      <LoaderOp showing={show} validation={validation} dataText={dataText} />
-      )}
-      <Loader loading={loading} />
       {renderheader()}
+      {/* <Loader loading={loading}/> */}
+      {
+        show&&
+      <CustomAlert show={show} setShow={setShow} validation={validation} label={dataText}/>
+      }
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"

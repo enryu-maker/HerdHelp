@@ -4,13 +4,14 @@ import { COLORS, FONTS, images, SIZES } from './Constants';
 const Card=({
     Tagnumber,
     Name,
-    // Species,
+    cond,
     Gender,
     Weight,
     image,
     onPress,
     navigation
 })=>{
+    // console.log(image)
   return (
     <TouchableOpacity style={{backgroundColor:COLORS.lightGray2,
     height:120,
@@ -22,10 +23,13 @@ const Card=({
     alignSelf:'center'}}
     onPress={onPress}>
       <View style={{justifyContent:'center',margin:SIZES.padding}}>
-          {/* <Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + image}} */}
-          <Image source={{uri: image}}
+          {
 
-          style={{height:50,width:50,}}/>
+              cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + image}} style={{height:50,width:50,}}/>):(<Image source={{uri: image}} style={{height:50,width:50,}}/>)
+          }
+          
+
+          
       </View>
       <View style={{
           flexDirection:'column',

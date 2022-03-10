@@ -17,9 +17,7 @@ export const Home = ({navigation}) => {
   const [loading, setLoading] = React.useState(true);
   const [available, setAvailable] = React.useState([]);
   async function fetchanimal() {
-    // setLoading(true);
     let {data} = await axiosIns.get('animals/');
-    // console.log(data[0].data)
     return data;
   }
   React.useEffect(() => {
@@ -58,14 +56,10 @@ export const Home = ({navigation}) => {
       />
     );
   }
-  // console.log(available)
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-      {/* <Loader loading={loading}/> */}
       {renderHeader()}
-
       <View
-        // showsVerticalScrollIndicator={false}
         style={{
           marginVertical: 0,
           width: '88%',
@@ -91,6 +85,7 @@ export const Home = ({navigation}) => {
                   navigation.navigate('Add', {
                     label: `My ${a.label}'s`,
                     data: a.data,
+                    cond:true
                   });
                 }}
               />

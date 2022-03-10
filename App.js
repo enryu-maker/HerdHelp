@@ -22,14 +22,14 @@ export default function App() {
         const {data} = await axiosIns.get('profile/');
         return data;
       } catch (e) {
-       alert("Something Went Wrong")
+      //  console.l("Something Went Wrong")
       }
     };
   React.useEffect(() => {
       fetchprofile().then(data => {
         global.User=data;
       });
-    }, []);
+    });
   React.useEffect(() => {
     setTimeout(()=>{
       SplashScreen.hide();

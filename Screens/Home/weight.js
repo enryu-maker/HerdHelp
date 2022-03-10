@@ -9,6 +9,8 @@ import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
+import CustomAlert from '../../Components/CustomAlert';
+import ActivityIndicatorExample from '../../Components/Loading';
 export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -44,27 +46,32 @@ export const Weight =({ navigation,route})=> {
             'Content-Type': 'application/json',
           },
         }).then((Response)=>{
-          if (Response.status==200){
+          if (Response.status==201){
+            console.log(Response)
             setLoading(false)
             setValidation(true);
             setShow(true)
             setDataText("Weight Updated")
-            setInterval(()=>{
-              setShow(false)
-              },4000)
             clear()
           }
           else{
           setLoading(false)
-          setValidation(true);
-            setShow(true)
+          console.log(Response)
+          setValidation(false);
+          setShow(true)
           setErr(`Animal with tag ${tag} not found`)
+          setDataText("Animal Not Found")
+
           }
         })
       }catch(err){
         setLoading(false)
-        setValidation(true);
+        setValidation(false);
+        setErr(`Animal with tag ${tag} not found`)
+
             setShow(true)
+            setDataText("Not Found")
+        
         // if(err){
         //   setErr(`Animal with tag ${tag} not found`)
         // }
@@ -75,6 +82,8 @@ export const Weight =({ navigation,route})=> {
       setValidation(true);
             setShow(true)
       setLoading(false)
+      setDataText("Not Found")
+
     }
   }
   function renderHeader() {
@@ -201,13 +210,11 @@ export const Weight =({ navigation,route})=> {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-        
         {show &&
-            <LoaderOp showing={show} validation={validation} dataText={dataText} />
-            } 
-        <Loader loading={loading}/>
+        // &&
+            <CustomAlert show={show} setShow={setShow} validation={validation} label={dataText} />
+        } 
       {renderHeader()}
-
       <KeyboardAwareScrollView
         keyboardDismissMode="on-drag"
         contentContainerStyle={{

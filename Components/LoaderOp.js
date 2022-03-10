@@ -19,7 +19,7 @@ function LoaderOp ({
     dataText,
     onClose
 }) {
-    console.log(showing)
+    // console.log(showing)
     // var show = showing
     const [show, setShow] = React.useState(showing);
     // React.useEffect(()=>{

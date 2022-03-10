@@ -17,6 +17,7 @@ import { Dropdown } from 'sharingan-rn-modal-dropdown'
 import FormInput from '../../Components/FormInput';
 import LoaderOp from '../../Components/LoaderOp';
 import Loader from '../../Components/Loader';
+import CustomAlert from '../../Components/CustomAlert';
 export const Finance = ({ navigation })=>{
     const [cat,setCat] = React.useState(1)
     const [Qty,setQty] = React.useState("")
@@ -49,9 +50,14 @@ export const Finance = ({ navigation })=>{
       setShow(true)
       setDataText("Finance added")
       setValidation(true)
-      setInterval(() => {
-        setShow(false);
-      }, 2000);}
+    
+    }
+    else{
+      setLoading(false)
+      setShow(true)
+      setDataText("Not added")
+      setValidation(false)
+    }
     }).catch(err => console.log("api Erorr: ", err.response),
     setValidation(false),
     setShow(true),
@@ -178,8 +184,11 @@ export const Finance = ({ navigation })=>{
       }
   return (
     <View style={{flex:1}}>
-      <Loader loading={loading}/>
-      <LoaderOp showing={false} validation={validation} dataText={dataText}/>
+      {/* <Loader loading={loading}/> */}
+      {
+        show&&
+      <CustomAlert show={show} validation={validation} label={dataText} setShow={setShow}/>
+      }
       {renderHeader()}
       <KeyboardAwareScrollView
         keyboardDismissMode="on-drag"

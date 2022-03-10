@@ -12,12 +12,16 @@ import {
 export default function Add({navigation,route}) {
   const [label,setLabel]=React.useState("")
   const [loading,setLoading]=React.useState(false)
+  const [cond,setCond]=React.useState(false)
+
   const [data,setData]=React.useState([])
 
   React.useEffect(()=>{
     
     let {label} = route.params
     let {data} =route.params
+    let {cond} =route.params
+    setCond(cond)
     if (!loading){
       setLabel(label)
       setData(data)
@@ -64,6 +68,7 @@ export default function Add({navigation,route}) {
           {data.map((listItem, index) => (
             <Card
               key={index}
+              cond={cond}
               Name={listItem.name}
               Tagnumber={listItem.support_tag}
               Gender={listItem.gender}
@@ -73,6 +78,7 @@ export default function Add({navigation,route}) {
               onPress={() => {
                 navigation.navigate('Info', {
                   value: listItem,
+                  cond:cond
                 });
               }}
             />

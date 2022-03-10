@@ -23,6 +23,7 @@ const Login = ({navigation}) => {
   const [showPass, setShowPass] = React.useState(false);
   const [saveMe, setSaveMe] = React.useState(false);
   const [EmailError, setEmailError] = React.useState('');
+  const [access, setAccess] = React.useState('');
   const [loading,setLoading] = React.useState(false)
   function isEnableSignIn() {
     return email != '' && password != '';
@@ -33,7 +34,22 @@ const Login = ({navigation}) => {
       await AsyncStorage.setItem('refresh', refresh);
       await AsyncStorage.setItem('id', id);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
+    }
+  };
+  const fetchprofile = async (token) => {
+    try {
+      const {data} = await axios.get('profile/',{
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      global.User=data;
+      setLoading(false)
+      return data;
+    } catch (e) {
+    //  console.log("Something Went Wrong")
+     setLoading(false)
     }
   };
   function login() {
@@ -51,29 +67,32 @@ const Login = ({navigation}) => {
         )
         .then(response => {
           if (response.status === 200) {
+
             storeData(
               response.data.access,
               response.data.refresh,
               response.data.userid.toString(),
             ).then(() => {
-              navigation.replace('Draw'),
-              setLoading(false)
+              fetchprofile(response.data.access).then(()=>{
+                navigation.replace('Draw')
+              })
+              // setLoading(false)
             });
             
           } else {
             setEmailError('User Not Registered');
-            setLoading(false)
+            // setLoading(false)
           }
         })
         .catch(error => {
           if (error.response) {
             setEmailError('Something Went Wrong');
-            setLoading(false)
+            // setLoading(false)
           }
         });
     } else {
       setEmailError('Invalid Input');
-      setLoading(false)
+      // setLoading(false)
     }
   }
   return (

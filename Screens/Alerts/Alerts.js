@@ -9,7 +9,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FormTimeInput from '../../Components/FormTimeInput';
 import axiosIns from '../../helpers/helpers';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
-import { set } from 'react-native-reanimated';
+import CustomAlert from '../../Components/CustomAlert';
 export default function Alerts({navigation,route}) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
@@ -21,7 +21,9 @@ export default function Alerts({navigation,route}) {
   const [err, setErr] = React.useState("");
   const [species, setSpcies] = React.useState([]);
   const [animals, setAnimals] = React.useState("");
-  
+  const [show, setShow] = React.useState(false);
+  const [validation, setValidation] = React.useState(false);
+  const [dataText, setDataText] = React.useState('');
   const [id,setId] = React.useState(null)
   const onChangeSpec = value => {
     setAnimals(value);
@@ -46,9 +48,15 @@ export default function Alerts({navigation,route}) {
             "Content-Type": "application/json",
         }
     }).then(response => {
-      clear()
-        alert("Alerts added sucessfully")
-    }).catch(err => console.log("api Erorr: ", err.response))
+      clear();
+      setShow(true)
+      setValidation(true)
+      setDataText("Alerts added")
+    }).catch(err => 
+      setShow(true),
+      setValidation(false),
+      setDataText("not added")
+      )
     }
     React.useEffect(()=>{
         setId(global.id)
@@ -225,6 +233,10 @@ export default function Alerts({navigation,route}) {
   return (
     <View style={{flex: 1}}>
       {renderHeader()}
+      {
+        show&&
+      <CustomAlert show={show} validation={validation} label={dataText} setShow={setShow}/>
+      }
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"

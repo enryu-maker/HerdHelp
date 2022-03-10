@@ -7,6 +7,7 @@ import axiosIns from '../helpers/helpers';
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
   const [med, setMed] = React.useState([]);
+  const [cond,setCond]= React.useState(false)
 
    async function getMedication() {
     let {data} = await axiosIns.get(`getmedication/${animal?.tag_number}`);
@@ -15,6 +16,8 @@ export const Info = ({navigation, route}) => {
   }
   React.useEffect(() => {
     let {value} = route.params;
+    let {cond} = route.params;
+    setCond(cond)
     setAnimal(value);
     getMedication()
   }, [med]);
@@ -56,11 +59,10 @@ export const Info = ({navigation, route}) => {
             alignSelf: 'center',
             marginLeft: 50,
           }}>
-          <Image
-            // source={{uri:}}
-            source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + animal?.image}}
-            style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}
-          />
+            {
+
+cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + animal?.image}} style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}/>):(<Image source={{uri: animal?.image}} style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}/>)
+}
           <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>
             ID: {animal?.tag_number}
           </Text>

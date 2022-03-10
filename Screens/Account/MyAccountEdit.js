@@ -11,6 +11,7 @@ import {
 } from 'react-native-image-picker';
 import {COLORS, SIZES, images} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
+import CustomAlert from '../../Components/CustomAlert';
 
 const MyAccountEdit = ({navigation,route}) => {
   const [pic, setPic] = React.useState('');
@@ -20,10 +21,13 @@ const MyAccountEdit = ({navigation,route}) => {
   const [idCard, setIdCard] = useState(route.params.user.farm_name);
   const [addr, setAddr] = useState(route.params.user.address);
   const [user,setUser]=React.useState([])
+  const [show, setShow] = React.useState(false);
+  const [validation, setValidation] = React.useState(false);
+  const [dataText, setDataText] = React.useState('');
 
   const updateprofile = async () => {
       try {
-        await axiosIns.patch(`updateprofile/2`,
+        await axiosIns.patch(`updateprofile/${global.id}`,
         {
           "fullname": fullName,
           "phone": phoneNo,
@@ -34,61 +38,39 @@ const MyAccountEdit = ({navigation,route}) => {
               'Content-Type': 'application/json',
             },
           }
-        ).then(()=>{alert("Details updated")})
+        ).then(()=>{
+          setDataText("Details updated")
+          setShow(true)
+          setValidation(true)
+        })
       } catch (e) {
-        console.log('error', e.response.data);
+        setDataText("Not updated")
+        setShow(true)
+        setValidation(false)
       }
     };
   React.useEffect(() => {
     let { user } = route.params
+    // console.log(user)
     setUser(user)
   },[]);
-  function openCamara() {
-    let options = {
-      storageOptions: {
-        path: 'images',
-        mediaType: 'photo',
-      },
-      includeBase64: true,
-    };
-    launchImageLibrary(options, response => {
-      if (response.assets) {
-        imageAssetsArray = response.assets[0].uri;
-        setPic(imageAssetsArray);
-        setPicdata(response.assets[0].base64);
-      }
-    });
-  }
-  function renderFileUri() {
-    if (pic!="") {
-      return (
-        <Image
-        source={{uri:"https://joeschmoe.io/api/v1/" + user.fullname}}
+  // function openCamara() {
+  //   let options = {
+  //     storageOptions: {
+  //       path: 'images',
+  //       mediaType: 'photo',
+  //     },
+  //     includeBase64: true,
+  //   };
+  //   launchImageLibrary(options, response => {
+  //     if (response.assets) {
+  //       imageAssetsArray = response.assets[0].uri;
+  //       setPic(imageAssetsArray);
+  //       setPicdata(response.assets[0].base64);
+  //     }
+  //   });
+  // }
 
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 100 / 2,
-            alignSelf: 'center',
-          }}
-        />
-      );
-    } else {
-      return (
-        <Image
-        source={{uri:"https://joeschmoe.io/api/v1/" + user.fullname}}
-
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 100 / 2,
-            alignSelf: 'center',
-            // tintColor: COLORS.Primary,
-          }}
-        />
-      );
-    }
-  }
   function renderHeader() {
     return (
       <Header
@@ -143,6 +125,7 @@ const MyAccountEdit = ({navigation,route}) => {
         {/* Name */}
         <FormInput
           label="Full Name"
+          placeholder={user.fullname}
           value={fullName}
           onChange={value => {
             setFullName(value);
@@ -155,6 +138,7 @@ const MyAccountEdit = ({navigation,route}) => {
         {/* Phone Number */}
         <FormInput
           label="Phone Number"
+          placeholder={user.phone}
           value={phoneNo}
           onChange={value => {
             setPhoneNo(value);
@@ -170,6 +154,8 @@ const MyAccountEdit = ({navigation,route}) => {
         {/* ID Card */}
         <FormInput
           label="Farm Name"
+          placeholder={user.farm_name}
+
           value={idCard}
           onChange={value => {
             setIdCard(value);
@@ -184,6 +170,8 @@ const MyAccountEdit = ({navigation,route}) => {
         {/* Address */}
         <FormInput
           label="Address"
+          placeholder={user.address}
+
           value={addr}
           onChange={value => {
             setAddr(value);
@@ -206,6 +194,7 @@ const MyAccountEdit = ({navigation,route}) => {
         backgroundColor: COLORS.white,
       }}>
       {renderHeader()}
+      <CustomAlert show={show} setShow={setShow} validation={validation} label={dataText}/>
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"

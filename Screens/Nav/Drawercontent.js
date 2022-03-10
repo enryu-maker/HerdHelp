@@ -8,20 +8,6 @@ import LineDivider from '../../Components/LineDivider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axiosIns from '../../helpers/helpers';
 export default function Drawercontent(props) {
-  // const [user,setUser]=React.useState([])
-  // const fetchprofile = async () => {
-  //     try {
-  //       const {data} = await axiosIns.get('profile/');
-  //       return data;
-  //     } catch (e) {
-  //      alert("Something Went Wrong")
-  //     }
-  //   };
-  //   React.useEffect(() => {
-  //     fetchprofile().then(data => {
-  //       setUser(data[0]);
-  //     });
-  //   }, [user]);
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView

@@ -612,9 +612,8 @@ const Addanimals = ({navigation,route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-        {loading && 
+        
         <Loader loading={loading}/>
-        }
         {show &&
         <CustomAlert show={show} validation={validation} setShow={setShow} label={dataText}/>
 }

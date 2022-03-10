@@ -14,10 +14,9 @@ export default function ReportOP({navigation,route}) {
   const [label,setLabel]=React.useState("")
   const [loading,setLoading]=React.useState(false)
   const [Data,setData]=React.useState([])
-  const [api,setApi] = React.useState("")
+  const [con,setCon] = React.useState(false)
 async function getData(api){
     let {data} =  await axiosIns.get(api)
-    // console.log(data)
     return data
  }
 //  console.log(api)
@@ -25,6 +24,8 @@ async function getData(api){
     
     let {label} = route.params
     let {api} =route.params
+    let {cond} =route.params
+    setCon(cond)
       setLabel(label)
     getData(api).then(data=>{
         setData(data)
@@ -72,6 +73,7 @@ async function getData(api){
           {Data.map((listItem, index) => (
             <Card
               key={index}
+              cond={con}
               Name={listItem.name}
               Tagnumber={listItem.support_tag}
               Gender={listItem.gender}
@@ -81,6 +83,7 @@ async function getData(api){
               onPress={() => {
                 navigation.navigate('Info', {
                   value: listItem,
+                  cond:con
                 });
               }}
             />

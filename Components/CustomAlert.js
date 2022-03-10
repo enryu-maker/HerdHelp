@@ -8,6 +8,9 @@ const CustomAlert=({
     label,
     validation
 })=>{
+  React.useEffect(()=>{
+    // setShow(setShow)
+  },[show])
   return (
     <Modal
     transparent={true}

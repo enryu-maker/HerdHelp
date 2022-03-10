@@ -65,16 +65,21 @@ function renderFileUri() {
           marginLeft:90
         }}
         rightComponent={
+          <TouchableOpacity
+          onPress={()=>navigation.navigate("MyAccountEdit",{
+            user:user
+          })}
+          >
           <Text
           style={{
             padding:SIZES.padding,
             color:COLORS.Primary,
             ...FONTS.h2
           }}
-          onPress={()=>navigation.navigate("MyAccountEdit",{
-            user:user
-          })}
+          
           >EDIT</Text>
+          </TouchableOpacity>
+          
         }
       />
     );
