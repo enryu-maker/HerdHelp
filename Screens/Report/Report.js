@@ -1,9 +1,10 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {images, COLORS} from '../../Components/Constants';
+import {images, COLORS,SIZES} from '../../Components/Constants';
 import Header from '../../Components/Header';
 import ReportB from './ReportB';
 import axiosIns from '../../helpers/helpers';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function Report({navigation}) {
   const [report, setReport] = React.useState([]);
@@ -14,7 +15,6 @@ export default function Report({navigation}) {
   React.useEffect(() => {
     getReports().then(data => {
       setReport(data);
-      // console.log(data)
     });
   }, []);
   function renderheader() {
@@ -71,7 +71,16 @@ export default function Report({navigation}) {
   return (
     <View style={{flex: 1}}>
       {renderheader()}
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardDismissMode="interactive"
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{
+          marginTop: SIZES.radius,
+          paddingBottom: 40,
+        }}>
       {renderButtons()}
+      </KeyboardAwareScrollView>
     </View>
   );
 }
