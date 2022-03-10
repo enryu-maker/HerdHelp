@@ -1,6 +1,6 @@
 import { View, Text,Modal,Image,Platform } from 'react-native'
 import React from 'react'
-import { COLORS, FONTS, images } from './Constants'
+import { COLORS, FONTS, images, SIZES } from './Constants'
 
 const CustomAlert=({
     show,
@@ -37,7 +37,7 @@ const CustomAlert=({
         backgroundColor:COLORS.white,
          justifyContent:"space-evenly",
          alignSelf:"center",
-         borderRadius:20,
+         borderRadius:SIZES.radius,
          flexDirection:"column",
         }}
         >

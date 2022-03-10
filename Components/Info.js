@@ -4,22 +4,24 @@ import Header from './Header';
 import {COLORS, SIZES, images, FONTS} from './Constants';
 import InfoItem from './InfoItem';
 import axiosIns from '../helpers/helpers';
+import Status from './Status';
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
   const [med, setMed] = React.useState([]);
-  const [cond,setCond]= React.useState(false)
+  const [cond, setCond] = React.useState(false);
+  const [show, setShow] = React.useState(false);
 
-   async function getMedication() {
+  async function getMedication() {
     let {data} = await axiosIns.get(`getmedication/${animal?.tag_number}`);
-    setMed(data)
+    setMed(data);
     return data;
   }
   React.useEffect(() => {
     let {value} = route.params;
     let {cond} = route.params;
-    setCond(cond)
+    setCond(cond);
     setAnimal(value);
-    getMedication()
+    getMedication();
   }, [med]);
 
   function renderSectionOne() {
@@ -33,6 +35,16 @@ export const Info = ({navigation, route}) => {
         }}>
         <InfoItem label="Name" value={animal?.name} />
         <InfoItem label="Gender" value={animal?.gender} />
+        {
+          animal?.gender == "Female"?(
+            <InfoItem
+          label="Bred"
+          value={animal?.bred == false ? 'No' : 'Yes'}
+        />
+          ):(
+            <View></View>
+          )
+        }
         <InfoItem label="Tag Number" value={animal?.support_tag} />
         <InfoItem
           label="Weight"
@@ -59,10 +71,21 @@ export const Info = ({navigation, route}) => {
             alignSelf: 'center',
             marginLeft: 50,
           }}>
-            {
-
-cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + animal?.image}} style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}/>):(<Image source={{uri: animal?.image}} style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}/>)
-}
+          {cond ? (
+            <Image
+              source={{
+                uri:
+                  'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' +
+                  animal?.image,
+              }}
+              style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}
+            />
+          ) : (
+            <Image
+              source={{uri: animal?.image}}
+              style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}
+            />
+          )}
           <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>
             ID: {animal?.tag_number}
           </Text>
@@ -78,10 +101,10 @@ cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.a
             justifyContent: 'space-evenly',
           }}
           onPress={() => {
-            console.log(med)
-            navigation.navigate("MedCard",{
-              medication:med
-            })
+            console.log(med);
+            navigation.navigate('MedCard', {
+              medication: med,
+            });
           }}>
           <Image
             source={images.med}
@@ -151,7 +174,6 @@ cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.a
             <InfoItem
               label="Mother Tag"
               value={animal?.mother_tagnumber}
-              // withDivider={false}
             />
             <InfoItem
               label="Father Tag"
@@ -166,6 +188,7 @@ cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.a
             withDivider={false}
           />
         )}
+        
       </View>
     );
   }
@@ -178,12 +201,7 @@ cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.a
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        <InfoItem label="Breed" value={animal?.breed} />
-        <InfoItem
-          label="Bred"
-          value={animal?.bred == false ? 'No' : 'Yes'}
-          withDivider={false}
-        />
+        <InfoItem label="Breed" value={animal?.breed} withDivider={false}/>
       </View>
     );
   }
@@ -197,11 +215,10 @@ cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.a
           backgroundColor: COLORS.lightGray2,
           paddingBottom: SIZES.padding,
         }}>
-        <InfoItem label="Breed" value={animal?.breed} />
+        <InfoItem label="Breed" value={animal?.breed} withDivider={false}/>
         <InfoItem
           label="Bred"
           value={animal?.bred == false ? 'No' : 'Yes'}
-          withDivider={false}
         />
       </View>
     );
@@ -232,10 +249,27 @@ cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.a
           </View>
         }
         title={'More Info'}
-        titleStyle={
-          {
-            // marginLeft: 55,
-          }
+        titleStyle={{
+          marginLeft:cond?100:0
+        }}
+        rightComponent={
+          cond?
+          <TouchableOpacity
+          onPress={()=>{
+            setShow(true)
+          }}
+          >
+          <Text
+          style={{
+            marginTop:5,
+            padding:SIZES.padding,
+            color:COLORS.Primary,
+            ...FONTS.h2
+          }}
+          
+          >EDIT</Text>
+          </TouchableOpacity>:<View></View>
+          
         }
       />
     );
@@ -247,7 +281,10 @@ cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.a
         backgroundColor: COLORS.white,
       }}>
       {renderHeader()}
-
+      {
+        show &&
+        <Status show={show} setShow={setShow}/>
+      }
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
