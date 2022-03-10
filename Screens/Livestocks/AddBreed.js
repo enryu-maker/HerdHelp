@@ -7,6 +7,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
+
 import React, {useState, useRef} from 'react';
 import Header from '../../Components/Header';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -27,11 +28,12 @@ import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
 import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
+import CustomAlert from '../../Components/CustomAlert';
 
 const Addanimals = ({navigation,route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
-  const [valueBS, setValueBS] = useState('');
+  const [valueBS, setValueBS] = useState("");
   const [age, setAge] = useState(0);
   const [Breed, setBreed] = useState('');
   const [tag, setTag] = useState('');
@@ -114,13 +116,13 @@ const Addanimals = ({navigation,route}) => {
           setValidation(true);
             setShow(true)
             setDataText('Animal added');
-            setInterval(()=>{
-              setShow(false)
-              },3000)
+            // setInterval(()=>{
+            //   setShow(false)
+            //   },3000)
             
         }
       })
-      .catch(err => console.log('api Erorr: ', err.response),
+      .catch(err => console.log('api Erorr: ', err),
       setLoading(false),
       setValidation(false),
       setShow(false)
@@ -457,7 +459,8 @@ const Addanimals = ({navigation,route}) => {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
-        <Dropdown
+        {
+          valueBS!="Male"?<Dropdown
           label="Bred"
           borderRadius={SIZES.radius}
           data={Bred}
@@ -489,7 +492,9 @@ const Addanimals = ({navigation,route}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-        />
+        />:<View></View>
+        }
+        
         <FormInput
           prependComponent={
             <View
@@ -607,15 +612,19 @@ const Addanimals = ({navigation,route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
+        {loading && 
+        <Loader loading={loading}/>
+        }
         {show &&
-            <LoaderOp showing={show} validation={validation} dataText={dataText} />
-            } 
-      <Loader loading={loading}/>
+        <CustomAlert show={show} validation={validation} setShow={setShow} label={dataText}/>
+}
+      
       {renderHeader()}
 
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="interactive"
+        keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
           marginTop: SIZES.radius,
           paddingHorizontal: SIZES.padding,

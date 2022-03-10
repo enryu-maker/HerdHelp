@@ -11,21 +11,20 @@ import {
 } from 'react-native';
 import React from 'react';
 import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
-import {Caption, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
 import DrawerCard from './DrawerCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axiosIns from '../../helpers/helpers';
-import react from 'react';
 export default function Drawer({setShow, show, navigation}) {
   return (
     <Modal
       transparent={true}
       animationType={'fade'}
       visible={show}
-      onRequestClose={() => {
-        setShow(false);
-      }}>
+      // onRequestClose={() => {
+      //   setShow(false);
+      // }}
+
+      >
       <View
         style={{
           height: '100%',
@@ -42,7 +41,7 @@ export default function Drawer({setShow, show, navigation}) {
             borderBottomEndRadius: SIZES.radius,
             borderTopRightRadius: SIZES.radius,
           }}>
-          {/* <TouchableOpacity
+          <TouchableOpacity
             onPress={() => {
               setShow(false);
             }}
@@ -58,7 +57,7 @@ export default function Drawer({setShow, show, navigation}) {
                 tintColor: COLORS.red,
               }}
             />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
           <Image source={{uri:"https://picsum.photos/"+global.id}} 
                 resizeMode="cover"
                 style={{
@@ -75,13 +74,14 @@ export default function Drawer({setShow, show, navigation}) {
                 // marginTop:Platform.OS=="android"?0:45, 
             }}
             onPress={()=>
-              {setShow(false),navigation.navigate("MyAccount")
+              {setShow(false),
+              navigation.navigate("MyAccount")
               }
             }
             >
                 
                 <Text style={{...FONTS.h3,color:COLORS.Primary,alignSelf:"center"}}>
-                  Edit
+                  EDIT
                   </Text>
                 </TouchableOpacity>
           <LineDivider lineStyle={{
@@ -92,7 +92,7 @@ export default function Drawer({setShow, show, navigation}) {
           }}/>
           <DrawerCard name={"Home"} img={images.home}
           onPress={() => {
-            setShow(false);
+            navigation.replace("Main")
           }}
           />
           <DrawerCard name={"Reports"} img={images.file}
@@ -137,7 +137,7 @@ export default function Drawer({setShow, show, navigation}) {
         </View>
         </View>
         <View
-        onTouchStart={()=>{setShow(false)}}
+        // onTouchStart={()=>{setShow(false)}}
           style={{
             backgroundColor:"transparent",
             width: '30%',

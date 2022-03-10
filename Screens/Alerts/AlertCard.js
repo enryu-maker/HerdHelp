@@ -39,10 +39,10 @@ const AlertCard=({
             }>{`${tag}`}</Text>
             <View style={{flexDirection:"row",justifyContent:"space-between",width:"55%"}}>
             <Text style={
-                Platform.OS=="android"?{...FONTS.h3,color:COLORS.Primary}:{...FONTS.h2,color:COLORS.Primary}
+                Platform.OS=="android"?{...FONTS.h4,color:COLORS.Primary}:{...FONTS.h2,color:COLORS.Primary}
             }>{date}</Text>
             <Text style={
-                Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h2}
+                Platform.OS=="android"?{...FONTS.h4}:{...FONTS.h2}
             }>    {time}</Text>
             </View>
             </View>

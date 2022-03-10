@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View,StatusBar ,Image} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import Login from '../Auth/Login';
 import {Signup} from "../Auth/Signup"
 import { Home } from '../Home/Home';
@@ -24,6 +23,37 @@ const Stack = createNativeStackNavigator();
 import Setting from '../Setting/Setting';
 import Report from '../Report/Report';
 import ReportOP from '../Report/ReportOP';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+import Drawercontent from './Drawercontent';
+const DrawerNav = () => {
+  return (
+    <Drawer.Navigator initialRouteName='Home'
+      screenOptions={{
+        headerShown: false, drawerActiveBackgroundColor: COLORS.Primary,
+        drawerActiveTintColor: COLORS.white,
+        drawerStyle:[{backgroundColor:COLORS.transparent},styles.drawerStyle],
+        drawerLabelStyle: [FONTS.body3,{letterSpacing:2}],
+        drawerType:"front",
+        overlayColor: COLORS.Primary,
+        backBehavior:"history",  
+        drawerStatusBarAnimation:"fade",
+      }}
+      drawerContent={props =><Drawercontent {...props}
+      drawerWidth= {SIZES.width - 120}
+      />
+    }
+    >
+      <Drawer.Screen name='Main' component={Main} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.home}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+      </Drawer.Navigator>)}
 export default class Homenav extends Component {
   render() {
     return (
@@ -32,8 +62,8 @@ export default class Homenav extends Component {
           style="auto"/>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false}}
-          initialRouteName={'Main'}>
-          <Stack.Screen name='Main' component={Main} />
+          initialRouteName={'Draw'}>
+          <Stack.Screen name='Draw' component={DrawerNav} />
           <Stack.Screen name='Home' component={Home}/>
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />

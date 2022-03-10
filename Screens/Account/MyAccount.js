@@ -50,7 +50,7 @@ function renderFileUri() {
                 marginLeft: 25,
               }}
               onPressIn={() => {
-                navigation.replace("Main");
+                navigation.replace("Draw");
               }}>
               <Image
                 source={images.back}

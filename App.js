@@ -1,11 +1,11 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { View,StatusBar, SafeAreaView} from 'react-native';
+import { View,StatusBar} from 'react-native';
 import Homenav from "./Screens/Nav/Homenav"
 import Rootnav from "./Screens/Nav/Rootnav"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen'
-// var signal= true
+import axiosIns from './helpers/helpers';
 export default function App() {
   const [Route,setRoute]=React.useState(false);
   async function retrieveData(){
@@ -17,6 +17,19 @@ export default function App() {
       }
       return data;
   };
+  const fetchprofile = async () => {
+      try {
+        const {data} = await axiosIns.get('profile/');
+        return data;
+      } catch (e) {
+       alert("Something Went Wrong")
+      }
+    };
+  React.useEffect(() => {
+      fetchprofile().then(data => {
+        global.User=data;
+      });
+    }, []);
   React.useEffect(() => {
     setTimeout(()=>{
       SplashScreen.hide();

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View,StatusBar ,Image} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import Login from '../Auth/Login';
 import {Signup} from "../Auth/Signup"
 import { Home } from '../Home/Home';
@@ -21,9 +20,39 @@ import FinanceInfo from '../Finance/FinanceInfo';
 import LoadAlert from '../Alerts/LoadAlert';
 import MedCard from '../../Components/MedCard';
 import Report from '../Report/Report';
+import ReportOP from '../Report/ReportOP';
 const Stack = createNativeStackNavigator();
 import Setting from '../Setting/Setting';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
+const Drawer = createDrawerNavigator();
+import Drawercontent from './Drawercontent';
+const DrawerNav = () => {
+  return (
+    <Drawer.Navigator initialRouteName='Home'
+      screenOptions={{
+        headerShown: false, drawerActiveBackgroundColor: COLORS.Primary,
+        drawerActiveTintColor: COLORS.white,
+        drawerStyle:[{backgroundColor:COLORS.transparent},styles.drawerStyle],
+        drawerLabelStyle: [FONTS.body3,{letterSpacing:2}],
+        drawerType:"front",
+        overlayColor: COLORS.Primary,
+        backBehavior:"history",  
+        drawerStatusBarAnimation:"fade",
+      }}
+      drawerContent={props =><Drawercontent {...props}
+      drawerWidth= {SIZES.width- 120}
+      />
+    }
+    >
+      <Drawer.Screen name='Main' component={Main} options={{
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.home}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+      </Drawer.Navigator>)}
 export default class Rootnav extends Component {
   render() {
     return (
@@ -33,7 +62,7 @@ export default class Rootnav extends Component {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false}}
           initialRouteName={'Login'}>
-          <Stack.Screen name='Main' component={Main} />
+          <Stack.Screen name='Draw' component={DrawerNav} />
           <Stack.Screen name='Home' component={Home}/>
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />
@@ -51,6 +80,7 @@ export default class Rootnav extends Component {
           <Stack.Screen name='MedCard' component={MedCard}/>
           <Stack.Screen name='Setting' component={Setting}/>
           <Stack.Screen name='Report' component={Report}/>
+          <Stack.Screen name='ReportOP' component={ReportOP}/>
 
         </Stack.Navigator>
       </NavigationContainer>

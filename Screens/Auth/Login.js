@@ -56,7 +56,7 @@ const Login = ({navigation}) => {
               response.data.refresh,
               response.data.userid.toString(),
             ).then(() => {
-              navigation.replace('Main'),
+              navigation.replace('Draw'),
               setLoading(false)
             });
             

@@ -28,7 +28,8 @@ const  ReportB=({
               flexDirection:'column',
               justifyContent:"space-evenly"
           }}>
-              <Text style={[FONTS.h2,{letterSpacing:1,fontWeight:'600'}]}>
+              <Text style={
+                 Platform.OS=="android"?[FONTS.h3,{letterSpacing:1,fontWeight:'600'}]:[FONTS.h2,{letterSpacing:1,fontWeight:'600'}]}>
                   {reportText}
               </Text>
               

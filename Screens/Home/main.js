@@ -35,6 +35,7 @@ const Main = ({navigation}) => {
   } 
   async function loadId(){
     global.id = await AsyncStorage.getItem("id")
+    // console.log(global.id)
   }
   React.useEffect(() => {
       fetchanimal();
@@ -63,7 +64,7 @@ const Main = ({navigation}) => {
               style={{
                 marginLeft: 30,
               }}
-              onPress={() => {setShow(true)}}>
+              onPress={() => {navigation.openDrawer()}}>
               <Image
                 source={images.menu}
                 style={{
@@ -75,9 +76,10 @@ const Main = ({navigation}) => {
           </View>
         }
       />
-      {
+      {/* {
+        show&&
     <Drawer setShow={setShow} show={show} navigation={navigation} user={user}/>
-      }
+      } */}
       <ScrollView showsVerticalScrollIndicator={false}>
       <View 
         style={{

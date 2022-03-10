@@ -9,7 +9,6 @@ export default function Report({navigation}) {
   const [report, setReport] = React.useState([]);
   async function getReports() {
     let {data} = await axiosIns.get('reports/');
-    // console.log(data);
     return data;
   }
   React.useEffect(() => {
@@ -33,7 +32,7 @@ export default function Report({navigation}) {
                 marginLeft: 25,
               }}
               onPress={() => {
-                navigation.replace('Main');
+                navigation.replace('Draw');
               }}>
               <Image
                 source={images.back}
@@ -50,9 +49,7 @@ export default function Report({navigation}) {
     return (
       <View
         style={{
-          flex: 1,
-          // justifyContent: 'space-evenly',
-          // flexDirection: 'row',
+          flex: 1
         }}>
         {
         report.map((listItem, index)  => (
