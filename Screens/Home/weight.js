@@ -47,7 +47,7 @@ export const Weight =({ navigation,route})=> {
           },
         }).then((Response)=>{
           if (Response.status==200){
-            console.log(Response.status)
+            // console.log(Response.status)
             setLoading(false)
             setValidation(true);
             setShow(true)
@@ -66,7 +66,7 @@ export const Weight =({ navigation,route})=> {
         })
       }catch(err){
         setLoading(false)
-        console.log(err)
+        // console.log(err)
         setValidation(false);
         setErr(`Animal with tag ${tag} not found there`)
         setShow(true)

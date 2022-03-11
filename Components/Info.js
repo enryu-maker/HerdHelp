@@ -101,7 +101,7 @@ export const Info = ({navigation, route}) => {
             justifyContent: 'space-evenly',
           }}
           onPress={() => {
-            console.log(med);
+            // console.log(med);
             navigation.navigate('MedCard', {
               medication: med,
             });
