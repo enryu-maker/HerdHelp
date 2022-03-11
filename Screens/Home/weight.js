@@ -7,10 +7,8 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import axiosIns from '../../helpers/helpers';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
-import Loader from '../../Components/Loader';
-import LoaderOp from '../../Components/LoaderOp';
 import CustomAlert from '../../Components/CustomAlert';
-import ActivityIndicatorExample from '../../Components/Loading';
+
 export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -47,7 +45,6 @@ export const Weight =({ navigation,route})=> {
           },
         }).then((Response)=>{
           if (Response.status==200){
-            // console.log(Response.status)
             setLoading(false)
             setValidation(true);
             setShow(true)
@@ -56,34 +53,26 @@ export const Weight =({ navigation,route})=> {
           }
           else{
           setLoading(false)
-          // console.log(Response)
           setValidation(false);
           setShow(true)
           setErr(`Animal with tag ${tag} not found here`)
           setDataText("Animal Not Found")
-
           }
         })
       }catch(err){
         setLoading(false)
-        // console.log(err)
         setValidation(false);
         setErr(`Animal with tag ${tag} not found there`)
         setShow(true)
         setDataText("Not Found")
-        
-        // if(err){
-        //   setErr(`Animal with tag ${tag} not found`)
-        // }
       }
     }
     else{
+      setLoading(false)
       setErr("Please Enter valid Data")
       setValidation(true);
-            setShow(true)
-      setLoading(false)
+      setShow(true)
       setDataText("Not Found")
-
     }
   }
   function renderHeader() {
@@ -214,7 +203,7 @@ export const Weight =({ navigation,route})=> {
       }}>
         {show &&
         // &&
-            <CustomAlert show={show} setShow={setShow} validation={validation} label={dataText} />
+        <CustomAlert show={show} setShow={setShow} validation={validation} label={dataText}/>
         } 
       {renderHeader()}
       <KeyboardAwareScrollView

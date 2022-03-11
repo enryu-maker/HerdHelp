@@ -121,7 +121,7 @@ const Status = ({show, setShow,animal}) => {
   return (
     <Modal
       transparent={true}
-      animationType={'slide'}
+      animationType={'fade'}
       visible={show}
       onRequestClose={() => {
         setShow(false);
@@ -134,9 +134,6 @@ const Status = ({show, setShow,animal}) => {
           justifyContent: 'center',
           alignSelf: 'center',
         }}
-        // onTouchStart={() => {
-        //   setShow(false);
-        // }}
         >
         <View
           style={{

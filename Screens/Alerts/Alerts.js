@@ -31,8 +31,8 @@ export default function Alerts({navigation,route}) {
   const clear=()=>{
     setTitle("")
     setContent("")
+    setTag("")
   }
-
     const data =JSON.stringify(
       {
         "title": title,
@@ -53,13 +53,13 @@ export default function Alerts({navigation,route}) {
         clear();
         setShow(true)
         setValidation(true)
-        setDataText("Alerts added")
+        setDataText("Alerts Added")
       }
       
     }).catch(err => 
       setShow(true),
       setValidation(false),
-      setDataText("not added")
+      setDataText("Not Added")
       )
     }
     React.useEffect(()=>{
@@ -124,6 +124,8 @@ export default function Alerts({navigation,route}) {
           disableSelectionTick
           primaryColor={COLORS.Primary}
           value={species}
+          animationIn="zoomIn"
+          animationOut="zoomOut"
           onChange={onChangeSpec}
           mainContainerStyle={{
             borderRadius: SIZES.padding,

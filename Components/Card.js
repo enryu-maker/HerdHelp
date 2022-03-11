@@ -11,7 +11,6 @@ const Card=({
     onPress,
     navigation
 })=>{
-    // console.log(image)
   return (
     <TouchableOpacity style={{backgroundColor:COLORS.lightGray2,
     height:120,
@@ -24,12 +23,8 @@ const Card=({
     onPress={onPress}>
       <View style={{justifyContent:'center',margin:SIZES.padding}}>
           {
-
               cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + image}} style={{height:50,width:50,}}/>):(<Image source={{uri: image}} style={{height:50,width:50,}}/>)
           }
-          
-
-          
       </View>
       <View style={{
           flexDirection:'column',

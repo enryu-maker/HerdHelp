@@ -60,6 +60,31 @@ async function getData(api){
           </View>
         }
         title={label}
+        titleStyle={{
+          marginLeft:65
+        }}
+        rightComponent={
+          <View
+            style={{
+              justifyContent: 'center',
+              // position: 'absolute',
+              // marginTop: 25,
+              zIndex: 1,
+            }}>
+            <TouchableOpacity
+              style={{
+                // marginLeft: 25,
+              }}
+              onPressIn={() => {
+                navigation.goBack();
+              }}>
+              <Image
+                source={images.filter}
+                style={{width: 25, height: 25, tintColor: COLORS.darkGray2,margin:20}}
+              />
+            </TouchableOpacity>
+          </View>
+        }
       />
     );
   }

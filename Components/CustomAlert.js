@@ -55,9 +55,7 @@ const CustomAlert=({
         style={
            Platform.OS=="android"?{...FONTS.h3,alignSelf:"center"} : {...FONTS.h2,alignSelf:"center"}
             }>{label}</Text>
-        
         </View>
-            
         </View>
 
 
