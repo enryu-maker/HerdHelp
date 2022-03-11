@@ -26,10 +26,13 @@ export default function App() {
       }
     };
   React.useEffect(() => {
+    setInterval(()=>{
       fetchprofile().then(data => {
         global.User=data;
       });
-    });
+    },100000);
+    })
+      
   React.useEffect(() => {
     setTimeout(()=>{
       SplashScreen.hide();

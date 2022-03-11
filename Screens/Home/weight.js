@@ -39,15 +39,15 @@ export const Weight =({ navigation,route})=> {
     if (tag!="",weight!=0){
       setLoading(true)
       try{
-        let {resp} = await axiosIns.patch(`animals/${id}${species}${tag}`,{
+        await axiosIns.patch(`animals/${id}${species}${tag}`,{
           'weight':weight
         }, {
           headers: {
             'Content-Type': 'application/json',
           },
         }).then((Response)=>{
-          if (Response.status==201){
-            console.log(Response)
+          if (Response.status==200){
+            console.log(Response.status)
             setLoading(false)
             setValidation(true);
             setShow(true)
@@ -56,21 +56,21 @@ export const Weight =({ navigation,route})=> {
           }
           else{
           setLoading(false)
-          console.log(Response)
+          // console.log(Response)
           setValidation(false);
           setShow(true)
-          setErr(`Animal with tag ${tag} not found`)
+          setErr(`Animal with tag ${tag} not found here`)
           setDataText("Animal Not Found")
 
           }
         })
       }catch(err){
         setLoading(false)
+        console.log(err)
         setValidation(false);
-        setErr(`Animal with tag ${tag} not found`)
-
-            setShow(true)
-            setDataText("Not Found")
+        setErr(`Animal with tag ${tag} not found there`)
+        setShow(true)
+        setDataText("Not Found")
         
         // if(err){
         //   setErr(`Animal with tag ${tag} not found`)
@@ -137,6 +137,8 @@ export const Weight =({ navigation,route})=> {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
+          animationIn="zoomIn"
+          animationOut="zoomOut"
           disableSelectionTick
           primaryColor={COLORS.Primary}
           value={species}

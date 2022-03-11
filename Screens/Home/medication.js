@@ -62,11 +62,11 @@ export const Medication = ({navigation, route}) => {
         },
       )
       .then(response => {
-        if (response.status == 200) {
+        if (response.status == 201) {
           setLoading(false),
           setValidation(true),
           setShow(true),
-          setDataText('Medication added'),
+          setDataText(`Medication {"\n"} added`),
           clear()
         } else {
           setLoading(false),

@@ -44,6 +44,7 @@ const MyAccountEdit = ({navigation,route}) => {
           setValidation(true)
         })
       } catch (e) {
+        console.log(e.response)
         setDataText("Not updated")
         setShow(true)
         setValidation(false)
@@ -51,7 +52,6 @@ const MyAccountEdit = ({navigation,route}) => {
     };
   React.useEffect(() => {
     let { user } = route.params
-    // console.log(user)
     setUser(user)
   },[]);
   // function openCamara() {

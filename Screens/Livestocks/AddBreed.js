@@ -115,11 +115,7 @@ const Addanimals = ({navigation,route}) => {
           setLoading(false)
           setValidation(true);
             setShow(true)
-            setDataText('Animal added');
-            // setInterval(()=>{
-            //   setShow(false)
-            //   },3000)
-            
+            setDataText('Animal added'); 
         }
       })
       .catch(err => console.log('api Erorr: ', err),

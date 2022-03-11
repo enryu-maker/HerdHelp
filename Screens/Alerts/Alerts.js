@@ -48,10 +48,14 @@ export default function Alerts({navigation,route}) {
             "Content-Type": "application/json",
         }
     }).then(response => {
-      clear();
-      setShow(true)
-      setValidation(true)
-      setDataText("Alerts added")
+      if(response.status==201)
+      {
+        clear();
+        setShow(true)
+        setValidation(true)
+        setDataText("Alerts added")
+      }
+      
     }).catch(err => 
       setShow(true),
       setValidation(false),

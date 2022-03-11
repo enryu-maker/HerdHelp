@@ -16,7 +16,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextButton from '../../Components/TextButton';
 import axios from 'axios';
 import Loader from '../../Components/Loader';
-axios.defaults.baseURL = 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/';
+axios.defaults.baseURL =
+  'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/';
 const Login = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -24,7 +25,7 @@ const Login = ({navigation}) => {
   const [saveMe, setSaveMe] = React.useState(false);
   const [EmailError, setEmailError] = React.useState('');
   const [access, setAccess] = React.useState('');
-  const [loading,setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState(false);
   function isEnableSignIn() {
     return email != '' && password != '';
   }
@@ -39,26 +40,28 @@ const Login = ({navigation}) => {
   };
   const fetchprofile = async (token) => {
     try {
-      const {data} = await axios.get('profile/',{
+      const {data} = await axios.get('profile/', {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       });
-      global.User=data;
-      setLoading(false)
       return data;
     } catch (e) {
-    //  console.log("Something Went Wrong")
-     setLoading(false)
+      console.log('Something Went Wrong');
+      setLoading(false);
     }
   };
   function login() {
     if (isEnableSignIn()) {
-      setLoading(true)
+      setLoading(true);
       axios
         .post(
           'login/',
-          {email: email, password: password},
+          {
+            email: email,
+            password: password,
+          },
           {
             headers: {
               'Content-Type': 'application/json',
@@ -67,32 +70,29 @@ const Login = ({navigation}) => {
         )
         .then(response => {
           if (response.status === 200) {
-
             storeData(
               response.data.access,
               response.data.refresh,
               response.data.userid.toString(),
             ).then(() => {
-              fetchprofile(response.data.access).then(()=>{
-                navigation.replace('Draw')
-              })
-              // setLoading(false)
+              navigation.replace('Draw'),
+              setLoading(false)
             });
             
           } else {
             setEmailError('User Not Registered');
-            // setLoading(false)
+            setLoading(false);
           }
         })
         .catch(error => {
           if (error.response) {
             setEmailError('Something Went Wrong');
-            // setLoading(false)
+            setLoading(false);
           }
         });
     } else {
       setEmailError('Invalid Input');
-      // setLoading(false)
+      setLoading(false);
     }
   }
   return (
@@ -109,10 +109,12 @@ const Login = ({navigation}) => {
         imgstyle={{
           marginTop: 80,
         }}
-        containerStyle={{
-          // margin: '10%',
-          // marginTop: 120,
-        }}
+        containerStyle={
+          {
+            // margin: '10%',
+            // marginTop: 120,
+          }
+        }
       />
       <ScrollView>
         <Text
@@ -216,13 +218,13 @@ const Login = ({navigation}) => {
               label="Forgot Password?"
               buttonContainerStyle={{
                 backgroundColor: null,
-                width:160,
+                width: 160,
                 // marginRight:120
               }}
               labelStyle={{
                 color: COLORS.Primary,
                 ...FONTS.h4,
-                marginRight:50
+                marginRight: 50,
               }}
               onPress={() => navigation.navigate('ForgotPassword')}
             />
