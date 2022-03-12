@@ -100,6 +100,7 @@ const Addanimals = ({navigation,route}) => {
     vaccination_date: vaccinateddatet,
     price: price,
     bought: bought,
+    status:"Alive"
   });
   function postAnimal() {
     setLoading(true)

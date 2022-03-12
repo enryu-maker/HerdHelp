@@ -30,8 +30,8 @@ export const Weight =({ navigation,route})=> {
   };
   const clear=()=>{
     setSpcies([])
-    setWeight()
-    setTag()
+    setWeight("")
+    setTag("")
   }
   async function updateWeight(){
     if (tag!="",weight!=0){

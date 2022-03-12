@@ -2,7 +2,6 @@ import { View, Text ,TouchableOpacity,Image,ScrollView} from 'react-native'
 import React from 'react'
 import Header from '../../Components/Header';
 import Card from '../../Components/Card';
-import ActivityIndicatorExample from '../../Components/Loading';
 import {
   COLORS,
   FONTS,
@@ -10,11 +9,32 @@ import {
   SIZES,
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
+import ReportFilter from './ReportFilter';
 export default function ReportOP({navigation,route}) {
   const [label,setLabel]=React.useState("")
   const [loading,setLoading]=React.useState(false)
   const [Data,setData]=React.useState([])
   const [con,setCon] = React.useState(false)
+  const [show, setShow] = React.useState(false);
+  const [sep, setSpec] = React.useState('')
+  const [vacc, setVacc] = React.useState('')
+  const [med, setMed] = React.useState('')
+
+  function filterList(list) {
+    return list.filter(
+      (listItem) =>
+          listItem.species
+          .toString()
+          .includes(sep.toString()) &&
+          (listItem.vaccinated
+          .toString()
+          .includes(vacc.toString()) &&
+          listItem.medicated
+          .toString()
+          .includes(med.toString()))
+    );
+  }
+  // console.log(Data)
 async function getData(api){
     let {data} =  await axiosIns.get(api)
     return data
@@ -76,7 +96,7 @@ async function getData(api){
                 // marginLeft: 25,
               }}
               onPressIn={() => {
-                navigation.goBack();
+                setShow(true);
               }}>
               <Image
                 source={images.filter}
@@ -91,11 +111,15 @@ async function getData(api){
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       {renderHeader()} 
+      {
+        show &&
+      <ReportFilter show={show} setShow={setShow} setSpec={setSpec} setMed={setMed} setVacc={setVacc}/>
+      }
       
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{flexGrow: 1}}>
-          {Data.map((listItem, index) => (
+          {filterList(Data).map((listItem, index) => (
             <Card
               key={index}
               cond={con}

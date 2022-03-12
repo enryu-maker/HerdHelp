@@ -11,18 +11,21 @@ export const Info = ({navigation, route}) => {
   const [cond, setCond] = React.useState(false);
   const [show, setShow] = React.useState(false);
 
-  async function getMedication() {
-    let {data} = await axiosIns.get(`getmedication/${animal?.tag_number}`);
-    setMed(data);
+  async function getMedication(tag) {
+    let {data} = await axiosIns.get(`getmedication/${tag}`);
+    // setMed(data);
     return data;
   }
   React.useEffect(() => {
     let {value} = route.params;
     let {cond} = route.params;
+    getMedication(value.tag_number).then((data)=>{
+      setMed(data)
+    });
     setCond(cond);
     setAnimal(value);
-    getMedication();
-  }, [med]);
+    
+  }, []);
 
   function renderSectionOne() {
     return (

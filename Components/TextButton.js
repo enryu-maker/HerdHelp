@@ -27,11 +27,12 @@ const TextButton = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 backgroundColor: COLORS.Primary,
-                ...buttonContainerStyle,
                 borderRadius:SIZES.radius,
                 height:55,
                 width:'88%',
-                alignSelf:'center'
+                alignSelf:'center',
+                ...buttonContainerStyle,
+
             }}
             disabled={disabled}
             onPress={onPress}

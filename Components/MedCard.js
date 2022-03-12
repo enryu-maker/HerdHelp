@@ -17,7 +17,6 @@ export default function MedCard({ navigation,route }) {
         let {medication} = route.params
         setMed(medication)
       }
-      // console.log(med)
   }, []);
 
     function renderHeader() {

@@ -12,7 +12,7 @@ export default function Drawercontent(props) {
     <View style={{flex: 1}}>
       <DrawerContentScrollView
         {...props}
-        style={{borderBottomWidth: 0, borderBottomColor: 'none'}}>
+        style={{borderBottomWidth: 0.8, borderBottomColor: COLORS.Primary}}>
         <TouchableWithoutFeedback style={styles.drawerContent}
         onPress={()=>{props.navigation.navigate('MyAccount')}}
         >
@@ -40,7 +40,7 @@ export default function Drawercontent(props) {
           </View>
         </TouchableWithoutFeedback>
         <LineDivider
-          lineStyle={{alignSelf: 'center', width: '95%', marginTop: 10}}
+          lineStyle={{alignSelf: 'center', width: '100%', marginTop: 10,backgroundColor:COLORS.Primary}}
         />
         <Drawer.Section style={[styles.drawerSection]}>
           <DrawerItem
@@ -66,11 +66,24 @@ export default function Drawercontent(props) {
             }}
           />
         </Drawer.Section>
+        <Drawer.Section style={[styles.drawerSection,{marginTop:5}]}>
+        <DrawerItem
+            icon={({color, size}) => (
+              <Image source={images.weight} style={[{height: 25, width: 25}]} />
+            )}
+            label="Weight History"
+            labelStyle={[FONTS.body3, {letterSpacing: 2}]}
+            onPress={() => {
+              props.navigation.navigate('WeightH');
+              props.navigation.closeDrawer()
+            }}
+          />
+        </Drawer.Section>
+        
       </DrawerContentScrollView>
 
       <Drawer.Section style={styles.bottomDrawerSection}>
       
-        <LineDivider lineStyle={{alignSelf: 'center', width: '95%'}} />
         <DrawerItem
             icon={({color, size}) => (
               <Image source={images.setting} style={[{height: 25, width: 25}]} />
@@ -108,6 +121,7 @@ const styles = StyleSheet.create({
   },
   userInfoSection: {
     paddingLeft: 25,
+    
   },
   title: {
     fontSize: 20,
@@ -136,9 +150,13 @@ const styles = StyleSheet.create({
   },
   drawerSection: {
     marginTop: 10,
+    borderBottomWidth:0.8,
+    borderBottomColor:COLORS.Primary
   },
   bottomDrawerSection: {
     marginBottom: 15,
+    borderBottomWidth:0,
+    borderBottomColor:COLORS.white
     // borderTopColor: COLORS.lightGray1,
     // borderTopWidth: 1,
   },

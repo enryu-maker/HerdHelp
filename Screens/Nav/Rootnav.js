@@ -24,6 +24,7 @@ import ReportOP from '../Report/ReportOP';
 const Stack = createNativeStackNavigator();
 import Setting from '../Setting/Setting';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import WeightH from '../WeightHistory/WeightH';
 
 const Drawer = createDrawerNavigator();
 import Drawercontent from './Drawercontent';
@@ -81,6 +82,8 @@ export default class Rootnav extends Component {
           <Stack.Screen name='Setting' component={Setting}/>
           <Stack.Screen name='Report' component={Report}/>
           <Stack.Screen name='ReportOP' component={ReportOP}/>
+          <Stack.Screen name='WeightH' component={WeightH}/>
+
 
         </Stack.Navigator>
       </NavigationContainer>

@@ -53,7 +53,7 @@ export const Medication = ({navigation, route}) => {
           dosage: dos,
           disease: Dis,
           withdrawal: withdraw,
-          withdrawal_date: datet,
+          withdrawal_date: datet!=""? datet:null,
         },
         {
           headers: {
@@ -66,7 +66,8 @@ export const Medication = ({navigation, route}) => {
           setLoading(false),
           setValidation(true),
           setShow(true),
-          setDataText(`Medication {"\n"} added`),
+          setDataText(`Medication added`),
+          setErr(`Medication added`)
           clear()
         } else {
           setLoading(false),
@@ -127,7 +128,7 @@ export const Medication = ({navigation, route}) => {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        <Text style={{color: COLORS.red, alignSelf: 'center', ...FONTS.body3}}>
+        <Text style={{color:validation? COLORS.Primary : COLORS.red, alignSelf: 'center', ...FONTS.body3}}>
           {err}
         </Text>
         <Dropdown

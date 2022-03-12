@@ -8,7 +8,7 @@ import TextButton from './TextButton';
 import FormInput from './FormInput';
 import axiosIns from '../helpers/helpers';
 const Status = ({show, setShow,animal}) => {
-    const [status,setStatus] = React.useState("")
+    const [status,setStatus] = React.useState([])
     const [Price,setPrice] = React.useState(0)
     const [loading,setloading] = React.useState(false)
     const [statusCat,setStatusCat] = React.useState([])
@@ -20,7 +20,7 @@ const Status = ({show, setShow,animal}) => {
     }
     React.useEffect(()=>{
       setStatusCat(global.stat)
-    })
+    },[])
     const updateAnimal=async()=>{
         if(Price!=""){
             axiosIns.patch(`animals/${animal.tag_number}`,{
@@ -104,11 +104,8 @@ const Status = ({show, setShow,animal}) => {
           }}
           enableAvatar
           required
-          // showLoader
-          // mode="outlined"
           disableSelectionTick
           primaryColor={COLORS.Primary}
-          // avatarSize={28}
           value={status}
           onChange={updateStatus}
           animationIn="zoomIn"
@@ -130,7 +127,7 @@ const Status = ({show, setShow,animal}) => {
                   />
                 </View>
               }
-              label={Status!="Dead"?"Sold Price*":"Lost Amount*"}
+              label={Status =="Dead"?"Sold Price*":"Lost Amount*"}
               value={Price}
               onChange={value => {
                 setPrice(value);
