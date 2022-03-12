@@ -1,4 +1,4 @@
-import { View, Text ,TouchableOpacity,Image,ScrollView} from 'react-native'
+import { View, Text ,TouchableOpacity,Image,ScrollView,Platform} from 'react-native'
 import React from 'react'
 import Header from '../../Components/Header';
 import Card from '../../Components/Card';
@@ -46,8 +46,8 @@ async function getData(api){
     let {label} = route.params
     let {api} =route.params
     let {cond} =route.params
-    let {footer} =route.params
-    setFooter(footer)
+    // let {footer} =route.params
+    // setFooter(footer)
     setCon(cond)
       setLabel(label)
     getData(api).then(data=>{
@@ -114,13 +114,40 @@ async function getData(api){
   function renderFooter(){
     return(
       <View style={{
-        justifyContent:"flex-end",
-        height:120,
+        // justifyContent:"flex-end",
+        height:80,
         borderTopLeftRadius:SIZES.radius+10,
         borderTopRightRadius:SIZES.radius+10,
-        
+        backgroundColor:COLORS.Primary,
+        flexDirection:"row",
+        justifyContent:"center"
       }}>
+        <Text style={
+          
+         Platform.OS=="ios"?{
+          ...FONTS.h1,
+          color:COLORS.white,
+          alignSelf:"center"
+        }:{
+          ...FONTS.h2,
+          color:COLORS.white,
+          alignSelf:"center"
 
+        }
+      }>Amount:</Text>
+      <Text style={
+         Platform.OS=="ios"?{
+          ...FONTS.h1,
+          color:COLORS.white,
+          alignSelf:"center"
+        }:{
+          ...FONTS.h2,
+          color:COLORS.white,
+          alignSelf:"center"
+
+
+        }
+      }>  $240</Text>
       </View>
     )
   }

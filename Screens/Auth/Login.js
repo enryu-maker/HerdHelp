@@ -48,7 +48,7 @@ const Login = ({navigation}) => {
       });
       return data;
     } catch (e) {
-      console.log('Something Went Wrong');
+      // console.log('Something Went Wrong');
       setLoading(false);
     }
   };

@@ -8,6 +8,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 export default function Report(props) {
   const [report, setReport] = React.useState([]);
+  const [footer, setFooter] = React.useState(false);
+
   async function getReports() {
     let {data} = await axiosIns.get('reports/');
     return data;
@@ -60,8 +62,7 @@ export default function Report(props) {
               label:listItem.name,
               api:listItem.api.toString(),
               cond:false,
-              footer:listItem.name=="Sold Animals"||"Lost Animals"?true:false
-              // listItem.name=="Sold Animals"||"Lost Animals"?
+              // footer:listItem.name.toString()!="Sold Animals" || "Lost Animals"? false : true
             })
           }}
           />

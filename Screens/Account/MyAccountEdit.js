@@ -44,7 +44,7 @@ const MyAccountEdit = ({navigation,route}) => {
           setValidation(true)
         })
       } catch (e) {
-        console.log(e.response)
+        // console.log(e.response)
         setDataText("Not updated")
         setShow(true)
         setValidation(false)
