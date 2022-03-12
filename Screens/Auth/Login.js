@@ -218,7 +218,7 @@ const Login = ({navigation}) => {
               label="Forgot Password?"
               buttonContainerStyle={{
                 backgroundColor: null,
-                width: 160,
+                width: 250,
                 // marginRight:120
               }}
               labelStyle={{
