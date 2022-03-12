@@ -41,7 +41,7 @@ export const Finance = ({navigation}) => {
   });
   async function postfinance() {
     // setLoading(true)
-    if (price == " " && Qty == " ") {
+    if (price != "" && Qty != "") {
       await axiosIns
         .post('finance/', data, {
           headers: {
