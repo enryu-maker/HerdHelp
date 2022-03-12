@@ -12,7 +12,7 @@ const  ReportB=({
 })=>{
   return (
     <TouchableOpacity style={{backgroundColor:COLORS.lightGray2,
-        height:120,
+        height:100,
         margin:SIZES.base2,
         borderRadius:SIZES.radius,
         flexDirection:'row',

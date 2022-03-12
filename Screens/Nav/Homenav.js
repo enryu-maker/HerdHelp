@@ -24,6 +24,7 @@ import Setting from '../Setting/Setting';
 import Report from '../Report/Report';
 import ReportOP from '../Report/ReportOP';
 import WeightH from '../WeightHistory/WeightH';
+import History from '../WeightHistory/History';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
@@ -42,15 +43,39 @@ const DrawerNav = () => {
         drawerStatusBarAnimation:"fade",
       }}
       drawerContent={props =><Drawercontent {...props}
-      drawerWidth= {SIZES.width - 120}
+      // drawerWidth= {SIZES.width}
       />
     }
     >
-      <Drawer.Screen name='Main' component={Main} options={{
+      <Drawer.Screen name='Draw' component={Main} options={{
         // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.home}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+          <Drawer.Screen name='Report' component={Report} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.file}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+          <Drawer.Screen name='WeightH' component={WeightH} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.weight}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+          <Drawer.Screen name='Setting' component={Setting} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.setting}
                 style={[{ height: 25, width: 25}]}
               /> )       
           }} />
@@ -84,6 +109,8 @@ export default class Homenav extends Component {
           <Stack.Screen name='Report' component={Report}/>
           <Stack.Screen name='ReportOP' component={ReportOP}/>
           <Stack.Screen name='WeightH' component={WeightH}/>
+          <Stack.Screen name='History' component={History}/>
+
 
 
         </Stack.Navigator>

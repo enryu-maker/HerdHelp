@@ -25,7 +25,7 @@ const Stack = createNativeStackNavigator();
 import Setting from '../Setting/Setting';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import WeightH from '../WeightHistory/WeightH';
-
+import History from '../WeightHistory/History';
 const Drawer = createDrawerNavigator();
 import Drawercontent from './Drawercontent';
 const DrawerNav = () => {
@@ -46,10 +46,26 @@ const DrawerNav = () => {
       />
     }
     >
-      <Drawer.Screen name='Main' component={Main} options={{
+      <Drawer.Screen name='Draw' component={Main} options={{
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.home}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+          <Drawer.Screen name='Report' component={Report} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.file}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+          <Drawer.Screen name='WeightH' component={WeightH} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.weight}
                 style={[{ height: 25, width: 25}]}
               /> )       
           }} />
@@ -83,6 +99,8 @@ export default class Rootnav extends Component {
           <Stack.Screen name='Report' component={Report}/>
           <Stack.Screen name='ReportOP' component={ReportOP}/>
           <Stack.Screen name='WeightH' component={WeightH}/>
+          <Stack.Screen name='History' component={History}/>
+
 
 
         </Stack.Navigator>

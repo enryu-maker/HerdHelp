@@ -19,6 +19,7 @@ export default function ReportOP({navigation,route}) {
   const [sep, setSpec] = React.useState('')
   const [vacc, setVacc] = React.useState('')
   const [med, setMed] = React.useState('')
+  const [footer,setFooter] =React.useState(false)
 
   function filterList(list) {
     return list.filter(
@@ -45,6 +46,8 @@ async function getData(api){
     let {label} = route.params
     let {api} =route.params
     let {cond} =route.params
+    let {footer} =route.params
+    setFooter(footer)
     setCon(cond)
       setLabel(label)
     getData(api).then(data=>{
@@ -52,7 +55,7 @@ async function getData(api){
     })
     
   },[])
-//   console.log(typrOf api)
+
 
   function renderHeader() {
     return (
@@ -108,6 +111,19 @@ async function getData(api){
       />
     );
   }
+  function renderFooter(){
+    return(
+      <View style={{
+        justifyContent:"flex-end",
+        height:120,
+        borderTopLeftRadius:SIZES.radius+10,
+        borderTopRightRadius:SIZES.radius+10,
+        
+      }}>
+
+      </View>
+    )
+  }
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       {renderHeader()} 
@@ -138,6 +154,10 @@ async function getData(api){
             />
           ))}
         </ScrollView>
+        {
+          footer?renderFooter():<View></View>
+        }
+        
     </View>
   )
 }

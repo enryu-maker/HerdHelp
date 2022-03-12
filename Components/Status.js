@@ -12,8 +12,6 @@ const Status = ({show, setShow,animal}) => {
     const [Price,setPrice] = React.useState(0)
     const [loading,setloading] = React.useState(false)
     const [statusCat,setStatusCat] = React.useState([])
-
-
     const [err,setErr] = React.useState("")
     const updateStatus=value=>{
         setStatus(value)
@@ -21,10 +19,20 @@ const Status = ({show, setShow,animal}) => {
     React.useEffect(()=>{
       setStatusCat(global.stat)
     },[])
+    async function delAnimal(){
+      try{
+        await axiosIns.delete(`animals/${animal.tag_number}`)
+      }
+      catch(err){
+        setErr("Something Went Wrong")
+      }
+    }
     const updateAnimal=async()=>{
         if(Price!=""){
             axiosIns.patch(`animals/${animal.tag_number}`,{
-              'status':status
+              'status':status.toString(),
+              'soldprice':Price,
+              'tag_number':`${animal.tag_number}${status.toString()=="Dead"?"D":"S"}`
             }, {
               headers: {
                 'Content-Type': 'application/json',
@@ -33,8 +41,11 @@ const Status = ({show, setShow,animal}) => {
               if(Response.status==200){
                 setErr("Status Update sucessfully")
                 setloading(true)
-                setShow(false)
+                delAnimal().then(()=>{
+                  setShow(false)
+                })
               }
+              // })
               else{
                 setErr("Status Not Update")
                 setloading(false)
@@ -55,7 +66,6 @@ const Status = ({show, setShow,animal}) => {
                   justifyContent: 'center',
                   position: 'absolute',
                   marginTop: 25,
-                // padding:10,
                   zIndex: 1,
                 }}>
                 <TouchableOpacity
@@ -102,7 +112,6 @@ const Status = ({show, setShow,animal}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          enableAvatar
           required
           disableSelectionTick
           primaryColor={COLORS.Primary}
@@ -127,7 +136,7 @@ const Status = ({show, setShow,animal}) => {
                   />
                 </View>
               }
-              label={Status =="Dead"?"Sold Price*":"Lost Amount*"}
+              label={"Amount*"}
               value={Price}
               onChange={value => {
                 setPrice(value);
@@ -184,9 +193,7 @@ const Status = ({show, setShow,animal}) => {
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {
-          // alert(` ${id}${valueMS}${tag}`)
           updateAnimal();
-          // clear();
         }}
         icon={images.update}
         buttonContainerStyle={{

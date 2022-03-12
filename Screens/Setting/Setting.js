@@ -19,8 +19,8 @@ export default function Setting({navigation}) {
                 // marginTop: 20,
                 marginLeft: 25,
               }}
-              onPress={() =>  {navigation.replace("Draw")} }>
-              <Image source={images.back} style={{width:30,height:30,tintColor:COLORS.darkGray2}}/>
+              onPress={() =>  {navigation.openDrawer()} }>
+              <Image source={images.menu} style={{width:30,height:30,tintColor:COLORS.darkGray2}}/>
 
             </TouchableOpacity>
           </View>

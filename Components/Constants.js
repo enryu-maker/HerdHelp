@@ -49,7 +49,8 @@ export const images ={
     mark:require("../assets/Add/mark.png"),
     HH:require("../assets/Logo/logo.png"),
     setting:require("../assets/Logo/settings.png"),
-    file:require("../assets/Logo/file.png")
+    file:require("../assets/Logo/file.png"),
+    heart:require("../assets/Logo/heart.png")
 
 }
 export const COLORS={

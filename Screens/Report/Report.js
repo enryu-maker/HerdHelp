@@ -6,17 +6,19 @@ import ReportB from './ReportB';
 import axiosIns from '../../helpers/helpers';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-export default function Report({navigation}) {
+export default function Report(props) {
   const [report, setReport] = React.useState([]);
   async function getReports() {
     let {data} = await axiosIns.get('reports/');
     return data;
   }
+  console.log(props.navigation)
   React.useEffect(() => {
     getReports().then(data => {
       setReport(data);
     });
-  }, []);
+
+  },[]);
   function renderheader() {
     return (
       <Header
@@ -32,11 +34,9 @@ export default function Report({navigation}) {
               style={{
                 marginLeft: 25,
               }}
-              onPress={() => {
-                navigation.replace('Draw');
-              }}>
+              onPress={() => {props.navigation.openDrawer()}}>
               <Image
-                source={images.back}
+                source={images.menu}
                 style={{width: 30, height: 30, tintColor: COLORS.darkGray2}}
               />
             </TouchableOpacity>
@@ -56,10 +56,12 @@ export default function Report({navigation}) {
         report.map((listItem, index)  => (
           <ReportB key={listItem.id} img={listItem.image} reportText={listItem.name} 
           onPress={()=>{
-            navigation.navigate("ReportOP",{
+            props.navigation.navigate("ReportOP",{
               label:listItem.name,
               api:listItem.api.toString(),
-              cond:false
+              cond:false,
+              footer:listItem.name=="Sold Animals"||"Lost Animals"?true:false
+              // listItem.name=="Sold Animals"||"Lost Animals"?
             })
           }}
           />

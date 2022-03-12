@@ -101,7 +101,7 @@ const Main = ({navigation}) => {
         }}>
           <ScrollView showsVerticalScrollIndicator={false}>
         <TextButton
-          icon={images.herd}
+          icon={images.heart}
           label={'MY HERDS'}
           onPress={() => {
             navigation.navigate('Home');

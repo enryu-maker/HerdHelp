@@ -92,6 +92,7 @@ export default function Drawercontent(props) {
             labelStyle={[FONTS.body3, {letterSpacing: 2}]}
             onPress={() => {
               props.navigation.navigate('Setting');
+              props.navigation.closeDrawer()
             }}
           />
         <DrawerItem
