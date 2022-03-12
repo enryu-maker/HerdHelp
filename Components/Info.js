@@ -283,7 +283,7 @@ export const Info = ({navigation, route}) => {
       {renderHeader()}
       {
         show &&
-        <Status show={show} setShow={setShow}/>
+        <Status show={show} setShow={setShow} animal={animal}/>
       }
       <ScrollView
         showsVerticalScrollIndicator={false}

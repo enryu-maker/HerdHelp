@@ -28,15 +28,24 @@ const Main = ({navigation}) => {
   const [user,setUser] = React.useState([])
   async function fetchanimal() {
     let {data} = await axiosIns.get('getcategories/');
-    // console.log(data)
+    // let {stat} = await axiosIns.get('getstatuses/');
     setLoading(true);
     global.species = data
+    // global.stat=stat
+    return data;
+  } 
+  async function fetchStatus() {
+    let {data} = await axiosIns.get('getstatuses/');
+    setLoading(true);
+    // console.log(data)
+    global.stat=data
     return data;
   } 
   async function loadId(){
     global.id = await AsyncStorage.getItem("id")
   }
   React.useEffect(() => {
+    fetchStatus();
       fetchanimal();
       loadId();
       global.alertlength;

@@ -19,7 +19,9 @@ export const Home = ({navigation}) => {
         setLoading(false);
       });
   }, []);
-  // console.log(loading)
+  // console.log(global.stat)
+
+  // console.log(global.stat)
   function renderHeader() {
     return (
       <Header

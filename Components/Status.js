@@ -6,16 +6,44 @@ import Header from './Header';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import TextButton from './TextButton';
 import FormInput from './FormInput';
+import axiosIns from '../helpers/helpers';
 const Status = ({show, setShow,animal}) => {
-    const [status,setStatus] = React.useState("Alive")
+    const [status,setStatus] = React.useState("")
     const [Price,setPrice] = React.useState(0)
+    const [loading,setloading] = React.useState(false)
+    const [statusCat,setStatusCat] = React.useState([])
+
+
     const [err,setErr] = React.useState("")
     const updateStatus=value=>{
         setStatus(value)
     }
-    const updateAnimal=()=>{
-        if(Price==""){
-            alert("Its working")
+    React.useEffect(()=>{
+      setStatusCat(global.stat)
+    })
+    const updateAnimal=async()=>{
+        if(Price!=""){
+            axiosIns.patch(`animals/${animal.tag_number}`,{
+              'status':status
+            }, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then((Response)=>{
+              if(Response.status==200){
+                setErr("Status Update sucessfully")
+                setloading(true)
+                setShow(false)
+              }
+              else{
+                setErr("Status Not Update")
+                setloading(false)
+              }
+            })
+        }
+        else{
+          setErr("Invalid input")
+          setloading(false)
         }
     }
     function renderHeader() {
@@ -39,7 +67,7 @@ const Status = ({show, setShow,animal}) => {
                   }}>
                   <Image
                     source={images.cancel}
-                    style={{width: 30, height: 30, tintColor: COLORS.red}}
+                    style={{width: 35, height: 35, tintColor: COLORS.red}}
                   />
                 </TouchableOpacity>
               </View>
@@ -57,13 +85,13 @@ const Status = ({show, setShow,animal}) => {
               borderRadius: SIZES.radius,
               backgroundColor: COLORS.lightGray2,
             }}>
-        <Text style={{color: COLORS.red, alignSelf: 'center', ...FONTS.body3}}>
+        <Text style={{color:!loading?COLORS.red:COLORS.Primary, alignSelf: 'center', ...FONTS.body3}}>
           {err}
         </Text>
         <Dropdown
           label="Status"
           borderRadius={SIZES.radius}
-        //   data={Bought}
+          data={statusCat}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}
           selectedItemTextStyle={
             (FONTS.body3,
