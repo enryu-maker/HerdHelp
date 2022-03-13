@@ -30,14 +30,14 @@ export default function App() {
       fetchprofile().then(data => {
         global.User=data;
       });
-    })
+    },[])
       
   React.useEffect(() => {
     setTimeout(()=>{
       SplashScreen.hide();
     },3000)
     retrieveData()
-  },[Route]);
+  },[]);
   return (
         <View style={{flex:1}}>
           <StatusBar 
