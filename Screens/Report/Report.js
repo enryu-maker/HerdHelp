@@ -14,7 +14,6 @@ export default function Report(props) {
     let {data} = await axiosIns.get('reports/');
     return data;
   }
-  console.log(props.navigation)
   React.useEffect(() => {
     getReports().then(data => {
       setReport(data);

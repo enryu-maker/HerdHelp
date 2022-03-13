@@ -4,6 +4,8 @@
 <dict>
 	<key> NSCameraUsageDescription </key>
 	<string>$(PRODUCT_NAME) uses Cameras</string>
+	<key>UIUserInterfaceStyle</key>
+    <string>Light</string>
 	<key>Allow Arbitrary Loads</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -48,6 +50,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>
+
 	<array>
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>

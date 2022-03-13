@@ -6,6 +6,7 @@ import Rootnav from "./Screens/Nav/Rootnav"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen'
 import axiosIns from './helpers/helpers';
+
 export default function App() {
   const [Route,setRoute]=React.useState(false);
   async function retrieveData(){
@@ -39,8 +40,9 @@ export default function App() {
   },[Route]);
   return (
         <View style={{flex:1}}>
-          <StatusBar
-          style="auto"/>
+          <StatusBar 
+          barStyle="dark-content"
+          />
           {
             Route?  <Homenav/> : <Rootnav/> 
           }
