@@ -25,6 +25,7 @@ export default function Alerts({navigation,route}) {
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
   const [id,setId] = React.useState(null)
+  const [loading, setLoading] = React.useState(false);
   const onChangeSpec = value => {
     setAnimals(value);
   };
@@ -43,6 +44,7 @@ export default function Alerts({navigation,route}) {
       },
     )
     function postAlert(){
+      setLoading(true)
       axiosIns.post('alerts/',data, {
         headers: {
             "Content-Type": "application/json",
@@ -50,6 +52,7 @@ export default function Alerts({navigation,route}) {
     }).then(response => {
       if(response.status==201)
       {
+      setLoading(false)
         clear();
         setShow(true)
         setValidation(true)
@@ -57,6 +60,7 @@ export default function Alerts({navigation,route}) {
       }
       
     }).catch(err => 
+      setLoading(false),
       setShow(true),
       setValidation(false),
       setDataText("Not Added")
@@ -259,6 +263,7 @@ export default function Alerts({navigation,route}) {
           postAlert();
         }}
         icon={images.bell}
+        loading={loading}
         buttonContainerStyle={{
           // flex:1,
           height: 60,

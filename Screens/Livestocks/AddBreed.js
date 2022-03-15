@@ -629,13 +629,10 @@ const Addanimals = ({navigation,route}) => {
 
       <TextButton
         onPress={() => {
-          // alert(` ${id}${valueMS}${tag}`)
           postAnimal();
-          // clear();
         }}
         icon={images.add}
         buttonContainerStyle={{
-          // flex:1,
           height: 60,
           marginTop: SIZES.padding,
           marginHorizontal: SIZES.padding,
@@ -645,7 +642,6 @@ const Addanimals = ({navigation,route}) => {
         }}
         label={'Add Animals'}
         loading={loading}
-        // label2={true}
       />
     </View>
   );

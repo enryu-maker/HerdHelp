@@ -23,11 +23,14 @@ export default function WeightH({navigation}) {
         );
         if (data.length > 0 && data != undefined) {
           setTag("")
+          setLoading(false)
           return data;
         } else {
+          setLoading(false)
           setErr('Animal Not found');
         }
       } catch (err) {
+        setLoading(false)
         setErr(err);
       }
     } else {
@@ -166,6 +169,7 @@ export default function WeightH({navigation}) {
           });
         }}
         icon={images.weight}
+        loading={loading}
         buttonContainerStyle={{
           height: 60,
           marginTop: SIZES.padding,

@@ -235,6 +235,7 @@ export const Signup = ({navigation}) => {
               ? COLORS.Primary
               : COLORS.transparentPrimary2,
           }}
+          loading={loading}
           onPress={() => {
             signup();
           }}

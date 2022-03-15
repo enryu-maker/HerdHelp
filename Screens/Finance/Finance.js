@@ -40,7 +40,7 @@ export const Finance = ({navigation}) => {
     quantity: Qty,
   });
   async function postfinance() {
-    // setLoading(true)
+    setLoading(true)
     if (price != "" && Qty != "") {
       await axiosIns
         .post('finance/', data, {
@@ -50,11 +50,13 @@ export const Finance = ({navigation}) => {
         })
         .then(Response => {
           if (Response.status == 201) {
+            setLoading(false)
             setShow(true);
             setValidation(true);
             setDataText('Finance added');
             clean();
           } else {
+            setLoading(false)
             setValidation(false);
             setShow(true);
             setDataText('Not added');
@@ -62,12 +64,14 @@ export const Finance = ({navigation}) => {
           }
         })
         .catch(err => {
+          setLoading(false)
           setValidation(false),
           setShow(true),
           setDataText('Error');
         });
     } 
     else {
+      setLoading(false)
       setValidation(false);
       setShow(true);
       setDataText('Invalid Input');
@@ -227,6 +231,7 @@ export const Finance = ({navigation}) => {
           postfinance();
         }}
         icon={images.money}
+        loading={loading}
         buttonContainerStyle={{
           // flex:1,
           height: 60,
