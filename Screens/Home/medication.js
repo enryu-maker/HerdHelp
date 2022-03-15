@@ -351,6 +351,7 @@ export const Medication = ({navigation, route}) => {
           addMedical();
         }}
         icon={images.med}
+        loading={loading}
         buttonContainerStyle={{
           // flex:1,
           height: 60,

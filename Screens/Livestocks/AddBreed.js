@@ -102,9 +102,9 @@ const Addanimals = ({navigation,route}) => {
     bought: bought,
     status:"Alive"
   });
-  function postAnimal() {
+  async function postAnimal() {
     setLoading(true)
-    axiosIns
+   await axiosIns
       .post('animals/', data, {
         headers: {
           'Content-Type': 'application/json',
@@ -609,8 +609,6 @@ const Addanimals = ({navigation,route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-        
-        <Loader loading={loading}/>
         {show &&
         <CustomAlert show={show} validation={validation} setShow={setShow} label={dataText}/>
 }
@@ -646,6 +644,7 @@ const Addanimals = ({navigation,route}) => {
           backgroundColor: COLORS.Primary,
         }}
         label={'Add Animals'}
+        loading={loading}
         // label2={true}
       />
     </View>

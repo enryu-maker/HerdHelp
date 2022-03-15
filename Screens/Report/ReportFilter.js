@@ -5,7 +5,7 @@ import {images, SIZES, FONTS, COLORS} from '../../Components/Constants';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import TextButton from '../../Components/TextButton';
-export default function ReportFilter({show, setShow,setSpec,setVacc,setMed}) {
+export default function ReportFilter({show, setShow,setSpec,setVacc,setMed,vacc,med}) {
     const [species,setSpecies] = React.useState(false)
     const [animal,setAnimal] = React.useState([])
     const updateStatus=value=>{
@@ -90,6 +90,7 @@ export default function ReportFilter({show, setShow,setSpec,setVacc,setMed}) {
           icon={images.correct}
           buttonContainerStyle={{
             marginTop:15,
+          backgroundColor:vacc?COLORS.Primary:COLORS.transparentPrimary
           }}
           onPress={()=>{setVacc(true)}}
           />
@@ -101,7 +102,7 @@ export default function ReportFilter({show, setShow,setSpec,setVacc,setMed}) {
           onPress={()=>{setVacc(false)}}
           buttonContainerStyle={{
               marginTop:10,
-            // width:150
+              backgroundColor:vacc==false?COLORS.Primary:COLORS.transparentPrimary
         }}/>
         <TextButton label={"Medicated"}
           icon={images.correct}
@@ -111,7 +112,8 @@ export default function ReportFilter({show, setShow,setSpec,setVacc,setMed}) {
           onPress={()=>{setMed(true)}}
           buttonContainerStyle={{
               marginTop:10,
-            // width:150
+              backgroundColor:med?COLORS.Primary:COLORS.transparentPrimary
+
         }}/>
         <TextButton label={"Not Medicated"}
           icon={images.cancel}
@@ -121,6 +123,8 @@ export default function ReportFilter({show, setShow,setSpec,setVacc,setMed}) {
           onPress={()=>{setMed(false)}}
           buttonContainerStyle={{
               marginTop:10,
+              backgroundColor:med==false?COLORS.Primary:COLORS.transparentPrimary
+
             // width:150
         }}/>
 

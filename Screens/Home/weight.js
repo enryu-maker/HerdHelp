@@ -221,7 +221,7 @@ export const Weight =({ navigation,route})=> {
           updateWeight()
         }}
         icon={images.weight}
-
+        loading={loading}
         buttonContainerStyle={{
           // flex:1,
           height: 60,

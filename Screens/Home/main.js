@@ -19,9 +19,6 @@ import {
   
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
-import Drawer from '../Custom/Drawer';
-import ActivityIndicatorExample from '../../Components/Loading';
-import Loader from '../../Components/Loader';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [show, setShow] = React.useState(false);

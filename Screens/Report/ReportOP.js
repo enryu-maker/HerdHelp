@@ -156,7 +156,7 @@ async function getData(api){
       {renderHeader()} 
       {
         show &&
-      <ReportFilter show={show} setShow={setShow} setSpec={setSpec} setMed={setMed} setVacc={setVacc}/>
+      <ReportFilter show={show} setShow={setShow} setSpec={setSpec} setMed={setMed} setVacc={setVacc} vacc={vacc} med={med}/>
       }
       
         <ScrollView

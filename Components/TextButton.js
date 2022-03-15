@@ -3,7 +3,8 @@ import {
     TouchableOpacity,
     Text,
     View,
-    Image
+    Image,
+    ActivityIndicator
 } from 'react-native';
 import { FONTS, COLORS ,SIZES} from "./Constants";
 import ActivityIndicatorExample from './Loading';
@@ -18,7 +19,8 @@ const TextButton = ({
     onPress,
     icon,
     iconStyle,
-    buttonContainerStyle2
+    buttonContainerStyle2,
+    loading
 }) => {
     return (
         <TouchableOpacity
@@ -44,7 +46,16 @@ const TextButton = ({
                         margin:10
                     }}
                 >
-                    <Image source={icon} style={{height:25,width:25,tintColor:COLORS.white,...iconStyle}}/>
+                {
+                    loading?
+                
+                    <ActivityIndicator
+                        animating = {true}
+                        color = {COLORS.white}
+                        size = "small"
+                        />
+                        :
+                    <Image source={icon} style={{height:25,width:25,tintColor:COLORS.white,...iconStyle}}/> } 
             </View>
             }
             <Text style={{ color: COLORS.white, ...FONTS.h3, ...labelStyle,letterSpacing:2 }}>

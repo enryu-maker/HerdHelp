@@ -37,7 +37,7 @@ const DrawerNav = () => {
         drawerStyle:[{backgroundColor:COLORS.transparent},styles.drawerStyle],
         drawerLabelStyle: [FONTS.body3,{letterSpacing:2}],
         drawerType:"front",
-        overlayColor: COLORS.Primary,
+        overlayColor: "#00000040",
         backBehavior:"history",  
         drawerStatusBarAnimation:"fade",
       }}

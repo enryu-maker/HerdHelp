@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity,ActivityIndicator} from 'react-native';
 import React from 'react';
 import {images, COLORS,SIZES} from '../../Components/Constants';
 import Header from '../../Components/Header';
@@ -9,9 +9,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 export default function Report(props) {
   const [report, setReport] = React.useState([]);
   const [footer, setFooter] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
 
   async function getReports() {
+    setLoading(true)
     let {data} = await axiosIns.get('reports/');
+    setLoading(false)
     return data;
   }
   React.useEffect(() => {
@@ -53,7 +57,12 @@ export default function Report(props) {
         style={{
           flex: 1
         }}>
-        {
+        {loading? <ActivityIndicator
+                        animating = {loading}
+                        color = {COLORS.white}
+                        size = "small"
+                        // style={{padding:10}}
+                        /> :
         report.map((listItem, index)  => (
           <ReportB key={listItem.id} img={listItem.image} reportText={listItem.name} 
           onPress={()=>{
@@ -61,7 +70,7 @@ export default function Report(props) {
               label:listItem.name,
               api:listItem.api.toString(),
               cond:false,
-              // footer:listItem.name.toString()!="Sold Animals" || "Lost Animals"? false : true
+              footer:listItem.name.toString()!="Sold Animals" || "Lost Animals"? false : true
             })
           }}
           />
