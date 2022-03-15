@@ -46,7 +46,7 @@ const AlertCard=({
             }>    {time}</Text>
             </View>
             </View>
-            <TouchableOpacity style={{backgroundColor:'#ff5b5b',height:110,width:75,alignSelf:"flex-end",borderRadius:SIZES.radius,margin:5,flexDirection:"column",justifyContent:"space-evenly"}}
+            {/* <TouchableOpacity style={{backgroundColor:'#ff5b5b',height:110,width:75,alignSelf:"flex-end",borderRadius:SIZES.radius,margin:5,flexDirection:"column",justifyContent:"space-evenly"}}
             onPress={()=>{delAlert()}}
             >
             <Image source={images.bell} 
@@ -61,7 +61,7 @@ const AlertCard=({
             </Text>
             </View>
             
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         </View>
         
 

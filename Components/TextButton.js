@@ -48,7 +48,6 @@ const TextButton = ({
                 >
                 {
                     loading?
-                
                     <ActivityIndicator
                         animating = {true}
                         color = {COLORS.white}

@@ -50,7 +50,9 @@ export const images ={
     HH:require("../assets/Logo/logo.png"),
     setting:require("../assets/Logo/settings.png"),
     file:require("../assets/Logo/file.png"),
-    heart:require("../assets/Logo/heart.png")
+    heart:require("../assets/Logo/heart.png"),
+    delet:require("../assets/Logo/delete.png")
+
 
 }
 export const COLORS={
