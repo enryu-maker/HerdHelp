@@ -30,11 +30,11 @@ export default function Drawercontent(props) {
               <View />
               {global.User &&
                 <View style={{marginLeft: 20}}>
-                <Title style={styles.title}>{global.User[0].fullname}</Title>
+                <Title style={styles.title}>{global.User[0]?.fullname}</Title>
                 <Caption style={[styles.caption, {color: COLORS.gray}]}>
-                {global.User[0].farm_name}
+                {global.User[0]?.farm_name}
                 </Caption>
-                <Caption style={styles.caption}>{`@ ${global.User[0].username}`}</Caption>
+                <Caption style={styles.caption}>{`@ ${global.User[0]?.username}`}</Caption>
               </View>}
             </View>
           </View>

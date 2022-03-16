@@ -33,7 +33,7 @@ export default function LoadAlert({navigation, route}) {
       // console.log(data)
     });
     global.alertlength = alert;
-  }, []);
+  }, [alert]);
   function delAlert(id){
     axiosIns.delete(`alerts/${id}`).then(()=>{alert("Alert deleted sucessfully")})
    }
@@ -137,7 +137,7 @@ export default function LoadAlert({navigation, route}) {
               iconStyle={{
                 marginRight: 15,
               }}
-              onPress={() => delAlert(data.item.id)}
+              onPress={() => {delAlert(data.item.id)}}
             />
           )}
           disableRightSwipe={true}
