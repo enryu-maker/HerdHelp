@@ -51,7 +51,8 @@ export const images ={
     setting:require("../assets/Logo/settings.png"),
     file:require("../assets/Logo/file.png"),
     heart:require("../assets/Logo/heart.png"),
-    delet:require("../assets/Logo/delete.png")
+    delet:require("../assets/Logo/delete.png"),
+    parents:require("../assets/Logo/family.png")
 
 
 }

@@ -78,6 +78,17 @@ export default function Drawercontent(props) {
               props.navigation.closeDrawer()
             }}
           />
+          <DrawerItem
+            icon={({color, size}) => (
+              <Image source={images.parents} style={[{height: 25, width: 25}]} />
+            )}
+            label="Parents"
+            labelStyle={[FONTS.body3, {letterSpacing: 2}]}
+            onPress={() => {
+              props.navigation.navigate('WeightH');
+              props.navigation.closeDrawer()
+            }}
+          />
         </Drawer.Section>
         
       </DrawerContentScrollView>
@@ -134,6 +145,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 18,
     letterSpacing: 1,
+    color:COLORS.Primary
   },
   row: {
     marginTop: 6,
