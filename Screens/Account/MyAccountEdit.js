@@ -76,25 +76,31 @@ const MyAccountEdit = ({navigation,route}) => {
       <Header
         leftComponent={
           <View
+          style={{
+            justifyContent: 'center',
+            position: 'absolute',
+            marginTop: 20,
+            zIndex: 1,
+          }}>
+          <TouchableOpacity
             style={{
-              justifyContent: 'center',
-              position: 'absolute',
-              marginTop: 25,
-              zIndex: 1,
-            }}>
-            <TouchableOpacity
-              style={{
-                marginLeft: 25,
+              marginLeft: 25,
+              backgroundColor:COLORS.Primary,
+              height:40,
+              width:40,
+              justifyContent:"center",
+              borderRadius:SIZES.base,
               }}
-              onPressIn={() => {
-                navigation.replace("MyAccount");
-              }}>
-              <Image
-                source={images.back}
-                style={{width: 28, height: 28, tintColor: COLORS.darkGray2}}
-              />
-            </TouchableOpacity>
-          </View>
+            onPress={() => {
+              navigation.replace("MyAccount");
+
+            }}>
+            <Image
+              source={images.back}
+              style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
+            />
+          </TouchableOpacity>
+        </View>
         }
         title={'Edit Account'}
         titleStyle={{

@@ -10,10 +10,13 @@ export const Info = ({navigation, route}) => {
   const [med, setMed] = React.useState([]);
   const [cond, setCond] = React.useState(false);
   const [show, setShow] = React.useState(false);
-
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+  })
   async function getMedication(tag) {
     let {data} = await axiosIns.get(`getmedication/${tag}`);
-    // setMed(data);
     return data;
   }
   React.useEffect(() => {
@@ -63,7 +66,7 @@ export const Info = ({navigation, route}) => {
         style={{
           marginTop: SIZES.padding,
           borderRadius: SIZES.radius,
-          paddingHorizontal: SIZES.radius,
+          // paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -72,7 +75,7 @@ export const Info = ({navigation, route}) => {
           style={{
             flexDirection: 'column',
             alignSelf: 'center',
-            marginLeft: 50,
+            marginLeft: 65,
           }}>
           {cond ? (
             <Image
@@ -96,15 +99,15 @@ export const Info = ({navigation, route}) => {
         <TouchableOpacity
           style={{
             backgroundColor: COLORS.Primary,
-            height: 120,
+            height: 130,
             width: 80,
             borderRadius: SIZES.radius,
-            margin: 8,
+            marginLeft: 30,
             flexDirection: 'column',
+            alignSelf:"center",
             justifyContent: 'space-evenly',
           }}
           onPress={() => {
-            // console.log(med);
             navigation.navigate('MedCard', {
               medication: med,
             });
@@ -187,7 +190,7 @@ export const Info = ({navigation, route}) => {
         ) : (
           <InfoItem
             label="Price"
-            value={`$ ${animal?.price}`}
+            value={`${formatter.format(animal?.price)}`}
             withDivider={false}
           />
         )}
@@ -234,19 +237,24 @@ export const Info = ({navigation, route}) => {
             style={{
               justifyContent: 'center',
               position: 'absolute',
-              marginTop: 25,
+              marginTop: 20,
               zIndex: 1,
             }}>
             <TouchableOpacity
               style={{
                 marginLeft: 25,
-              }}
-              onPressIn={() => {
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:40,
+                justifyContent:"center",
+                borderRadius:SIZES.base,
+                }}
+              onPress={() => {
                 navigation.goBack();
               }}>
               <Image
                 source={images.back}
-                style={{width: 28, height: 28, tintColor: COLORS.darkGray2}}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>
@@ -258,15 +266,25 @@ export const Info = ({navigation, route}) => {
         rightComponent={
           cond?
           <TouchableOpacity
+          style={{
+            marginRight: 25,
+            // backgroundColor:COLORS.Primary,
+            // height:40,
+            // width:40,
+            // justifyContent:"center",
+            // borderRadius:SIZES.base,
+            }}
           onPress={()=>{
             setShow(true)
           }}
           >
           <Text
           style={{
-            marginTop:5,
-            padding:SIZES.padding,
-            color:COLORS.Primary,
+            backgroundColor:COLORS.Primary,
+            borderRadius:SIZES.base,
+            marginTop: 20,
+            padding:5,
+            color:COLORS.white,
             ...FONTS.h2
           }}
           

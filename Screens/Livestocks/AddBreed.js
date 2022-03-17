@@ -30,10 +30,10 @@ import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
 import CustomAlert from '../../Components/CustomAlert';
 
-const Addanimals = ({navigation,route}) => {
+const Addanimals = ({navigation, route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
-  const [valueBS, setValueBS] = useState("");
+  const [valueBS, setValueBS] = useState('');
   const [age, setAge] = useState(0);
   const [Breed, setBreed] = useState('');
   const [tag, setTag] = useState('');
@@ -50,11 +50,11 @@ const Addanimals = ({navigation,route}) => {
   const [bought, setBought] = useState(false);
   const [loading, setLoading] = React.useState(false);
   const [animals, setAnimals] = React.useState([]);
-  const [id,setId] = React.useState("")
-  const [registration,setRegistration] = React.useState("")
+  const [id, setId] = React.useState('');
+  const [registration, setRegistration] = React.useState('');
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
-  const [dataText,setDataText] = React.useState("")
+  const [dataText, setDataText] = React.useState('');
   const onChangeMS = value => {
     setValueMS(value);
   };
@@ -70,22 +70,22 @@ const Addanimals = ({navigation,route}) => {
   const onChangebought = value => {
     setBought(value);
   };
-  const clear=()=>{
+  const clear = () => {
     // setSpcies([])
-    setWeight("")
-    setTag("")
-    setRegistration("")
-    setAge("")
-    setBreed("")
-    setMother("")
-    setFather("")
-    setPrice("")
-    setName("")
-  }
+    setWeight('');
+    setTag('');
+    setRegistration('');
+    setAge('');
+    setBreed('');
+    setMother('');
+    setFather('');
+    setPrice('');
+    setName('');
+  };
   const data = JSON.stringify({
     name: name,
-    tag_number:` ${id}${valueMS}${tag}`,
-    registration:"",
+    tag_number: ` ${id}${valueMS}${tag}`,
+    registration: '',
     support_tag: tag,
     gender: valueBS,
     species: valueMS,
@@ -100,11 +100,11 @@ const Addanimals = ({navigation,route}) => {
     vaccination_date: vaccinateddatet,
     price: price,
     bought: bought,
-    status:"Alive"
+    status: 'Alive',
   });
   async function postAnimal() {
-    setLoading(true)
-   await axiosIns
+    setLoading(true);
+    await axiosIns
       .post('animals/', data, {
         headers: {
           'Content-Type': 'application/json',
@@ -112,23 +112,24 @@ const Addanimals = ({navigation,route}) => {
       })
       .then(response => {
         if (response.status == 201) {
-          clear()
-          setLoading(false)
+          clear();
+          setLoading(false);
           setValidation(true);
-            setShow(true)
-            setDataText('Animal added'); 
+          setShow(true);
+          setDataText('Animal added');
         }
       })
-      .catch(err => console.log('api Erorr: ', err),
-      setLoading(false),
-      setValidation(false),
-      setShow(false)
+      .catch(
+        err => console.log('api Erorr: ', err),
+        setLoading(false),
+        setValidation(false),
+        setShow(false),
       );
   }
   React.useEffect(() => {
-      setId(global.id)
-      setAnimals(global.species)
-  },[]);
+    setId(global.id);
+    setAnimals(global.species);
+  }, []);
   function renderHeader() {
     return (
       <Header
@@ -137,19 +138,24 @@ const Addanimals = ({navigation,route}) => {
             style={{
               justifyContent: 'center',
               position: 'absolute',
-              marginTop: 25,
+              marginTop: 20,
               zIndex: 1,
             }}>
             <TouchableOpacity
               style={{
                 marginLeft: 25,
-              }}
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:40,
+                justifyContent:"center",
+                borderRadius:SIZES.base,
+                }}
               onPress={() => {
                 navigation.goBack();
               }}>
               <Image
                 source={images.back}
-                style={{width: 30, height: 30, tintColor: COLORS.darkGray2}}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>
@@ -178,6 +184,7 @@ const Addanimals = ({navigation,route}) => {
             </View>
           }
           label="Tag Number*"
+          keyboardType="numeric"
           value={tag}
           onChange={value => {
             setTag(value);
@@ -308,7 +315,7 @@ const Addanimals = ({navigation,route}) => {
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
-        {bought!=true? (
+        {bought != true ? (
           <View>
             <FormDateInput
               label="Date of Birth"
@@ -338,6 +345,7 @@ const Addanimals = ({navigation,route}) => {
               }
               label="Mother Tag Number"
               value={mother}
+              keyboardType="numeric"
               onChange={value => {
                 setMother(value);
               }}
@@ -360,6 +368,7 @@ const Addanimals = ({navigation,route}) => {
               }
               label="Father Tag Number"
               value={father}
+              keyboardType="numeric"
               onChange={value => {
                 setFather(value);
               }}
@@ -445,6 +454,7 @@ const Addanimals = ({navigation,route}) => {
           }
           label="Weight"
           value={weight}
+          keyboardType="numeric"
           onChange={value => {
             setWeight(value);
           }}
@@ -456,42 +466,44 @@ const Addanimals = ({navigation,route}) => {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
-        {
-          valueBS!="Male"?<Dropdown
-          label="Bred"
-          borderRadius={SIZES.radius}
-          data={Bred}
-          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
-          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
-          selectedItemViewStyle={{
-            backgroundColor: COLORS.Primary,
-            margin: 5,
-            borderRadius: SIZES.radius,
-          }}
-          enableAvatar
-          // required
-          disableSelectionTick
-          primaryColor={COLORS.Primary}
-          avatarSize={28}
-          value={bred}
-          onChange={onChangeB}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
-          // mode="outlined"
-          mainContainerStyle={{
-            borderRadius: SIZES.padding,
-            width: '88%',
-            alignSelf: 'center',
-            marginTop: SIZES.height > 800 ? SIZES.base : 10,
-          }}
-          itemContainerStyle={{
-            backgroundColor: COLORS.white,
-            margin: 5,
-            borderRadius: SIZES.radius,
-          }}
-        />:<View></View>
-        }
-        
+        {valueBS != 'Male' ? (
+          <Dropdown
+            label="Bred"
+            borderRadius={SIZES.radius}
+            data={Bred}
+            textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+            selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+            selectedItemViewStyle={{
+              backgroundColor: COLORS.Primary,
+              margin: 5,
+              borderRadius: SIZES.radius,
+            }}
+            enableAvatar
+            // required
+            disableSelectionTick
+            primaryColor={COLORS.Primary}
+            avatarSize={28}
+            value={bred}
+            onChange={onChangeB}
+            animationIn="zoomIn"
+            animationOut="zoomOut"
+            // mode="outlined"
+            mainContainerStyle={{
+              borderRadius: SIZES.padding,
+              width: '88%',
+              alignSelf: 'center',
+              marginTop: SIZES.height > 800 ? SIZES.base : 10,
+            }}
+            itemContainerStyle={{
+              backgroundColor: COLORS.white,
+              margin: 5,
+              borderRadius: SIZES.radius,
+            }}
+          />
+        ) : (
+          <View></View>
+        )}
+
         <FormInput
           prependComponent={
             <View
@@ -589,6 +601,7 @@ const Addanimals = ({navigation,route}) => {
           }
           label="Price"
           value={price}
+          keyboardType="numeric"
           onChange={value => {
             setPrice(value);
           }}
@@ -609,10 +622,15 @@ const Addanimals = ({navigation,route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-        {show &&
-        <CustomAlert show={show} validation={validation} setShow={setShow} label={dataText}/>
-}
-      
+      {show && (
+        <CustomAlert
+          show={show}
+          validation={validation}
+          setShow={setShow}
+          label={dataText}
+        />
+      )}
+
       {renderHeader()}
 
       <KeyboardAwareScrollView

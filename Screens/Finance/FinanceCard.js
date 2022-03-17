@@ -8,6 +8,11 @@ const FinanceCard=({
     quantity,
     
 })=>{
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+  })
   return (
     <View style={{backgroundColor:COLORS.lightGray2,
     height:120,
@@ -25,7 +30,7 @@ const FinanceCard=({
           }>{` Qty: ${quantity}`}</Text>
           <Text style={
           Platform.OS=="android"?{paddingTop:5,...FONTS.h3,marginLeft:60,color:COLORS.green}:{paddingTop:5,...FONTS.h2,marginLeft:60,color:COLORS.green}
-            }>{`$ ${price}`}</Text>
+            }>{`${formatter.format(price)}`}</Text>
           </View>
           <Text 
           style={

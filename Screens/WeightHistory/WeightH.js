@@ -53,19 +53,24 @@ export default function WeightH({navigation}) {
             style={{
               justifyContent: 'center',
               position: 'absolute',
-              marginTop: 25,
+              marginTop: 20,
               zIndex: 1,
             }}>
             <TouchableOpacity
               style={{
-                marginLeft: 25,
+              marginLeft: 25,
+              backgroundColor:COLORS.Primary,
+              height:40,
+              width:40,
+              justifyContent:"center",
+              borderRadius:SIZES.base,
               }}
               onPress={() => {
                 navigation.openDrawer();
               }}>
               <Image
                 source={images.menu}
-                style={{width: 30, height: 30, tintColor: COLORS.darkGray2}}
+                style={{width: 30, height: 30, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>
@@ -125,6 +130,7 @@ export default function WeightH({navigation}) {
           }
           label="Tag Number"
           value={tag}
+          keyboardType="numeric"
           onChange={value => {
             setTag(value);
           }}

@@ -65,45 +65,54 @@ async function getData(api){
             style={{
               justifyContent: 'center',
               position: 'absolute',
-              marginTop: 25,
+              marginTop: 20,
               zIndex: 1,
             }}>
             <TouchableOpacity
               style={{
                 marginLeft: 25,
-              }}
-              onPressIn={() => {
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:40,
+                justifyContent:"center",
+                borderRadius:SIZES.base,
+                }}
+              onPress={() => {
                 navigation.goBack();
               }}>
               <Image
                 source={images.back}
-                style={{width: 30, height: 30, tintColor: COLORS.darkGray2}}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>
         }
         title={label}
         titleStyle={{
-          marginLeft:65
+          marginLeft:100
         }}
         rightComponent={
           <View
             style={{
-              justifyContent: 'center',
-              // position: 'absolute',
-              // marginTop: 25,
-              zIndex: 1,
-            }}>
+              marginTop: 20,
+              marginRight:25
+              }}
+            >
             <TouchableOpacity
               style={{
-                // marginLeft: 25,
+                marginLeft: 25,
+              backgroundColor:COLORS.Primary,
+              height:40,
+              width:40,
+              justifyContent:"center",
+              borderRadius:SIZES.base,
               }}
               onPressIn={() => {
                 setShow(true);
               }}>
               <Image
                 source={images.filter}
-                style={{width: 25, height: 25, tintColor: COLORS.darkGray2,margin:20}}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>

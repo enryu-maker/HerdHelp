@@ -62,19 +62,28 @@ const Main = ({navigation}) => {
         leftComponent={
           <View
             style={{
-              justifyContent: 'center',
+              // justifyContent: 'center',
               marginTop: '8%',
             }}>
             <TouchableOpacity
               style={{
-                marginLeft: 30,
+              marginLeft: 25,
+              backgroundColor:COLORS.Primary,
+              height:40,
+              width:40,
+              justifyContent:"center",
+              borderRadius:SIZES.base,
               }}
               onPress={() => {navigation.openDrawer()}}>
               <Image
                 source={images.menu}
                 style={{
-                  width: 35,
-                  height: 35,
+              // backgroundColor:COLORS.Primary,
+                  width: 30,
+                  height: 30,
+                  padding:5,
+                  alignSelf:"center",
+                  tintColor:COLORS.white
                 }}
               />
             </TouchableOpacity>
