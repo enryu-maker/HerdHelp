@@ -49,12 +49,11 @@ const Main = ({navigation}) => {
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-    {/* <Loader loading={loading}/> */}
       <Header
         title={"HerdHelp"}
         titleStyle={{
-          marginTop:30,
-          marginRight: 65,
+          marginTop:20,
+          marginRight: 55,
           color:COLORS.black,
           ...FONTS.h1
 
@@ -62,8 +61,7 @@ const Main = ({navigation}) => {
         leftComponent={
           <View
             style={{
-              // justifyContent: 'center',
-              marginTop: '8%',
+              marginTop:25,
             }}>
             <TouchableOpacity
               style={{

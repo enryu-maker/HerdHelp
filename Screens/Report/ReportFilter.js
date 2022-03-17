@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import TextButton from '../../Components/TextButton';
 export default function ReportFilter({show, setShow,setSpec,setVacc,setMed,vacc,med}) {
-    const [species,setSpecies] = React.useState(false)
+    const [species,setSpecies] = React.useState(null)
     const [animal,setAnimal] = React.useState([])
     const updateStatus=value=>{
         setSpecies(value)
@@ -90,7 +90,7 @@ export default function ReportFilter({show, setShow,setSpec,setVacc,setMed,vacc,
           icon={images.correct}
           buttonContainerStyle={{
             marginTop:15,
-          backgroundColor:vacc?COLORS.Primary:COLORS.transparentPrimary
+          backgroundColor:vacc?COLORS.Primary:COLORS.gray
           }}
           onPress={()=>{setVacc(true)}}
           />
@@ -102,7 +102,7 @@ export default function ReportFilter({show, setShow,setSpec,setVacc,setMed,vacc,
           onPress={()=>{setVacc(false)}}
           buttonContainerStyle={{
               marginTop:10,
-              backgroundColor:vacc==false?COLORS.Primary:COLORS.transparentPrimary
+              backgroundColor:vacc==false?COLORS.Primary:COLORS.gray
         }}/>
         <TextButton label={"Medicated"}
           icon={images.correct}
@@ -112,7 +112,7 @@ export default function ReportFilter({show, setShow,setSpec,setVacc,setMed,vacc,
           onPress={()=>{setMed(true)}}
           buttonContainerStyle={{
               marginTop:10,
-              backgroundColor:med?COLORS.Primary:COLORS.transparentPrimary
+              backgroundColor:med?COLORS.Primary:COLORS.gray
 
         }}/>
         <TextButton label={"Not Medicated"}
@@ -123,7 +123,7 @@ export default function ReportFilter({show, setShow,setSpec,setVacc,setMed,vacc,
           onPress={()=>{setMed(false)}}
           buttonContainerStyle={{
               marginTop:10,
-              backgroundColor:med==false?COLORS.Primary:COLORS.transparentPrimary
+              backgroundColor:med==false?COLORS.Primary:COLORS.gray
 
             // width:150
         }}/>

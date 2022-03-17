@@ -175,12 +175,11 @@ export const Medication = ({navigation, route}) => {
           label="Tag Number"
           value={tag}
           onChange={value => {
-            // console.log(value)
             setTag(value);
           }}
+          keyboardType="numeric"
           inputContainerStyle={{
             backgroundColor: COLORS.white,
-            // justifyContent: 'center',
           }}
           containerStyle={{
             marginTop: SIZES.radius,

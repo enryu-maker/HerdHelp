@@ -1,6 +1,6 @@
 import { View, Text,Image,TouchableOpacity } from 'react-native'
 import React from 'react'
-import { images,COLORS } from '../../Components/Constants';
+import { images,COLORS,SIZES } from '../../Components/Constants';
 import Header from '../../Components/Header';
 export default function Setting({navigation}) {
   function renderheader() {
@@ -11,17 +11,25 @@ export default function Setting({navigation}) {
             style={{
               justifyContent: 'center',
               position: 'absolute',
-              marginTop: 25,
+              marginTop: 20,
               zIndex: 1,
             }}>
             <TouchableOpacity
               style={{
-                // marginTop: 20,
                 marginLeft: 25,
-              }}
-              onPress={() =>  {navigation.openDrawer()} }>
-              <Image source={images.menu} style={{width:30,height:30,tintColor:COLORS.darkGray2}}/>
-
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:40,
+                justifyContent:"center",
+                borderRadius:SIZES.base,
+                }}
+              onPress={() => {
+                navigation.openDrawer();
+              }}>
+              <Image
+                source={images.menu}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
+              />
             </TouchableOpacity>
           </View>
         }
