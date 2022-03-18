@@ -26,7 +26,7 @@ import ReportOP from '../Report/ReportOP';
 import WeightH from '../WeightHistory/WeightH';
 import History from '../WeightHistory/History';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
+import Parents from '../Parents/Parents';
 const Drawer = createDrawerNavigator();
 import Drawercontent from './Drawercontent';
 const DrawerNav = () => {
@@ -72,6 +72,14 @@ const DrawerNav = () => {
               /> )       
           }} />
           <Drawer.Screen name='Setting' component={Setting} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.setting}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+          <Drawer.Screen name='Parents' component={Parents} options={{
         // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image

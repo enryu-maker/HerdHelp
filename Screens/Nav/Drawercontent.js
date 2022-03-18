@@ -85,7 +85,7 @@ export default function Drawercontent(props) {
             label="Parents"
             labelStyle={[FONTS.body3, {letterSpacing: 2}]}
             onPress={() => {
-              props.navigation.navigate('WeightH');
+              props.navigation.navigate('Parents');
               props.navigation.closeDrawer()
             }}
           />

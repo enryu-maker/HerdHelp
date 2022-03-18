@@ -28,6 +28,7 @@ import WeightH from '../WeightHistory/WeightH';
 import History from '../WeightHistory/History';
 const Drawer = createDrawerNavigator();
 import Drawercontent from './Drawercontent';
+import Parents from '../Parents/Parents';
 const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
@@ -66,6 +67,14 @@ const DrawerNav = () => {
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.weight}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
+          <Drawer.Screen name='Parents' component={Parents} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.setting}
                 style={[{ height: 25, width: 25}]}
               /> )       
           }} />
