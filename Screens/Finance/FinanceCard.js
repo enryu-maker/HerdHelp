@@ -34,7 +34,7 @@ const FinanceCard=({
           </View>
           <Text 
           style={
-          Platform.OS=="android"?{paddingLeft:SIZES.padding,paddingTop:5,...FONTS.h3}:{paddingLeft:SIZES.padding,paddingTop:5,...FONTS.h2}
+          Platform.OS=="android"?{paddingLeft:SIZES.padding,paddingTop:5,...FONTS.h3}:{paddingLeft:SIZES.padding,paddingTop:5,...FONTS.body2}
           }
           
           >{` Date: ${date}`}</Text>

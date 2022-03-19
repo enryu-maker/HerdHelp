@@ -108,21 +108,21 @@ export default function LoadAlert({navigation, route}) {
               Platform.OS=="android"?{...FONTS.h2}:{...FONTS.h2}
                 }>{`Issue: ${data.item.title}`}</Text>
             <Text style={
-                Platform.OS=="android"?{...FONTS.body3}:{...FONTS.body2}
+                Platform.OS=="android"?{...FONTS.body3}:{...FONTS.body3}
             }>{`Solution: ${data.item.content}`}</Text>
             {
               data.item.tag!=undefined||""?(<Text style={
-                Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h2}
+                Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h3}
             }>{`${data.item.tag}`}</Text>):
               (<View></View>)
             }
             <View style={{flexDirection:"row",justifyContent:"space-between",width:"55%"}}>
             <Text style={
-                Platform.OS=="android"?{...FONTS.h4,color:COLORS.Primary}:{...FONTS.h2,color:COLORS.Primary}
+                Platform.OS=="android"?{...FONTS.h4,color:COLORS.Primary}:{...FONTS.h3,color:COLORS.Primary}
             }>{`Date: ${data.item.alert_date}`}</Text>
             <Text style={
-                Platform.OS=="android"?{...FONTS.h4}:{...FONTS.h2}
-            }>    {`Time: ${data.item.alert_time.slice(0,6)}`}</Text>
+                Platform.OS=="android"?{...FONTS.h4}:{...FONTS.h3}
+            }>    {`Time: ${data.item.alert_time}`}</Text>
             </View>
             </View></View>
             </View>

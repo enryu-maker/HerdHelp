@@ -77,7 +77,7 @@ export default function Report(props) {
               label:listItem.name,
               api:listItem.api.toString(),
               cond:false,
-              footer:listItem.name.toString()!="Sold Animals" || "Lost Animals"? false : true
+              footer:listItem.name=="Lost Animals" || listItem.name=="Sold Animals"? true : false
             })
           }}
           />

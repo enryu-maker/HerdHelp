@@ -56,6 +56,11 @@ export const images ={
 
 
 }
+export const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2
+})
 export const COLORS={
     // Primary:"rgb(126,204,122)",
     Primary:"#0DB44C",

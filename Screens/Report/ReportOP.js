@@ -1,4 +1,4 @@
-import { View, Text ,TouchableOpacity,Image,ScrollView,Platform} from 'react-native'
+import { View, Text ,TouchableOpacity,Image,ScrollView,Platform,ActivityIndicator} from 'react-native'
 import React from 'react'
 import Header from '../../Components/Header';
 import Card from '../../Components/Card';
@@ -7,9 +7,12 @@ import {
   FONTS,
   images,
   SIZES,
+  formatter
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import ReportFilter from './ReportFilter';
+import { set } from 'react-native-reanimated';
+import ActivityIndicatorExample from '../../Components/Loading';
 export default function ReportOP({navigation,route}) {
   const [label,setLabel]=React.useState("")
   const [loading,setLoading]=React.useState(false)
@@ -20,7 +23,7 @@ export default function ReportOP({navigation,route}) {
   const [vacc, setVacc] = React.useState('')
   const [med, setMed] = React.useState('')
   const [footer,setFooter] =React.useState(false)
-
+  const [amount,setAmount] = React.useState([])
   function filterList(list) {
     return list.filter(
       (listItem) =>
@@ -37,7 +40,9 @@ export default function ReportOP({navigation,route}) {
   }
   // console.log(Data)
 async function getData(api){
+    setLoading(true)
     let {data} =  await axiosIns.get(api)
+    setLoading(false)
     return data
  }
 //  console.log(api)
@@ -46,8 +51,8 @@ async function getData(api){
     let {label} = route.params
     let {api} =route.params
     let {cond} =route.params
-    // let {footer} =route.params
-    // setFooter(footer)
+    let {footer} =route.params
+    setFooter(footer)
     setCon(cond)
       setLabel(label)
     getData(api).then(data=>{
@@ -120,21 +125,29 @@ async function getData(api){
       />
     );
   }
-  function renderFooter(){
+  function totalmoney(){
+    var price=0
+    Data.map(a=>{
+      price+=a.soldprice
+    })
+    return price
+  }
+  function renderFooter(price){
     return(
       <View style={{
         // justifyContent:"flex-end",
         height:80,
-        borderTopLeftRadius:SIZES.radius+10,
-        borderTopRightRadius:SIZES.radius+10,
+        borderTopLeftRadius:SIZES.radius,
+        borderTopRightRadius:SIZES.radius,
         backgroundColor:COLORS.Primary,
         flexDirection:"row",
-        justifyContent:"center"
+        justifyContent:"center",
+        // marginBottom:10
       }}>
         <Text style={
           
          Platform.OS=="ios"?{
-          ...FONTS.h1,
+          ...FONTS.h2,
           color:COLORS.white,
           alignSelf:"center"
         }:{
@@ -143,20 +156,19 @@ async function getData(api){
           alignSelf:"center"
 
         }
-      }>Amount:</Text>
+      }>{`Total ${label}: `}</Text>
       <Text style={
          Platform.OS=="ios"?{
-          ...FONTS.h1,
+          ...FONTS.h2,
           color:COLORS.white,
           alignSelf:"center"
         }:{
           ...FONTS.h2,
           color:COLORS.white,
           alignSelf:"center"
-
-
         }
-      }>  $240</Text>
+      }>{formatter.format(price)}
+        </Text>
       </View>
     )
   }
@@ -167,8 +179,18 @@ async function getData(api){
         show &&
       <ReportFilter show={show} setShow={setShow} setSpec={setSpec} setMed={setMed} setVacc={setVacc} vacc={vacc} med={med}/>
       }
-      
-        <ScrollView
+      {
+        loading?(
+        <View style={{
+          flex:1,
+          justifyContent:"center",
+        }}><ActivityIndicator size="large"
+        color={COLORS.Primary}
+        style={{
+          alignSelf:"center"
+        }}/></View>
+        ):
+        (<ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{flexGrow: 1}}>
           {filterList(Data).map((listItem, index) => (
@@ -189,9 +211,9 @@ async function getData(api){
               }}
             />
           ))}
-        </ScrollView>
+        </ScrollView>)}
         {
-          footer?renderFooter():<View></View>
+          footer?renderFooter(totalmoney()):null
         }
         
     </View>

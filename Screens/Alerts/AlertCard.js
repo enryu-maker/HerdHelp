@@ -32,17 +32,17 @@ const AlertCard=({
               Platform.OS=="android"?{...FONTS.h2}:{...FONTS.h2}
                 }>{title}</Text>
             <Text style={
-                Platform.OS=="android"?{...FONTS.body3}:{...FONTS.body2}
+                Platform.OS=="android"?{...FONTS.body3}:{...FONTS.body3}
             }>{content}</Text>
             <Text style={
-                Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h2}
+                Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h3}
             }>{`${tag}`}</Text>
             <View style={{flexDirection:"row",justifyContent:"space-between",width:"55%"}}>
             <Text style={
-                Platform.OS=="android"?{...FONTS.h4,color:COLORS.Primary}:{...FONTS.h2,color:COLORS.Primary}
+                Platform.OS=="android"?{...FONTS.h4,color:COLORS.Primary}:{...FONTS.h3,color:COLORS.Primary}
             }>{date}</Text>
             <Text style={
-                Platform.OS=="android"?{...FONTS.h4}:{...FONTS.h2}
+                Platform.OS=="android"?{...FONTS.h4}:{...FONTS.h3}
             }>    {time}</Text>
             </View>
             </View>
