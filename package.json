@@ -28,6 +28,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-material-design": "^0.3.7",
     "react-native-paper": "^4.11.2",
+    "react-native-push-notification": "^8.1.1",
     "react-native-reanimated": "^2.4.1",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",

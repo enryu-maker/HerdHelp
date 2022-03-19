@@ -36,13 +36,13 @@ export default function App() {
       });
     },[])
   React.useEffect(() => {
-    // setTimeout(()=>{
+    setTimeout(()=>{
       SplashScreen.hide();
-    // },3000)
+    },2000)
     retrieveData().then(cond=>{
       setRoute(cond)
     })
-  },[]);
+  },[Route]);
   return (
         <View style={{flex:1}}>
           <StatusBar 
