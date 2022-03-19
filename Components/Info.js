@@ -289,13 +289,6 @@ export const Info = ({navigation, route}) => {
           cond?
           <TouchableOpacity
           style={{
-            // marginRight: 25,
-            // backgroundColor:COLORS.Primary,
-            // borderRadius:SIZES.radius,
-            // marginTop: 20,
-            // padding:5,
-            // height:40,
-            // width:50,
             justifyContent:"center"
             }}
           onPress={()=>{
@@ -308,7 +301,6 @@ export const Info = ({navigation, route}) => {
             color:COLORS.Primary,
             ...FONTS.h2
           }}
-          
           >EDIT</Text>
           </TouchableOpacity>:<View></View>
           
