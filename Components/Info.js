@@ -268,11 +268,12 @@ export const Info = ({navigation, route}) => {
           <TouchableOpacity
           style={{
             marginRight: 25,
-            // backgroundColor:COLORS.Primary,
-            // height:40,
-            // width:40,
-            // justifyContent:"center",
-            // borderRadius:SIZES.base,
+            backgroundColor:COLORS.Primary,
+            borderRadius:SIZES.radius,
+            marginTop: 20,
+            padding:5,
+            height:40,
+            width:60
             }}
           onPress={()=>{
             setShow(true)
@@ -280,14 +281,10 @@ export const Info = ({navigation, route}) => {
           >
           <Text
           style={{
-            backgroundColor:COLORS.Primary,
-            borderRadius:SIZES.base,
-            marginTop: 20,
-            padding:5,
+            
             color:COLORS.white,
             ...FONTS.h2
           }}
-          
           >EDIT</Text>
           </TouchableOpacity>:<View></View>
           
