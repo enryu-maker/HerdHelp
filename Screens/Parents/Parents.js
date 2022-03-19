@@ -156,7 +156,7 @@ export default function Parents({navigation}) {
   }
   function renderAnimal(data) {
     return data.map(a => (
-      <Card Tagnumber={a.tag_number} Gender={a.gender} image={a.image} Name={a.name}/>
+      <Card key={a.id} Tagnumber={a.tag_number} Gender={a.gender} image={a.image} Name={a.name}/>
     ));
   }
   return (

@@ -229,6 +229,22 @@ export const Info = ({navigation, route}) => {
       </View>
     );
   }
+  function Babies(){
+
+    return(<View
+        style={{
+          marginTop: SIZES.padding,
+          borderRadius: SIZES.radius,
+          paddingHorizontal: SIZES.radius,
+          backgroundColor: COLORS.lightGray2,
+          paddingBottom: SIZES.padding,
+        }}>
+        <InfoItem label="Tag" value={"DOB"}/>
+        {animal.children?.map(a=>(
+          <InfoItem label={a.tag_number} value={a.birth_date} />
+        ))}
+        </View>)
+  }
   function renderHeader() {
     return (
       <Header
@@ -310,6 +326,10 @@ export const Info = ({navigation, route}) => {
         }}>
         {renderSectionZero()}
         {renderSectionOne()}
+        {
+          animal.children?.length > 0?Babies():null
+        }
+        
         {Type()}
         {renderSectionFour()}
         {Vaccinated()}
