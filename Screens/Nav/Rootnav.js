@@ -31,7 +31,7 @@ import Drawercontent from './Drawercontent';
 import Parents from '../Parents/Parents';
 const DrawerNav = () => {
   return (
-    <Drawer.Navigator initialRouteName='Home'
+    <Drawer.Navigator initialRouteName='Draw'
       screenOptions={{
         headerShown: false, drawerActiveBackgroundColor: COLORS.Primary,
         drawerActiveTintColor: COLORS.white,

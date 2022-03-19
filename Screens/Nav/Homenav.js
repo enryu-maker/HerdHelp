@@ -43,7 +43,6 @@ const DrawerNav = () => {
         drawerStatusBarAnimation:"fade",
       }}
       drawerContent={props =><Drawercontent {...props}
-      // drawerWidth= {SIZES.width}
       />
     }
     >
