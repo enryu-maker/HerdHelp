@@ -137,6 +137,8 @@ export const Medication = ({navigation, route}) => {
         </Text>
         <Dropdown
           label="Species"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           borderRadius={SIZES.radius}
           data={animals}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}
@@ -271,6 +273,8 @@ export const Medication = ({navigation, route}) => {
         />
         <Dropdown
           label="Withdrawal"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           borderRadius={SIZES.radius}
           data={Bred}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}

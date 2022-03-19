@@ -120,6 +120,8 @@ export const Weight =({ navigation,route})=> {
         }}>
         <Text style={{color:COLORS.red,alignSelf: 'center',...FONTS.body3}}>{err}</Text>
         <Dropdown
+        dropdownIcon={images.down}
+        dropdownIconSize={22}
           label="Species"
           borderRadius={SIZES.radius}
           data={animals}

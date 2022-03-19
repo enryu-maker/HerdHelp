@@ -131,6 +131,8 @@ export default function Alerts({navigation,route}) {
             borderRadius: SIZES.radius,
           }}
           disableSelectionTick
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           primaryColor={COLORS.Primary}
           value={species}
           animationIn="zoomIn"

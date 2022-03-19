@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, Image, ScrollView,Platform,ActivityIndicator} from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
 import {images, SIZES, FONTS, COLORS} from '../../Components/Constants';
@@ -101,6 +101,8 @@ export default function Parents({navigation}) {
         </Text>
         <Dropdown
           label="Species"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           borderRadius={SIZES.radius}
           data={species}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}
@@ -155,8 +157,8 @@ export default function Parents({navigation}) {
     );
   }
   function renderAnimal(data) {
-    return data.map(a => (
-      <Card key={a.id} Tagnumber={a.tag_number} Gender={a.gender} image={a.image} Name={a.name}/>
+    return data.map((a,index) => (
+      <Card key={index} Tagnumber={a.tag_number} Gender={a.gender} image={a.image} Name={a.name}/>
     ));
   }
   return (
@@ -171,6 +173,7 @@ export default function Parents({navigation}) {
         contentContainerStyle={{
           marginTop: SIZES.radius,
           paddingHorizontal: SIZES.padding,
+          marginBottom:Platform.OS=="ios"?10:50
 
         }}>
         {renderForm()}
@@ -185,16 +188,16 @@ export default function Parents({navigation}) {
         borderRadius:SIZES.base,
         position:"relative"
       }}>
-      <Text style={{color: COLORS.white, alignSelf: 'center', ...FONTS.h2}}>
+      <Text style={Platform.OS=="android"?{color: COLORS.white, alignSelf: 'center', ...FONTS.h3}:{color: COLORS.white, alignSelf: 'center', ...FONTS.h2}}>
           List of Babies
         </Text></View>
       {
-        babies != undefined ?
+        babies != undefined || !loading ?
       (
       
       <ScrollView>{renderAnimal(babies)}</ScrollView> 
       ):
-      (<View></View>)
+      (<ActivityIndicator size={"large"} color={COLORS.Primary}/>)
       }
       <TextButton
         onPress={() => {

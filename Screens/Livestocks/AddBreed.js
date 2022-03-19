@@ -218,6 +218,8 @@ const Addanimals = ({navigation, route}) => {
         />
         <Dropdown
           label="Species"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           borderRadius={SIZES.radius}
           data={animals}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}
@@ -251,6 +253,8 @@ const Addanimals = ({navigation, route}) => {
         />
         <Dropdown
           label="Gender"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           borderRadius={SIZES.radius}
           data={genderdata}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}
@@ -284,6 +288,8 @@ const Addanimals = ({navigation, route}) => {
         />
         <Dropdown
           label="Purchased?"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           borderRadius={SIZES.radius}
           data={Bought}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}
@@ -469,6 +475,8 @@ const Addanimals = ({navigation, route}) => {
         {valueBS != 'Male' ? (
           <Dropdown
             label="Bred"
+            dropdownIcon={images.down}
+          dropdownIconSize={22}
             borderRadius={SIZES.radius}
             data={Bred}
             textInputStyle={(FONTS.body2, {letterSpacing: 2})}
@@ -533,6 +541,8 @@ const Addanimals = ({navigation, route}) => {
         />
         <Dropdown
           label="Vaccinated"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           borderRadius={SIZES.radius}
           data={Bred}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}

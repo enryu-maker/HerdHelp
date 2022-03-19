@@ -96,7 +96,7 @@ const Main = ({navigation}) => {
       <View 
         style={{
             width: '88%',
-            marginTop:SIZES.height*.1225 ,
+            marginTop:SIZES.height*0.08 ,
             paddingVertical: SIZES.padding,
             paddingHorizontal: SIZES.radius,
             borderRadius: SIZES.radius,

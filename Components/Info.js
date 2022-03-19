@@ -239,9 +239,15 @@ export const Info = ({navigation, route}) => {
           backgroundColor: COLORS.lightGray2,
           paddingBottom: SIZES.padding,
         }}>
+          <Text style={{
+            ...FONTS.h3,
+            alignSelf:"center",
+            padding:8,
+            color:COLORS.darkGray2
+          }}>Children List</Text>
         <InfoItem label="Tag" value={"DOB"}/>
-        {animal.children?.map(a=>(
-          <InfoItem label={a.tag_number} value={a.birth_date} />
+        {animal.children?.map((a,index)=>(
+          <InfoItem  key={index} label={a.tag_number} value={a.birth_date} />
         ))}
         </View>)
   }
@@ -283,13 +289,14 @@ export const Info = ({navigation, route}) => {
           cond?
           <TouchableOpacity
           style={{
-            marginRight: 25,
-            backgroundColor:COLORS.Primary,
-            borderRadius:SIZES.radius,
-            marginTop: 20,
-            padding:5,
-            height:40,
-            width:60
+            // marginRight: 25,
+            // backgroundColor:COLORS.Primary,
+            // borderRadius:SIZES.radius,
+            // marginTop: 20,
+            // padding:5,
+            // height:40,
+            // width:50,
+            justifyContent:"center"
             }}
           onPress={()=>{
             setShow(true)
@@ -297,10 +304,11 @@ export const Info = ({navigation, route}) => {
           >
           <Text
           style={{
-            
-            color:COLORS.white,
+            padding:SIZES.padding,
+            color:COLORS.Primary,
             ...FONTS.h2
           }}
+          
           >EDIT</Text>
           </TouchableOpacity>:<View></View>
           

@@ -93,6 +93,8 @@ export default function WeightH({navigation}) {
         </Text>
         <Dropdown
           label="Species"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           borderRadius={SIZES.radius}
           data={animals}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}

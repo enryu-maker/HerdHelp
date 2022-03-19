@@ -52,7 +52,8 @@ export const images ={
     file:require("../assets/Logo/file.png"),
     heart:require("../assets/Logo/heart.png"),
     delet:require("../assets/Logo/delete.png"),
-    parents:require("../assets/Logo/family.png")
+    parents:require("../assets/Logo/family.png"),
+    down:require("../assets/Logo/down.png")
 
 
 }
@@ -121,31 +122,29 @@ export const FONTS = {
     body4: { fontFamily:type.base, fontSize: SIZES.body4, lineHeight: 20 },
     body5: { fontFamily:type.base, fontSize: SIZES.body5, lineHeight: 18 },
 };
-
-
-
   export const genderdata = [
     {
       value: 'Male',
       label: 'Male',
-      avatarSource:require("../assets/animal_logo/male.png")
+      avatarSource:images.male
     },
     {
       value: 'Female',
       label: 'Female',
-      avatarSource:require("../assets/animal_logo/female.png")
+      avatarSource:images.female
     },
 ];
 export const Bred = [
   {
     value: true,
     label: 'Yes',
-    avatarSource:require("../assets/animal_logo/yes.png")
+    avatarSource:images.correct
   },
   {
     value: false,
     label: 'No',
-    avatarSource:require("../assets/animal_logo/no.png")
+    avatarSource:images.cancel
+    // avatarSource:{uri:"https://longwoodgardens.org/sites/default/files/highlight_images/76758.jpg"}
   },
 ];
 export const Bought = [

@@ -142,6 +142,8 @@ export const Finance = ({navigation}) => {
           // enableAvatar
           required
           disableSelectionTick
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           primaryColor={COLORS.Primary}
           avatarSize={28}
           value={cat}

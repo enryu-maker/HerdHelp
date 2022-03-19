@@ -103,6 +103,8 @@ const Status = ({show, setShow,animal}) => {
           borderRadius={SIZES.radius}
           data={statusCat}
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
           selectedItemTextStyle={
             (FONTS.body3,
             {color: COLORS.white, letterSpacing: 2, alignSelf: 'center'})
@@ -112,6 +114,7 @@ const Status = ({show, setShow,animal}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
+          enableAvatar
           required
           disableSelectionTick
           primaryColor={COLORS.Primary}
