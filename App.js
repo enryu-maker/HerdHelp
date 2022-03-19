@@ -8,15 +8,19 @@ import SplashScreen from 'react-native-splash-screen'
 import axiosIns from './helpers/helpers';
 
 export default function App() {
-  const [Route,setRoute]=React.useState(false);
+  const [Route,setRoute]=React.useState("");
   async function retrieveData(){
-    let data
-      const token = await AsyncStorage.getItem('token');
-      const refresh = await AsyncStorage.getItem('refresh');
-      if (token !== null && refresh !== null) {
-         setRoute(true);
-      }
-      return data;
+    var data = (JSON.parse(await AsyncStorage.getItem('route')))
+    var cond
+    if (data==true){
+      return cond="true"
+    }
+    else if (data==false){
+      return cond="false"
+    }
+    else{
+      return cond="null"
+    }
   };
   const fetchprofile = async () => {
       try {
@@ -31,12 +35,13 @@ export default function App() {
         global.User=data;
       });
     },[])
-      
   React.useEffect(() => {
-    setTimeout(()=>{
+    // setTimeout(()=>{
       SplashScreen.hide();
-    },3000)
-    retrieveData()
+    // },3000)
+    retrieveData().then(cond=>{
+      setRoute(cond)
+    })
   },[]);
   return (
         <View style={{flex:1}}>
@@ -44,7 +49,7 @@ export default function App() {
           barStyle="default"
           />
           {
-            Route?  <Homenav/> : <Rootnav/> 
+            Route=="true" || Route!='null'?<Homenav/>:<Rootnav/>
           }
         </View>
         

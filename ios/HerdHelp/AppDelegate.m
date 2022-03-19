@@ -28,6 +28,7 @@ static void InitializeFlipper(UIApplication *application) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 #ifdef FB_SONARKIT_ENABLED
+  [NSThread sleepForTimeInterval:2.0];
   InitializeFlipper(application);
 #endif
 
