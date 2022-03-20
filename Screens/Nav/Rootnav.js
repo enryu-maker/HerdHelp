@@ -38,7 +38,7 @@ const DrawerNav = () => {
         drawerStyle:[{backgroundColor:COLORS.transparent},styles.drawerStyle],
         drawerLabelStyle: [FONTS.body3,{letterSpacing:2}],
         drawerType:"front",
-        overlayColor: "#00000040",
+        overlayColor:"#0d0d0d40",    
         backBehavior:"history",  
         drawerStatusBarAnimation:"fade",
       }}
@@ -122,8 +122,8 @@ export default class Rootnav extends Component {
 const styles = StyleSheet.create({
   drawerStyle: {
     backgroundColor:         COLORS.layout,
-    borderTopRightRadius:    SIZES.padding,
-    borderBottomRightRadius: SIZES.padding,
-    width:                   '75%',
+    borderTopRightRadius:    12,
+    borderBottomRightRadius: 12,
+    width:                   '80%',
 },
 })

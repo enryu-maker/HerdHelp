@@ -54,7 +54,7 @@ const Login = ({navigation}) => {
       setLoading(false);
     }
   };
-  function login() {
+   function login() {
     if (isEnableSignIn()) {
       setLoading(true);
       axios
@@ -71,7 +71,7 @@ const Login = ({navigation}) => {
           },
         )
         .then(response => {
-          if (response.status === 200) {
+          if (response.status == 200) {
             storeData(
               response.data.access,
               response.data.refresh,
@@ -88,7 +88,7 @@ const Login = ({navigation}) => {
         })
         .catch(error => {
           if (error.response) {
-            setEmailError('Something Went Wrong');
+            setEmailError('Invalid Email & Password');
             setLoading(false);
           }
         });
@@ -139,6 +139,14 @@ const Login = ({navigation}) => {
             flex: 1,
             marginTop: SIZES.height > 800 ? SIZES.padding * 2 : SIZES.radius,
           }}>
+            <Text
+          style={{
+            ...FONTS.body3,
+            alignSelf: 'center',
+            color:COLORS.red
+          }}>
+          {EmailError}
+        </Text>
           <FormInput
             label={'Email'}
             value={email}
