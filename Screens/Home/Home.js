@@ -19,9 +19,6 @@ export const Home = ({navigation}) => {
         setLoading(false);
       });
   }, []);
-  // console.log(global.stat)
-
-  // console.log(global.stat)
   function renderHeader() {
     return (
       <Header
@@ -58,7 +55,7 @@ export const Home = ({navigation}) => {
   }
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-      {/* <Loader loading={loading}/> */}
+      <Loader loading={loading}/>
       {renderHeader()}
       <View
         style={{
