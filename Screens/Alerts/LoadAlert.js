@@ -10,7 +10,6 @@ import React from 'react';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import Header from '../../Components/Header';
-import AlertCard from './AlertCard';
 import ActivityIndicatorExample from '../../Components/Loading';
 import TextButton from '../../Components/TextButton';
 import {SwipeListView} from 'react-native-swipe-list-view';
