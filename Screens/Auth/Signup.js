@@ -127,7 +127,7 @@ export const Signup = ({navigation}) => {
           flex: 1,
           marginTop: SIZES.height > 800 ? SIZES.padding * 2 : SIZES.radius,
         }}>
-        <Text style={{color: validation? COLORS.Primary:COLORS.red, alignSelf: 'center', ...FONTS.h3}}>
+        <Text style={{color: validation? COLORS.Primary:COLORS.red, alignSelf: 'center', ...FONTS.body3}}>
           {EmailError}
         </Text>
         {/* Input */}
@@ -140,6 +140,7 @@ export const Signup = ({navigation}) => {
           placeholder={'Enter Email'}
           keyboardType="email-address"
           autoCompleteType="email"
+          // errorMsg={EmailError}
           appendComponent={
             <View
               style={{
@@ -239,6 +240,7 @@ export const Signup = ({navigation}) => {
           onPress={() => {
             signup();
           }}
+          disabled={isEnableSignIn()}
           label={'Signup'}
         />
         <View

@@ -236,6 +236,7 @@ const Login = ({navigation}) => {
                 ...FONTS.h4,
                 marginRight: 50,
               }}
+              disabled={isEnableSignIn()}
               onPress={() => navigation.navigate('ForgotPassword')}
             />
           </View>

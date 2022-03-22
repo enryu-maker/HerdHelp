@@ -29,70 +29,68 @@ import History from '../WeightHistory/History';
 const Drawer = createDrawerNavigator();
 import Drawercontent from './Drawercontent';
 import Parents from '../Parents/Parents';
-const DrawerNav = () => {
-  return (
-    <Drawer.Navigator initialRouteName='Draw'
-      screenOptions={{
-        headerShown: false, drawerActiveBackgroundColor: COLORS.Primary,
-        drawerActiveTintColor: COLORS.white,
-        drawerStyle:[{backgroundColor:COLORS.transparent},styles.drawerStyle],
-        drawerLabelStyle: [FONTS.body3,{letterSpacing:2}],
-        drawerType:"front",
-        overlayColor:"#0d0d0d40",    
-        backBehavior:"history",  
-        drawerStatusBarAnimation:"fade",
-      }}
-      drawerContent={props =><Drawercontent {...props}
-      drawerWidth= {SIZES.width- 120}
-      />
-    }
-    >
-      <Drawer.Screen name='Draw' component={Main} options={{
-            drawerIcon: ({ focused, size }) => (
-              <Image
-                source={images.home}
-                style={[{ height: 25, width: 25}]}
-              /> )       
-          }} />
-          <Drawer.Screen name='Report' component={Report} options={{
-        // drawerActiveTintColor: COLORS.white,
-            drawerIcon: ({ focused, size }) => (
-              <Image
-                source={images.file}
-                style={[{ height: 25, width: 25}]}
-              /> )       
-          }} />
-          <Drawer.Screen name='WeightH' component={WeightH} options={{
-        // drawerActiveTintColor: COLORS.white,
-            drawerIcon: ({ focused, size }) => (
-              <Image
-                source={images.weight}
-                style={[{ height: 25, width: 25}]}
-              /> )       
-          }} />
-          <Drawer.Screen name='Parents' component={Parents} options={{
-        // drawerActiveTintColor: COLORS.white,
-            drawerIcon: ({ focused, size }) => (
-              <Image
-                source={images.setting}
-                style={[{ height: 25, width: 25}]}
-              /> )       
-          }} />
-      </Drawer.Navigator>)}
+import Homenav from './Homenav';
+// const DrawerNav = () => {
+//   return (
+//     <Drawer.Navigator initialRouteName='Draw'
+//       screenOptions={{
+//         headerShown: false, drawerActiveBackgroundColor: COLORS.Primary,
+//         drawerActiveTintColor: COLORS.white,
+//         drawerStyle:[{backgroundColor:COLORS.transparent},styles.drawerStyle],
+//         drawerLabelStyle: [FONTS.body3,{letterSpacing:2}],
+//         drawerType:"front",
+//         overlayColor:"#0d0d0d40",    
+//         backBehavior:"history",  
+//         drawerStatusBarAnimation:"fade",
+//       }}
+//       drawerContent={props =><Drawercontent {...props}
+//       drawerWidth= {SIZES.width- 120}
+//       />
+//     }
+//     >
+//       <Drawer.Screen name='Draw' component={Main} options={{
+//             drawerIcon: ({ focused, size }) => (
+//               <Image
+//                 source={images.home}
+//                 style={[{ height: 25, width: 25}]}
+//               /> )       
+//           }} />
+//           <Drawer.Screen name='Report' component={Report} options={{
+//         // drawerActiveTintColor: COLORS.white,
+//             drawerIcon: ({ focused, size }) => (
+//               <Image
+//                 source={images.file}
+//                 style={[{ height: 25, width: 25}]}
+//               /> )       
+//           }} />
+//           <Drawer.Screen name='WeightH' component={WeightH} options={{
+//         // drawerActiveTintColor: COLORS.white,
+//             drawerIcon: ({ focused, size }) => (
+//               <Image
+//                 source={images.weight}
+//                 style={[{ height: 25, width: 25}]}
+//               /> )       
+//           }} />
+//           <Drawer.Screen name='Parents' component={Parents} options={{
+//         // drawerActiveTintColor: COLORS.white,
+//             drawerIcon: ({ focused, size }) => (
+//               <Image
+//                 source={images.setting}
+//                 style={[{ height: 25, width: 25}]}
+//               /> )       
+//           }} />
+//       </Drawer.Navigator>)}
 export default class Rootnav extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-          <StatusBar
-          style="auto"/>
-      <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false}}
           initialRouteName={'Login'} mode="modal">
-          <Stack.Screen name='Draw' component={DrawerNav} />
-          <Stack.Screen name='Home' component={Home}/>
+          <Stack.Screen name='Draw' component={Homenav} />
+          {/* <Stack.Screen name='Home' component={Home}/> */}
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />
-          <Stack.Screen name='Info' component={Info}/>
+          {/* <Stack.Screen name='Info' component={Info}/>
           <Stack.Screen name='Animals' component={Addanimals}  />
           <Stack.Screen name='MyAccount' component={MyAccount} />
           <Stack.Screen name='MyAccountEdit' component={MyAccountEdit} />
@@ -108,12 +106,11 @@ export default class Rootnav extends Component {
           <Stack.Screen name='Report' component={Report}/>
           <Stack.Screen name='ReportOP' component={ReportOP}/>
           <Stack.Screen name='WeightH' component={WeightH}/>
-          <Stack.Screen name='History' component={History}/>
+          <Stack.Screen name='History' component={History}/> */}
 
 
 
         </Stack.Navigator>
-      </NavigationContainer>
       </View>
     )
   }

@@ -29,6 +29,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Parents from '../Parents/Parents';
 const Drawer = createDrawerNavigator();
 import Drawercontent from './Drawercontent';
+import Rootnav from './Rootnav';
 const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
@@ -46,7 +47,7 @@ const DrawerNav = () => {
       />
     }
     >
-      <Drawer.Screen name='Draw' component={Main} options={{
+      <Drawer.Screen name='drawScreen' component={Main} options={{
         // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image
@@ -91,15 +92,12 @@ export default class Homenav extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-          <StatusBar
-          style="auto"/>
-      <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false}}
           initialRouteName={'Draw'} mode="modal">
           <Stack.Screen name='Draw' component={DrawerNav} />
           <Stack.Screen name='Home' component={Home}/>
-          <Stack.Screen name='Login' component={Login} />
-          <Stack.Screen name='Signup' component={Signup} />
+          <Stack.Screen name='Auth' component={Rootnav} />
+          {/* <Stack.Screen name='Signup' component={Signup} /> */}
           <Stack.Screen name='Info' component={Info}/>
           <Stack.Screen name='Animals' component={Addanimals}  />
           <Stack.Screen name='MyAccount' component={MyAccount} />
@@ -121,7 +119,6 @@ export default class Homenav extends Component {
 
 
         </Stack.Navigator>
-      </NavigationContainer>
       </View>
     )
   }

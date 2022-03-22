@@ -120,7 +120,7 @@ export default function Drawercontent(props) {
           ]}
           onPress={() => {
             AsyncStorage.clear();
-            props.navigation.replace('Login');
+            props.navigation.replace('Auth');
           }}
         />
       </Drawer.Section>
