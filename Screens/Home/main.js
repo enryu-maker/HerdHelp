@@ -41,6 +41,7 @@ const Main = ({navigation}) => {
   async function loadId(){
     global.id = await AsyncStorage.getItem("id")
   }
+
   React.useEffect(() => {
     fetchStatus();
       fetchanimal();

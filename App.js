@@ -37,11 +37,7 @@ export default function App() {
     fetchprofile().then(data => {
       global.User = data;
     });
-    if(Route == 'true'){
-      loadFinance().then(data=>{
-        global.alertlength=data
-      })
-    }
+    
   }, []);
   React.useEffect(() => {
     setTimeout(() => {
@@ -50,6 +46,11 @@ export default function App() {
     retrieveData().then(cond => {
       setRoute(cond);
     });
+    if(Route == 'true'){
+      loadFinance().then(data=>{
+        global.alertlength=data
+      })
+    }
   }, [Route]);
   return (
     <View style={{flex: 1}}>
