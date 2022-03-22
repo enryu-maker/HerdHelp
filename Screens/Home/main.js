@@ -106,7 +106,7 @@ const Main = ({navigation}) => {
               }}
               onPress={() => {navigation.navigate("MyAccount")}}>
               <Image
-                source={images.HH}
+                source={images.login}
                 style={{
                   width: 30,
                   height: 30,
@@ -200,32 +200,33 @@ const Main = ({navigation}) => {
         <TextButton
           label={`ALERTS  `}
           icon={images.bell}
-          // iconStyle={{
-          //   tintColor:global.alertlength.length>0?COLORS.red:COLORS.white
-          // }}
+          iconStyle={{
+            tintColor:global.alertlength.length>0?COLORS.red:COLORS.white
+          }}
           onPress={() => {
             navigation.navigate('LoadAlert'
             );
           }}
           label2={`${global.alertlength?.length}`}
           buttonContainerStyle2={{
-            height:25,
-            width:25,
-            backgroundColor:global.alertlength?.length>0?COLORS.red:COLORS.Primary
+            height:30,
+            width:30,
+            backgroundColor:global.alertlength?.length>0?COLORS.red:COLORS.Primary,
+            justifyContent:"center",
+            alignSelf:"center",
+            padding:1
+
+
           }}
           label2Style={{
             color:global.alertlength?.length>0?COLORS.white:COLORS.Primary,
-            // justifyContent:"center",
-            // alignSelf:"center"
+            justifyContent:"center",
+            alignSelf:"center"
           }}
           buttonContainerStyle={{
             marginTop: 12,
             marginBottom: 12,
             height:75,
-            // width:200,
-            // alignSelf:"flex-end"
-            // borderColor:global.alertlength.length>0?COLORS.red:COLORS.white,
-            // borderWidth:2
           }}
         />
      </ScrollView>

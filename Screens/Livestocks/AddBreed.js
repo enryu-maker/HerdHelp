@@ -55,6 +55,8 @@ const Addanimals = ({navigation, route}) => {
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
+  const [EmailError, setEmailError] = React.useState('');
+
   const onChangeMS = value => {
     setValueMS(value);
   };
@@ -70,6 +72,9 @@ const Addanimals = ({navigation, route}) => {
   const onChangebought = value => {
     setBought(value);
   };
+  function isEnableSignIn() {
+    return tag != '' && name != '' && valueMS!='' && valueBS!=''&& bought!='';
+  }
   const clear = () => {
     // setSpcies([])
     setWeight('');
@@ -104,7 +109,8 @@ const Addanimals = ({navigation, route}) => {
   });
   async function postAnimal() {
     setLoading(true);
-    await axiosIns
+    if(isEnableSignIn())
+    {await axiosIns
       .post('animals/', data, {
         headers: {
           'Content-Type': 'application/json',
@@ -120,11 +126,15 @@ const Addanimals = ({navigation, route}) => {
         }
       })
       .catch(
-        err => console.log('api Erorr: ', err),
-        setLoading(false),
-        setValidation(false),
-        setShow(false),
-      );
+        err => {console.log('api Erorr: ', err)
+        setLoading(false)
+        setValidation(false)
+        setShow(false)}
+      );}
+    else{
+      setEmailError("Required Fields cannot be empty")
+      setLoading(false)
+    }
   }
   React.useEffect(() => {
     setId(global.id);
@@ -174,6 +184,15 @@ const Addanimals = ({navigation, route}) => {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
+          <Text
+          style={{
+            ...FONTS.body3,
+            alignSelf: 'center',
+            color:COLORS.red,
+            padding:5
+          }}>
+          {EmailError}
+        </Text>
         <FormInput
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
