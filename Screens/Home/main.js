@@ -50,13 +50,17 @@ const Main = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <Header
-        title={"HerdHelp"}
-        titleStyle={{
-          marginTop:20,
-          // marginRight: 55,
-          color:COLORS.black,
-          ...FONTS.h1
+        // title={"HerdHelp"}
+        // titleStyle={{
+        //   marginTop:20,
+        //   // marginRight: 55,
+        //   color:COLORS.black,
+        //   ...FONTS.h1
 
+        // }}
+        img={images.herdhelp}
+        imgstyle={{
+          width:220
         }}
         leftComponent={
           <View
