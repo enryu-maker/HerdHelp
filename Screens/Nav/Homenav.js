@@ -93,8 +93,8 @@ export default class Homenav extends Component {
     return (
       <>
         <Stack.Navigator screenOptions={{ headerShown: false}}
-          initialRouteName={'Draw'}>
-          <Stack.Screen name='Draw' component={DrawerNav} />
+          initialRouteName={'DrawNav'}>
+          <Stack.Screen name='DrawNav' component={DrawerNav} />
           <Stack.Screen name='Home' component={Home}/>
           <Stack.Screen name='Auth' component={Rootnav} />
           <Stack.Screen name='Info' component={Info}/>
@@ -114,9 +114,6 @@ export default class Homenav extends Component {
           <Stack.Screen name='ReportOP' component={ReportOP}/>
           <Stack.Screen name='WeightH' component={WeightH}/>
           <Stack.Screen name='History' component={History}/>
-
-
-
         </Stack.Navigator>
       </>
     )
