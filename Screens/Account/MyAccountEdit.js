@@ -5,17 +5,11 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import FormInput from '../../Components/FormInput';
-// import ImagePicker from 'react-native-image-picker';
-import {
-  launchImageLibrary,
-} from 'react-native-image-picker';
 import {COLORS, SIZES, images} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import CustomAlert from '../../Components/CustomAlert';
 
 const MyAccountEdit = ({navigation,route}) => {
-  const [pic, setPic] = React.useState('');
-  const [picdata, setPicdata] = React.useState('');
   const [fullName, setFullName] = useState(route.params.user.fullname);
   const [phoneNo, setPhoneNo] = useState(route.params.user.phone);
   const [idCard, setIdCard] = useState(route.params.user.farm_name);
@@ -54,23 +48,6 @@ const MyAccountEdit = ({navigation,route}) => {
     let { user } = route.params
     setUser(user)
   },[]);
-  // function openCamara() {
-  //   let options = {
-  //     storageOptions: {
-  //       path: 'images',
-  //       mediaType: 'photo',
-  //     },
-  //     includeBase64: true,
-  //   };
-  //   launchImageLibrary(options, response => {
-  //     if (response.assets) {
-  //       imageAssetsArray = response.assets[0].uri;
-  //       setPic(imageAssetsArray);
-  //       setPicdata(response.assets[0].base64);
-  //     }
-  //   });
-  // }
-
   function renderHeader() {
     return (
       <Header

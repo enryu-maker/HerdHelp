@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key> NSCameraUsageDescription </key>
-	<string>$(PRODUCT_NAME) uses Cameras</string>
 	<key>Allow Arbitrary Loads</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -82,6 +80,8 @@
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>
 </plist>

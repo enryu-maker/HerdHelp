@@ -5,7 +5,6 @@ import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import InfoItem from '../../Components/InfoItem';
 import {COLORS, SIZES, images, dummyData, FONTS} from '../../Components/Constants';
-import { launchImageLibrary, ImageLibraryOptions, launchCamera } from 'react-native-image-picker';
 import axiosIns from '../../helpers/helpers';
 
 const MyAccount = ({navigation,route}) => {
