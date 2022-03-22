@@ -53,14 +53,16 @@ const Main = ({navigation}) => {
         // title={"HerdHelp"}
         // titleStyle={{
         //   marginTop:20,
-        //   // marginRight: 55,
+        //   marginRight: 55,
         //   color:COLORS.black,
         //   ...FONTS.h1
 
         // }}
         img={images.herdhelp}
         imgstyle={{
-          width:220
+          width:220,
+          marginRight: 50,
+
         }}
         leftComponent={
           <View
@@ -90,34 +92,34 @@ const Main = ({navigation}) => {
             </TouchableOpacity>
           </View>
         }
-        rightComponent={
-          <View
-            style={{
-              marginTop:25,
-            }}>
-            <TouchableOpacity
-              style={{
-              marginRight: 25,
-              backgroundColor:COLORS.Primary,
-              height:40,
-              width:40,
-              justifyContent:"center",
-              borderRadius:SIZES.base,
-              }}
-              onPress={() => {navigation.navigate("MyAccount")}}>
-              <Image
-                source={images.login}
-                style={{
-                  width: 30,
-                  height: 30,
-                  padding:5,
-                  alignSelf:"center",
-                  tintColor:COLORS.white
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-        }
+        // rightComponent={
+        //   <View
+        //     style={{
+        //       marginTop:25,
+        //     }}>
+        //     <TouchableOpacity
+        //       style={{
+        //       marginRight: 25,
+        //       backgroundColor:COLORS.Primary,
+        //       height:40,
+        //       width:40,
+        //       justifyContent:"center",
+        //       borderRadius:SIZES.base,
+        //       }}
+        //       onPress={() => {navigation.navigate("MyAccount")}}>
+        //       <Image
+        //         source={images.login}
+        //         style={{
+        //           width: 30,
+        //           height: 30,
+        //           padding:5,
+        //           alignSelf:"center",
+        //           tintColor:COLORS.white
+        //         }}
+        //       />
+        //     </TouchableOpacity>
+        //   </View>
+        // }
 
       />
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -156,9 +158,6 @@ const Main = ({navigation}) => {
           buttonContainerStyle={{
             marginTop: 12,
             height:75,
-
-            // width:200,
-            // alignSelf:"flex-end"
           }}
         />
         <TextButton
@@ -192,16 +191,13 @@ const Main = ({navigation}) => {
           buttonContainerStyle={{
             marginTop: 12,
             height:75,
-
-            // width:200,
-            // alignSelf:"flex-start"
           }}
         />
         <TextButton
           label={`ALERTS  `}
           icon={images.bell}
           iconStyle={{
-            tintColor:global.alertlength.length>0?COLORS.red:COLORS.white
+            tintColor:global.alertlength?.length>0?COLORS.red:COLORS.white
           }}
           onPress={() => {
             navigation.navigate('LoadAlert'

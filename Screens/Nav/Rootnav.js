@@ -83,14 +83,14 @@ import Homenav from './Homenav';
 export default class Rootnav extends Component {
   render() {
     return (
-      <View style={{flex:1}}>
+      <>
         <Stack.Navigator screenOptions={{ headerShown: false}}
-          initialRouteName={'Login'} mode="modal">
-          <Stack.Screen name='Draw' component={Homenav} />
+          initialRouteName={'Login'} >
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />
+          <Stack.Screen name='Draw' component={Homenav} />
         </Stack.Navigator>
-      </View>
+      </>
     )
   }
 }

@@ -50,8 +50,8 @@ export default function Drawercontent(props) {
             label="Home"
             labelStyle={[FONTS.body3, {letterSpacing: 2}]}
             onPress={() => {
-              props.navigation.navigate('Draw');
               props.navigation.closeDrawer()
+              props.navigation.navigate('Draw');
             }}
           />
           <DrawerItem
@@ -61,8 +61,8 @@ export default function Drawercontent(props) {
             label="Report"
             labelStyle={[FONTS.body3, {letterSpacing: 2}]}
             onPress={() => {
-              props.navigation.navigate('Report');
               props.navigation.closeDrawer()
+              props.navigation.navigate('Report');
             }}
           />
         </Drawer.Section>
@@ -74,8 +74,9 @@ export default function Drawercontent(props) {
             label="Weight History"
             labelStyle={[FONTS.body3, {letterSpacing: 2}]}
             onPress={() => {
-              props.navigation.navigate('WeightH');
               props.navigation.closeDrawer()
+              props.navigation.navigate('WeightH');
+
             }}
           />
           <DrawerItem
@@ -85,8 +86,8 @@ export default function Drawercontent(props) {
             label="Parents"
             labelStyle={[FONTS.body3, {letterSpacing: 2}]}
             onPress={() => {
-              props.navigation.navigate('Parents');
               props.navigation.closeDrawer()
+              props.navigation.navigate('Parents');
             }}
           />
         </Drawer.Section>
@@ -102,8 +103,8 @@ export default function Drawercontent(props) {
             label="Setting"
             labelStyle={[FONTS.body3, {letterSpacing: 2}]}
             onPress={() => {
-              props.navigation.navigate('Setting');
               props.navigation.closeDrawer()
+              props.navigation.navigate('Setting');
             }}
           />
         <DrawerItem

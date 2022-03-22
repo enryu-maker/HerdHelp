@@ -45,27 +45,29 @@ export default function App() {
     }, 4000);
     retrieveData().then(cond => {
       setRoute(cond);
+      if(cond == 'true'){
+        loadFinance().then(data=>{
+          global.alertlength=data
+        })
+      }
     });
-    if(Route == 'true'){
-      loadFinance().then(data=>{
-        global.alertlength=data
-      })
-    }
+    
   }, [Route]);
   return (
     <View style={{flex: 1}}>
       <StatusBar
         barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
       />
+      <NavigationContainer>
       {Route == 'true' || Route != 'null' ? (
-        <NavigationContainer>
+
           <Homenav />
-        </NavigationContainer>
       ) : (
-        <NavigationContainer>
+
           <Rootnav />
-        </NavigationContainer>
+
       )}
+      </NavigationContainer>
     </View>
   );
 }

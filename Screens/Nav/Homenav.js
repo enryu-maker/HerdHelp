@@ -91,13 +91,12 @@ const DrawerNav = () => {
 export default class Homenav extends Component {
   render() {
     return (
-      <View style={{flex:1}}>
+      <>
         <Stack.Navigator screenOptions={{ headerShown: false}}
-          initialRouteName={'Draw'} mode="modal">
+          initialRouteName={'Draw'}>
           <Stack.Screen name='Draw' component={DrawerNav} />
           <Stack.Screen name='Home' component={Home}/>
           <Stack.Screen name='Auth' component={Rootnav} />
-          {/* <Stack.Screen name='Signup' component={Signup} /> */}
           <Stack.Screen name='Info' component={Info}/>
           <Stack.Screen name='Animals' component={Addanimals}  />
           <Stack.Screen name='MyAccount' component={MyAccount} />
@@ -119,7 +118,7 @@ export default class Homenav extends Component {
 
 
         </Stack.Navigator>
-      </View>
+      </>
     )
   }
 }
