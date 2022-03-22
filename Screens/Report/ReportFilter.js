@@ -202,6 +202,7 @@ export default function ReportFilter({
               alignSelf: 'center',
               justifyContent: 'flex-start',
               position: 'relative',
+              marginBottom:SIZES.height>700?30:130
             }}>
             <TextButton
               onPress={() => {

@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, Image, TouchableOpacity, ScrollView,ActivityIndicator} from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
 import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
@@ -16,7 +16,7 @@ export const Home = ({navigation}) => {
   React.useEffect(() => {
       fetchanimal().then(data => {
         setAnimals(data);
-        setLoading(false);
+        setLoading(false)
       });
   }, []);
   function renderHeader() {
@@ -55,7 +55,7 @@ export const Home = ({navigation}) => {
   }
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-      <Loader loading={loading}/>
+      {/* <Loader loading={loading}/> */}
       {renderHeader()}
       <View
         style={{
@@ -67,7 +67,13 @@ export const Home = ({navigation}) => {
           backgroundColor: COLORS.lightGray2,
           alignSelf: 'center'
         }}>
-        {animals.map(a => {
+          {
+            loading?(
+              <ActivityIndicator size="large" color={COLORS.Primary}/>
+            ):(
+
+            
+        animals.map(a => {
           if (a.data.length != 0) {
             return (
               <TextButton
@@ -87,7 +93,9 @@ export const Home = ({navigation}) => {
               />
             );
           }
-        })}
+        })
+        )
+          }
       </View>
     </View>
   );

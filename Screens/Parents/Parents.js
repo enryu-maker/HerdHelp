@@ -158,7 +158,7 @@ export default function Parents({navigation}) {
   }
   function renderAnimal(data) {
     return data.map((a,index) => (
-      <Card key={index} Tagnumber={a.tag_number} Gender={a.gender} image={a.image} Name={a.name}/>
+      <Card key={index} Tagnumber={a.tag_number} Gender={a.gender} image={a.image} Name={a.name} Weight={a.weight}/>
     ));
   }
   return (
@@ -173,14 +173,13 @@ export default function Parents({navigation}) {
         contentContainerStyle={{
           marginTop: SIZES.radius,
           paddingHorizontal: SIZES.padding,
-          marginBottom:Platform.OS=="ios"?10:50
+          marginBottom:SIZES.height>700?-100:50
 
         }}>
         {renderForm()}
       </KeyboardAwareScrollView>
       <View style={{
         backgroundColor:COLORS.Primary,
-        marginTop:-60,
         height:40,
         width:160,
         alignSelf:"center",

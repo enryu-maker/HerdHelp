@@ -25,7 +25,7 @@ const Med = ({
         style={
           Platform.OS == 'android'
             ? {letterSpacing: 2, padding: 2, ...FONTS.h3, color: COLORS.green}
-            : {letterSpacing: 2, padding: 10, ...FONTS.h2, color: COLORS.green}
+            : {letterSpacing: 2, padding: 2, ...FONTS.h3, color: COLORS.green}
         }>
         {`Problem: ${disease}`}
       </Text>
@@ -40,8 +40,8 @@ const Med = ({
               }
             : {
                 letterSpacing: 2,
-                padding: 10,
-                ...FONTS.body2,
+                padding: 2,
+                ...FONTS.body3,
                 color: COLORS.black,
               }
         }>
@@ -59,8 +59,8 @@ const Med = ({
               ? {letterSpacing: 2, padding: 2, ...FONTS.h4, color: COLORS.green}
               : {
                   letterSpacing: 2,
-                  padding: 10,
-                  ...FONTS.h2,
+                  padding: 2,
+                  ...FONTS.h4,
                   color: COLORS.green,
                 }
           }>
@@ -73,8 +73,8 @@ const Med = ({
               ? {letterSpacing: 2, padding: 2, ...FONTS.h4, color: COLORS.black}
               : {
                   letterSpacing: 2,
-                  padding: 10,
-                  ...FONTS.h2,
+                  padding: 2,
+                  ...FONTS.h4,
                   color: COLORS.black,
                 }
           }>
@@ -98,8 +98,8 @@ const Med = ({
                   }
                 : {
                     letterSpacing: 2,
-                    padding: 10,
-                    ...FONTS.body2,
+                    padding: 2,
+                    ...FONTS.body3,
                     color: COLORS.black,
                   }
             }>
@@ -112,7 +112,7 @@ const Med = ({
                 ? {letterSpacing: 2, padding: 2, ...FONTS.h3, color: COLORS.red}
                 : {
                     letterSpacing: 2,
-                    padding: 10,
+                    padding: 2,
                     ...FONTS.h2,
                     color: COLORS.red,
                   }

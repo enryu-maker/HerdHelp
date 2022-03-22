@@ -13,6 +13,7 @@ import axiosIns from '../../helpers/helpers';
 import ReportFilter from './ReportFilter';
 import { set } from 'react-native-reanimated';
 import ActivityIndicatorExample from '../../Components/Loading';
+import TextButton from '../../Components/TextButton';
 export default function ReportOP({navigation,route}) {
   const [label,setLabel]=React.useState("")
   const [loading,setLoading]=React.useState(false)
@@ -136,22 +137,24 @@ async function getData(api){
     return(
       <View style={{
         // justifyContent:"flex-end",
-        height:80,
-        borderTopLeftRadius:SIZES.radius,
-        borderTopRightRadius:SIZES.radius,
+        height:55,
+        borderRadius:SIZES.radius,
+        // borderTopRightRadius:SIZES.radius,
         backgroundColor:COLORS.Primary,
         flexDirection:"row",
         justifyContent:"center",
-        // marginBottom:10
+        width:"88%",
+        alignSelf:"center",
+        marginBottom:30,
       }}>
         <Text style={
           
          Platform.OS=="ios"?{
-          ...FONTS.h2,
+          ...FONTS.h3,
           color:COLORS.white,
           alignSelf:"center"
         }:{
-          ...FONTS.h2,
+          ...FONTS.h4,
           color:COLORS.white,
           alignSelf:"center"
 
@@ -159,11 +162,11 @@ async function getData(api){
       }>{`Total ${label}: `}</Text>
       <Text style={
          Platform.OS=="ios"?{
-          ...FONTS.h2,
+          ...FONTS.h3,
           color:COLORS.white,
           alignSelf:"center"
         }:{
-          ...FONTS.h2,
+          ...FONTS.h4,
           color:COLORS.white,
           alignSelf:"center"
         }
@@ -212,6 +215,14 @@ async function getData(api){
             />
           ))}
         </ScrollView>)}
+        <TextButton label={"Generate Report"}
+        icon={images.file}
+        buttonContainerStyle={{
+          marginBottom:footer? 10 : 30,
+          margin:20
+          // padding:20
+        }}
+        />
         {
           footer?renderFooter(totalmoney()):null
         }

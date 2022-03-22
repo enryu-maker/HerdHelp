@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { View,StatusBar} from 'react-native';
+import { View,StatusBar,Platform} from 'react-native';
 import Homenav from "./Screens/Nav/Homenav"
 import Rootnav from "./Screens/Nav/Rootnav"
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -46,7 +46,7 @@ export default function App() {
   return (
         <View style={{flex:1}}>
           <StatusBar 
-          barStyle="default"
+          barStyle={ Platform.OS=="android"?"default":"dark-content"}
           />
           {
             Route=="true" || Route!='null'?<Homenav/>:<Rootnav/>
