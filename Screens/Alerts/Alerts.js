@@ -59,12 +59,12 @@ export default function Alerts({navigation,route}) {
         setDataText("Alerts Added")
       }
       
-    }).catch(err => 
-      setLoading(false),
-      setShow(true),
-      setValidation(false),
+    }).catch(err =>{
+      setLoading(false)
+      setShow(true)
+      setValidation(false)
       setDataText("Not Added")
-      )
+      })
     }
     React.useEffect(()=>{
         setId(global.id)

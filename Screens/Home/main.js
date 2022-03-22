@@ -45,7 +45,6 @@ const Main = ({navigation}) => {
     fetchStatus();
       fetchanimal();
       loadId();
-      global.alertlength;
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>

@@ -28,10 +28,9 @@ export default function LoadAlert({navigation, route}) {
     setId(global.id);
     setSpcies(global.species);
     loadFinance().then(data => {
-      global.alertlength=data
+      global.alertlength=data;
       setAlerts(data);
     });
-    global.alertlength = alert;
   }, [alert]);
   function delAlert(id){
     axiosIns.delete(`alerts/${id}`).then(()=>{alert("Alert deleted sucessfully")})
