@@ -53,7 +53,7 @@ const Main = ({navigation}) => {
         title={"HerdHelp"}
         titleStyle={{
           marginTop:20,
-          marginRight: 55,
+          // marginRight: 55,
           color:COLORS.black,
           ...FONTS.h1
 
@@ -76,7 +76,6 @@ const Main = ({navigation}) => {
               <Image
                 source={images.menu}
                 style={{
-              // backgroundColor:COLORS.Primary,
                   width: 30,
                   height: 30,
                   padding:5,
@@ -87,21 +86,47 @@ const Main = ({navigation}) => {
             </TouchableOpacity>
           </View>
         }
+        rightComponent={
+          <View
+            style={{
+              marginTop:25,
+            }}>
+            <TouchableOpacity
+              style={{
+              marginRight: 25,
+              backgroundColor:COLORS.Primary,
+              height:40,
+              width:40,
+              justifyContent:"center",
+              borderRadius:SIZES.base,
+              }}
+              onPress={() => {navigation.navigate("MyAccount")}}>
+              <Image
+                source={images.HH}
+                style={{
+                  width: 30,
+                  height: 30,
+                  padding:5,
+                  alignSelf:"center",
+                  tintColor:COLORS.white
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        }
+
       />
-      {/* {
-        show&&
-    <Drawer setShow={setShow} show={show} navigation={navigation} user={user}/>
-      } */}
       <ScrollView showsVerticalScrollIndicator={false}>
       <View 
         style={{
             width: '88%',
-            marginTop:SIZES.height*0.08 ,
+            marginTop:40 ,
             paddingVertical: SIZES.padding,
             paddingHorizontal: SIZES.radius,
             borderRadius: SIZES.radius,
             backgroundColor: COLORS.lightGray2,
             alignSelf: 'center',
+            marginBottom:SIZES.height>700?30:120
         }}>
           <ScrollView showsVerticalScrollIndicator={false}>
         <TextButton
@@ -112,6 +137,10 @@ const Main = ({navigation}) => {
           }}
           buttonContainerStyle={{
             marginTop: 18,
+            height:75,
+
+            // width:200,
+            // alignSelf:"flex-start"
           }}
         />
         <TextButton
@@ -122,6 +151,10 @@ const Main = ({navigation}) => {
           )}}
           buttonContainerStyle={{
             marginTop: 12,
+            height:75,
+
+            // width:200,
+            // alignSelf:"flex-end"
           }}
         />
         <TextButton
@@ -131,6 +164,7 @@ const Main = ({navigation}) => {
             navigation.navigate('medication')}}
           buttonContainerStyle={{
             marginTop: 12,
+            height:75,
           }}
         />
         <TextButton
@@ -142,6 +176,7 @@ const Main = ({navigation}) => {
           }}
           buttonContainerStyle={{
             marginTop: 12,
+            height:75,
           }}
         />
         <TextButton
@@ -152,28 +187,39 @@ const Main = ({navigation}) => {
           }}
           buttonContainerStyle={{
             marginTop: 12,
+            height:75,
+
+            // width:200,
+            // alignSelf:"flex-start"
           }}
         />
         <TextButton
           label={`ALERTS  `}
           icon={images.bell}
-          iconStyle={{
-            // tintColor:global.alertlength.length>0?COLORS.red:COLORS.white
-          }}
+          // iconStyle={{
+          //   tintColor:global.alertlength.length>0?COLORS.red:COLORS.white
+          // }}
           onPress={() => {
             navigation.navigate('LoadAlert'
             );
           }}
-          // label2={`${global.alertlength.length}`}
-          // buttonContainerStyle2={{
-          //   backgroundColor:global.alertlength.length>0?COLORS.red:COLORS.Primary
-          // }}
-          // label2Style={{
-          //   color:global.alertlength.length>0?COLORS.white:COLORS.Primary
-          // }}
+          label2={`${global.alertlength?.length}`}
+          buttonContainerStyle2={{
+            height:25,
+            width:25,
+            backgroundColor:global.alertlength?.length>0?COLORS.red:COLORS.Primary
+          }}
+          label2Style={{
+            color:global.alertlength?.length>0?COLORS.white:COLORS.Primary,
+            // justifyContent:"center",
+            // alignSelf:"center"
+          }}
           buttonContainerStyle={{
             marginTop: 12,
             marginBottom: 12,
+            height:75,
+            // width:200,
+            // alignSelf:"flex-end"
             // borderColor:global.alertlength.length>0?COLORS.red:COLORS.white,
             // borderWidth:2
           }}

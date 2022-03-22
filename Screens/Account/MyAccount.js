@@ -20,6 +20,7 @@ const MyAccount = ({navigation,route}) => {
     React.useEffect(() => {
       fetchprofile().then(data => {
         setUser(data[0]);
+        global.User=data
       });
     }, []);
   
@@ -54,7 +55,7 @@ function renderFileUri() {
                 borderRadius:SIZES.base,
                 }}
               onPress={() => {
-                navigation.replace("Draw");
+                navigation.goBack();
               }}>
               <Image
                 source={images.back}

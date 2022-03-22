@@ -47,7 +47,7 @@ const DrawerNav = () => {
       />
     }
     >
-      <Drawer.Screen name='drawScreen' component={Main} options={{
+      <Drawer.Screen name='Draw' component={Main} options={{
         // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image

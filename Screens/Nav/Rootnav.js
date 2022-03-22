@@ -87,29 +87,8 @@ export default class Rootnav extends Component {
         <Stack.Navigator screenOptions={{ headerShown: false}}
           initialRouteName={'Login'} mode="modal">
           <Stack.Screen name='Draw' component={Homenav} />
-          {/* <Stack.Screen name='Home' component={Home}/> */}
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />
-          {/* <Stack.Screen name='Info' component={Info}/>
-          <Stack.Screen name='Animals' component={Addanimals}  />
-          <Stack.Screen name='MyAccount' component={MyAccount} />
-          <Stack.Screen name='MyAccountEdit' component={MyAccountEdit} />
-          <Stack.Screen name='medication' component={Medication} />
-          <Stack.Screen name='weight' component={Weight} />
-          <Stack.Screen name='Finance' component={Finance} />
-          <Stack.Screen name='Alerts' component={Alerts} />
-          <Stack.Screen name='FinanceInfo' component={FinanceInfo} />
-          <Stack.Screen name='LoadAlert' component={LoadAlert}/>
-          <Stack.Screen name='Add' component={Add}/>
-          <Stack.Screen name='MedCard' component={MedCard}/>
-          <Stack.Screen name='Setting' component={Setting}/>
-          <Stack.Screen name='Report' component={Report}/>
-          <Stack.Screen name='ReportOP' component={ReportOP}/>
-          <Stack.Screen name='WeightH' component={WeightH}/>
-          <Stack.Screen name='History' component={History}/> */}
-
-
-
         </Stack.Navigator>
       </View>
     )

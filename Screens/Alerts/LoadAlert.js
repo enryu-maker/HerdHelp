@@ -28,8 +28,8 @@ export default function LoadAlert({navigation, route}) {
     setId(global.id);
     setSpcies(global.species);
     loadFinance().then(data => {
+      global.alertlength=data
       setAlerts(data);
-      // console.log(data)
     });
     global.alertlength = alert;
   }, [alert]);
@@ -57,7 +57,7 @@ export default function LoadAlert({navigation, route}) {
                 borderRadius:SIZES.base,
                 }}
               onPress={() => {
-                navigation.goBack();
+                navigation.navigate("Draw");
               }}>
               <Image
                 source={images.back}

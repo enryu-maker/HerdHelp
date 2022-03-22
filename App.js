@@ -29,6 +29,10 @@ export default function App() {
       //  console.l("Something Went Wrong")
     }
   };
+  async function loadFinance() {
+    let {data} = await axiosIns.get('alerts/');
+    return data;
+  }
   React.useEffect(() => {
     fetchprofile().then(data => {
       global.User = data;
@@ -41,6 +45,9 @@ export default function App() {
     retrieveData().then(cond => {
       setRoute(cond);
     });
+    loadFinance().then(data=>{
+      global.alertlength=data
+    })
   }, [Route]);
   return (
     <View style={{flex: 1}}>

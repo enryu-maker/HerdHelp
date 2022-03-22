@@ -91,7 +91,7 @@ export default function Alerts({navigation,route}) {
                 borderRadius:SIZES.base,
                 }}
               onPress={() => {
-                navigation.goBack();
+                navigation.navigate("LoadAlert");
               }}>
               <Image
                 source={images.back}
