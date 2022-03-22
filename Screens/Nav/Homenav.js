@@ -95,7 +95,7 @@ export default class Homenav extends Component {
           style="auto"/>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false}}
-          initialRouteName={'Draw'}>
+          initialRouteName={'Draw'} mode="modal">
           <Stack.Screen name='Draw' component={DrawerNav} />
           <Stack.Screen name='Home' component={Home}/>
           <Stack.Screen name='Login' component={Login} />

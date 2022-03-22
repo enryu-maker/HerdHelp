@@ -87,7 +87,7 @@ export default class Rootnav extends Component {
           style="auto"/>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false}}
-          initialRouteName={'Login'}>
+          initialRouteName={'Login'} mode="modal">
           <Stack.Screen name='Draw' component={DrawerNav} />
           <Stack.Screen name='Home' component={Home}/>
           <Stack.Screen name='Login' component={Login} />

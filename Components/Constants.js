@@ -64,7 +64,8 @@ export const formatter = new Intl.NumberFormat('en-US', {
 })
 export const COLORS={
     // Primary:"rgb(126,204,122)",
-    Primary:"#0DB44C",
+    Primary:"#009A48",
+    // Primary:"#0DB44C",#9b4246
     transparentPrimary: "#d6f5d6",
     transparentPrimary2: "#eaf7e9",
     white:"#ffffff",
@@ -77,7 +78,7 @@ export const COLORS={
     darkGray: "#525C67",
     darkGray2: "#757D85",
     transparent: "transparent",
-    red: "#FF1717",
+    red: "red",
     green: "#27AE60",
     layout:"#f0f0f0"
 }
