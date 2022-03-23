@@ -11,13 +11,16 @@ import {NavigationContainer} from '@react-navigation/native';
 export default function App() {
   const [Route, setRoute] = React.useState('');
   async function retrieveData() {
-    var data = JSON.parse(await AsyncStorage.getItem('route'));
+    try
+    {let {data} = JSON.parse(await AsyncStorage.getItem('route'));
     var cond;
     if (data == true) {
       return (cond = 'true');
     } else if (data == false) {
       return (cond = 'false');
     } else {
+      return (cond = 'null');
+    }}catch{
       return (cond = 'null');
     }
   }
@@ -28,12 +31,7 @@ export default function App() {
     } catch (e) {
     }
   };
-  React.useEffect(() => {
-    fetchprofile().then(data => {
-      global.User = data;
-    });
-    
-  }, []);
+  
   React.useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
@@ -42,7 +40,13 @@ export default function App() {
       setRoute(cond);
     });
     
-  }, [Route]);
+  }, []);
+  React.useEffect(() => {
+    if (Route!="false"||Route!="null"){
+    fetchprofile().then(data => {
+      global.User = data;
+    });}
+  }, []);
   return (
     <View style={{flex: 1}}>
       <StatusBar
