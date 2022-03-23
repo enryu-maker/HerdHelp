@@ -30,7 +30,9 @@ export const Medication = ({navigation, route}) => {
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
-  const [data,setData] = React.useState([]);
+  const [dataT,setDataT] = React.useState("");
+  const [dataS,setDataS] = React.useState("");
+
   const [cond,setCond] = React.useState(false);
 
   const onChangeSpec = value => {
@@ -49,7 +51,7 @@ export const Medication = ({navigation, route}) => {
       .post(
         'medication/',
         {
-          tag_number: `${global.id}${species}${tag}`,
+          tag_number:!cond?`${global.id}${dataS}${dataT}` : `${global.id}${species}${tag}`,
           medication_name: med,
           medication_date: treatt,
           dosage: dos,
@@ -92,11 +94,12 @@ export const Medication = ({navigation, route}) => {
     setAnimals(global.species);
     let {cond} = route.params
     setCond(cond)
-    if (cond){
+    if (!cond){
       let {tag} = route.params
-      setData(tag)
+      setDataT(tag)
+      let{species} = route.params
+      setDataS(species)
     }
-    
   }, []);
   function renderheader() {
     return (
@@ -365,9 +368,9 @@ export const Medication = ({navigation, route}) => {
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {
-          // alert(`${id}${species}${tag}`)
+          // `${global.id}${dataS}${dataT}`
           // setSupportTag(`${species}${tag}`)
-          addMedical();
+          // addMedical();
         }}
         icon={images.med}
         loading={loading}

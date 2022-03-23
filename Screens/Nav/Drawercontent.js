@@ -14,7 +14,7 @@ export default function Drawercontent(props) {
         {...props}
         style={{borderBottomWidth: 0.8, borderBottomColor: COLORS.Primary}}>
         <TouchableWithoutFeedback style={styles.drawerContent}
-        onPress={()=>{props.navigation.navigate('MyAccount')}}
+        // onPress={()=>{props.navigation.navigate('MyAccount')}}
         >
           <View style={styles.userInfoSection}>
             <View style={[styles.row, {flexDirection: 'row'}]}>

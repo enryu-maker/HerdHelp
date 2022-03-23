@@ -63,7 +63,8 @@ export default function MedCard({ navigation,route }) {
             }}
           onPress={()=>{
             navigation.navigate('medication',{
-              tag:animal.tag_number,
+              tag:animal.support_tag.toString(),
+              species:animal.species.toString(),
               cond:false
             })
           }}
