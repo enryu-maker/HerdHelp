@@ -12,13 +12,15 @@ export default function MedCard({ navigation,route }) {
   const [med, setMed] = React.useState([]);
   const [err, setErr] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [animal,setAnimal] = React.useState([])
   React.useEffect(() => {
       if(!loading){
         let {medication} = route.params
         setMed(medication)
+        let {animal} = route.params
+        setAnimal(animal)
       }
   }, []);
-
     function renderHeader() {
         return (
           <Header
@@ -51,8 +53,30 @@ export default function MedCard({ navigation,route }) {
             }
             title={'Medication Details'}
             titleStyle={{
-              marginLeft:25
+              marginLeft:120,
+              alignSelf:"center"
             }}
+            rightComponent={
+              <TouchableOpacity
+          style={{
+            justifyContent:"center"
+            }}
+          onPress={()=>{
+            navigation.navigate('medication',{
+              tag:animal.tag_number,
+              cond:false
+            })
+          }}
+          >
+          <Text
+          style={{
+            padding:SIZES.padding,
+            color:COLORS.Primary,
+            ...FONTS.h2
+          }}
+          >+Med</Text>
+          </TouchableOpacity>
+            }
           />
         );
       }

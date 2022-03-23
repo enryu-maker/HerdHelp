@@ -26,13 +26,8 @@ export default function App() {
       const {data} = await axiosIns.get('profile/');
       return data;
     } catch (e) {
-      //  console.l("Something Went Wrong")
     }
   };
-  async function loadFinance() {
-    let {data} = await axiosIns.get('alerts/');
-    return data;
-  }
   React.useEffect(() => {
     fetchprofile().then(data => {
       global.User = data;
@@ -45,11 +40,6 @@ export default function App() {
     }, 4000);
     retrieveData().then(cond => {
       setRoute(cond);
-      if(cond == 'true'){
-        loadFinance().then(data=>{
-          global.alertlength=data
-        })
-      }
     });
     
   }, [Route]);

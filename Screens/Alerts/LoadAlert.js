@@ -28,7 +28,6 @@ export default function LoadAlert({navigation, route}) {
     setId(global.id);
     setSpcies(global.species);
     loadFinance().then(data => {
-      global.alertlength=data;
       setAlerts(data);
     });
   }, [alert]);

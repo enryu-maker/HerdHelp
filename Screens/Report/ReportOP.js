@@ -14,6 +14,7 @@ import ReportFilter from './ReportFilter';
 import { set } from 'react-native-reanimated';
 import ActivityIndicatorExample from '../../Components/Loading';
 import TextButton from '../../Components/TextButton';
+import Generate from './Generate';
 export default function ReportOP({navigation,route}) {
   const [label,setLabel]=React.useState("")
   const [loading,setLoading]=React.useState(false)
@@ -25,6 +26,8 @@ export default function ReportOP({navigation,route}) {
   const [med, setMed] = React.useState('')
   const [footer,setFooter] =React.useState(false)
   const [amount,setAmount] = React.useState([])
+  const [fields,setFileds] = React.useState([])
+
   function filterList(list) {
     return list.filter(
       (listItem) =>
@@ -46,6 +49,7 @@ async function getData(api){
     setLoading(false)
     return data
  }
+ 
 //  console.log(api)
   React.useEffect(()=>{
     
@@ -59,6 +63,10 @@ async function getData(api){
     getData(api).then(data=>{
         setData(data)
     })
+  //   getcat().then(data=>{
+  //     setFileds(data)
+  // })
+    // {Generate()}
     
   },[])
 
@@ -221,6 +229,11 @@ async function getData(api){
           marginBottom:footer? 10 : 30,
           margin:20
           // padding:20
+        }}
+        onPress={()=>{
+          navigation.navigate("Generate",{
+            label:label
+          })
         }}
         />
         {

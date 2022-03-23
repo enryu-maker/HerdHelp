@@ -30,6 +30,8 @@ export const Medication = ({navigation, route}) => {
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
+  const [data,setData] = React.useState([]);
+  const [cond,setCond] = React.useState(false);
 
   const onChangeSpec = value => {
     setSpcies(value);
@@ -88,6 +90,13 @@ export const Medication = ({navigation, route}) => {
   React.useEffect(() => {
     setId(global.id);
     setAnimals(global.species);
+    let {cond} = route.params
+    setCond(cond)
+    if (cond){
+      let {tag} = route.params
+      setData(tag)
+    }
+    
   }, []);
   function renderheader() {
     return (
@@ -135,7 +144,9 @@ export const Medication = ({navigation, route}) => {
         <Text style={{color:validation? COLORS.Primary : COLORS.red, alignSelf: 'center', ...FONTS.body3}}>
           {err}
         </Text>
-        <Dropdown
+        {
+          cond?
+          <><Dropdown
           label="Species"
           dropdownIcon={images.down}
           dropdownIconSize={22}
@@ -187,8 +198,8 @@ export const Medication = ({navigation, route}) => {
             marginTop: SIZES.radius,
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
-        />
-
+        /></>:<View></View>
+        }
         <FormInput
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>

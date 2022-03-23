@@ -16,6 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextButton from '../../Components/TextButton';
 import axios from 'axios';
 import Loader from '../../Components/Loader';
+
 axios.defaults.baseURL =
   'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/';
 const Login = ({navigation}) => {
@@ -77,7 +78,7 @@ const Login = ({navigation}) => {
               response.data.refresh,
               response.data.userid.toString(),
             ).then(() => {
-              navigation.replace('Draw'),
+              navigation.replace('DrawNav'),
               setLoading(false)
             });
             

@@ -31,6 +31,12 @@ const Main = ({navigation}) => {
     // global.stat=stat
     return data;
   } 
+  async function getcat() {
+    setLoading(true);
+    let {data} = await axiosIns.get('getfields/');
+    global.fields=data
+    return data;
+  }
   async function fetchStatus() {
     let {data} = await axiosIns.get('getstatuses/');
     setLoading(true);
@@ -41,27 +47,29 @@ const Main = ({navigation}) => {
   async function loadId(){
     global.id = await AsyncStorage.getItem("id")
   }
-
+  async function loadFinance() {
+    let {data} = await axiosIns.get('alerts/');
+    global.alertlength=data
+    return data;
+  }
   React.useEffect(() => {
     fetchStatus();
       fetchanimal();
       loadId();
+      getcat();
+      loadFinance().then(data=>{
+        setUser(data)
+      }
+
+      );
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <Header
-        // title={"HerdHelp"}
-        // titleStyle={{
-        //   marginTop:20,
-        //   marginRight: 55,
-        //   color:COLORS.black,
-        //   ...FONTS.h1
-
-        // }}
         img={images.herdhelp}
         imgstyle={{
           width:220,
-          marginRight: 50,
+          // marginRight: 50,
 
         }}
         leftComponent={
@@ -92,34 +100,34 @@ const Main = ({navigation}) => {
             </TouchableOpacity>
           </View>
         }
-        // rightComponent={
-        //   <View
-        //     style={{
-        //       marginTop:25,
-        //     }}>
-        //     <TouchableOpacity
-        //       style={{
-        //       marginRight: 25,
-        //       backgroundColor:COLORS.Primary,
-        //       height:40,
-        //       width:40,
-        //       justifyContent:"center",
-        //       borderRadius:SIZES.base,
-        //       }}
-        //       onPress={() => {navigation.navigate("MyAccount")}}>
-        //       <Image
-        //         source={images.login}
-        //         style={{
-        //           width: 30,
-        //           height: 30,
-        //           padding:5,
-        //           alignSelf:"center",
-        //           tintColor:COLORS.white
-        //         }}
-        //       />
-        //     </TouchableOpacity>
-        //   </View>
-        // }
+        rightComponent={
+          <View
+            style={{
+              marginTop:25,
+            }}>
+            <TouchableOpacity
+              style={{
+              marginRight: 25,
+              backgroundColor:COLORS.Primary,
+              height:40,
+              width:40,
+              justifyContent:"center",
+              borderRadius:SIZES.base,
+              }}
+              onPress={() => {navigation.navigate("MyAccount")}}>
+              <Image
+                source={images.login}
+                style={{
+                  width: 30,
+                  height: 30,
+                  padding:5,
+                  alignSelf:"center",
+                  tintColor:COLORS.white
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        }
 
       />
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -164,7 +172,9 @@ const Main = ({navigation}) => {
           icon={images.med}
           label={'ADD MEDICATION'}
           onPress={() => {
-            navigation.navigate('medication')}}
+            navigation.navigate('medication',{
+              cond:true
+            })}}
           buttonContainerStyle={{
             marginTop: 12,
             height:75,
@@ -197,17 +207,17 @@ const Main = ({navigation}) => {
           label={`ALERTS  `}
           icon={images.bell}
           iconStyle={{
-            tintColor:global.alertlength?.length>0?COLORS.red:COLORS.white
+            tintColor:user?.length>0?COLORS.red:COLORS.white
           }}
           onPress={() => {
             navigation.navigate('LoadAlert'
             );
           }}
-          label2={`${global.alertlength?.length}`}
+          label2={`${user?.length}`}
           buttonContainerStyle2={{
             height:30,
             width:30,
-            backgroundColor:global.alertlength?.length>0?COLORS.red:COLORS.Primary,
+            backgroundColor:user?.length>0?COLORS.red:COLORS.Primary,
             justifyContent:"center",
             alignSelf:"center",
             padding:1
@@ -215,7 +225,7 @@ const Main = ({navigation}) => {
 
           }}
           label2Style={{
-            color:global.alertlength?.length>0?COLORS.white:COLORS.Primary,
+            color:user?.length>0?COLORS.white:COLORS.Primary,
             justifyContent:"center",
             alignSelf:"center"
           }}

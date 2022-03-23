@@ -93,7 +93,7 @@ export const Info = ({navigation, route}) => {
             />
           )}
           <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>
-            ID: {animal?.tag_number}
+            ID: {animal?.support_tag}
           </Text>
         </View>
         <TouchableOpacity
@@ -110,6 +110,7 @@ export const Info = ({navigation, route}) => {
           onPress={() => {
             navigation.navigate('MedCard', {
               medication: med,
+              animal:animal
             });
           }}>
           <Image
@@ -179,11 +180,11 @@ export const Info = ({navigation, route}) => {
             <InfoItem label="Date Of Birth" value={animal?.birth_date} />
             <InfoItem
               label="Mother Tag"
-              value={animal?.mother_tagnumber}
+              value={animal?.mother_supporttag}
             />
             <InfoItem
               label="Father Tag"
-              value={animal?.father_tagnumber}
+              value={animal?.father_supporttag}
               withDivider={false}
             />
           </View>

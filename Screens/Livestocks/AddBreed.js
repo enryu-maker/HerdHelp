@@ -360,6 +360,34 @@ const Addanimals = ({navigation, route}) => {
               inputStyle={{marginLeft: 20, fontSize: 16}}
             />
             <FormInput
+          prependComponent={
+            <View
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                marginLeft: 0,
+              }}>
+              <Image
+                source={images.scale}
+                style={{width: 28, height: 28, tintColor: COLORS.Primary}}
+              />
+            </View>
+          }
+          label="Weight"
+          value={weight}
+          keyboardType="numeric"
+          onChange={value => {
+            setWeight(value);
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+        />
+            <FormInput
               prependComponent={
                 <View style={{alignSelf: 'center', justifyContent: 'center'}}>
                   <Image
@@ -405,10 +433,88 @@ const Addanimals = ({navigation, route}) => {
               }}
               inputStyle={{marginLeft: 20, fontSize: 16}}
             />
-          </View>
+            <Dropdown
+          label="Vaccinated"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
+          borderRadius={SIZES.radius}
+          data={Bred}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          enableAvatar
+          // required
+          disableSelectionTick
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
+          value={vaccinated}
+          onChange={onChangeVacc}
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{
+            backgroundColor: COLORS.white,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+        />
+        {vaccinated ? (
+          <FormDateInput
+            label="Date of Vaccination"
+            placeholder="YYYY-MM-DD"
+            value={vaccinateddate}
+            setDate={setVaccinateddate}
+            formatDate={setVaccinateddatet}
+            containerStyle={{
+              marginTop: SIZES.radius,
+              // marginLeft:20
+            }}
+            inputContainerStyle={{
+              backgroundColor: COLORS.white,
+              width: '88%',
+              alignSelf: 'center',
+            }}
+            inputStyle={{marginLeft: 20, fontSize: 16}}
+          />
         ) : (
           <View></View>
         )}
+        <FormInput
+          prependComponent={
+            <View
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                marginLeft: 0,
+              }}>
+              <Image
+                source={images.dog}
+                style={{width: 28, height: 28, tintColor: COLORS.Primary}}
+              />
+            </View>
+          }
+          label="Breed"
+          value={Breed}
+          onChange={value => {
+            setBreed(value);
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+        />
         <FormInput
           prependComponent={
             <View
@@ -436,6 +542,38 @@ const Addanimals = ({navigation, route}) => {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
+          </View>
+
+        ) : (
+          <View>
+            <FormInput
+          prependComponent={
+            <View
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                marginLeft: 0,
+              }}>
+              <Image
+                source={images.money}
+                style={{width: 28, height: 28, tintColor: COLORS.Primary}}
+              />
+            </View>
+          }
+          label="Price"
+          value={price}
+          keyboardType="numeric"
+          onChange={value => {
+            setPrice(value);
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+        />
         <FormInput
           prependComponent={
             <View
@@ -445,15 +583,15 @@ const Addanimals = ({navigation, route}) => {
                 marginLeft: 0,
               }}>
               <Image
-                source={images.dog}
+                source={images.age}
                 style={{width: 28, height: 28, tintColor: COLORS.Primary}}
               />
             </View>
           }
-          label="Breed"
-          value={Breed}
+          label="Age"
+          value={age}
           onChange={value => {
-            setBreed(value);
+            setAge(value);
           }}
           containerStyle={{
             marginTop: SIZES.radius,
@@ -530,34 +668,6 @@ const Addanimals = ({navigation, route}) => {
         ) : (
           <View></View>
         )}
-
-        <FormInput
-          prependComponent={
-            <View
-              style={{
-                alignSelf: 'center',
-                justifyContent: 'center',
-                marginLeft: 0,
-              }}>
-              <Image
-                source={images.age}
-                style={{width: 28, height: 28, tintColor: COLORS.Primary}}
-              />
-            </View>
-          }
-          label="Age"
-          value={age}
-          onChange={value => {
-            setAge(value);
-          }}
-          containerStyle={{
-            marginTop: SIZES.radius,
-          }}
-          inputContainerStyle={{
-            backgroundColor: COLORS.white,
-          }}
-          inputStyle={{marginLeft: 20, fontSize: 16}}
-        />
         <Dropdown
           label="Vaccinated"
           dropdownIcon={images.down}
@@ -613,7 +723,6 @@ const Addanimals = ({navigation, route}) => {
         ) : (
           <View></View>
         )}
-
         <FormInput
           prependComponent={
             <View
@@ -623,16 +732,15 @@ const Addanimals = ({navigation, route}) => {
                 marginLeft: 0,
               }}>
               <Image
-                source={images.money}
+                source={images.dog}
                 style={{width: 28, height: 28, tintColor: COLORS.Primary}}
               />
             </View>
           }
-          label="Price"
-          value={price}
-          keyboardType="numeric"
+          label="Breed"
+          value={Breed}
           onChange={value => {
-            setPrice(value);
+            setBreed(value);
           }}
           containerStyle={{
             marginTop: SIZES.radius,
@@ -642,6 +750,44 @@ const Addanimals = ({navigation, route}) => {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
+        <FormInput
+          prependComponent={
+            <View
+              style={{
+                alignSelf: 'center',
+                justifyContent: 'center',
+                marginLeft: 0,
+              }}>
+              <Image
+                source={images.name}
+                style={{width: 28, height: 28, tintColor: COLORS.Primary}}
+              />
+            </View>
+          }
+          label="Registration"
+          value={registration}
+          onChange={value => {
+            setRegistration(value);
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+        />
+          </View>
+        )}
+        
+        
+        
+        
+
+        
+        
+
+        
       </View>
     );
   }
