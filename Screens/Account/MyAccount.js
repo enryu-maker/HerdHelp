@@ -55,7 +55,7 @@ function renderFileUri() {
                 borderRadius:SIZES.base,
                 }}
               onPress={() => {
-                navigation.goBack();
+                navigation.replace("DrawNav");
               }}>
               <Image
                 source={images.back}
