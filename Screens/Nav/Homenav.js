@@ -31,6 +31,7 @@ const Drawer = createDrawerNavigator();
 import Drawercontent from './Drawercontent';
 import Rootnav from './Rootnav';
 import Generate from '../Report/Generate';
+import Babies from '../../Components/Babies';
 const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
@@ -116,6 +117,8 @@ export default class Homenav extends Component {
           <Stack.Screen name='WeightH' component={WeightH}/>
           <Stack.Screen name='History' component={History}/>
           <Stack.Screen name='Generate' component={Generate}/>
+          <Stack.Screen name='Babies' component={Babies}/>
+
 
         </Stack.Navigator>
       </>

@@ -1,15 +1,15 @@
 import { View, Text ,TouchableOpacity,Image,ScrollView} from 'react-native'
 import React from 'react'
-import Header from '../../Components/Header';
-import Card from '../../Components/Card';
-import ActivityIndicatorExample from '../../Components/Loading';
+import Header from './Header';
+import Card from './Card';
+
 import {
   COLORS,
   FONTS,
   images,
   SIZES,
-} from '../../Components/Constants';
-export default function Add({navigation,route}) {
+} from './Constants';
+export default function Babies({navigation,route}) {
   const [label,setLabel]=React.useState("")
   const [loading,setLoading]=React.useState(false)
   const [cond,setCond]=React.useState(false)
@@ -77,12 +77,6 @@ export default function Add({navigation,route}) {
               Species={listItem.category}
               Weight={listItem.weight}
               image={listItem.image}
-              onPress={() => {
-                navigation.navigate('Info', {
-                  value: listItem,
-                  cond:cond
-                });
-              }}
             />
           ))}
         </ScrollView>

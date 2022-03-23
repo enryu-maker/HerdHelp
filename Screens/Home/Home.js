@@ -82,7 +82,7 @@ export const Home = ({navigation}) => {
                 }}
                 icon={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + a.data[0].image}}
                 key={a.id}
-                label={`My ${a.label}'s`}
+                label={`My ${a.label}'s [${a.data.length}]`}
                 onPress={() => {
                   navigation.navigate('Add', {
                     label: `My ${a.label}'s`,

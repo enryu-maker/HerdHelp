@@ -129,7 +129,7 @@ class Generate extends Component {
             checkboxStyle={{
               tintColor: COLORS.gray,
             }}
-            items={global.fields?.reportdata}
+            items={this.props.route.params.fields}
             selectedItems={this.state.selectedFruits}
             onSelectionsChange={this.onSelectionsChange}
           />

@@ -191,10 +191,6 @@ export const Info = ({navigation, route}) => {
         ) : (
           <>
           <InfoItem
-            label="registration"
-            value={(animal?.registration)}
-          />
-          <InfoItem
             label="Price"
             value={`${formatter.format(animal?.price)}`}
             withDivider={false}
@@ -214,6 +210,10 @@ export const Info = ({navigation, route}) => {
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
+          <InfoItem
+            label="registration"
+            value={(animal?.registration)}
+          />
         <InfoItem label="Breed" value={animal?.breed} withDivider={false}/>
       </View>
     );
@@ -238,25 +238,27 @@ export const Info = ({navigation, route}) => {
   }
   function Babies(){
 
-    return(<View
+    return(<TouchableOpacity
         style={{
           marginTop: SIZES.padding,
           borderRadius: SIZES.radius,
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
-          paddingBottom: SIZES.padding,
-        }}>
-          <Text style={{
-            ...FONTS.h3,
-            alignSelf:"center",
-            padding:8,
-            color:COLORS.darkGray2
-          }}>Children List</Text>
-        <InfoItem label="Tag" value={"DOB"}/>
-        {animal.children?.map((a,index)=>(
+          // paddingBottom: SIZES.padding,
+        }}
+        onPress={()=>{
+          navigation.navigate('Babies', {
+            label: "Babies",
+            data: animal.children,
+            cond:true
+          });
+        }}
+        >
+        <InfoItem label="Babies" value={animal.children.length}/>
+        {/* {animal.children?.map((a,index)=>(
           <InfoItem  key={index} label={a.tag_number} value={a.birth_date} />
-        ))}
-        </View>)
+        ))} */}
+        </TouchableOpacity>)
   }
   function renderHeader() {
     return (

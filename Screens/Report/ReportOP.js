@@ -63,6 +63,7 @@ async function getData(api){
     getData(api).then(data=>{
         setData(data)
     })
+    setFileds(global.fields?.reportdata)
   //   getcat().then(data=>{
   //     setFileds(data)
   // })
@@ -232,7 +233,8 @@ async function getData(api){
         }}
         onPress={()=>{
           navigation.navigate("Generate",{
-            label:label
+            label:label,
+            fields:fields
           })
         }}
         />

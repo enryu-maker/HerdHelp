@@ -11,18 +11,16 @@ import {NavigationContainer} from '@react-navigation/native';
 export default function App() {
   const [Route, setRoute] = React.useState('');
   async function retrieveData() {
-    try
-    {let {data} = JSON.parse(await AsyncStorage.getItem('route'));
-    var cond;
-    if (data == true) {
-      return (cond = 'true');
-    } else if (data == false) {
-      return (cond = 'false');
-    } else {
-      return (cond = 'null');
-    }}catch{
-      return (cond = 'null');
-    }
+    // let {data} = JSON.parse(await AsyncStorage.getItem('route'));
+    // var cond;
+    return(JSON.parse(await AsyncStorage.getItem('route')))
+    // if (data == true) {
+    //   return (cond = 'true');
+    // } else if (data == false) {
+    //   return (cond = 'false');
+    // } else {
+    //   return (cond = 'null');
+    // }
   }
   const fetchprofile = async () => {
     try {
@@ -31,7 +29,12 @@ export default function App() {
     } catch (e) {
     }
   };
-  
+  React.useEffect(() => {
+    if (Route!="false"||Route!="null"){
+    fetchprofile().then(data => {
+      global.User = data;
+    });}
+  }, []);
   React.useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
@@ -40,20 +43,15 @@ export default function App() {
       setRoute(cond);
     });
     
-  }, []);
-  React.useEffect(() => {
-    if (Route!="false"||Route!="null"){
-    fetchprofile().then(data => {
-      global.User = data;
-    });}
-  }, []);
+  }, [Route]);
+  // console.log(Route)
   return (
     <View style={{flex: 1}}>
       <StatusBar
         barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
       />
       <NavigationContainer>
-      {Route == 'true' || Route != 'null' ? (
+      {Route == true || Route != null ? (
 
           <Homenav />
       ) : (
