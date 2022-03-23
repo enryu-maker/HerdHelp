@@ -370,7 +370,7 @@ export const Medication = ({navigation, route}) => {
         onPress={() => {
           // `${global.id}${dataS}${dataT}`
           // setSupportTag(`${species}${tag}`)
-          // addMedical();
+          addMedical();
         }}
         icon={images.med}
         loading={loading}
