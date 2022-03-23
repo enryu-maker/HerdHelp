@@ -139,7 +139,6 @@ export default function Parents({navigation}) {
             </View>
           }
           label="Tag Number"
-          keyboardType="numeric"
           value={tag}
           onChange={value => {
             setTag(value);

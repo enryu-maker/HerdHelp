@@ -73,7 +73,7 @@ const Addanimals = ({navigation, route}) => {
     setBought(value);
   };
   function isEnableSignIn() {
-    return tag != '' && name != '' && valueMS!='' && valueBS!=''&& bought!='';
+    return tag != '' &&  valueMS!='' && valueBS!='';
   }
   const clear = () => {
     // setSpcies([])

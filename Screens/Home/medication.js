@@ -193,7 +193,7 @@ export const Medication = ({navigation, route}) => {
           onChange={value => {
             setTag(value);
           }}
-          keyboardType="numeric"
+          // keyboardType="numeric"
           inputContainerStyle={{
             backgroundColor: COLORS.white,
           }}

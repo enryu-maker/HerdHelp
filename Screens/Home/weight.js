@@ -159,7 +159,7 @@ export const Weight =({ navigation,route})=> {
             </View>
           }
           label="Tag Number"
-          keyboardType="numeric"
+          // keyboardType="numeric"
           value={tag}
           onChange={value => {
             setTag(value);

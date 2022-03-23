@@ -132,7 +132,7 @@ export default function WeightH({navigation}) {
           }
           label="Tag Number"
           value={tag}
-          keyboardType="numeric"
+          // keyboardType="numeric"
           onChange={value => {
             setTag(value);
           }}
