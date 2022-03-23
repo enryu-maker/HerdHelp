@@ -91,6 +91,14 @@ const DrawerNav = () => {
           }} />
       </Drawer.Navigator>)}
 export default class Homenav extends Component {
+   fetchprofile = async () => {
+      const {data} = await axiosIns.get('profile/');
+      global.User = data;
+      return data;
+  };
+  componentDidMount(){
+    {this.fetchprofile()}
+  }
   render() {
     return (
       <>

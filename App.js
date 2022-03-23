@@ -5,36 +5,16 @@ import Homenav from './Screens/Nav/Homenav';
 import Rootnav from './Screens/Nav/Rootnav';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen';
-import axiosIns from './helpers/helpers';
 import {NavigationContainer} from '@react-navigation/native';
 
 export default function App() {
   const [Route, setRoute] = React.useState('');
   async function retrieveData() {
-    // let {data} = JSON.parse(await AsyncStorage.getItem('route'));
-    // var cond;
+
     return(JSON.parse(await AsyncStorage.getItem('route')))
-    // if (data == true) {
-    //   return (cond = 'true');
-    // } else if (data == false) {
-    //   return (cond = 'false');
-    // } else {
-    //   return (cond = 'null');
-    // }
+
   }
-  const fetchprofile = async () => {
-    try {
-      const {data} = await axiosIns.get('profile/');
-      return data;
-    } catch (e) {
-    }
-  };
-  React.useEffect(() => {
-    if (Route!="false"||Route!="null"){
-    fetchprofile().then(data => {
-      global.User = data;
-    });}
-  }, []);
+  
   React.useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();

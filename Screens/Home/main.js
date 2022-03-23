@@ -151,7 +151,8 @@ const Main = ({navigation}) => {
           }}
           buttonContainerStyle={{
             marginTop: 18,
-            height:75,
+            height:SIZES.height>700?75:60,
+
 
             // width:200,
             // alignSelf:"flex-start"
@@ -165,7 +166,8 @@ const Main = ({navigation}) => {
           )}}
           buttonContainerStyle={{
             marginTop: 12,
-            height:75,
+            height:SIZES.height>700?75:60,
+
           }}
         />
         <TextButton
@@ -177,7 +179,8 @@ const Main = ({navigation}) => {
             })}}
           buttonContainerStyle={{
             marginTop: 12,
-            height:75,
+            height:SIZES.height>700?75:60,
+
           }}
         />
         <TextButton
@@ -189,7 +192,7 @@ const Main = ({navigation}) => {
           }}
           buttonContainerStyle={{
             marginTop: 12,
-            height:75,
+            height:SIZES.height>700?75:60,
           }}
         />
         <TextButton
@@ -200,7 +203,8 @@ const Main = ({navigation}) => {
           }}
           buttonContainerStyle={{
             marginTop: 12,
-            height:75,
+            height:SIZES.height>700?75:60,
+
           }}
         />
         <TextButton
@@ -232,7 +236,8 @@ const Main = ({navigation}) => {
           buttonContainerStyle={{
             marginTop: 12,
             marginBottom: 12,
-            height:75,
+            height:SIZES.height>700?75:60,
+
           }}
         />
      </ScrollView>
