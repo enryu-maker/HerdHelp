@@ -128,7 +128,7 @@ const Main = ({navigation}) => {
             borderRadius: SIZES.radius,
             backgroundColor: COLORS.lightGray2,
             alignSelf: 'center',
-            marginBottom:SIZES.height>700?37:50
+            marginBottom:SIZES.height>700?37:50,
         }}>
           <ScrollView showsVerticalScrollIndicator={false}>
         <TextButton

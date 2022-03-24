@@ -9,7 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { COLORS } from './Components/Constants';
 import axiosIns from './helpers/helpers';
 export default function App() {
-  const [Route, setRoute] = React.useState(null);
+  const [Route, setRoute] = React.useState("");
   async function retrieveData() {
     return(JSON.parse(await AsyncStorage.getItem('route')))
   }
