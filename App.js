@@ -11,9 +11,7 @@ import axiosIns from './helpers/helpers';
 export default function App() {
   const [Route, setRoute] = React.useState(null);
   async function retrieveData() {
-
     return(JSON.parse(await AsyncStorage.getItem('route')))
-
   }
   const fetchprofile = async () => {
     try {
@@ -23,7 +21,7 @@ export default function App() {
     }
   };
   React.useEffect(() => {
-    if (Route!=false ||Route!= null ){
+    if (Route == true ||Route != null ){
     fetchprofile().then(data => {
       global.User = data;
     });}
@@ -35,19 +33,18 @@ export default function App() {
     retrieveData().then(cond => {
       setRoute(cond);
     });
-    
   }, [Route]);
-  console.log(Route)
+
   return (
     <View style={{flex: 1,backgroundColor:COLORS.white}}>
       <StatusBar
         barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
       />
       <NavigationContainer>
-      {Route != false || Route != null ? (
-          <Homenav />
+      {Route == true || Route != null ? (
+          <Homenav/>
       ) : (
-          <Rootnav />
+          <Rootnav/>
       )}
       </NavigationContainer>
     </View>
