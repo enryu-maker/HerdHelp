@@ -25,18 +25,10 @@ const Main = ({navigation}) => {
   const [user,setUser] = React.useState([])
   async function fetchanimal() {
     let {data} = await axiosIns.get('getcategories/');
-    // let {stat} = await axiosIns.get('getstatuses/');
     setLoading(true);
     global.species = data
-    // global.stat=stat
     return data;
   } 
-  async function getcat() {
-    setLoading(true);
-    let {data} = await axiosIns.get('getfields/');
-    global.fields=data
-    return data;
-  }
   async function fetchStatus() {
     let {data} = await axiosIns.get('getstatuses/');
     setLoading(true);
@@ -47,21 +39,17 @@ const Main = ({navigation}) => {
   async function loadId(){
     global.id = await AsyncStorage.getItem("id")
   }
-  async function loadFinance() {
+  async function getALerts(){
     let {data} = await axiosIns.get('alerts/');
-    global.alertlength=data
-    return data;
+    return(data)
   }
   React.useEffect(() => {
     fetchStatus();
       fetchanimal();
       loadId();
-      getcat();
-      loadFinance().then(data=>{
+      getALerts().then((data)=>{
         setUser(data)
-      }
-
-      );
+      })
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -140,7 +128,7 @@ const Main = ({navigation}) => {
             borderRadius: SIZES.radius,
             backgroundColor: COLORS.lightGray2,
             alignSelf: 'center',
-            marginBottom:SIZES.height>700?30:120
+            marginBottom:SIZES.height>700?37:50
         }}>
           <ScrollView showsVerticalScrollIndicator={false}>
         <TextButton

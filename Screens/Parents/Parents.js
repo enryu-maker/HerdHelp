@@ -172,7 +172,7 @@ export default function Parents({navigation}) {
         contentContainerStyle={{
           marginTop: SIZES.radius,
           paddingHorizontal: SIZES.padding,
-          marginBottom:SIZES.height>700?-100:50
+          marginBottom:SIZES.height>700?0:50
 
         }}>
         {renderForm()}

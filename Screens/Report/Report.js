@@ -23,10 +23,14 @@ export default function Report(props) {
     setLoading(false);
     return data;
   }
+  // async function getfields() {
+  //   global.fields = await axiosIns.get('getfields/');
+  // }
   React.useEffect(() => {
     getReports().then(data => {
       setReport(data);
     });
+    // getfields()
   }, []);
   function renderheader() {
     return (
@@ -93,7 +97,8 @@ export default function Report(props) {
                   cond: false,
                   footer:
                     listItem.name == 'Lost Animals' ||
-                    listItem.name == 'Sold Animals'
+                    listItem.name == 'Sold Animals' ||
+                    listItem.name == 'Purchased Animals'
                       ? true
                       : false,
                 });

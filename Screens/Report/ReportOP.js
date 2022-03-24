@@ -138,7 +138,12 @@ async function getData(api){
   function totalmoney(){
     var price=0
     Data.map(a=>{
-      price+=a.soldprice
+      if (label=='Purchased Animals'){
+        price+=a.price
+      }
+      else{
+        price+=a.soldprice
+      }
     })
     return price
   }
