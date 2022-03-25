@@ -122,7 +122,7 @@ export const Medication = ({navigation, route}) => {
                 borderRadius:SIZES.base,
                 }}
               onPress={() => {
-                navigation.goBack();
+                !cond ? navigation.goBack():navigation.navigate("MedCard")
               }}>
               <Image
                 source={images.back}
@@ -351,7 +351,6 @@ export const Medication = ({navigation, route}) => {
         backgroundColor: COLORS.white,
       }}>
       {renderheader()}
-      {/* <Loader loading={loading}/> */}
       {
         show&&
       <CustomAlert show={show} setShow={setShow} validation={validation} label={dataText}/>

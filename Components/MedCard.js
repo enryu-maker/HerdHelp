@@ -12,12 +12,9 @@ import axiosIns from '../helpers/helpers';
 export default function MedCard({ navigation,route }) {
   const [med, setMed] = React.useState([]);
   const [err, setErr] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
   const [animal,setAnimal] = React.useState([])
   async function getMedication(tag) {
-    setLoading(true)
     let {data} = await axiosIns.get(`getmedication/${tag}`);
-    setLoading(false)
     return data;
   }
   React.useEffect(() => {
@@ -26,7 +23,7 @@ export default function MedCard({ navigation,route }) {
     setMed(data)
     });
     setAnimal(animal)
-  }, []);
+  }, [med]);
     function renderHeader() {
         return (
           <Header
@@ -95,8 +92,8 @@ export default function MedCard({ navigation,route }) {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1}}>
      {   
-     loading?(<ActivityIndicator size="large" color={COLORS.Primary}/>):
-     (med.map(a=>{
+    //  loading?(<ActivityIndicator size="large" color={COLORS.Primary}/>):
+     med.map(a=>{
          return(
             <Med 
             key={a.id}
@@ -108,7 +105,7 @@ export default function MedCard({ navigation,route }) {
             withdrawal_date={a.withdrawal_date}
             />
          )
-         }))
+         })
      }
      </ScrollView>
     </View>
