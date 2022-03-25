@@ -53,7 +53,8 @@ export const images ={
     heart:require("../assets/Logo/heart.png"),
     delet:require("../assets/Logo/delete.png"),
     parents:require("../assets/Logo/family.png"),
-    down:require("../assets/Logo/down.png")
+    down:require("../assets/Logo/down.png"),
+    right:require("../assets/Logo/arrow-right.png"),
 
 
 }

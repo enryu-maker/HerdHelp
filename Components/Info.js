@@ -5,6 +5,7 @@ import {COLORS, SIZES, images, FONTS} from './Constants';
 import InfoItem from './InfoItem';
 import axiosIns from '../helpers/helpers';
 import Status from './Status';
+import TextButton from './TextButton';
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
   const [med, setMed] = React.useState([]);
@@ -237,13 +238,32 @@ export const Info = ({navigation, route}) => {
   }
   function Babies(){
 
-    return(<TouchableOpacity
-        style={{
+    return(<TextButton
+        buttonContainerStyle={{
           marginTop: SIZES.padding,
           borderRadius: SIZES.radius,
           paddingHorizontal: SIZES.radius,
-          backgroundColor: COLORS.lightGray2,
-          // paddingBottom: SIZES.padding,
+          backgroundColor: COLORS.Primary,
+          width:"100%"
+          // borderColor:COLORS.Primary,
+          // borderWidth:2
+        }}
+        icon={images.right}
+        label={"Babies"}
+        label2={animal.children.length}
+        buttonContainerStyle2={{
+          height:30,
+          width:30,
+          backgroundColor:COLORS.white,
+          justifyContent:"center",
+          alignSelf:"center",
+          padding:0,
+          margin:5
+        }}
+        label2Style={{
+          color:COLORS.Primary,
+          justifyContent:"center",
+          alignSelf:"center"
         }}
         onPress={()=>{
           navigation.navigate('Babies', {
@@ -252,12 +272,7 @@ export const Info = ({navigation, route}) => {
             cond:true
           });
         }}
-        >
-        <InfoItem label="Babies" value={animal.children.length}/>
-        {/* {animal.children?.map((a,index)=>(
-          <InfoItem  key={index} label={a.tag_number} value={a.birth_date} />
-        ))} */}
-        </TouchableOpacity>)
+        />)
   }
   function renderHeader() {
     return (

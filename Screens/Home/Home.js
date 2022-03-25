@@ -83,7 +83,23 @@ export const Home = ({navigation}) => {
                 }}
                 icon={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + a.data[0].image}}
                 key={a.id}
-                label={`My ${a.label}'s [${a.data.length}]`}
+                label={`My ${a.label}'s`}
+                buttonContainerStyle2={{
+                  height:30,
+                  width:30,
+                  backgroundColor:COLORS.white,
+                  justifyContent:"center",
+                  alignSelf:"center",
+                  padding:0,
+                  margin:10,
+                }}
+                loading={loading}
+                label2Style={{
+                  color:COLORS.Primary,
+                  justifyContent:"center",
+                  alignSelf:"center"
+                }}
+                label2={`${a.data.length}`}
                 onPress={() => {
                   navigation.navigate('Add', {
                     label: `My ${a.label}'s`,

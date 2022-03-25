@@ -42,6 +42,7 @@ export default function Parents({navigation}) {
         }
       } catch (e) {
         setLoading(false);
+        setErr('Parent Not found');
       }
     } else {
       setLoading(false);
@@ -184,7 +185,8 @@ export default function Parents({navigation}) {
         alignSelf:"center",
         justifyContent:"center",
         borderRadius:SIZES.base,
-        position:"relative"
+        position:"relative",
+        margin:20
       }}>
       <Text style={Platform.OS=="android"?{color: COLORS.white, alignSelf: 'center', ...FONTS.h3}:{color: COLORS.white, alignSelf: 'center', ...FONTS.h2}}>
           List of Babies

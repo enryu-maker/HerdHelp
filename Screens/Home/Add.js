@@ -56,7 +56,34 @@ export default function Add({navigation,route}) {
             </TouchableOpacity>
           </View>
         }
-        title={`${label} [ ${data.length} ]`}
+        title={`${label}`}
+        titleStyle={{
+          marginLeft: 65,
+        }}
+        rightComponent={
+          <View
+            style={{
+              marginTop:20,
+            }}>
+            <View
+              style={{
+              marginRight: 25,
+              backgroundColor:COLORS.Primary,
+              height:40,
+              width:40,
+              justifyContent:"center",
+              borderRadius:SIZES.base,
+              justifyContent:"center"
+              }}
+              onPress={() => {navigation.navigate("MyAccount")}}>
+              <Text style={{
+                color:COLORS.white,
+                ...FONTS.h2,
+                alignSelf:"center"
+              }}>{data.length}</Text>
+            </View>
+          </View>
+        }
       />
     );
   }

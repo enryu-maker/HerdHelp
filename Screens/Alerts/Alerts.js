@@ -45,7 +45,8 @@ export default function Alerts({navigation,route}) {
     )
     function postAlert(){
       setLoading(true)
-      axiosIns.post('alerts/',data, {
+      try
+      {axiosIns.post('alerts/',data, {
         headers: {
             "Content-Type": "application/json",
         }
@@ -64,7 +65,10 @@ export default function Alerts({navigation,route}) {
       setShow(true)
       setValidation(false)
       setDataText("Not Added")
-      })
+      })}
+      catch{
+        setErr("Animal not found")
+      }
     }
     React.useEffect(()=>{
         setId(global.id)

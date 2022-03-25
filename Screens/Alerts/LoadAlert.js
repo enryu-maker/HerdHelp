@@ -68,7 +68,7 @@ export default function LoadAlert({navigation, route}) {
       />
     );
   }
-
+  // console.log(alert)
   return (
     <View style={{flex: 1}}>
       {renderHeader()}
@@ -82,11 +82,6 @@ export default function LoadAlert({navigation, route}) {
         <SwipeListView
           data={alert}
           keyExtractor={item => `${item.id}`}
-          contentContainerStyle={{
-            // marginTop: SIZES.radius,
-            // paddingHorizontal: SIZES.padding,
-            // paddingBottom: SIZES.padding * 2
-        }}
           renderItem={(data, rowMap) => (
             <View
               style={{
@@ -108,9 +103,9 @@ export default function LoadAlert({navigation, route}) {
                 Platform.OS=="android"?{...FONTS.body3}:{...FONTS.body3}
             }>{`Solution: ${data.item.content}`}</Text>
             {
-              data.item.tag!=undefined||""?(<Text style={
+              data.item.tag_number!=undefined||""?(<Text style={
                 Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h3}
-            }>{`${data.item.tag}`}</Text>):
+            }>{`Tag: ${data.item.tag_number}`}</Text>):
               (<View></View>)
             }
             <View style={{flexDirection:"row",justifyContent:"space-between",width:"55%"}}>

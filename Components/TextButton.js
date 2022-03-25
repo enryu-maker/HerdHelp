@@ -7,8 +7,6 @@ import {
     ActivityIndicator
 } from 'react-native';
 import { FONTS, COLORS ,SIZES} from "./Constants";
-import ActivityIndicatorExample from './Loading';
-
 const TextButton = ({
     buttonContainerStyle,
     disabled,
@@ -54,10 +52,10 @@ const TextButton = ({
                         size = "small"
                         />
                         :
-                    <Image source={icon} style={{height:25,width:25,tintColor:COLORS.white,...iconStyle}}/> } 
+                    <Image source={icon} style={{height:25,width:25,tintColor:COLORS.white,alignSelf:"flex-start",...iconStyle}}/> } 
             </View>
             }
-            <Text style={{ color: COLORS.white, ...FONTS.h3, ...labelStyle,letterSpacing:2 }}>
+            <Text style={{ color: COLORS.white, ...FONTS.h3, ...labelStyle,alignSelf:"center",letterSpacing:2 }}>
                 {label}
             </Text>
 
@@ -69,7 +67,8 @@ const TextButton = ({
                         height:20,
                         width:20,
                         borderRadius:20/2,
-                        alignSelf:"center",justifyContent:"center",
+                        alignSelf:"flex-end",
+                        justifyContent:"flex-end",
                         ...buttonContainerStyle2
                         
                     }}
