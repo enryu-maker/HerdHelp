@@ -128,7 +128,7 @@ def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitect
 
 android {
     dexOptions {
-       javaMaxHeapSize "3g"
+       javaMaxHeapSize "4g"
     }
     ndkVersion rootProject.ext.ndkVersion
 

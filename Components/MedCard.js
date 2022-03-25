@@ -1,4 +1,4 @@
-import { View, Text,TouchableOpacity,Image,ScrollView } from 'react-native'
+import { View, Text,TouchableOpacity,Image,ScrollView,ActivityIndicator } from 'react-native'
 import React from 'react'
 import Header from './Header'
 import {
@@ -8,18 +8,24 @@ import {
     FONTS
 } from "../Components/Constants"
 import Med from './Med';
+import axiosIns from '../helpers/helpers';
 export default function MedCard({ navigation,route }) {
   const [med, setMed] = React.useState([]);
   const [err, setErr] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [animal,setAnimal] = React.useState([])
+  async function getMedication(tag) {
+    setLoading(true)
+    let {data} = await axiosIns.get(`getmedication/${tag}`);
+    setLoading(false)
+    return data;
+  }
   React.useEffect(() => {
-      if(!loading){
-        let {medication} = route.params
-        setMed(medication)
-        let {animal} = route.params
-        setAnimal(animal)
-      }
+    let {animal} = route.params
+    getMedication(animal.tag_number).then((data)=>{
+    setMed(data)
+    });
+    setAnimal(animal)
   }, []);
     function renderHeader() {
         return (
@@ -89,7 +95,8 @@ export default function MedCard({ navigation,route }) {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1}}>
      {   
-     med.map(a=>{
+     loading?(<ActivityIndicator size="large" color={COLORS.Primary}/>):
+     (med.map(a=>{
          return(
             <Med 
             key={a.id}
@@ -101,7 +108,7 @@ export default function MedCard({ navigation,route }) {
             withdrawal_date={a.withdrawal_date}
             />
          )
-         })
+         }))
      }
      </ScrollView>
     </View>

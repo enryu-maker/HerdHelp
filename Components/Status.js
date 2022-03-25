@@ -8,7 +8,7 @@ import TextButton from './TextButton';
 import FormInput from './FormInput';
 import axiosIns from '../helpers/helpers';
 const Status = ({show, setShow, animal}) => {
-  const [status, setStatus] = React.useState([]);
+  const [status, setStatus] = React.useState("Alive");
   const [Price, setPrice] = React.useState(0);
   const [loading, setloading] = React.useState(false);
   const [statusCat, setStatusCat] = React.useState([]);
@@ -32,7 +32,7 @@ const Status = ({show, setShow, animal}) => {
     }
   }
   const updateAnimal = async () => {
-    if (Price != '') {
+   
       axiosIns
         .patch(
           `animals/${animal.tag_number}`,
@@ -64,10 +64,7 @@ const Status = ({show, setShow, animal}) => {
             setloading(false);
           }
         });
-    } else {
-      setErr('Invalid input');
-      setloading(false);
-    }
+  
   };
   function renderHeader() {
     return (

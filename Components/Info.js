@@ -109,7 +109,6 @@ export const Info = ({navigation, route}) => {
           }}
           onPress={() => {
             navigation.navigate('MedCard', {
-              medication: med,
               animal:animal
             });
           }}>

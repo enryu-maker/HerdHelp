@@ -5,6 +5,7 @@ import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
 import TextButton from '../../Components/TextButton';
 import axiosIns from '../../helpers/helpers';
 import Loader from '../../Components/Loader';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 export const Home = ({navigation}) => {
   const [animals, setAnimals] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -57,8 +58,10 @@ export const Home = ({navigation}) => {
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       {/* <Loader loading={loading}/> */}
       {renderHeader()}
-      <View
-        style={{
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardDismissMode="on-drag"
+        contentContainerStyle={{
           marginVertical: 0,
           width: '88%',
           paddingVertical: SIZES.padding,
@@ -70,9 +73,7 @@ export const Home = ({navigation}) => {
           {
             loading?(
               <ActivityIndicator size="large" color={COLORS.Primary}/>
-            ):(
-
-            
+            ):(            
         animals.map(a => {
           if (a.data.length != 0) {
             return (
@@ -96,7 +97,7 @@ export const Home = ({navigation}) => {
         })
         )
           }
-      </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 };
