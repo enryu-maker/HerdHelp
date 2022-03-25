@@ -74,8 +74,7 @@ export default function Add({navigation,route}) {
               justifyContent:"center",
               borderRadius:SIZES.base,
               justifyContent:"center"
-              }}
-              onPress={() => {navigation.navigate("MyAccount")}}>
+              }}>
               <Text style={{
                 color:COLORS.white,
                 ...FONTS.h2,

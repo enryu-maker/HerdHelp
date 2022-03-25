@@ -152,7 +152,7 @@ export const Info = ({navigation, route}) => {
         />
         {animal?.vaccinated ? (
           <InfoItem
-            label="vaccination Date"
+            label="Vacc Date"
             value={animal?.vaccination_date}
             withDivider={false}
           />
@@ -211,7 +211,7 @@ export const Info = ({navigation, route}) => {
           backgroundColor: COLORS.lightGray2,
         }}>
           <InfoItem
-            label="registration"
+            label="Registration"
             value={(animal?.registration)}
           />
         <InfoItem label="Breed" value={animal?.breed} withDivider={false}/>
