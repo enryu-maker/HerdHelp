@@ -29,6 +29,7 @@ import FormDateInput from '../../Components/FormDateInput';
 import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
 import CustomAlert from '../../Components/CustomAlert';
+import { SequencedTransition } from 'react-native-reanimated';
 
 const Addanimals = ({navigation, route}) => {
   const [bred, setBred] = useState(false);
@@ -56,7 +57,7 @@ const Addanimals = ({navigation, route}) => {
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
   const [EmailError, setEmailError] = React.useState('');
-
+  const [unit, setUnit] = React.useState(false);
   const onChangeMS = value => {
     setValueMS(value);
   };
@@ -141,6 +142,7 @@ const Addanimals = ({navigation, route}) => {
   React.useEffect(() => {
     setId(global.id);
     setAnimals(global.species);
+    setUnit(global.unit)
   }, []);
   function renderHeader() {
     return (
@@ -780,16 +782,7 @@ const Addanimals = ({navigation, route}) => {
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
           </View>
-        )}
-        
-        
-        
-        
-
-        
-        
-
-        
+        )}        
       </View>
     );
   }
@@ -824,7 +817,11 @@ const Addanimals = ({navigation, route}) => {
 
       <TextButton
         onPress={() => {
-          postAnimal();
+          var val = unit=="true"?weight: Math.round(weight/0.45359237)
+          var val2 = unit=="false"?weight: Math.round(weight*0.45359237)
+          alert(val2)
+          console.log(typeof(unit))
+          // postAnimal();
         }}
         icon={images.add}
         buttonContainerStyle={{

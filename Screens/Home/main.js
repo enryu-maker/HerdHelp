@@ -21,7 +21,7 @@ import {
 import axiosIns from '../../helpers/helpers';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = React.useState("");
   const [user,setUser] = React.useState([])
   async function fetchanimal() {
     let {data} = await axiosIns.get('getcategories/');
@@ -29,10 +29,13 @@ const Main = ({navigation}) => {
     global.species = data
     return data;
   } 
+  async function getWeightUnit(){
+    setShow(JSON.parse(await AsyncStorage.getItem('weight')))
+    // return data
+  }
   async function fetchStatus() {
     let {data} = await axiosIns.get('getstatuses/');
     setLoading(true);
-    // console.log(data)
     global.stat=data
     return data;
   } 
@@ -43,6 +46,7 @@ const Main = ({navigation}) => {
     let {data} = await axiosIns.get('alerts/');
     return(data)
   }
+  
   React.useEffect(() => {
     fetchStatus();
       fetchanimal();
@@ -50,6 +54,9 @@ const Main = ({navigation}) => {
       getALerts().then((data)=>{
         setUser(data)
       })
+      getWeightUnit()
+      global.unit=show
+      // console.log(show)
   },[]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>

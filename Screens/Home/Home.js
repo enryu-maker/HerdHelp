@@ -56,7 +56,6 @@ export const Home = ({navigation}) => {
   }
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
-      {/* <Loader loading={loading}/> */}
       {renderHeader()}
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}

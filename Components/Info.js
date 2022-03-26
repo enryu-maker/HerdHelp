@@ -306,7 +306,7 @@ export const Info = ({navigation, route}) => {
         }
         title={'More Info'}
         titleStyle={{
-          marginLeft:cond?100:0
+          marginLeft:cond?140:0
         }}
         rightComponent={
           cond?
@@ -324,7 +324,7 @@ export const Info = ({navigation, route}) => {
             color:COLORS.Primary,
             ...FONTS.h2
           }}
-          >EDIT</Text>
+          >Status</Text>
           </TouchableOpacity>:<View></View>
           
         }

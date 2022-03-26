@@ -36,6 +36,7 @@ const Login = ({navigation}) => {
       await AsyncStorage.setItem('refresh', refresh);
       await AsyncStorage.setItem('id', id);
       await AsyncStorage.setItem('route', "true");
+      await AsyncStorage.setItem('weight', "true");
     } catch (e) {
       // console.log(e);
     }
