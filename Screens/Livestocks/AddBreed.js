@@ -101,7 +101,8 @@ const Addanimals = ({navigation, route}) => {
     father_supporttag:father!=""?father:"",
     father_tagnumber:father!=""? `${id}${valueMS}${father}`:"" ,
     breed: Breed,
-    weight: weight,
+    weight: unit==true?weight: Math.round(weight/0.45359237),
+    weight_kg:unit==false?weight: Math.round(weight*0.45359237),
     bred: bred,
     age: age,
     vaccinated: vaccinated,
@@ -817,10 +818,11 @@ const Addanimals = ({navigation, route}) => {
 
       <TextButton
         onPress={() => {
-          var val = unit=="true"?weight: Math.round(weight/0.45359237)
-          var val2 = unit=="false"?weight: Math.round(weight*0.45359237)
-          alert(val2)
-          console.log(typeof(unit))
+          var val = unit==true?weight: Math.round(weight/0.45359237)
+          var val2 = unit==false?weight: Math.round(weight*0.45359237)
+          alert("lbs:"+val)
+          alert("kg:"+val2)
+          console.log(unit)
           // postAnimal();
         }}
         icon={images.add}

@@ -4,8 +4,8 @@ import Header from '../../Components/Header';
 import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
 import TextButton from '../../Components/TextButton';
 import axiosIns from '../../helpers/helpers';
-import Loader from '../../Components/Loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import CustomButton from './CustomButtom';
 export const Home = ({navigation}) => {
   const [animals, setAnimals] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -76,28 +76,13 @@ export const Home = ({navigation}) => {
         animals.map(a => {
           if (a.data.length != 0) {
             return (
-              <TextButton
+              <CustomButton
                 buttonContainerStyle={{
                   marginTop: SIZES.padding,
                 }}
                 icon={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + a.data[0].image}}
                 key={a.id}
-                label={`My ${a.label}'s`}
-                buttonContainerStyle2={{
-                  height:30,
-                  width:30,
-                  backgroundColor:COLORS.white,
-                  justifyContent:"center",
-                  alignSelf:"center",
-                  padding:0,
-                  margin:10,
-                }}
-                loading={loading}
-                label2Style={{
-                  color:COLORS.Primary,
-                  justifyContent:"center",
-                  alignSelf:"center"
-                }}
+                label={`My ${a.label}`}
                 label2={`${a.data.length}`}
                 onPress={() => {
                   navigation.navigate('Add', {

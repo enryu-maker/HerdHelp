@@ -5,10 +5,12 @@ import { images,FONTS,SIZES,COLORS } from '../../Components/Constants'
 import HistoryCard from './HistoryCard'
 export default function History({navigation,route}) {
     const [whist,setWhist] = React.useState([])
+    const [unit,setUnit] = React.useState(global.unit)
+
     React.useEffect(()=>{
         let {data} =route.params
         setWhist(data)
-        // console.log(data)
+        setUnit(global.unit)
     },[])
     function renderheader() {
         return (
@@ -50,7 +52,10 @@ export default function History({navigation,route}) {
           <ScrollView showsHorizontalScrollIndicator={false}>
               {
                   whist.map((a,index)=>(
-                    <HistoryCard key={index} date={a.date_from.slice(0,9)} weight={a.weight}/>
+                    unit?
+                    (<HistoryCard key={index} date={a.date_from.slice(0,9)} weight={a.weight}/>):
+                    (<HistoryCard key={index} date={a.date_from.slice(0,9)} weight={a.weight_kg}/>)
+
                   ))
               }
           </ScrollView>

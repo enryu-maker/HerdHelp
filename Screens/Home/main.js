@@ -19,6 +19,7 @@ import {
   
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
+import CustomButton from './CustomButtom';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [show, setShow] = React.useState("");
@@ -30,7 +31,7 @@ const Main = ({navigation}) => {
     return data;
   } 
   async function getWeightUnit(){
-    setShow(JSON.parse(await AsyncStorage.getItem('weight')))
+    global.unit=JSON.parse(await AsyncStorage.getItem('weight'))
     // return data
   }
   async function fetchStatus() {
@@ -55,9 +56,9 @@ const Main = ({navigation}) => {
         setUser(data)
       })
       getWeightUnit()
-      global.unit=show
+      // global.unit=show
       // console.log(show)
-  },[]);
+  },[show]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <Header
@@ -138,7 +139,7 @@ const Main = ({navigation}) => {
             marginBottom:SIZES.height>700?37:50,
         }}>
           <ScrollView showsVerticalScrollIndicator={false}>
-        <TextButton
+        <CustomButton
           icon={images.heart}
           label={'MY HERDS'}
           onPress={() => {
@@ -148,12 +149,14 @@ const Main = ({navigation}) => {
             marginTop: 18,
             height:SIZES.height>700?75:60,
 
-
-            // width:200,
             // alignSelf:"flex-start"
           }}
+          label2
+          buttonContainerStyle2={{
+            backgroundColor:COLORS.Primary
+          }}
         />
-        <TextButton
+        <CustomButton
           icon={images.add}
           label={'ADD ANIMALS'}
           onPress={() => {
@@ -164,8 +167,12 @@ const Main = ({navigation}) => {
             height:SIZES.height>700?75:60,
 
           }}
+          label2
+          buttonContainerStyle2={{
+            backgroundColor:COLORS.Primary
+          }}
         />
-        <TextButton
+        <CustomButton
           icon={images.med}
           label={'ADD MEDICATION'}
           onPress={() => {
@@ -177,8 +184,12 @@ const Main = ({navigation}) => {
             height:SIZES.height>700?75:60,
 
           }}
+          label2
+          buttonContainerStyle2={{
+            backgroundColor:COLORS.Primary
+          }}
         />
-        <TextButton
+        <CustomButton
           icon={images.weight}
           label={'UPDATE WEIGHT'}
           onPress={() => {
@@ -189,8 +200,12 @@ const Main = ({navigation}) => {
             marginTop: 12,
             height:SIZES.height>700?75:60,
           }}
+          label2
+          buttonContainerStyle2={{
+            backgroundColor:COLORS.Primary
+          }}
         />
-        <TextButton
+        <CustomButton
           icon={images.money}
           label={'FINANCES'}
           onPress={() => {
@@ -201,8 +216,12 @@ const Main = ({navigation}) => {
             height:SIZES.height>700?75:60,
 
           }}
+          label2
+          buttonContainerStyle2={{
+            backgroundColor:COLORS.Primary
+          }}
         />
-        <TextButton
+        <CustomButton
           label={`ALERTS  `}
           icon={images.bell}
           iconStyle={{
@@ -220,11 +239,9 @@ const Main = ({navigation}) => {
             justifyContent:"center",
             alignSelf:"center",
             padding:1
-
-
           }}
           label2Style={{
-            color:user?.length>0?COLORS.white:COLORS.Primary,
+            color:COLORS.white,
             justifyContent:"center",
             alignSelf:"center"
           }}

@@ -5,24 +5,23 @@ import Header from '../../Components/Header';
 import SettingContent from './settingContent';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomButton from '../Home/CustomButtom';
 export default function Setting({navigation}) {
   const [unit,setUnit] = React.useState("")
   const [loading,setLoading] = React.useState(false)
   const [cond,setCond] = React.useState("")
+  const [EmailError,setEmailError] = React.useState("")
+
   async function setWeightUnit(valu){
     await AsyncStorage.setItem("weight",valu.toString())
   }
-  const onChangeUnit = async(value) =>{
+  const onChangeUnit = (value) =>{
+    setLoading(true)
     setUnit(value)
     setWeightUnit(value)
+    setLoading(false)
+    setEmailError("Setting Updated Restart The App")
   }
-  async function getWeightUnit(){
-    console.log(await AsyncStorage.getItem("weight"))
-  }
-  React.useEffect(()=>{
-    getWeightUnit()
-  },[cond])
-
   const units = [
     {
       value: true,
@@ -120,6 +119,15 @@ export default function Setting({navigation}) {
   return (
     <View style={{flex:1}}>
       {renderheader()}
+      <Text
+          style={{
+            ...FONTS.body3,
+            alignSelf: 'center',
+            color:COLORS.Primary,
+            padding:5
+          }}>
+          {EmailError}
+        </Text>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
