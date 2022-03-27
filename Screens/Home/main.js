@@ -153,7 +153,9 @@ const Main = ({navigation}) => {
           }}
           label2
           buttonContainerStyle2={{
-            backgroundColor:COLORS.Primary
+            backgroundColor:COLORS.Primary,
+            marginRight:0
+
           }}
         />
         <CustomButton
@@ -169,7 +171,9 @@ const Main = ({navigation}) => {
           }}
           label2
           buttonContainerStyle2={{
-            backgroundColor:COLORS.Primary
+            backgroundColor:COLORS.Primary,
+            marginRight:0
+
           }}
         />
         <CustomButton
@@ -186,7 +190,9 @@ const Main = ({navigation}) => {
           }}
           label2
           buttonContainerStyle2={{
-            backgroundColor:COLORS.Primary
+            backgroundColor:COLORS.Primary,
+            marginRight:0
+
           }}
         />
         <CustomButton
@@ -202,7 +208,9 @@ const Main = ({navigation}) => {
           }}
           label2
           buttonContainerStyle2={{
-            backgroundColor:COLORS.Primary
+            backgroundColor:COLORS.Primary,
+            marginRight:0
+
           }}
         />
         <CustomButton
@@ -218,7 +226,8 @@ const Main = ({navigation}) => {
           }}
           label2
           buttonContainerStyle2={{
-            backgroundColor:COLORS.Primary
+            backgroundColor:COLORS.Primary,
+            marginRight:0
           }}
         />
         <CustomButton
@@ -233,12 +242,12 @@ const Main = ({navigation}) => {
           }}
           label2={`${user?.length}`}
           buttonContainerStyle2={{
-            height:30,
-            width:30,
+            // height:30,
+            // width:30,
             backgroundColor:user?.length>0?COLORS.red:COLORS.Primary,
             justifyContent:"center",
             alignSelf:"center",
-            padding:1
+            // padding:1
           }}
           label2Style={{
             color:COLORS.white,

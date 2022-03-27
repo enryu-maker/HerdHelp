@@ -6,6 +6,7 @@ import InfoItem from './InfoItem';
 import axiosIns from '../helpers/helpers';
 import Status from './Status';
 import TextButton from './TextButton';
+
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
   const [med, setMed] = React.useState([]);
@@ -55,7 +56,7 @@ export const Info = ({navigation, route}) => {
         <InfoItem label="Tag Number" value={animal?.support_tag} />
         <InfoItem
           label="Weight"
-          value={`${animal?.weight} lbs`}
+          value={global.unit?`${animal?.weight} lbs`:`${animal?.weight_kg} kg`}
           withDivider={false}
         />
       </View>
@@ -306,7 +307,7 @@ export const Info = ({navigation, route}) => {
         }
         title={'More Info'}
         titleStyle={{
-          marginLeft:cond?140:0
+          marginLeft:cond?120:0
         }}
         rightComponent={
           cond?
@@ -357,6 +358,24 @@ export const Info = ({navigation, route}) => {
         {renderSectionFour()}
         {Vaccinated()}
       </ScrollView>
+      
+      <TextButton
+        onPress={() => {
+          alert("Are u sure want to update the data?")
+        }}
+        icon={images.update}
+        buttonContainerStyle={{
+          height: 60,
+          marginTop: SIZES.padding-10,
+          marginHorizontal: SIZES.padding,
+          marginBottom: SIZES.padding + 10,
+          borderTopLeftRadius: SIZES.radius,
+          borderTopRightRadius: SIZES.radius,
+          backgroundColor: COLORS.Primary,
+        }}
+        label={'update Animal'}
+        // loading={loading}
+      />
     </View>
   );
 };

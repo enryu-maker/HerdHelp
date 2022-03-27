@@ -7,6 +7,7 @@ import {
     ActivityIndicator
 } from 'react-native';
 import { FONTS, COLORS ,SIZES} from "./Constants";
+import LinearGradient from "react-native-linear-gradient";
 const TextButton = ({
     buttonContainerStyle,
     disabled,
@@ -21,6 +22,21 @@ const TextButton = ({
     loading
 }) => {
     return (
+        <>
+        <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                colors={[ COLORS.transparent,COLORS.lightGray1,]}
+                style={{
+                    // position: 'absolute',
+                    top: -5,
+                    left: 0,
+                    right: 0,
+                    height: Platform.OS === 'ios' ? 5 : 5,
+                    borderTopLeftRadius: SIZES.radius,
+                    borderTopRightRadius: SIZES.radius
+                }}
+            />
         <TouchableOpacity
             style={{
                 flexDirection:"row",
@@ -79,6 +95,7 @@ const TextButton = ({
             </View>
             }
         </TouchableOpacity>
+        </>
     )
 }
 

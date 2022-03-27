@@ -9,6 +9,7 @@ const Card=({
     Weight,
     image,
     onPress,
+    weight_kg,
     navigation
 })=>{
   return (
@@ -37,7 +38,7 @@ const Card=({
               {Name}
           </Text>
           <Text style={[FONTS.h4,{letterSpacing:3}]}>
-              {Weight} lbs
+              {global.unit?`${Weight} lbs`:`${weight_kg} kg`}
           </Text>
       </View>
       <View style={{

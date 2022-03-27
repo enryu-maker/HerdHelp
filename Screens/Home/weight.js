@@ -38,7 +38,8 @@ export const Weight =({ navigation,route})=> {
       setLoading(true)
       try{
         await axiosIns.patch(`animals/${id}${species}${tag}`,{
-          'weight':weight
+          'weight': unit==true?weight: Math.round(weight/0.45359237),
+          'weight_kg':unit==false?weight: Math.round(weight*0.45359237),
         }, {
           headers: {
             'Content-Type': 'application/json',
