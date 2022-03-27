@@ -19,13 +19,12 @@ import Loader from '../../Components/Loader';
 
 axios.defaults.baseURL =
   'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/';
-const Login = ({navigation}) => {
+const Login = ({navigation,route}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [showPass, setShowPass] = React.useState(false);
   const [saveMe, setSaveMe] = React.useState(false);
   const [EmailError, setEmailError] = React.useState('');
-  const [access, setAccess] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   function isEnableSignIn() {
     return email != '' && password != '';
@@ -39,20 +38,6 @@ const Login = ({navigation}) => {
       await AsyncStorage.setItem('weight', "true");
     } catch (e) {
       // console.log(e);
-    }
-  };
-  const fetchprofile = async (token) => {
-    try {
-      const {data} = await axios.get('profile/', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      return data;
-    } catch (e) {
-      // console.log('Something Went Wrong');
-      setLoading(false);
     }
   };
    function login() {

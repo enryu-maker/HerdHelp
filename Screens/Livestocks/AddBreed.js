@@ -91,7 +91,7 @@ const Addanimals = ({navigation, route}) => {
   const data = JSON.stringify({
     name: name,
     tag_number: ` ${id}${valueMS}${tag}`,
-    registration: '',
+    registration: registration,
     support_tag: tag,
     gender: valueBS,
     species: valueMS,

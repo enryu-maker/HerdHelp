@@ -61,6 +61,7 @@ export const Signup = ({navigation}) => {
             setInterval(()=>{
             setShow(false)
             },3000)
+            navigation.navigate('Login')
             
           } else {
             setLoading(false);
@@ -241,7 +242,7 @@ export const Signup = ({navigation}) => {
           onPress={() => {
             signup();
           }}
-          disabled={isEnableSignIn()}
+          disabled={!isEnableSignIn()}
           label={'Signup'}
         />
         <View

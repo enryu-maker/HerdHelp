@@ -51,6 +51,7 @@ const TextButton = ({
                 ...buttonContainerStyle,
 
             }}
+            
             disabled={disabled}
             onPress={onPress}
         >

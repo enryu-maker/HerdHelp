@@ -90,7 +90,7 @@ import {
     };
     const data = JSON.stringify({
       name: name,
-      registration: '',
+      registration:registration,
       gender: valueBS,
       species: valueMS,
       birth_date: dobt,
@@ -816,7 +816,7 @@ import {
             borderRadius: SIZES.radius,
             backgroundColor: COLORS.Primary,
           }}
-          label={'Add Animals'}
+          label={'Update Animals'}
           loading={loading}
         />
       </View>
