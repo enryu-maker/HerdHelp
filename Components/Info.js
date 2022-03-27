@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, Image, ScrollView,Alert} from 'react-native';
 import React from 'react';
 import Header from './Header';
 import {COLORS, SIZES, images, FONTS} from './Constants';
@@ -6,6 +6,7 @@ import InfoItem from './InfoItem';
 import axiosIns from '../helpers/helpers';
 import Status from './Status';
 import TextButton from './TextButton';
+
 
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
@@ -358,10 +359,20 @@ export const Info = ({navigation, route}) => {
         {renderSectionFour()}
         {Vaccinated()}
       </ScrollView>
-      
+      {cond?
       <TextButton
         onPress={() => {
-          alert("Are u sure want to update the data?")
+          Alert.alert("Are you sure",
+          "You want ot edit animal?",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "Edit", onPress: () => console.log("OK Pressed") ,style: "edit"}
+          ]
+        );
         }}
         icon={images.update}
         buttonContainerStyle={{
@@ -373,9 +384,10 @@ export const Info = ({navigation, route}) => {
           borderTopRightRadius: SIZES.radius,
           backgroundColor: COLORS.Primary,
         }}
-        label={'update Animal'}
+        label={'Edit Animal'}
         // loading={loading}
-      />
+      />:null
+    }
     </View>
   );
 };

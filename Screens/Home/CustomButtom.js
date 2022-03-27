@@ -37,6 +37,7 @@ const CustomButton = ({
             disabled={disabled}
             onPress={onPress}
         >
+            <>
             {icon && <View style={{
                 borderColor:COLORS.white,
                 height:40,
@@ -57,20 +58,20 @@ const CustomButton = ({
             </View>}
             <View style={{
                 justifyContent:"center",
-                // alignSelf:"center"
+                // alignSelf:"flex-start"
             }}>
             <Text style={{
                 color:COLORS.white,
                 ...FONTS.h3,
-                // alignSelf:"center",
+                alignSelf:"flex-start",
                 letterSpacing:2,
                 ...labelStyle
 
             }}>{label}</Text>
             </View>
-            {label2 != false && <View
+            </>
+             <View
               style={{
-            //   marginRight: 25,
               backgroundColor:COLORS.white,
               height:40,
               width:40,
@@ -79,8 +80,6 @@ const CustomButton = ({
               alignSelf:"center",
               marginRight:10,
               ...buttonContainerStyle2
-            
-            //   justifyContent:"center"
               }}>
               <Text style={{
                 color:COLORS.Primary,
@@ -88,7 +87,7 @@ const CustomButton = ({
                 alignSelf:"center",
                 ...label2Style
               }}>{label2}</Text>
-            </View>}
+            </View>
         </TouchableOpacity>
     )
 }

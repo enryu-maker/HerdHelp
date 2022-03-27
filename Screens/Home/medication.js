@@ -122,7 +122,7 @@ export const Medication = ({navigation, route}) => {
                 borderRadius:SIZES.base,
                 }}
               onPress={() => {
-                !cond ? navigation.goBack():navigation.navigate("MedCard")
+                navigation.goBack() 
               }}>
               <Image
                 source={images.back}

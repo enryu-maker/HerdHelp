@@ -237,26 +237,22 @@ const Main = ({navigation}) => {
             tintColor:user?.length>0?COLORS.red:COLORS.white
           }}
           onPress={() => {
-            navigation.navigate('LoadAlert'
-            );
+            navigation.navigate('LoadAlert');
           }}
           label2={`${user?.length}`}
           buttonContainerStyle2={{
-            // height:30,
-            // width:30,
             backgroundColor:user?.length>0?COLORS.red:COLORS.Primary,
             justifyContent:"center",
             alignSelf:"center",
-            // padding:1
           }}
           label2Style={{
-            color:COLORS.white,
+            color:user?.length>0?COLORS.white:COLORS.Primary,
             justifyContent:"center",
             alignSelf:"center"
           }}
           buttonContainerStyle={{
             marginTop: 12,
-            marginBottom: 12,
+            marginBottom: 20,
             height:SIZES.height>700?75:60,
 
           }}

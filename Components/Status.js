@@ -69,13 +69,13 @@ const Status = ({show, setShow, animal}) => {
   function renderHeader() {
     return (
       <Header
-        rightComponent={
+        leftComponent={
           <View
             style={{
               justifyContent: 'center',
-              position: 'absolute',
-              marginTop: 25,
-              zIndex: 1,
+              // position: 'absolute',
+              // marginTop: 25,
+              // zIndex: 1,
             }}>
             <TouchableOpacity
               style={{
@@ -92,6 +92,10 @@ const Status = ({show, setShow, animal}) => {
           </View>
         }
         title={'Status'}
+        titleStyle={{
+          marginRight:60,
+          alignSelf:"center"
+        }}
       />
     );
   }
@@ -166,7 +170,7 @@ const Status = ({show, setShow, animal}) => {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
-        {
+        {/* {
           animal.gender!="Male"?
         
         (<Dropdown
@@ -203,7 +207,7 @@ const Status = ({show, setShow, animal}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-        />):(<View></View>)}
+        />):(<View></View>)} */}
       </View>
     );
   }
@@ -225,7 +229,7 @@ const Status = ({show, setShow, animal}) => {
         }}>
         <View
           style={{
-            height: 550,
+            height: 500,
             width: 342,
             backgroundColor: COLORS.white,
             alignSelf: 'center',
