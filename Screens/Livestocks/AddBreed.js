@@ -818,12 +818,7 @@ const Addanimals = ({navigation, route}) => {
 
       <TextButton
         onPress={() => {
-          var val = unit==true?weight: Math.round(weight/0.45359237)
-          var val2 = unit==false?weight: Math.round(weight*0.45359237)
-          alert("lbs:"+val)
-          alert("kg:"+val2)
-          console.log(unit)
-          // postAnimal();
+          postAnimal();
         }}
         icon={images.add}
         buttonContainerStyle={{
