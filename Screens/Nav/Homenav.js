@@ -33,6 +33,7 @@ import Rootnav from './Rootnav';
 import Generate from '../Report/Generate';
 import Babies from '../../Components/Babies';
 import axiosIns from '../../helpers/helpers';
+import EditAnimal from '../Edit/editAnimal';
 const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
@@ -127,6 +128,8 @@ export default class Homenav extends Component {
           <Stack.Screen name='History' component={History}/>
           <Stack.Screen name='Generate' component={Generate}/>
           <Stack.Screen name='Babies' component={Babies}/>
+          <Stack.Screen name='editAnimal' component={EditAnimal}/>
+
         </Stack.Navigator>
       </>
     )

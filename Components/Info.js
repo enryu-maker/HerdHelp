@@ -270,7 +270,7 @@ export const Info = ({navigation, route}) => {
         onPress={()=>{
           navigation.navigate('Babies', {
             label: "Babies",
-            data: animal.children,
+            data: animal?.children,
             cond:true
           });
         }}
@@ -370,7 +370,9 @@ export const Info = ({navigation, route}) => {
               onPress: () => console.log("Cancel Pressed"),
               style: "cancel"
             },
-            { text: "Edit", onPress: () => console.log("OK Pressed") ,style: "edit"}
+            { text: "Edit", onPress: () =>navigation.navigate("editAnimal",{
+              animal:animal
+            }) ,style: "edit"}
           ]
         );
         }}

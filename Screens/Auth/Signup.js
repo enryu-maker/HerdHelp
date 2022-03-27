@@ -226,6 +226,7 @@ export const Signup = ({navigation}) => {
           }
         />
         <TextButton
+          border={false}
           icon={images.sign}
           buttonContainerStyle={{
             height: 55,

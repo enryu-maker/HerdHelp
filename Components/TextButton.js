@@ -19,11 +19,12 @@ const TextButton = ({
     icon,
     iconStyle,
     buttonContainerStyle2,
-    loading
+    loading,
+    border=true
 }) => {
     return (
         <>
-        <LinearGradient
+        {border && <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 colors={[ COLORS.transparent,COLORS.lightGray1,]}
@@ -36,7 +37,7 @@ const TextButton = ({
                     borderTopLeftRadius: SIZES.radius,
                     borderTopRightRadius: SIZES.radius
                 }}
-            />
+            />}
         <TouchableOpacity
             style={{
                 flexDirection:"row",

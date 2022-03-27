@@ -242,6 +242,7 @@ const Login = ({navigation}) => {
             />
           </View>
           <TextButton
+          border={false}
             icon={images.log}
             buttonContainerStyle={{
               height: 55,
