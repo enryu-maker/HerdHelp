@@ -55,6 +55,10 @@ export const images ={
     parents:require("../assets/Logo/family.png"),
     down:require("../assets/Logo/down.png"),
     right:require("../assets/Logo/arrow-right.png"),
+    subs:require("../assets/Logo/subscription.png"),
+    rightone:require("../assets/Logo/right.png"),
+
+
 
 
 }

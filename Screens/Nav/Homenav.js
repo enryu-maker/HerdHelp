@@ -34,6 +34,8 @@ import Generate from '../Report/Generate';
 import Babies from '../../Components/Babies';
 import axiosIns from '../../helpers/helpers';
 import EditAnimal from '../Edit/editAnimal';
+import Subscription from '../Subscription/Subscription';
+import Payment from '../Subscription/Payment';
 const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
@@ -91,6 +93,14 @@ const DrawerNav = () => {
                 style={[{ height: 25, width: 25}]}
               /> )       
           }} />
+          <Drawer.Screen name='Subscription' component={Subscription} options={{
+        // drawerActiveTintColor: COLORS.white,
+            drawerIcon: ({ focused, size }) => (
+              <Image
+                source={images.setting}
+                style={[{ height: 25, width: 25}]}
+              /> )       
+          }} />
       </Drawer.Navigator>)}
 export default class Homenav extends Component {
    fetchprofile = async () => {
@@ -129,7 +139,8 @@ export default class Homenav extends Component {
           <Stack.Screen name='Generate' component={Generate}/>
           <Stack.Screen name='Babies' component={Babies}/>
           <Stack.Screen name='editAnimal' component={EditAnimal}/>
-
+          <Stack.Screen name='Subscription' component={Subscription}/>
+          <Stack.Screen name='Payment' component={Payment}/>
         </Stack.Navigator>
       </>
     )

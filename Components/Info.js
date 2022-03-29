@@ -240,16 +240,16 @@ export const Info = ({navigation, route}) => {
   }
   function Babies(){
 
-    return(<TextButton
+    return(
+    <TextButton
         buttonContainerStyle={{
           marginTop: SIZES.padding,
           borderRadius: SIZES.radius,
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.Primary,
           width:"100%"
-          // borderColor:COLORS.Primary,
-          // borderWidth:2
         }}
+        border={false}
         icon={images.right}
         label={"Babies"}
         label2={animal.children.length}

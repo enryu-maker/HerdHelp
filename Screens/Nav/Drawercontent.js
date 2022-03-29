@@ -65,6 +65,17 @@ export default function Drawercontent(props) {
               props.navigation.navigate('Report');
             }}
           />
+          <DrawerItem
+            icon={({color, size}) => (
+              <Image source={images.subs} style={[{height: 25, width: 25}]} />
+            )}
+            label="Subscription"
+            labelStyle={[FONTS.body3, {letterSpacing: 2}]}
+            onPress={() => {
+              props.navigation.closeDrawer()
+              props.navigation.navigate('Subscription');
+            }}
+          />
         </Drawer.Section>
         <Drawer.Section style={[styles.drawerSection,{marginTop:5}]}>
         <DrawerItem
