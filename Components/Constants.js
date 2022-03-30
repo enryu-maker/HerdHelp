@@ -57,10 +57,7 @@ export const images ={
     right:require("../assets/Logo/arrow-right.png"),
     subs:require("../assets/Logo/subscription.png"),
     rightone:require("../assets/Logo/right.png"),
-
-
-
-
+    paid:require("../assets/Logo/paid.png"),
 }
 export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',

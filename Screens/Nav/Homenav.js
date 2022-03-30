@@ -36,6 +36,7 @@ import axiosIns from '../../helpers/helpers';
 import EditAnimal from '../Edit/editAnimal';
 import Subscription from '../Subscription/Subscription';
 import Payment from '../Subscription/Payment';
+import SubDetails from '../Subscription/SubDetails';
 const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
@@ -141,6 +142,7 @@ export default class Homenav extends Component {
           <Stack.Screen name='editAnimal' component={EditAnimal}/>
           <Stack.Screen name='Subscription' component={Subscription}/>
           <Stack.Screen name='Payment' component={Payment}/>
+          <Stack.Screen name='Details' component={SubDetails}/>
         </Stack.Navigator>
       </>
     )

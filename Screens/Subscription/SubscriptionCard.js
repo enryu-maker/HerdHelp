@@ -1,26 +1,31 @@
 import { View, Text,Image ,TouchableOpacity} from 'react-native'
 import React from 'react'
-import { COLORS, FONTS, images, SIZES } from '../../Components/Constants'
+import { COLORS, FONTS, formatter, images, SIZES } from '../../Components/Constants'
 
 const SubscriptionCard=({
     label,
     price,
-    description,
+    count=0,
     buttonStyle,
-    onPress
+    onPress,
+    active
 })=>{
   return (
     <TouchableOpacity
     style={{
-        backgroundColor:COLORS.lightGray2,
+        backgroundColor:active?COLORS.Primary:COLORS.lightGray2,
         height:100,
         width:"88%",
         alignSelf:"center",
         borderRadius:SIZES.radius,
+        marginTop:20,
         ...buttonStyle
     }}
     onPress={onPress}
     >
+        <View style={{
+            flexDirection:"column"
+        }}>
         <View style={{
             justifyContent:"space-between",
             flexDirection:"row",
@@ -29,21 +34,47 @@ const SubscriptionCard=({
                 ...FONTS.h2,
                 marginTop:10,
                 marginLeft:10,
-
-            }}>Tier 1</Text>
+                color:active?COLORS.white:COLORS.black
+            }}>{label}</Text>
+        
             <Image source={images.rightone} style={{
                 height:15,
                 width:15,
-                margin:10
+                margin:10,
+                tintColor:active?COLORS.white:COLORS.black
             }}/>
         </View>
+        <View style={{
+            // justifyContent:"space-between",
+            flexDirection:"row",
+        }}>
+         <View>
         <Text style={{
             ...FONTS.h3,
-            marginLeft:30
+            marginLeft:30,
+            color:active?COLORS.white:COLORS.black
         }}>
-            $ 0.99
+           {`${formatter.format( price)} / month`}
         </Text>
+        <Text style={{
+            ...FONTS.h3,
+            marginLeft:30,
+            color:active?COLORS.white:COLORS.black
 
+        }}>
+           {`Animal Limit : ${count}`}
+        </Text>
+        </View>
+        {
+           active? <Image source={images.paid} style={{
+            height:50,
+            width:50,
+            marginLeft:65,
+            tintColor:"yellow"
+        }}/>:null
+    }
+        </View>
+        </View>
     </TouchableOpacity>
       
   )

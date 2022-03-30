@@ -1,4 +1,4 @@
-import { View, Text,TouchableOpacity,Image } from 'react-native'
+import { View, Text,TouchableOpacity,Image,ScrollView } from 'react-native'
 import React from 'react'
 import { images,FONTS,SIZES, COLORS } from '../../Components/Constants';
 import Header from '../../Components/Header'
@@ -41,6 +41,7 @@ export default function Subscription({navigation}) {
           </View>
         }
         title={'Subscription'}
+        
       />
     );
   }
@@ -50,7 +51,61 @@ export default function Subscription({navigation}) {
       backgroundColor:COLORS.white
     }}>
       {renderheader()}
-      <SubscriptionCard/>
+      <ScrollView 
+      showsHorizontalScrollIndicator
+      >
+      <SubscriptionCard
+      label={"Tier 1"}
+      price={9.99}
+      count={"50"}
+      onPress={()=>{
+        navigation.navigate("Details",{
+          label:"Tier 1"
+        })
+      }}
+      />
+      <SubscriptionCard
+      label={"Tier 2"}
+      price={19.99}
+      count={"100"}
+      onPress={()=>{
+        navigation.navigate("Details",{
+          label:"Tier 2"
+        })
+      }}
+      />
+      <SubscriptionCard
+      label={"Tier 3"}
+      price={29.99}
+      count={"200"}
+      onPress={()=>{
+        navigation.navigate("Details",{
+          label:"Tier 3"
+        })
+      }}
+      />
+      <SubscriptionCard
+      label={"Tier 4"}
+      price={49.99}
+      count={"500"}
+      active={true}
+      onPress={()=>{
+        navigation.navigate("Details",{
+          label:"Tier 4"
+        })
+      }}
+      />
+      <SubscriptionCard
+      label={"Tier 5"}
+      price={99.99}
+      count={"500+"}
+      onPress={()=>{
+        navigation.navigate("Details",{
+          label:"Tier 5"
+        })
+      }}
+      />
+      </ScrollView>
     </View>
   )
 }

@@ -18,7 +18,8 @@ const CustomButton = ({
     icon,
     iconStyle,
     buttonContainerStyle2,
-    loading
+    loading,
+    iconContainerStyle
 }) => {
     return (
         <TouchableOpacity
@@ -46,7 +47,8 @@ const CustomButton = ({
                 borderRadius:SIZES.base,
                 alignSelf:"center",
                 marginLeft:10,
-                borderWidth:1
+                borderWidth:1,
+                ...iconContainerStyle
             }}>
             <Image source={icon} style={{
                 height:30,
