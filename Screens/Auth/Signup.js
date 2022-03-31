@@ -261,7 +261,7 @@ export const Signup = ({navigation}) => {
             // console.log(Data)
             // signup();
           }}
-          disabled={!isEnableSignIn()}
+          // disabled={!isEnableSignIn()}
           label={'Signup'}
         />
         <View
