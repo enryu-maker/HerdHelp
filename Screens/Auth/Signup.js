@@ -14,23 +14,29 @@ import TextButton from '../../Components/TextButton';
 import axios from 'axios';
 import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
-axios.defaults.baseURL = 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/';
+import { baseURL } from '../../helpers/helpers';
+import utils from '../../utils/Utils';
+axios.defaults.baseURL =
+  'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/';
 export const Signup = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [showPass, setShowPass] = React.useState(false);
   const [EmailError, setEmailError] = React.useState('');
+  const [EmailErr, setEmailErr] = React.useState('');
+  const [PassErr, setPassErr] = React.useState('');
+  const [UserErr, setUserErr] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
-  const [dataText,setDataText] = React.useState("")
-//   React.useEffect(()=>{
-    // setTimeout(()=>{
-    //     setShow(false)
-    // },1500)
-//   })
-    
+  const [dataText, setDataText] = React.useState('');
+  const Data = {
+    'username': username,
+    'password': password,
+    'email': email,
+  };
+
   function isEnableSignIn() {
     return email != '' && password != '' && username != '';
   }
@@ -39,7 +45,7 @@ export const Signup = ({navigation}) => {
       setLoading(true);
       await axios
         .post(
-          '/register/',
+          baseURL + 'register/',
           {
             username: username,
             password: password,
@@ -55,33 +61,32 @@ export const Signup = ({navigation}) => {
           if (response.status === 201) {
             setLoading(false);
             setValidation(true);
-            setShow(true)
-            setDataText("User created")
-            setEmailError("User created")
-            setInterval(()=>{
-            setShow(false)
-            },3000)
-            navigation.navigate('Login')
-            
+            setShow(true);
+            setDataText('User created');
+            setEmailError('User created');
+            setInterval(() => {
+              setShow(false);
+            }, 3000);
+            navigation.navigate('Login');
           } else {
             setLoading(false);
             setValidation(false);
-            setShow(true)
+            setShow(true);
             setDataText('User Registered');
           }
         })
         .catch(error => {
           if (error.response) {
             setLoading(false);
-            setShow(true)
+            setShow(true);
             setValidation(false);
-            setDataText('User Registered')
+            setDataText('User Registered');
             setEmailError('Invalid Input');
           }
         });
     } else {
       setValidation(false);
-      setShow(true)
+      setShow(true);
       setLoading(false);
       setDataText('User Registered');
       setEmailError('Invalid Input');
@@ -94,9 +99,9 @@ export const Signup = ({navigation}) => {
         // marginTop:'8%',
         backgroundColor: COLORS.white,
       }}>
-          {show &&
-            <LoaderOp showing={show} validation={validation} dataText={dataText} />
-            } 
+      {show && (
+        <LoaderOp showing={show} validation={validation} dataText={dataText} />
+      )}
       <Loader loading={loading} />
       <Header
         img={images.herdhelp}
@@ -128,7 +133,12 @@ export const Signup = ({navigation}) => {
           flex: 1,
           marginTop: SIZES.height > 800 ? SIZES.padding * 2 : SIZES.radius,
         }}>
-        <Text style={{color: validation? COLORS.Primary:COLORS.red, alignSelf: 'center', ...FONTS.body3}}>
+        <Text
+          style={{
+            color: validation ? COLORS.Primary : COLORS.red,
+            alignSelf: 'center',
+            ...FONTS.body3,
+          }}>
           {EmailError}
         </Text>
         {/* Input */}
@@ -136,8 +146,10 @@ export const Signup = ({navigation}) => {
           label={'Email'}
           value={email}
           onChange={text => {
+            utils.validateEmail(text,setEmailErr)
             setEmail(text);
           }}
+          errorMsg={EmailErr}
           placeholder={'Enter Email'}
           keyboardType="email-address"
           autoCompleteType="email"
@@ -149,7 +161,7 @@ export const Signup = ({navigation}) => {
               }}>
               <Image
                 source={
-                  email == '' || email != '' ? images.correct : images.cancel
+                  email == ''? images.correct : email != '' && EmailErr == ''? images.correct : images.cancel
                 }
                 style={{
                   height: 20,
@@ -157,7 +169,7 @@ export const Signup = ({navigation}) => {
                   tintColor:
                     email == ''
                       ? COLORS.gray
-                      : email != ''
+                      : email != '' && EmailErr == ''
                       ? COLORS.green
                       : COLORS.red,
                 }}
@@ -169,8 +181,10 @@ export const Signup = ({navigation}) => {
           label={'Username'}
           value={username}
           onChange={text => {
+            utils.validateUser(text,setUserErr)
             setUsername(text);
           }}
+          errorMsg={UserErr}
           placeholder={'Enter Username'}
           keyboardType="default"
           appendComponent={
@@ -180,9 +194,8 @@ export const Signup = ({navigation}) => {
               }}>
               <Image
                 source={
-                  username == '' || username != ''
-                    ? images.correct
-                    : images.cancel
+                  username == ''? images.correct : username != '' && UserErr == ''? images.correct : images.cancel
+
                 }
                 style={{
                   height: 20,
@@ -190,7 +203,7 @@ export const Signup = ({navigation}) => {
                   tintColor:
                     username == ''
                       ? COLORS.gray
-                      : username != ''
+                      : username != '' && UserErr == ''
                       ? COLORS.green
                       : COLORS.red,
                 }}
@@ -204,8 +217,10 @@ export const Signup = ({navigation}) => {
           secureTextEntry={!showPass}
           autoCompleteType="password"
           onChange={value => {
+            utils.validatePassword(value,setPassErr)
             setPassword(value);
           }}
+          errorMsg={PassErr}
           placeholder={'Enter Password'}
           appendComponent={
             <TouchableOpacity
@@ -240,7 +255,11 @@ export const Signup = ({navigation}) => {
           }}
           loading={loading}
           onPress={() => {
-            signup();
+            navigation.navigate('Sub', {
+              userdata: Data,
+            });
+            // console.log(Data)
+            // signup();
           }}
           disabled={!isEnableSignIn()}
           label={'Signup'}

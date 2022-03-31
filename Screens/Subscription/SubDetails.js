@@ -66,7 +66,7 @@ function SubDetails({navigation,route}) {
                 // color:active?COLORS.white:COLORS.black
             }}>{route.params.data.label}</Text>
             {
-                active?<Image source={images.paid} style={{
+                active && route.params.cond?<Image source={images.paid} style={{
                     height:50,
                     width:50,
                     marginLeft:65,
@@ -77,7 +77,7 @@ function SubDetails({navigation,route}) {
             
         </View>
         {
-            active?<>
+            active && route.params.cond?<>
             <Text style={{
                 ...FONTS.h3,
                 marginTop:10,
@@ -105,10 +105,19 @@ function SubDetails({navigation,route}) {
             }}>{`Price : ${formatter.format(route.params.data.price)} `}</Text>
             <Text style={{
                 ...FONTS.h3,
-                margin:10,
+                marginLeft:10,
+                marginTop:10,
+
                 // marginLeft:10,
                 // color:active?COLORS.white:COLORS.black
             }}>{`Animal Count : ${route.params.data.count} `}</Text>
+            <Text style={{
+            ...FONTS.body3,
+            margin:10,
+            color:active && route.params.cond?COLORS.white:COLORS.black
+        }}>
+           {`${route.params.data.description}`}
+        </Text>
             </>
         }
             </View>
@@ -226,7 +235,7 @@ function SubDetails({navigation,route}) {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.Primary,
         }}
-        label={active?'Renew':'Proceed'}
+        label={active && route.params.cond?'Renew':'Proceed'}
         label2={formatter.format( route.params.data.price)}
         labelStyle={{
             marginLeft:50

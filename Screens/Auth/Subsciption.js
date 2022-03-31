@@ -9,15 +9,16 @@ import {
 import React from 'react';
 import {images, FONTS, SIZES, COLORS} from '../../Components/Constants';
 import Header from '../../Components/Header';
-import TextButton from '../../Components/TextButton';
-import SubscriptionCard from './SubscriptionCard';
+import SubscriptionCard from '../Subscription/SubscriptionCard';
 import axiosIns from '../../helpers/helpers';
+import axios from 'axios';
+import { baseURL } from '../../helpers/helpers';
 export default function Subscription({navigation}) {
   const [subs, setSubs] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   async function loadSubs() {
     setLoading(true);
-    let {data} = await axiosIns.get('subscriptions/');
+    let {data} = await axios.get(baseURL + 'subscriptions/');
     console.log(data);
     return data;
   }
@@ -48,10 +49,10 @@ export default function Subscription({navigation}) {
                 borderRadius: SIZES.base,
               }}
               onPress={() => {
-                navigation.openDrawer();
+                navigation.goBack();
               }}>
               <Image
-                source={images.menu}
+                source={images.back}
                 style={{
                   width: 30,
                   height: 30,
@@ -73,9 +74,14 @@ export default function Subscription({navigation}) {
         backgroundColor: COLORS.white,
       }}>
       {renderheader()}
-      <ScrollView showsHorizontalScrollIndicator>
+      <ScrollView showsHorizontalScrollIndicator
+       style={{
+        flex:1,
+      }}>
         {loading ? (
-          <ActivityIndicator size={'large'} color={COLORS.Primary} />
+          <ActivityIndicator size={'large'} color={COLORS.Primary} style={{
+            justifyContent:"center",alignSelf:"center"
+          }} />
         ) : (
           subs.map(a => (
             <SubscriptionCard
@@ -85,7 +91,7 @@ export default function Subscription({navigation}) {
               onPress={() => {
                 navigation.navigate('Details', {
                   data: a,
-                  cond:true
+                  cond:false
                 });
               }}
             />

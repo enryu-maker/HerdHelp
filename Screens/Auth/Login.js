@@ -16,9 +16,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextButton from '../../Components/TextButton';
 import axios from 'axios';
 import Loader from '../../Components/Loader';
+import utils from '../../utils/Utils';
 
-axios.defaults.baseURL =
-  'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/';
+
 const Login = ({navigation,route}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -26,6 +26,8 @@ const Login = ({navigation,route}) => {
   const [saveMe, setSaveMe] = React.useState(false);
   const [EmailError, setEmailError] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [EmailErr, setEmailErr] = React.useState('');
+
   function isEnableSignIn() {
     return email != '' && password != '';
   }
@@ -87,9 +89,7 @@ const Login = ({navigation,route}) => {
     <View
       style={{
         flex: 1,
-        // marginTop: '8%',
-        backgroundColor: COLORS.white,
-        // flex:1
+        backgroundColor: COLORS.white
       }}>
       <Loader loading={loading} />
       <Header
@@ -97,12 +97,6 @@ const Login = ({navigation,route}) => {
         imgstyle={{
           marginTop: 80,
         }}
-        containerStyle={
-          {
-            // margin: '10%',
-            // marginTop: 120,
-          }
-        }
       />
       <ScrollView>
         <Text
@@ -133,39 +127,41 @@ const Login = ({navigation,route}) => {
           }}>
           {EmailError}
         </Text>
-          <FormInput
-            label={'Email'}
-            value={email}
-            onChange={text => {
-              setEmail(text);
-            }}
-            placeholder={'Enter Email'}
-            keyboardType="email-address"
-            autoCompleteType="email"
-            keytype="next"
-            appendComponent={
-              <View
+        <FormInput
+          label={'Email'}
+          value={email}
+          onChange={text => {
+            utils.validateEmail(text,setEmailErr)
+            setEmail(text);
+          }}
+          errorMsg={EmailErr}
+          placeholder={'Enter Email'}
+          keyboardType="email-address"
+          autoCompleteType="email"
+          // errorMsg={EmailError}
+          appendComponent={
+            <View
+              style={{
+                justifyContent: 'center',
+              }}>
+              <Image
+                source={
+                  email == ''? images.correct : email != '' && EmailErr == ''? images.correct : images.cancel
+                }
                 style={{
-                  justifyContent: 'center',
-                }}>
-                <Image
-                  source={
-                    email == '' || email != '' ? images.correct : images.cancel
-                  }
-                  style={{
-                    height: 20,
-                    width: 20,
-                    tintColor:
-                      email == ''
-                        ? COLORS.gray
-                        : email != ''
-                        ? COLORS.green
-                        : COLORS.red,
-                  }}
-                />
-              </View>
-            }
-          />
+                  height: 20,
+                  width: 20,
+                  tintColor:
+                    email == ''
+                      ? COLORS.gray
+                      : email != '' && EmailErr == ''
+                      ? COLORS.green
+                      : COLORS.red,
+                }}
+              />
+            </View>
+          }
+        />
           <FormInput
             label={'Password'}
             value={password}

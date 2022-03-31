@@ -8,7 +8,8 @@ const SubscriptionCard=({
     count=0,
     buttonStyle,
     onPress,
-    active
+    active,
+    desc
 })=>{
   return (
     <TouchableOpacity
@@ -45,7 +46,6 @@ const SubscriptionCard=({
             }}/>
         </View>
         <View style={{
-            // justifyContent:"space-between",
             flexDirection:"row",
         }}>
          <View>
@@ -64,6 +64,7 @@ const SubscriptionCard=({
         }}>
            {`Animal Limit : ${count}`}
         </Text>
+        
         </View>
         {
            active? <Image source={images.paid} style={{
