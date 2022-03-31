@@ -17,6 +17,11 @@ const  ReportB=({
         borderRadius:SIZES.radius,
         flexDirection:'row',
         justifyContent:'space-evenly',
+        shadowColor: COLORS.black,
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 1,
+        shadowRadius: 8,
+        elevation: 8,
         width:'88%',
         alignSelf:'center'}}
         onPress={onPress}>

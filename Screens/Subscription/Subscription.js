@@ -73,7 +73,8 @@ export default function Subscription({navigation}) {
         backgroundColor: COLORS.white,
       }}>
       {renderheader()}
-      <ScrollView showsHorizontalScrollIndicator>
+      <ScrollView showsHorizontalScrollIndicator 
+      >
         {loading ? (
           <ActivityIndicator size={'large'} color={COLORS.Primary} />
         ) : (

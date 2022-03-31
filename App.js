@@ -39,6 +39,7 @@ export default function App() {
     <View style={{flex: 1,backgroundColor:COLORS.white}}>
       <StatusBar
         barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
+        backgroundColor={COLORS.Primary}
       />
       <NavigationContainer>
       {Route == true || Route != null ? (
