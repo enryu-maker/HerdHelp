@@ -1,6 +1,6 @@
 import { View, Text,TouchableOpacity,Image,ScrollView } from 'react-native'
 import React from 'react'
-import { images,FONTS,SIZES, COLORS } from '../../Components/Constants';
+import { images,FONTS,SIZES, COLORS, formatter } from '../../Components/Constants';
 import Header from '../../Components/Header'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomButton from '../Home/CustomButtom';
@@ -64,7 +64,7 @@ function SubDetails({navigation,route}) {
                 marginTop:10,
                 marginLeft:10,
                 // color:active?COLORS.white:COLORS.black
-            }}>{route.params.label}</Text>
+            }}>{route.params.data.label}</Text>
             {
                 active?<Image source={images.paid} style={{
                     height:50,
@@ -102,13 +102,13 @@ function SubDetails({navigation,route}) {
                 marginTop:10,
                 marginLeft:10,
                 // color:active?COLORS.white:COLORS.black
-            }}>{`Price : $ 49.99 `}</Text>
+            }}>{`Price : ${formatter.format(route.params.data.price)} `}</Text>
             <Text style={{
                 ...FONTS.h3,
                 margin:10,
                 // marginLeft:10,
                 // color:active?COLORS.white:COLORS.black
-            }}>{`Animal Count : 500 `}</Text>
+            }}>{`Animal Count : ${route.params.data.count} `}</Text>
             </>
         }
             </View>
@@ -159,11 +159,9 @@ function SubDetails({navigation,route}) {
                 <Text style={{
                     ...FONTS.h2,
                     justifyContent:"center",
-                    marginLeft:30
-
-                    
+                    marginLeft:20
                 }}>
-                    19.99
+                   {route.params.data.price}
                 </Text>
                 
                 </View>
@@ -183,11 +181,11 @@ function SubDetails({navigation,route}) {
                 <Text style={{
                     ...FONTS.h2,
                     justifyContent:"center",
-                    marginLeft:10
+                    marginLeft:35
 
                     
                 }}>
-                    $ 19.99
+                   {` ${formatter.format( route.params.data.price)}`}
                 </Text>
                 
                 </View>
@@ -229,7 +227,7 @@ function SubDetails({navigation,route}) {
           backgroundColor: COLORS.Primary,
         }}
         label={active?'Renew':'Proceed'}
-        label2={"$19.99"}
+        label2={formatter.format( route.params.data.price)}
         labelStyle={{
             marginLeft:50
         }}
