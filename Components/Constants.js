@@ -58,6 +58,10 @@ export const images ={
     subs:require("../assets/Logo/subscription.png"),
     rightone:require("../assets/Logo/right.png"),
     paid:require("../assets/Logo/paid.png"),
+    card:require("../assets/Logo/credit-cards.png"),
+    sack:require("../assets/Logo/sack.png"),
+
+
 }
 export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',

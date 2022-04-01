@@ -238,6 +238,7 @@ const Login = ({navigation,route}) => {
               login();
             }}
             label={'Login'}
+            disabled={!isEnableSignIn()}
           />
           <View
             style={{

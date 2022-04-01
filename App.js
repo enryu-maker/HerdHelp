@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import { StripeProvider } from '@stripe/stripe-react-native';
 import * as React from 'react';
 import {View, StatusBar, Platform} from 'react-native';
 import Homenav from './Screens/Nav/Homenav';
@@ -36,6 +37,7 @@ export default function App() {
   }, [Route]);
 
   return (
+    <StripeProvider>
     <View style={{flex: 1,backgroundColor:COLORS.white}}>
       <StatusBar
         barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
@@ -49,5 +51,6 @@ export default function App() {
       )}
       </NavigationContainer>
     </View>
+    </StripeProvider>
   );
 }

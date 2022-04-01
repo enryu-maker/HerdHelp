@@ -10,7 +10,6 @@ import React from 'react';
 import {images, FONTS, SIZES, COLORS} from '../../Components/Constants';
 import Header from '../../Components/Header';
 import SubscriptionCard from '../Subscription/SubscriptionCard';
-import axiosIns from '../../helpers/helpers';
 import axios from 'axios';
 import { baseURL } from '../../helpers/helpers';
 export default function Subscription({navigation}) {
@@ -19,7 +18,6 @@ export default function Subscription({navigation}) {
   async function loadSubs() {
     setLoading(true);
     let {data} = await axios.get(baseURL + 'subscriptions/');
-    console.log(data);
     return data;
   }
   React.useEffect(() => {
