@@ -19,9 +19,9 @@ const  ReportB=({
         justifyContent:'space-evenly',
         shadowColor: COLORS.black,
         shadowOffset: {width: 0, height: 0},
-        shadowOpacity: 1,
-        shadowRadius: 8,
-        elevation: 8,
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        elevation: 2,
         width:'88%',
         alignSelf:'center'}}
         onPress={onPress}>
