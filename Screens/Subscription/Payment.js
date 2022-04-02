@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image, Platform} from 'react-native';
 import {CardField, CardForm} from '@stripe/stripe-react-native';
 import React from 'react';
 import {images, FONTS, SIZES, COLORS} from '../../Components/Constants';
@@ -76,10 +76,10 @@ export default function Payment({navigation}) {
         // postalCodeEnabled={true}
         
         cardStyle={{
-          backgroundColor:COLORS.white
+          backgroundColor:COLORS.white,
         }}
         style={{
-          height:180
+          height:Platform.OS=="ios"?180:280
         }}
         onFormComplete={cardDetails=>{
           setCond(true)

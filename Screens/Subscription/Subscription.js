@@ -80,6 +80,7 @@ export default function Subscription({navigation}) {
         ) : (
           subs.map(a => (
             <SubscriptionCard
+            key={a.id}
               label={a.label}
               price={a.price}
               count={a.count}

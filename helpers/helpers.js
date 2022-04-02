@@ -34,7 +34,7 @@ axiosIns.interceptors.response.use(
             });
         }
         if (error.response.status === 401) {
-            alert("401");
+            console.log("401");
         } else {
             return new Promise((resolve, reject) => {
                 reject(error);
