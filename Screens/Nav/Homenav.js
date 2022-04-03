@@ -37,6 +37,7 @@ import EditAnimal from '../Edit/editAnimal';
 import Subscription from '../Subscription/Subscription';
 import Payment from '../Subscription/Payment';
 import SubDetails from '../Subscription/SubDetails';
+import Confirm from '../Subscription/Confirm';
 const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
@@ -143,6 +144,8 @@ export default class Homenav extends Component {
           <Stack.Screen name='Subscription' component={Subscription}/>
           <Stack.Screen name='Payment' component={Payment}/>
           <Stack.Screen name='Details' component={SubDetails}/>
+          <Stack.Screen name='Confirm' component={Confirm}/>
+
         </Stack.Navigator>
       </>
     )

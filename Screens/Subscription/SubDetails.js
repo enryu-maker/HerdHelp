@@ -5,7 +5,12 @@ import Header from '../../Components/Header'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomButton from '../Home/CustomButtom';
 function SubDetails({navigation,route}) {
-    var active = false
+  active=false
+  const [Amount,setAmount] =React.useState(0)
+    React.useEffect(()=>{
+      let {data} = route.params
+      setAmount((data.price*100).toFixed(0))
+    },[])
     function renderheader() {
         return (
           <Header
@@ -221,7 +226,9 @@ function SubDetails({navigation,route}) {
       </KeyboardAwareScrollView>
       <CustomButton
         onPress={() => {
-          navigation.navigate("Payment")
+          navigation.navigate("Payment",{
+            data:Amount
+          })
         }}
         icon={images.right}
         iconContainerStyle={{

@@ -1,13 +1,59 @@
 import {View, Text, TouchableOpacity, Image, Platform} from 'react-native';
-import {CardField, CardForm} from '@stripe/stripe-react-native';
+import {CardField, CardForm,confirmPayment,PaymentIntents,ThreeDSecure,useStripe} from '@stripe/stripe-react-native';
 import React from 'react';
 import {images, FONTS, SIZES, COLORS} from '../../Components/Constants';
 import Header from '../../Components/Header';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import TextButton from '../../Components/TextButton';
-export default function Payment({navigation}) {
+import ApiService from './api';
+export default function Payment({navigation,route}) {
   const [card,setCard] = React.useState([])
   const [cond,setCond] = React.useState(false)
+  const [loading,setLoading] = React.useState(false)
+
+  const [Amount,setAmount] =React.useState(0)
+    React.useEffect(()=>{
+      let {data} = route.params
+      setAmount(data)
+    },[])
+  const stripe = useStripe()
+  const handleSubmit = async () => {
+    setLoading(true)
+    const {paymentMethod, error} = await stripe.createPaymentMethod(
+      {
+       type:"Card",
+       card:card,       
+  })
+  const handlePay= async (client_secret) =>
+   {
+    let {error,paymentIntent}  = await confirmPayment(client_secret,{
+    type:"Card",
+    billingDetails:"Kira"
+  })
+  if(paymentIntent){
+    console.log(paymentIntent.id)
+  }
+  else if (error){
+    alert("Something went wrong")
+  }
+else{
+  alert("somthing went wrong")
+}
+}
+   ApiService.saveStripeInfo(
+    {
+   payment_method_id: paymentMethod.id,
+   amount:Amount
+  }
+  )
+  .then(response => {
+    handlePay(response.data.payment_intent.client_secret)
+    // console.log(response.data.payment_intent.client_secret);
+  }).catch(error => {
+    console.log(error)
+  })
+  }
+
   function renderheader() {
     return (
       <Header
@@ -95,7 +141,9 @@ export default function Payment({navigation}) {
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {
-          
+          handleSubmit().then(()=>{
+            setLoading(false)
+          })
         }}
         icon={images.sack}
         // loading={loading}
@@ -109,6 +157,7 @@ export default function Payment({navigation}) {
           backgroundColor:cond? COLORS.Primary:COLORS.transparentPrimary2,
         }}
         label={'Confirm Payment'}
+        loading={loading}
         disabled={!cond}
       />
     </View>

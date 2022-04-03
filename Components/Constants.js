@@ -1,5 +1,3 @@
-import {Animated} from 'react-native'
-import React, { useRef } from 'react'
 import { Dimensions,Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
 export const images ={
@@ -60,8 +58,6 @@ export const images ={
     paid:require("../assets/Logo/paid.png"),
     card:require("../assets/Logo/credit-cards.png"),
     sack:require("../assets/Logo/sack.png"),
-
-
 }
 export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -71,7 +67,7 @@ export const formatter = new Intl.NumberFormat('en-US', {
 export const COLORS={
     // Primary:"rgb(126,204,122)",
     Primary:"#009A48",
-    // Primary:"#2c812e",
+    // Primary:"#757D85",
     transparentPrimary: "#d6f5d6",
     transparentPrimary2: "#eaf7e9",
     white:"#ffffff",

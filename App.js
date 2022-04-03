@@ -37,7 +37,7 @@ export default function App() {
   }, [Route]);
 
   return (
-    <StripeProvider>
+    <StripeProvider publishableKey='pk_test_51KkRiWSCRjhQ59aV02LeMYb4qDlPbjYjDzNg6tkqbQaslExRye4QO9m1Do7FgnuAeKmVzpvTAjbVKQYnPANExl900000675L28'>
     <View style={{flex: 1,backgroundColor:COLORS.white}}>
       <StatusBar
         barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}

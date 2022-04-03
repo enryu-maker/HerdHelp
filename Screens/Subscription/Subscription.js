@@ -18,7 +18,6 @@ export default function Subscription({navigation}) {
   async function loadSubs() {
     setLoading(true);
     let {data} = await axiosIns.get('subscriptions/');
-    console.log(data);
     return data;
   }
   React.useEffect(() => {
@@ -80,7 +79,7 @@ export default function Subscription({navigation}) {
         ) : (
           subs.map(a => (
             <SubscriptionCard
-            key={a.id}
+              key={a.id}
               label={a.label}
               price={a.price}
               count={a.count}

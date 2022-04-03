@@ -39,6 +39,7 @@
     "react-native-svg": "^12.3.0",
     "react-native-swipe-list-view": "^3.2.9",
     "react-native-vector-icons": "^9.0.0",
+    "react-native-webview": "^11.18.1",
     "sharingan-rn-modal-dropdown": "^1.4.0",
     "typescript": "^4.5.5"
   },
