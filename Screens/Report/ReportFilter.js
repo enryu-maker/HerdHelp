@@ -99,6 +99,8 @@ export default function ReportFilter({
         <TextButton
           label={'Vaccinated'}
           icon={images.correct}
+          border={false}
+
           buttonContainerStyle={{
             marginTop: 15,
             backgroundColor: vacc ? COLORS.Primary : COLORS.gray,
@@ -113,6 +115,8 @@ export default function ReportFilter({
           iconStyle={{
             tintColor: COLORS.red,
           }}
+          border={false}
+
           onPress={() => {
             setVacc(false);
           }}
@@ -127,6 +131,8 @@ export default function ReportFilter({
           iconStyle={{
             tintColor: COLORS.white,
           }}
+          border={false}
+
           onPress={() => {
             setMed(true);
           }}
@@ -137,6 +143,7 @@ export default function ReportFilter({
         />
         <TextButton
           label={'Not Medicated'}
+          border={false}
           icon={images.cancel}
           iconStyle={{
             tintColor: COLORS.red,

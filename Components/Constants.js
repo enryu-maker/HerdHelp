@@ -71,7 +71,7 @@ export const formatter = new Intl.NumberFormat('en-US', {
 export const COLORS={
     // Primary:"rgb(126,204,122)",
     Primary:"#009A48",
-    // Primary:"#0DB44C",#9b4246
+    // Primary:"#2c812e",
     transparentPrimary: "#d6f5d6",
     transparentPrimary2: "#eaf7e9",
     white:"#ffffff",

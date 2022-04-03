@@ -91,6 +91,7 @@ const Status = ({show, setShow, animal}) => {
             </TouchableOpacity>
           </View>
         }
+      
         title={'Status'}
         titleStyle={{
           marginRight:60,
@@ -252,6 +253,7 @@ const Status = ({show, setShow, animal}) => {
             onPress={() => {
               updateAnimal();
             }}
+            border={false}
             icon={images.update}
             buttonContainerStyle={{
               // flex:1,
