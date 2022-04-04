@@ -61,7 +61,7 @@ const Main = ({navigation}) => {
       getWeightUnit()
       checkSubs().then(data=>{
         !data.isactive ? navigation.navigate('Subscription',{
-          msg:"Subscription Expired Please Purchase the Tier",
+          msg:"No Active Subscription Please Purchase the Tier",
           cond:true
         }) : null
       })

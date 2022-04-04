@@ -38,7 +38,13 @@ export default function Payment({navigation,route}) {
           payment_intent_id:paymentIntent.id,
           tier:label
         }).then(()=>{
-          Alert.alert("Payment Sucessfull")
+          Alert.alert("Payment Sucessfull",[
+            {
+              text: "ok",
+              onPress: () => navigation.replace("DrawNav"),
+              style: "ok"
+            }]
+            )
         })
     
   }
