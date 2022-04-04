@@ -49,7 +49,7 @@ export default function Payment({navigation,route}) {
     
   }
   else if (error){
-    alert("Something went wrong")
+    alert("Payment Declined")
   }
 else{
   alert("somthing went wrong")
