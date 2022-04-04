@@ -73,7 +73,10 @@ export default function Drawercontent(props) {
             labelStyle={[FONTS.body3, {letterSpacing: 2}]}
             onPress={() => {
               props.navigation.closeDrawer()
-              props.navigation.navigate('Subscription');
+              props.navigation.navigate('Subscription',{
+                msg:"",
+                cond:false
+              });
             }}
           />
         </Drawer.Section>

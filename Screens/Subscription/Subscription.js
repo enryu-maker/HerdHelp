@@ -12,17 +12,17 @@ import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import SubscriptionCard from './SubscriptionCard';
 import axiosIns from '../../helpers/helpers';
-export default function Subscription({navigation}) {
+export default function Subscription({navigation,route}) {
   const [subs, setSubs] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   async function loadSubs() {
     setLoading(true);
-    let {data} = await axiosIns.get('subscriptions/');
+    let {data} = await axiosIns.get(route.params.cond?'subscriptions/':'subscriptions/user/');
     return data;
   }
   React.useEffect(() => {
     loadSubs().then(data => {
-      setSubs(data);
+      setSubs(data.data);
       setLoading(false);
     });
   }, []);
@@ -72,6 +72,12 @@ export default function Subscription({navigation}) {
         backgroundColor: COLORS.white,
       }}>
       {renderheader()}
+      <Text style={{
+        color:COLORS.red,
+        padding:10,
+        alignSelf:"center",
+        ...FONTS.h3
+      }}>{route.params.msg}</Text>
       <ScrollView showsHorizontalScrollIndicator 
       >
         {loading ? (
@@ -83,10 +89,11 @@ export default function Subscription({navigation}) {
               label={a.label}
               price={a.price}
               count={a.count}
+              active={a.active}
               onPress={() => {
                 navigation.navigate('Details', {
                   data: a,
-                  cond:true
+                  cond:a.active
                 });
               }}
             />

@@ -9,16 +9,20 @@ import CustomButton from './CustomButtom';
 export const Home = ({navigation}) => {
   const [animals, setAnimals] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [active, setActive] = React.useState(false);
+
   async function fetchanimal() {
     setLoading(true)
     let {data} = await axiosIns.get('animals/');
     return data;
   }
+ 
   React.useEffect(() => {
       fetchanimal().then(data => {
         setAnimals(data);
         setLoading(false)
       });
+      
   }, []);
   function renderHeader() {
     return (

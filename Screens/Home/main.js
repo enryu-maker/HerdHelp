@@ -47,7 +47,10 @@ const Main = ({navigation}) => {
     let {data} = await axiosIns.get('alerts/');
     return(data)
   }
-  
+  async function checkSubs(){
+    let {data} = await axiosIns.get('subscriptions/isactive/')
+    return data
+  }
   React.useEffect(() => {
     fetchStatus();
       fetchanimal();
@@ -56,8 +59,12 @@ const Main = ({navigation}) => {
         setUser(data)
       })
       getWeightUnit()
-      // global.unit=show
-      // console.log(show)
+      checkSubs().then(data=>{
+        !data.isactive ? navigation.navigate('Subscription',{
+          msg:"Subscription Expired Please Purchase the Tier",
+          cond:true
+        }) : null
+      })
   },[show]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>

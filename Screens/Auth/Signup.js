@@ -16,8 +16,6 @@ import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
 import { baseURL } from '../../helpers/helpers';
 import utils from '../../utils/Utils';
-axios.defaults.baseURL =
-  'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/';
 export const Signup = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -255,13 +253,9 @@ export const Signup = ({navigation}) => {
           }}
           loading={loading}
           onPress={() => {
-            navigation.navigate('Sub', {
-              userdata: Data,
-            });
-            // console.log(Data)
-            // signup();
+            signup();
           }}
-          // disabled={!isEnableSignIn()}
+          disabled={!isEnableSignIn()}
           label={'Signup'}
         />
         <View

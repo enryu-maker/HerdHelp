@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Image, Platform} from 'react-native';
+import {View, Text, TouchableOpacity, Image, Platform,Alert} from 'react-native';
 import {CardField, CardForm,confirmPayment,PaymentIntents,ThreeDSecure,useStripe} from '@stripe/stripe-react-native';
 import React from 'react';
 import {images, FONTS, SIZES, COLORS} from '../../Components/Constants';
@@ -6,15 +6,19 @@ import Header from '../../Components/Header';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import TextButton from '../../Components/TextButton';
 import ApiService from './api';
+import axiosIns from '../../helpers/helpers';
+import Alerts from '../Alerts/Alerts';
 export default function Payment({navigation,route}) {
   const [card,setCard] = React.useState([])
   const [cond,setCond] = React.useState(false)
   const [loading,setLoading] = React.useState(false)
-
+  const [label,setLabel] = React.useState('')
   const [Amount,setAmount] =React.useState(0)
     React.useEffect(()=>{
       let {data} = route.params
       setAmount(data)
+      let {label} = route.params
+      setLabel(label)
     },[])
   const stripe = useStripe()
   const handleSubmit = async () => {
@@ -27,11 +31,16 @@ export default function Payment({navigation,route}) {
   const handlePay= async (client_secret) =>
    {
     let {error,paymentIntent}  = await confirmPayment(client_secret,{
-    type:"Card",
-    billingDetails:"Kira"
+    type:"Card"
   })
   if(paymentIntent){
-    console.log(paymentIntent.id)
+    await axiosIns.post('payments/confirmpayment/',{
+          payment_intent_id:paymentIntent.id,
+          tier:label
+        }).then(()=>{
+          Alert.alert("Payment Sucessfull")
+        })
+    
   }
   else if (error){
     alert("Something went wrong")
@@ -40,6 +49,12 @@ else{
   alert("somthing went wrong")
 }
 }
+// const sendBe=async(id)=>{
+//   await axiosIns.post('payments/confirmpayment/',{
+//     payment_intent_id:id,
+//     tier:
+//   })
+// }
    ApiService.saveStripeInfo(
     {
    payment_method_id: paymentMethod.id,
@@ -47,8 +62,7 @@ else{
   }
   )
   .then(response => {
-    handlePay(response.data.payment_intent.client_secret)
-    // console.log(response.data.payment_intent.client_secret);
+    handlePay(response.data.payment_intent.client_secret).then()
   }).catch(error => {
     console.log(error)
   })

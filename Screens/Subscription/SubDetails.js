@@ -5,10 +5,12 @@ import Header from '../../Components/Header'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomButton from '../Home/CustomButtom';
 function SubDetails({navigation,route}) {
-  active=false
   const [Amount,setAmount] =React.useState(0)
+  const [Data,setData] =React.useState(0)
+  const [active,setActive] =React.useState(route.params.cond)
     React.useEffect(()=>{
       let {data} = route.params
+      setData(data)
       setAmount((data.price*100).toFixed(0))
     },[])
     function renderheader() {
@@ -88,13 +90,13 @@ function SubDetails({navigation,route}) {
                 marginTop:10,
                 marginLeft:10,
                 // color:active?COLORS.white:COLORS.black
-            }}>{`Start Date : 12-12-2001 `}</Text>
+            }}>{`Start Date : ${Data.start_date} `}</Text>
             <Text style={{
                 ...FONTS.h3,
                 marginTop:10,
                 marginLeft:10,
                 // color:active?COLORS.white:COLORS.black
-            }}>{`End Date : 12-12-2001`}</Text>
+            }}>{`End Date : ${Data.expiry_date}`}</Text>
             <Text style={{
                 ...FONTS.h3,
                 margin:10,
@@ -227,7 +229,8 @@ function SubDetails({navigation,route}) {
       <CustomButton
         onPress={() => {
           navigation.navigate("Payment",{
-            data:Amount
+            data:Amount,
+            label:Data.label
           })
         }}
         icon={images.right}
