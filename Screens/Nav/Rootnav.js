@@ -16,10 +16,6 @@ export default class Rootnav extends Component {
           initialRouteName={'Login'} >
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />
-          <Stack.Screen name='Sub' component={Subsciption} />
-          <Stack.Screen name='Details' component={SubDetails} />
-          <Stack.Screen name='Payment' component={Payment} />
-
           <Stack.Screen name='DrawNav' component={Homenav} />
         </Stack.Navigator>
       </>

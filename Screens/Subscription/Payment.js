@@ -8,6 +8,7 @@ import TextButton from '../../Components/TextButton';
 import ApiService from './api';
 import axiosIns from '../../helpers/helpers';
 import Alerts from '../Alerts/Alerts';
+import Loading from './Loading';
 export default function Payment({navigation,route}) {
   const [card,setCard] = React.useState([])
   const [cond,setCond] = React.useState(false)
@@ -40,23 +41,23 @@ export default function Payment({navigation,route}) {
           tier:label
         }).then(()=>{
           Alert.alert("Payment Sucessfull",
-          "go back to home"
+          "Go to the Home Page",
           [
-            {
-              text: "ok",
-              onPress: () => navigation.replace("DrawNav"),
-              style: "ok"
-            }]
-            )
+            { text: "ok", onPress: () => navigation.navigate("DrawNav") ,style: "ok"}
+          ]
+        );
+        setLoading(false)
         })
     
   }
   else if (error){
     alert("Payment Declined")
+    setLoading(false)
     console.log(error)
   }
 else{
   alert("somthing went wrong")
+  setLoading(false)
 }
 }
    ApiService.saveStripeInfo(
@@ -73,7 +74,6 @@ else{
 
   })
   }
-console.log(global.User[0]?.fullname)
   function renderheader() {
     return (
       <Header
@@ -119,6 +119,7 @@ console.log(global.User[0]?.fullname)
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
+        <Loading show={loading}/>
       {renderheader()}
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
@@ -161,9 +162,7 @@ console.log(global.User[0]?.fullname)
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {
-          handleSubmit().then(()=>{
-            setLoading(false)
-          })
+          handleSubmit()
         }}
         icon={images.sack}
         // loading={loading}

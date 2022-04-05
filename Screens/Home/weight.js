@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image,Alert} from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
 import FormInput from '../../Components/FormInput';
