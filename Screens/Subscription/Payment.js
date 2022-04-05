@@ -70,7 +70,7 @@ else{
   .then(response => {
     handlePay(response.data.payment_intent.client_secret).then()
   }).catch(error => {
-    console.log(error)
+    alert("Payment Declined")
   })
   }
 
