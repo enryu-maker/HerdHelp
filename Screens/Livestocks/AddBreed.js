@@ -130,7 +130,8 @@ const Addanimals = ({navigation, route}) => {
         }
       })
       .catch(
-        err => {console.log('api Erorr: ', err)
+        err => {
+        setEmailError("No subscription found, please purchase a subscription for access to animals")
         setLoading(false)
         setValidation(false)
         setShow(false)}

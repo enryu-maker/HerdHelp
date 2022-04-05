@@ -17,7 +17,7 @@ import TextButton from '../../Components/TextButton';
 import axios from 'axios';
 import Loader from '../../Components/Loader';
 import utils from '../../utils/Utils';
-
+import { baseURL } from '../../helpers/helpers';
 
 const Login = ({navigation,route}) => {
   const [email, setEmail] = React.useState('');
@@ -42,12 +42,10 @@ const Login = ({navigation,route}) => {
       // console.log(e);
     }
   };
-   function login() {
+   async function login() {
     if (isEnableSignIn()) {
       setLoading(true);
-      axios
-        .post(
-          'login/',
+      await axios.post(baseURL + 'login/',
           {
             email: email,
             password: password,
@@ -238,7 +236,7 @@ const Login = ({navigation,route}) => {
               login();
             }}
             label={'Login'}
-            disabled={!isEnableSignIn()}
+            // disabled={!isEnableSignIn()}
           />
           <View
             style={{

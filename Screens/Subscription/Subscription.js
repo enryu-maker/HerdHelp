@@ -17,12 +17,19 @@ export default function Subscription({navigation,route}) {
   const [loading, setLoading] = React.useState(false);
   async function loadSubs() {
     setLoading(true);
-    let {data} = await axiosIns.get(route.params.cond?'subscriptions/':'subscriptions/user/');
-    return data;
+    if (route.params.cond){
+      let {data} = await axiosIns.get('subscriptions/');
+      return(data)
+    }
+    else{
+      let {data} = await axiosIns.get('subscriptions/user/');
+      console.log(data)
+      return(data.data)
+    }
   }
   React.useEffect(() => {
     loadSubs().then(data => {
-      setSubs(data.data);
+      setSubs(data);
       setLoading(false);
     });
   }, []);

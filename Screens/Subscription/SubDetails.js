@@ -102,7 +102,7 @@ function SubDetails({navigation,route}) {
                 margin:10,
                 // marginLeft:10,
                 // color:active?COLORS.white:COLORS.black
-            }}>{`Animal Count : 120/500`}</Text>
+            }}>{`Animal Count : ${Data.usage}`}</Text>
             </>:<>
             <Text style={{
                 ...FONTS.h3,
