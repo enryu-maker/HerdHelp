@@ -9,6 +9,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import { COLORS } from './Components/Constants';
 import axiosIns from './helpers/helpers';
+import { baseURL } from './helpers/helpers';
 import axios from 'axios';
 const Route = React.createContext()
 export default function App() {
@@ -20,7 +21,7 @@ export default function App() {
     return(JSON.parse(await AsyncStorage.getItem('route')))
   }
   async function getPubKey(){
-    let {data}= await axios.get('payments/getpubkey/')
+    let {data}= await axios.get(baseURL+'payments/getpubkey/')
     return data
   }
   const fetchprofile = async () => {
@@ -48,11 +49,10 @@ export default function App() {
         });}
     });
     getPubKey().then(data=>{
-      setPub(data)
+      setPub(data.pub_key)
     })
     
   }, [Route]);
-
   return (
     <StripeProvider publishableKey={pub}>
     <View style={{flex: 1,backgroundColor:COLORS.white}}>

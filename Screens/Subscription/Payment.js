@@ -55,12 +55,7 @@ else{
   alert("somthing went wrong")
 }
 }
-// const sendBe=async(id)=>{
-//   await axiosIns.post('payments/confirmpayment/',{
-//     payment_intent_id:id,
-//     tier:
-//   })
-// }
+
    ApiService.saveStripeInfo(
     {
    payment_method_id: paymentMethod.id,
@@ -68,9 +63,9 @@ else{
   }
   )
   .then(response => {
-    handlePay(response.data.payment_intent.client_secret).then()
+    handlePay(response.data.payment_intent.client_secret)
   }).catch(error => {
-    alert("Payment Declined")
+    alert("Server Busy")
   })
   }
 
