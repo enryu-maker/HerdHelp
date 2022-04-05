@@ -26,19 +26,22 @@ export default function Payment({navigation,route}) {
     const {paymentMethod, error} = await stripe.createPaymentMethod(
       {
        type:"Card",
-       card:card,       
+       card:card  
   })
   const handlePay= async (client_secret) =>
    {
     let {error,paymentIntent}  = await confirmPayment(client_secret,{
-    type:"Card"
+    type:"Card",
+    billingDetails:{name:global.User[0]?.fullname}
   })
   if(paymentIntent){
     await axiosIns.post('payments/confirmpayment/',{
           payment_intent_id:paymentIntent.id,
           tier:label
         }).then(()=>{
-          Alert.alert("Payment Sucessfull",[
+          Alert.alert("Payment Sucessfull",
+          "go back to home"
+          [
             {
               text: "ok",
               onPress: () => navigation.replace("DrawNav"),
@@ -50,12 +53,12 @@ export default function Payment({navigation,route}) {
   }
   else if (error){
     alert("Payment Declined")
+    console.log(error)
   }
 else{
   alert("somthing went wrong")
 }
 }
-
    ApiService.saveStripeInfo(
     {
    payment_method_id: paymentMethod.id,
@@ -66,9 +69,11 @@ else{
     handlePay(response.data.payment_intent.client_secret)
   }).catch(error => {
     alert("Server Busy")
+    console.log(error)
+
   })
   }
-
+console.log(global.User[0]?.fullname)
   function renderheader() {
     return (
       <Header
