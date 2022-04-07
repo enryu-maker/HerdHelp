@@ -30,6 +30,15 @@ export default function BillingAdd({ navigation }) {
       setStatelist(data[0]['data']);
     });
   }, []);
+  function finder(list,value){
+    var dataValue
+    list.map(a=>{
+      if( value == a.value){
+        dataValue =  a.states
+      } 
+      })
+      return dataValue
+  }
   function renderheader() {
     return (
       <Header
@@ -65,7 +74,7 @@ export default function BillingAdd({ navigation }) {
             </TouchableOpacity>
           </View>
         }
-        title={'Address'}
+        title={'Billing Address'}
       />
     );
   }
@@ -111,7 +120,7 @@ export default function BillingAdd({ navigation }) {
         <Dropdown
           label="State"
           borderRadius={SIZES.radius}
-            data={statelist}
+            data={finder(statelist,country)}
           textInputStyle={[FONTS.body3, {letterSpacing: 2}]}
           selectedItemTextStyle={[FONTS.body3, {color: COLORS.white}]}
           selectedItemViewStyle={{
