@@ -140,8 +140,6 @@ else{
             alignSelf:"center"
           }}/>
       <CardForm
-        // postalCodeEnabled={true}
-        
         cardStyle={{
           backgroundColor:COLORS.white,
         }}
@@ -158,6 +156,23 @@ else{
         onFocus={focusedField => {
           console.log('focusField', focusedField);
         }}
+      />
+      <TextButton 
+      label={"Billing Address"} 
+      labelStyle={{
+        color:COLORS.Primary
+      }}
+      onPress={()=>{
+        navigation.navigate('Address')
+      }}
+      icon={true?images.cancel:images.correct}
+      iconStyle={{
+        tintColor:true?COLORS.red:COLORS.Primary
+      }}
+      border={false}
+      buttonContainerStyle={{
+        backgroundColor:COLORS.white,
+      }}
       />
       </KeyboardAwareScrollView>
       <TextButton

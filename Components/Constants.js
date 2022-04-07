@@ -58,6 +58,9 @@ export const images ={
     paid:require("../assets/Logo/paid.png"),
     card:require("../assets/Logo/credit-cards.png"),
     sack:require("../assets/Logo/sack.png"),
+    line:require("../assets/Logo/line.png"),
+    mail:require("../assets/Logo/mailbox.png"),
+    city:require("../assets/Logo/city.png")
 }
 export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
