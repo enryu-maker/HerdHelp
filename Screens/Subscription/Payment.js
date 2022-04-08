@@ -94,6 +94,7 @@ else{
     handlePay(response.data.payment_intent.client_secret)
   }).catch(error => {
     alert("Server Busy")
+    setLoading(false)
     console.log(error)
 
   })
