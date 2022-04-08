@@ -23,8 +23,8 @@ export default function Payment({navigation,route}) {
   const [countrylist, setCountrylist] = React.useState([]);
   const [statelist, setStatelist] = React.useState([]);
     React.useEffect(()=>{
-      let {data} = route.params
-      setAmount(data)
+      let {Amount} = route.params
+      setAmount(Amount)
       let {label} = route.params
       setLabel(label)
       let {line1} = route.params
@@ -60,12 +60,12 @@ export default function Payment({navigation,route}) {
           Alert.alert("Payment Sucessfull",
           "Go to the Home Page",
           [
-            { text: "ok", onPress: () => navigation.navigate("DrawNav") ,style: "ok"}
+            { text: "ok", onPress: () => navigation.replace("DrawNav") ,style: "ok"}
           ]
         );
         setLoading(false)
         })
-    
+
   }
   else if (error){
     alert("Payment Declined")

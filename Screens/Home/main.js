@@ -111,7 +111,7 @@ const Main = ({navigation}) => {
             <TouchableOpacity
               style={{
               marginRight: 25,
-              backgroundColor:COLORS.Primary,
+              // backgroundColor:COLORS.Primary,
               height:40,
               width:40,
               justifyContent:"center",
@@ -119,13 +119,12 @@ const Main = ({navigation}) => {
               }}
               onPress={() => {navigation.navigate("MyAccount")}}>
               <Image
-                source={images.login}
+                source={{uri:"https://picsum.photos/"+global.id}}
+                resizeMode="cover"
                 style={{
-                  width: 30,
-                  height: 30,
-                  padding:5,
-                  alignSelf:"center",
-                  tintColor:COLORS.white
+                  height:40,
+              width:40,
+                  borderRadius: 40 / 2,
                 }}
               />
             </TouchableOpacity>
