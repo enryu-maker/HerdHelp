@@ -8,7 +8,9 @@ import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import axiosIns from '../../helpers/helpers';
 import TextButton from '../../Components/TextButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-export default function BillingAdd({ navigation }) {
+export default function BillingAdd({navigation,route}) {
+  const [label,setLabel] = React.useState('')
+  const [Amount,setAmount] =React.useState(0)
   const [line1, setLine1] = React.useState('');
   const [city, setCity] = React.useState('');
   const [postalcode, setPostalcode] = React.useState('');
@@ -16,28 +18,32 @@ export default function BillingAdd({ navigation }) {
   const [country, setCountry] = React.useState('');
   const [countrylist, setCountrylist] = React.useState([]);
   const [statelist, setStatelist] = React.useState([]);
-  const [loading,setLoading] = React.useState(false)
-    async function storeData (){
-        await AsyncStorage.setItem()
-    }
+  const [loading, setLoading] = React.useState(false);
+  function enableButton(){
+    return line1!="" && city!="" && postalcode!=""
+  }
   async function getLocation() {
     let {data} = await axiosIns.get('payments/getlocations/');
     return data;
   }
   React.useEffect(() => {
     getLocation().then(data => {
-      setCountrylist(data[0]['countrylist']);
-      setStatelist(data[0]['data']);
+      setCountrylist(data.countrylist);
+      setStatelist(data.data);
     });
+    let {data} = route.params;
+    setAmount(data);
+    let {label} = route.params;
+    setLabel(label);
   }, []);
-  function finder(list,value){
-    var dataValue
-    list.map(a=>{
-      if( value == a.value){
-        dataValue =  a.states
-      } 
-      })
-      return dataValue
+  function finder(list, value) {
+    var dataValue;
+    list.map(a => {
+      if (value == a.value) {
+        dataValue = a.states;
+      }
+    });
+    return dataValue;
   }
   function renderheader() {
     return (
@@ -81,7 +87,7 @@ export default function BillingAdd({ navigation }) {
   function renderForm() {
     return (
       <View>
-          <Dropdown
+        <Dropdown
           label="Country"
           borderRadius={SIZES.radius}
           data={countrylist}
@@ -120,7 +126,7 @@ export default function BillingAdd({ navigation }) {
         <Dropdown
           label="State"
           borderRadius={SIZES.radius}
-            data={finder(statelist,country)}
+          data={finder(statelist, country)}
           textInputStyle={[FONTS.body3, {letterSpacing: 2}]}
           selectedItemTextStyle={[FONTS.body3, {color: COLORS.white}]}
           selectedItemViewStyle={{
@@ -134,7 +140,7 @@ export default function BillingAdd({ navigation }) {
           dropdownIconSize={22}
           primaryColor={COLORS.Primary}
           avatarSize={28}
-            value={state}
+          value={state}
           onChange={value => {
             setState(value);
           }}
@@ -162,7 +168,7 @@ export default function BillingAdd({ navigation }) {
                   width: 30,
                   justifyContent: 'center',
                   alignSelf: 'center',
-                  tintColor:COLORS.Primary
+                  tintColor: COLORS.Primary,
                 }}
               />
             </>
@@ -189,7 +195,7 @@ export default function BillingAdd({ navigation }) {
                   width: 30,
                   justifyContent: 'center',
                   alignSelf: 'center',
-                  tintColor:COLORS.Primary
+                  tintColor: COLORS.Primary,
                 }}
               />
             </>
@@ -216,13 +222,12 @@ export default function BillingAdd({ navigation }) {
                   width: 30,
                   justifyContent: 'center',
                   alignSelf: 'center',
-                  tintColor:COLORS.Primary
+                  tintColor: COLORS.Primary,
                 }}
               />
             </>
           }
           label="Postal Code*"
-          //   placeholder={user.address}
           value={postalcode}
           onChange={value => {
             setPostalcode(value);
@@ -258,17 +263,30 @@ export default function BillingAdd({ navigation }) {
         }}>
         {renderForm()}
       </KeyboardAwareScrollView>
-      <TextButton label={"Save Address"} 
-      icon={images.update}
-      loading={loading}
-      buttonContainerStyle={{
-        height: 60,
-        marginTop: SIZES.padding,
-        marginHorizontal: SIZES.padding,
-        marginBottom: SIZES.padding + 10,
-        borderRadius: SIZES.radius,
-        backgroundColor: COLORS.Primary,
-      }}
+      <TextButton
+        label={'Save Address'}
+        onPress={() => {
+          navigation.navigate('Payment',{
+            label:label,
+            Amount:Amount,
+            line1:line1,
+            country:country,
+            state:state,
+            city:city,
+            postalcode:postalcode
+          });
+        }}
+        disabled={!enableButton()}
+        icon={images.update}
+        loading={loading}
+        buttonContainerStyle={{
+          height: 60,
+          marginTop: SIZES.padding,
+          marginHorizontal: SIZES.padding,
+          marginBottom: SIZES.padding + 10,
+          borderRadius: SIZES.radius,
+          backgroundColor:!enableButton()? COLORS.transparentPrimary2 : COLORS.Primary
+        }}
       />
     </View>
   );

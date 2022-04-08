@@ -15,11 +15,28 @@ export default function Payment({navigation,route}) {
   const [loading,setLoading] = React.useState(false)
   const [label,setLabel] = React.useState('')
   const [Amount,setAmount] =React.useState(0)
+  const [line1, setLine1] = React.useState('');
+  const [city, setCity] = React.useState('');
+  const [postalcode, setPostalcode] = React.useState('');
+  const [state, setState] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [countrylist, setCountrylist] = React.useState([]);
+  const [statelist, setStatelist] = React.useState([]);
     React.useEffect(()=>{
       let {data} = route.params
       setAmount(data)
       let {label} = route.params
       setLabel(label)
+      let {line1} = route.params
+      setLine1(line1)
+      let {country} = route.params
+      setCountry(country)
+      let {state} = route.params
+      setState(state)
+      let {city} = route.params
+      setCity(city)
+      let {postalcode} = route.params
+      setPostalcode(postalcode)
     },[])
   const stripe = useStripe()
   const handleSubmit = async () => {
@@ -63,7 +80,14 @@ else{
    ApiService.saveStripeInfo(
     {
    payment_method_id: paymentMethod.id,
-   amount:Amount
+   amount:Amount,
+   address:{
+     line1:line1,
+     city:city,
+     postalcode:postalcode,
+     state:state,
+     country:country
+   }
   }
   )
   .then(response => {
@@ -157,23 +181,7 @@ else{
           console.log('focusField', focusedField);
         }}
       />
-      <TextButton 
-      label={"Billing Address"} 
-      labelStyle={{
-        color:COLORS.Primary
-      }}
-      onPress={()=>{
-        navigation.navigate('Address')
-      }}
-      icon={true?images.cancel:images.correct}
-      iconStyle={{
-        tintColor:true?COLORS.red:COLORS.Primary
-      }}
-      border={false}
-      buttonContainerStyle={{
-        backgroundColor:COLORS.white,
-      }}
-      />
+      
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {

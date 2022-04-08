@@ -228,7 +228,7 @@ function SubDetails({navigation,route}) {
       </KeyboardAwareScrollView>
       <CustomButton
         onPress={() => {
-          navigation.navigate("Payment",{
+          navigation.navigate("Address",{
             data:Amount,
             label:Data.label
           })
