@@ -52,7 +52,7 @@ export default function Subscription({navigation,route}) {
                 width: 40,
                 
                 justifyContent: 'center',
-                borderRadius: SIZES.base,
+                borderRadius:40/2,
               }}
               onPress={() => {
                 navigation.openDrawer();

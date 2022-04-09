@@ -78,7 +78,7 @@ const CustomButton = ({
               height:40,
               width:40,
               justifyContent:"center",
-              borderRadius:SIZES.base,
+              borderRadius:40/2,
               alignSelf:"center",
               marginRight:10,
               ...buttonContainerStyle2

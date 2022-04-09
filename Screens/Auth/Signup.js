@@ -20,7 +20,8 @@ export const Signup = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [username, setUsername] = React.useState('');
-  const [Name, setName] = React.useState('');
+  const [first, setFirst] = React.useState('');
+  const [last, setLast] = React.useState('');
   const [showPass, setShowPass] = React.useState(false);
   const [EmailError, setEmailError] = React.useState('');
   const [EmailErr, setEmailErr] = React.useState('');
@@ -44,7 +45,8 @@ export const Signup = ({navigation}) => {
             username: username,
             password: password,
             email: email,
-            fullname:Name
+            first_name:first,
+            last_name:last,
           },
           {
             headers: {
@@ -208,13 +210,45 @@ export const Signup = ({navigation}) => {
           }
         />
         <FormInput
-          label={'Full Name'}
-          value={Name}
+          label={'First Name'}
+          value={first}
           onChange={text => {
-            setName(text);
+            setFirst(text);
           }}
-          errorMsg={UserErr}
           placeholder={'Enter FullName'}
+          keyboardType="default"
+          appendComponent={
+            <View
+              style={{
+                justifyContent: 'center',
+              }}>
+              <Image
+                source={
+                  username == ''? images.correct : username != '' && UserErr == ''? images.correct : images.cancel
+
+                }
+                style={{
+                  height: 20,
+                  width: 20,
+                  tintColor:
+                    username == ''
+                      ? COLORS.gray
+                      : username != '' && UserErr == ''
+                      ? COLORS.green
+                      : COLORS.red,
+                }}
+              />
+              
+            </View>
+          }
+        />
+        <FormInput
+          label={'Last Name'}
+          value={last}
+          onChange={text => {
+            setLast(text);
+          }}
+          placeholder={'Enter LastName'}
           keyboardType="default"
           appendComponent={
             <View

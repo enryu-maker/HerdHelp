@@ -92,7 +92,7 @@ export default function Alerts({navigation,route}) {
                 height:40,
                 width:40,
                 justifyContent:"center",
-                borderRadius:SIZES.base,
+                borderRadius:40/2,
                 }}
               onPress={() => {
                 navigation.navigate("LoadAlert");

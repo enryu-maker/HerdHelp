@@ -96,7 +96,7 @@ class Generate extends Component {
                 height: 40,
                 width: 40,
                 justifyContent: 'center',
-                borderRadius: SIZES.base,
+                borderRadius:40/2,
               }}
               onPress={() => {
                 this.props.navigation.goBack();
