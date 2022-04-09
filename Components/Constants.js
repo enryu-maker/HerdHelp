@@ -60,7 +60,9 @@ export const images ={
     sack:require("../assets/Logo/sack.png"),
     line:require("../assets/Logo/line.png"),
     mail:require("../assets/Logo/mailbox.png"),
-    city:require("../assets/Logo/city.png")
+    city:require("../assets/Logo/city.png"),
+    star:require("../assets/Logo/star.png")
+
 }
 export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',

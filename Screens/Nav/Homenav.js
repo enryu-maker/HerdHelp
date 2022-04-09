@@ -43,7 +43,8 @@ const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
       screenOptions={{
-        headerShown: false, drawerActiveBackgroundColor: COLORS.Primary,
+        headerShown: false, 
+        drawerActiveBackgroundColor: COLORS.Primary,
         drawerActiveTintColor: COLORS.white,
         drawerStyle:[{backgroundColor:COLORS.transparent},styles.drawerStyle],
         drawerLabelStyle: [FONTS.body3,{letterSpacing:2}],
@@ -111,8 +112,17 @@ export default class Homenav extends Component {
       global.User = data;
       return data;
   };
+  checkSubs= async()=>{
+    let {data} = await axiosIns.get('subscriptions/isactive/');
+    return data;
+  }
   componentDidMount(){
     {this.fetchprofile()}
+    {
+      this.checkSubs().then(data=>{
+        global.isActive=data.isactive
+      })
+    }
   }
   render() {
     return (
@@ -155,9 +165,9 @@ export default class Homenav extends Component {
 
 const styles = StyleSheet.create({
   drawerStyle: {
-    backgroundColor:         COLORS.layout,
-    borderTopRightRadius:    12,
-    borderBottomRightRadius: 12,
-    width:                   '80%',
+    backgroundColor:         COLORS.Primary,
+    borderTopRightRadius:    32,
+    borderBottomRightRadius: 32,
+    width:                   '90%',
 },
 })

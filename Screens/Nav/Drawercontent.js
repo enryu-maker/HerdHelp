@@ -1,4 +1,10 @@
-import {View, Text, StyleSheet, Image,TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import React from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {COLORS, SIZES, FONTS, images} from '../../Components/Constants';
@@ -13,13 +19,14 @@ export default function Drawercontent(props) {
       <DrawerContentScrollView
         {...props}
         style={{borderBottomWidth: 0.8, borderBottomColor: COLORS.Primary}}>
-        <TouchableWithoutFeedback style={styles.drawerContent}
-        // onPress={()=>{props.navigation.navigate('MyAccount')}}
+        <TouchableWithoutFeedback
+          style={styles.drawerContent}
+          // onPress={()=>{props.navigation.navigate('MyAccount')}}
         >
           <View style={styles.userInfoSection}>
             <View style={[styles.row, {flexDirection: 'row'}]}>
               <Image
-                source={{uri:"https://picsum.photos/"+global.id}}
+                source={{uri: 'https://picsum.photos/' + global.id}}
                 resizeMode="cover"
                 style={{
                   width: 80,
@@ -28,105 +35,125 @@ export default function Drawercontent(props) {
                 }}
               />
               <View />
-              {global.User &&
+              {global.User && (
                 <View style={{marginLeft: 20}}>
-                <Title style={styles.title}>{global.User[0]?.fullname}</Title>
-                <Caption style={[styles.caption, {color: COLORS.gray}]}>
-                {global.User[0]?.farm_name}
-                </Caption>
-                <Caption style={styles.caption}>{`@ ${global.User[0]?.username}`}</Caption>
-              </View>}
+                  <View style={{
+                    flexDirection:"row"
+                  }}>
+                  <Title style={styles.title}>{global.User[0]?.fullname}</Title>
+                  {
+                    global.isActive?<Image source={images.star} 
+                    style={{
+                      width:25,
+                      height:26,
+                      margin:6
+                    }}/>:null
+                  }
+                  </View>
+                  <Caption style={[styles.caption, {color: COLORS.white}]}>
+                    {global.User[0]?.farm_name}
+                  </Caption>
+                  <Caption
+                    style={
+                      styles.caption
+                    }>{`@ ${global.User[0]?.username}`}</Caption>
+                </View>
+              )}
             </View>
           </View>
         </TouchableWithoutFeedback>
         <LineDivider
-          lineStyle={{alignSelf: 'center', width: '100%', marginTop: 10,backgroundColor:COLORS.Primary}}
+          lineStyle={{
+            alignSelf: 'center',
+            width: '100%',
+            marginTop: 10,
+            backgroundColor: COLORS.white,
+          }}
         />
         <Drawer.Section style={[styles.drawerSection]}>
           <DrawerItem
             icon={({color, size}) => (
-              <Image source={images.home} style={[{height: 25, width: 25}]} />
+              <Image source={images.home} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
             )}
             label="Home"
-            labelStyle={[FONTS.body3, {letterSpacing: 2}]}
+            labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
             onPress={() => {
-              props.navigation.closeDrawer()
+              props.navigation.closeDrawer();
               props.navigation.navigate('Draw');
             }}
           />
           <DrawerItem
             icon={({color, size}) => (
-              <Image source={images.file} style={[{height: 25, width: 25}]} />
+              <Image source={images.file} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
             )}
             label="Report"
-            labelStyle={[FONTS.body3, {letterSpacing: 2}]}
+            labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
             onPress={() => {
-              props.navigation.closeDrawer()
+              props.navigation.closeDrawer();
               props.navigation.navigate('Report');
             }}
           />
           <DrawerItem
             icon={({color, size}) => (
-              <Image source={images.subs} style={[{height: 25, width: 25}]} />
+              <Image source={images.subs} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
             )}
             label="Subscription"
-            labelStyle={[FONTS.body3, {letterSpacing: 2}]}
+            labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
             onPress={() => {
-              props.navigation.closeDrawer()
-              props.navigation.navigate('Subscription',{
-                msg:"",
-                cond:false
+              props.navigation.closeDrawer();
+              props.navigation.navigate('Subscription', {
+                msg: '',
+                cond: false,
               });
             }}
           />
         </Drawer.Section>
-        <Drawer.Section style={[styles.drawerSection,{marginTop:5}]}>
-        <DrawerItem
+        <Drawer.Section style={[styles.drawerSection, {marginTop: 5}]}>
+          <DrawerItem
             icon={({color, size}) => (
-              <Image source={images.weight} style={[{height: 25, width: 25}]} />
+              <Image source={images.weight} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
             )}
             label="Weight History"
-            labelStyle={[FONTS.body3, {letterSpacing: 2}]}
+            labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
             onPress={() => {
-              props.navigation.closeDrawer()
+              props.navigation.closeDrawer();
               props.navigation.navigate('WeightH');
-
             }}
           />
           <DrawerItem
             icon={({color, size}) => (
-              <Image source={images.parents} style={[{height: 25, width: 25}]} />
+              <Image
+                source={images.parents}
+                style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
+              
             )}
             label="Parents"
-            labelStyle={[FONTS.body3, {letterSpacing: 2}]}
+            labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
             onPress={() => {
-              props.navigation.closeDrawer()
+              props.navigation.closeDrawer();
               props.navigation.navigate('Parents');
             }}
           />
         </Drawer.Section>
-        
       </DrawerContentScrollView>
 
       <Drawer.Section style={styles.bottomDrawerSection}>
-      
         <DrawerItem
-            icon={({color, size}) => (
-              <Image source={images.setting} style={[{height: 25, width: 25}]} />
-            )}
-            label="Setting"
-            labelStyle={[FONTS.body3, {letterSpacing: 2}]}
-            onPress={() => {
-              props.navigation.closeDrawer()
-              props.navigation.navigate('Setting');
-            }}
-          />
+          icon={({color, size}) => (
+            <Image source={images.setting} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
+          )}
+          label="Setting"
+          labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
+          onPress={() => {
+            props.navigation.closeDrawer();
+            props.navigation.navigate('Setting');
+          }}
+        />
         <DrawerItem
           icon={({color, size}) => (
             <Image
               source={images.logout}
-              style={[{height: 25, width: 25, tintColor: COLORS.red}]}
-            />
+              style={[{height: 25, width: 25, tintColor:COLORS.red}]} />
           )}
           label="Logout"
           labelStyle={[
@@ -148,19 +175,19 @@ const styles = StyleSheet.create({
   },
   userInfoSection: {
     paddingLeft: 25,
-    
   },
   title: {
     fontSize: 20,
     marginTop: 3,
     fontWeight: 'bold',
     letterSpacing: 2,
+    color: COLORS.white,
   },
   caption: {
     fontSize: 18,
     lineHeight: 18,
     letterSpacing: 1,
-    color:COLORS.Primary
+    color: COLORS.white,
   },
   row: {
     marginTop: 6,
@@ -178,13 +205,13 @@ const styles = StyleSheet.create({
   },
   drawerSection: {
     marginTop: 10,
-    borderBottomWidth:0.8,
-    borderBottomColor:COLORS.Primary
+    borderBottomWidth: 0.8,
+    borderBottomColor: COLORS.white,
   },
   bottomDrawerSection: {
     marginBottom: 15,
-    borderBottomWidth:0,
-    borderBottomColor:COLORS.white
+    borderTopWidth: 0.8,
+    borderTopColor: COLORS.white,
     // borderTopColor: COLORS.lightGray1,
     // borderTopWidth: 1,
   },
