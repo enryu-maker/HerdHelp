@@ -20,6 +20,7 @@ export const Signup = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [username, setUsername] = React.useState('');
+  const [Name, setName] = React.useState('');
   const [showPass, setShowPass] = React.useState(false);
   const [EmailError, setEmailError] = React.useState('');
   const [EmailErr, setEmailErr] = React.useState('');
@@ -29,14 +30,9 @@ export const Signup = ({navigation}) => {
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
-  const Data = {
-    'username': username,
-    'password': password,
-    'email': email,
-  };
 
   function isEnableSignIn() {
-    return email != '' && password != '' && username != '';
+    return email != '' && password != '' && username != '' && Name!="";
   }
   async function signup() {
     if (isEnableSignIn) {
@@ -48,6 +44,7 @@ export const Signup = ({navigation}) => {
             username: username,
             password: password,
             email: email,
+            fullname:Name
           },
           {
             headers: {
@@ -206,9 +203,45 @@ export const Signup = ({navigation}) => {
                       : COLORS.red,
                 }}
               />
+              
             </View>
           }
         />
+        <FormInput
+          label={'Full Name'}
+          value={Name}
+          onChange={text => {
+            setName(text);
+          }}
+          errorMsg={UserErr}
+          placeholder={'Enter FullName'}
+          keyboardType="default"
+          appendComponent={
+            <View
+              style={{
+                justifyContent: 'center',
+              }}>
+              <Image
+                source={
+                  username == ''? images.correct : username != '' && UserErr == ''? images.correct : images.cancel
+
+                }
+                style={{
+                  height: 20,
+                  width: 20,
+                  tintColor:
+                    username == ''
+                      ? COLORS.gray
+                      : username != '' && UserErr == ''
+                      ? COLORS.green
+                      : COLORS.red,
+                }}
+              />
+              
+            </View>
+          }
+        />
+        
         <FormInput
           label={'Password'}
           value={password}

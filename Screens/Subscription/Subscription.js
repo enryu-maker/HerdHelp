@@ -50,6 +50,7 @@ export default function Subscription({navigation,route}) {
                 backgroundColor: COLORS.Primary,
                 height: 40,
                 width: 40,
+                
                 justifyContent: 'center',
                 borderRadius: SIZES.base,
               }}
