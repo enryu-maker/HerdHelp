@@ -41,11 +41,11 @@ export default function Parents({navigation}) {
           return data;
         } else {
           setLoading(false);
-          setErr('Parent Not found');
+          setErr('babies Not found');
         }
       } catch (e) {
         setLoading(false);
-        setErr('Parent Not found');
+        setErr('Server Error');
       }
     } else {
       setLoading(false);
@@ -177,12 +177,29 @@ export default function Parents({navigation}) {
             borderRadius: SIZES.radius,
           }}
         />
+        {/* <View style={{
+        backgroundColor:COLORS.Primary,
+        height:40,
+        // width:160,
+        alignSelf:"center",
+        justifyContent:"center",
+        borderRadius:SIZES.base,
+        // position:"relative",
+        margin:20
+      }}> */}
+      {/* <Text style={Platform.OS=="android"?{color: COLORS.white, alignSelf: 'center', ...FONTS.h3}:{color: COLORS.white, alignSelf: 'center', ...FONTS.h2}}>
+          List of Babies
+        </Text></View> */}
       </View>
     );
   }
   function renderAnimal(data) {
     return data.map((a,index) => (
+      <View style={{
+        // marginTop:20
+      }}>
       <Card key={index} Tagnumber={a.tag_number} Gender={a.gender} image={a.image} Name={a.name} Weight={a.weight}/>
+      </View>
     ));
   }
   return (
@@ -202,19 +219,7 @@ export default function Parents({navigation}) {
         }}>
         {renderForm()}
       </KeyboardAwareScrollView>
-      <View style={{
-        backgroundColor:COLORS.Primary,
-        height:40,
-        width:160,
-        alignSelf:"center",
-        justifyContent:"center",
-        borderRadius:SIZES.base,
-        position:"relative",
-        margin:20
-      }}>
-      <Text style={Platform.OS=="android"?{color: COLORS.white, alignSelf: 'center', ...FONTS.h3}:{color: COLORS.white, alignSelf: 'center', ...FONTS.h2}}>
-          List of Babies
-        </Text></View>
+      
       {
         babies != undefined || !loading ?
       (

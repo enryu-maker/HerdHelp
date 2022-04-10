@@ -86,7 +86,9 @@ export default function Subscription({navigation,route}) {
         alignSelf:"center",
         ...FONTS.h3
       }}>{route.params.msg}</Text>
-      <ScrollView showsHorizontalScrollIndicator 
+      <ScrollView  
+        showsVerticalScrollIndicator={false}
+
       >
         {loading ? (
           <ActivityIndicator size={'large'} color={COLORS.Primary} />
