@@ -11,6 +11,7 @@ import Card from './ParentDesign';
 export default function Parents({navigation}) {
   const [species, setSpecies] = React.useState([]);
   const [tag, setTag] = React.useState('');
+  const [tagl, setTagl] = React.useState([]);
   const [id, setId] = React.useState('');
   const [err, setErr] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -20,6 +21,8 @@ export default function Parents({navigation}) {
   React.useEffect(() => {
     setId(global.id);
     setSpecies(global.species);
+    setTagl(global.tags)
+
   }, []);
   const onChangeSpec = value => {
     setAnimal(value);
@@ -88,6 +91,15 @@ export default function Parents({navigation}) {
       />
     );
   }
+  function finder(list, value) {
+    var dataValue;
+    list?.map(a => {
+      if (value == a.label) {
+        dataValue = a.data;
+      }
+    });
+    return dataValue;
+  }
   function renderForm() {
     return (
       <View
@@ -130,28 +142,40 @@ export default function Parents({navigation}) {
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
-        <FormInput
-          prependComponent={
-            <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-              <Image
-                source={images.tag}
-                style={{width: 26, height: 26, tintColor: COLORS.Primary}}
-              />
-            </View>
-          }
-          label="Tag Number"
+        <Dropdown
+          label="Tags"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
+          borderRadius={SIZES.radius}
+          data={finder(tagl,animal)}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          // enableAvatar
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
           value={tag}
           onChange={value => {
             setTag(value);
           }}
-          containerStyle={{
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
             marginTop: SIZES.height > 800 ? SIZES.base : 10,
           }}
-          inputContainerStyle={{
+          itemContainerStyle={{
             backgroundColor: COLORS.white,
-            // marginTop: SIZES.height > 800 ? SIZES.base : 10,
+            margin: 5,
+            borderRadius: SIZES.radius,
           }}
-          inputStyle={{marginLeft: 20, fontSize: 16}}
         />
       </View>
     );

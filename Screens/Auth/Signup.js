@@ -65,7 +65,7 @@ export const Signup = ({navigation}) => {
             setInterval(() => {
               setShow(false);
             }, 3000);
-            navigation.navigate('Login');
+            // navigation.navigate('Login');
           } else {
             setLoading(false);
             setValidation(false);

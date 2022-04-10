@@ -23,7 +23,7 @@ export default function Subscription({navigation,route}) {
     }
     else{
       let {data} = await axiosIns.get('subscriptions/user/');
-      // console.log(data)
+      console.log(data)
       return(data.data)
     }
   }
@@ -92,6 +92,7 @@ export default function Subscription({navigation,route}) {
           <ActivityIndicator size={'large'} color={COLORS.Primary} />
         ) : (
           subs.map(a => (
+            a.price != 0?
             <SubscriptionCard
               key={a.id}
               label={a.label}
@@ -104,7 +105,7 @@ export default function Subscription({navigation,route}) {
                   cond:a.active
                 });
               }}
-            />
+            />:null
           ))
         )}
       </ScrollView>
