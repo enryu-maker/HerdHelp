@@ -91,8 +91,14 @@ export const Signup = ({navigation}) => {
     }
   }
   return (
+    <View style={{
+      flex:1,
+      backgroundColor:COLORS.white,
+    }}>
     <KeyboardAwareScrollView
         keyboardDismissMode="interactive"
+        showsVerticalScrollIndicator={false}
+    
         contentContainerStyle={{
           marginTop: SIZES.radius,
           // paddingHorizontal: SIZES.padding,
@@ -107,7 +113,7 @@ export const Signup = ({navigation}) => {
         <View
             style={{
               justifyContent: 'center',
-              position: 'absolute',
+              // position: 'absolute',
               marginLeft: -15,
               // zIndex: 1,
             }}>
@@ -247,7 +253,7 @@ export const Signup = ({navigation}) => {
             setFirst(text);
           }}
           returnKeyType={"next"}
-          placeholder={'Enter FullName'}
+          placeholder={'Enter Firstname'}
           keyboardType="default"
           appendComponent={
             <View
@@ -280,7 +286,7 @@ export const Signup = ({navigation}) => {
           onChange={text => {
             setLast(text);
           }}
-          placeholder={'Enter LastName'}
+          placeholder={'Enter Lastname'}
           keyboardType="default"
           returnKeyType={"next"}
           appendComponent={
@@ -377,5 +383,6 @@ export const Signup = ({navigation}) => {
         </View>
       </View>
     </KeyboardAwareScrollView>
+    </View>
   );
 };

@@ -841,7 +841,7 @@ const Addanimals = ({navigation, route}) => {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.Primary,
         }}
-        label={'Add Animals'}
+        label={'Add Animal'}
         loading={loading}
       />
     </View>

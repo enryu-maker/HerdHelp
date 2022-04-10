@@ -110,7 +110,7 @@ export default function Report(props) {
     );
   }
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1,backgroundColor:COLORS.white}}>
       {renderheader()}
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}

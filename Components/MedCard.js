@@ -86,7 +86,7 @@ export default function MedCard({ navigation,route }) {
         );
       }
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1,backgroundColor:COLORS.white}}>
      {renderHeader()}
      <Text style={{...FONTS.h3,color:COLORS.red,alignSelf:"center"}}>{err}</Text>
      <ScrollView
