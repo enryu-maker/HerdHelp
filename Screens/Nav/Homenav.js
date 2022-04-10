@@ -58,7 +58,6 @@ const DrawerNav = () => {
     }
     >
       <Drawer.Screen name='Draw' component={Main} options={{
-        // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.home}
@@ -66,7 +65,6 @@ const DrawerNav = () => {
               /> )       
           }} />
           <Drawer.Screen name='Report' component={Report} options={{
-        // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.file}
@@ -74,7 +72,6 @@ const DrawerNav = () => {
               /> )       
           }} />
           <Drawer.Screen name='WeightH' component={WeightH} options={{
-        // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.weight}
@@ -82,7 +79,6 @@ const DrawerNav = () => {
               /> )       
           }} />
           <Drawer.Screen name='Setting' component={Setting} options={{
-        // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.setting}
@@ -90,7 +86,6 @@ const DrawerNav = () => {
               /> )       
           }} />
           <Drawer.Screen name='Parents' component={Parents} options={{
-        // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.setting}
@@ -98,7 +93,6 @@ const DrawerNav = () => {
               /> )       
           }} />
           <Drawer.Screen name='Subscription' component={Subscription} options={{
-        // drawerActiveTintColor: COLORS.white,
             drawerIcon: ({ focused, size }) => (
               <Image
                 source={images.setting}
@@ -106,10 +100,16 @@ const DrawerNav = () => {
               /> )       
           }} />
       </Drawer.Navigator>)}
+export const Username = React.createContext()
 export default class Homenav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username:''
+    };
+}
    fetchprofile = async () => {
       const {data} = await axiosIns.get('profile/');
-      global.User = data;
       return data;
   };
   checkSubs= async()=>{
@@ -117,16 +117,24 @@ export default class Homenav extends Component {
     return data;
   }
   componentDidMount(){
-    {this.fetchprofile()}
-    {
-      this.checkSubs().then(data=>{
-        global.isActive=data.isactive
+    setTimeout(()=>{
+      this.fetchprofile().then((data)=>{
+        global.User = data;
+        this.setState({
+          username:data[0].username
+        })
       })
-    }
+      this.checkSubs().then(data=>{
+          global.isActive=data.isactive
+        })
+      
+    })
   }
+
   render() {
     return (
       <>
+      <Username.Provider value={this.state.username}>
         <Stack.Navigator screenOptions={{ headerShown: false}}
           initialRouteName={'DrawNav'}>
           <Stack.Screen name='DrawNav' component={DrawerNav} />
@@ -158,11 +166,11 @@ export default class Homenav extends Component {
           <Stack.Screen name='Confirm' component={Confirm}/>
           <Stack.Screen name='Address' component={BillingAdd}/>
         </Stack.Navigator>
+        </Username.Provider>
       </>
     )
   }
 }
-
 const styles = StyleSheet.create({
   drawerStyle: {
     backgroundColor:         COLORS.Primary,

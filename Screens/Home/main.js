@@ -14,6 +14,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import CustomButton from './CustomButtom';
+import { Username } from '../Nav/Homenav';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [show, setShow] = React.useState('');
@@ -70,6 +71,8 @@ const Main = ({navigation}) => {
       global.tags=data
     })
   }, [show]);
+ const username = React.useContext(Username)
+
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <Header
@@ -125,7 +128,10 @@ const Main = ({navigation}) => {
                 navigation.navigate('MyAccount');
               }}>
               <Image
-      source={{uri:`https://ui-avatars.com/api/?name=${global.User[0].username}`}}
+
+              
+      source={{uri:`https://ui-avatars.com/api/?name=${username}`}}
+      
 
                 // resizeMode="cover"
                 style={{

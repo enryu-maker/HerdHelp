@@ -26,7 +26,7 @@ const MyAccount = ({navigation,route}) => {
   
 function renderFileUri() {
       return <Image
-      source={{uri:`https://ui-avatars.com/api/?name=${global.User[0].username}`}}
+      source={{uri:`https://ui-avatars.com/api/?name=${user.username}`}}
       
         style={{width: 100,
           height: 100,

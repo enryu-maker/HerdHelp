@@ -5,7 +5,7 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from 'react-native';
-import React from 'react';
+import React,{useContext} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {COLORS, SIZES, FONTS, images} from '../../Components/Constants';
 import userData from '../../Components/Constants';
@@ -13,7 +13,21 @@ import {Caption, Drawer, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axiosIns from '../../helpers/helpers';
+import { Username } from './Homenav';
 export default function Drawercontent(props) {
+  // const [username,setUsername] = React.useState("")
+//   const fetchprofile = async () => {
+//     const {data} = await axiosIns.get('profile/');
+//     return data;
+// };
+// React.useEffect(()=>{
+//   fetchprofile().then((data)=>{
+//     setUsername(data)
+//   })
+//   console.log(username)
+// },[])
+ const username = useContext(Username)
+ 
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -21,13 +35,13 @@ export default function Drawercontent(props) {
         style={{borderBottomWidth: 0.8, borderBottomColor: COLORS.Primary}}>
         <TouchableWithoutFeedback
           style={styles.drawerContent}
-          // onPress={()=>{props.navigation.navigate('MyAccount')}}
         >
           <View style={styles.userInfoSection}>
             <View style={[styles.row, {flexDirection: 'row'}]}>
               <Image
-      source={{uri:`https://ui-avatars.com/api/?name=${global.User[0].username}`}}
-
+                source={{
+                  uri: `https://ui-avatars.com/api/?name=${username}`,
+                }}
                 resizeMode="cover"
                 style={{
                   width: 80,
@@ -38,18 +52,23 @@ export default function Drawercontent(props) {
               <View />
               {global.User && (
                 <View style={{marginLeft: 20}}>
-                  <View style={{
-                    flexDirection:"row"
-                  }}>
-                  <Title style={styles.title}>{global.User[0]?.fullname}</Title>
-                  {
-                    global.isActive?<Image source={images.star} 
+                  <View
                     style={{
-                      width:25,
-                      height:26,
-                      margin:6
-                    }}/>:null
-                  }
+                      flexDirection: 'row',
+                    }}>
+                    <Title style={styles.title}>
+                      {global.User[0]?.fullname}
+                    </Title>
+                    {global.isActive ? (
+                      <Image
+                        source={images.star}
+                        style={{
+                          width: 25,
+                          height: 26,
+                          margin: 6,
+                        }}
+                      />
+                    ) : null}
                   </View>
                   <Caption style={[styles.caption, {color: COLORS.white}]}>
                     {global.User[0]?.farm_name}
@@ -74,7 +93,10 @@ export default function Drawercontent(props) {
         <Drawer.Section style={[styles.drawerSection]}>
           <DrawerItem
             icon={({color, size}) => (
-              <Image source={images.home} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
+              <Image
+                source={images.home}
+                style={[{height: 25, width: 25, tintColor: COLORS.white}]}
+              />
             )}
             label="Home"
             labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
@@ -85,7 +107,10 @@ export default function Drawercontent(props) {
           />
           <DrawerItem
             icon={({color, size}) => (
-              <Image source={images.file} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
+              <Image
+                source={images.file}
+                style={[{height: 25, width: 25, tintColor: COLORS.white}]}
+              />
             )}
             label="Report"
             labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
@@ -96,7 +121,10 @@ export default function Drawercontent(props) {
           />
           <DrawerItem
             icon={({color, size}) => (
-              <Image source={images.subs} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
+              <Image
+                source={images.subs}
+                style={[{height: 25, width: 25, tintColor: COLORS.white}]}
+              />
             )}
             label="Subscription"
             labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
@@ -112,7 +140,10 @@ export default function Drawercontent(props) {
         <Drawer.Section style={[styles.drawerSection, {marginTop: 5}]}>
           <DrawerItem
             icon={({color, size}) => (
-              <Image source={images.weight} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
+              <Image
+                source={images.weight}
+                style={[{height: 25, width: 25, tintColor: COLORS.white}]}
+              />
             )}
             label="Weight History"
             labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
@@ -125,8 +156,8 @@ export default function Drawercontent(props) {
             icon={({color, size}) => (
               <Image
                 source={images.parents}
-                style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
-              
+                style={[{height: 25, width: 25, tintColor: COLORS.white}]}
+              />
             )}
             label="Parents"
             labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
@@ -141,7 +172,10 @@ export default function Drawercontent(props) {
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
           icon={({color, size}) => (
-            <Image source={images.setting} style={[{height: 25, width: 25, tintColor:COLORS.white}]} />
+            <Image
+              source={images.setting}
+              style={[{height: 25, width: 25, tintColor: COLORS.white}]}
+            />
           )}
           label="Setting"
           labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
@@ -154,7 +188,8 @@ export default function Drawercontent(props) {
           icon={({color, size}) => (
             <Image
               source={images.logout}
-              style={[{height: 25, width: 25, tintColor:COLORS.red}]} />
+              style={[{height: 25, width: 25, tintColor: COLORS.red}]}
+            />
           )}
           label="Logout"
           labelStyle={[
