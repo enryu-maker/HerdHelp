@@ -146,6 +146,7 @@ export const Signup = ({navigation}) => {
             utils.validateEmail(text,setEmailErr)
             setEmail(text);
           }}
+          returnKeyType={"next"}
           errorMsg={EmailErr}
           placeholder={'Enter Email'}
           keyboardType="email-address"
@@ -181,6 +182,7 @@ export const Signup = ({navigation}) => {
             utils.validateUser(text,setUserErr)
             setUsername(text);
           }}
+          returnKeyType={"next"}
           errorMsg={UserErr}
           placeholder={'Enter Username'}
           keyboardType="default"
@@ -215,6 +217,7 @@ export const Signup = ({navigation}) => {
           onChange={text => {
             setFirst(text);
           }}
+          returnKeyType={"next"}
           placeholder={'Enter FullName'}
           keyboardType="default"
           appendComponent={
@@ -250,6 +253,7 @@ export const Signup = ({navigation}) => {
           }}
           placeholder={'Enter LastName'}
           keyboardType="default"
+          returnKeyType={"next"}
           appendComponent={
             <View
               style={{
@@ -285,6 +289,7 @@ export const Signup = ({navigation}) => {
             utils.validatePassword(value,setPassErr)
             setPassword(value);
           }}
+          returnKeyType={"go"}
           errorMsg={PassErr}
           placeholder={'Enter Password'}
           appendComponent={

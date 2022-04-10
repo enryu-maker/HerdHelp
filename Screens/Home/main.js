@@ -45,6 +45,10 @@ const Main = ({navigation}) => {
     let {data} = await axiosIns.get('subscriptions/isactive/');
     return data;
   }
+  async function getAnimals(){
+    let {data} = await axiosIns.get('animaltags/');
+    return data
+  }
   React.useEffect(() => {
     fetchStatus();
     fetchanimal();
@@ -62,6 +66,9 @@ const Main = ({navigation}) => {
           })
         : null;
     });
+    getAnimals().then((data)=>{
+      global.tags=data
+    })
   }, [show]);
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>

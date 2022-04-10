@@ -209,7 +209,7 @@ const Addanimals = ({navigation, route}) => {
             </View>
           }
           label="Tag Number*"
-          // keyboardType="numeric"
+          returnKeyType={"next"}
           value={tag}
           onChange={value => {
             setTag(value);
@@ -228,6 +228,7 @@ const Addanimals = ({navigation, route}) => {
               />
             </View>
           }
+          returnKeyType={"next"}
           label="Name*"
           value={name}
           onChange={value => {
@@ -379,6 +380,7 @@ const Addanimals = ({navigation, route}) => {
               />
             </View>
           }
+          returnKeyType={"next"}
           label="Weight"
           value={weight}
           keyboardType="numeric"
@@ -402,6 +404,7 @@ const Addanimals = ({navigation, route}) => {
                   />
                 </View>
               }
+              returnKeyType={"next"}
               label="Mother Tag Number"
               value={mother}
               keyboardType="numeric"
@@ -425,6 +428,7 @@ const Addanimals = ({navigation, route}) => {
                   />
                 </View>
               }
+              returnKeyType={"next"}
               label="Father Tag Number"
               value={father}
               keyboardType="numeric"
@@ -495,6 +499,7 @@ const Addanimals = ({navigation, route}) => {
           <View></View>
         )}
         <FormInput
+        returnKeyType={"next"}
           prependComponent={
             <View
               style={{
@@ -522,6 +527,7 @@ const Addanimals = ({navigation, route}) => {
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
         <FormInput
+        returnKeyType={"next"}
           prependComponent={
             <View
               style={{
@@ -553,6 +559,7 @@ const Addanimals = ({navigation, route}) => {
         ) : (
           <View>
             <FormInput
+            returnKeyType={"next"}
           prependComponent={
             <View
               style={{
@@ -581,6 +588,7 @@ const Addanimals = ({navigation, route}) => {
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
         <FormInput
+        returnKeyType={"next"}
           prependComponent={
             <View
               style={{
@@ -608,6 +616,7 @@ const Addanimals = ({navigation, route}) => {
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
         <FormInput
+        returnKeyType={"next"}
           prependComponent={
             <View
               style={{
@@ -743,6 +752,7 @@ const Addanimals = ({navigation, route}) => {
               />
             </View>
           }
+          returnKeyType={"next"}
           label="Breed"
           value={Breed}
           onChange={value => {
@@ -770,6 +780,7 @@ const Addanimals = ({navigation, route}) => {
               />
             </View>
           }
+          returnKeyType={"go"}
           label="Registration"
           value={registration}
           onChange={value => {

@@ -11,6 +11,7 @@ import CustomAlert from '../../Components/CustomAlert';
 
 export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
+  const [tagl, setTagl] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [weight, setWeight] = React.useState(0);
   const [err, setErr] = React.useState("");
@@ -24,10 +25,20 @@ export const Weight =({ navigation,route})=> {
   React.useEffect(() => {
       setId(global.id)
       setAnimals(global.species)
+      setTagl(global.tags)
   },[]);
   const onChangeSpec = value => {
     setSpcies(value);
   };
+  function finder(list, value) {
+    var dataValue;
+    list?.map(a => {
+      if (value == a.label) {
+        dataValue = a.data;
+      }
+    });
+    return dataValue;
+  }
   const clear=()=>{
     setSpcies([])
     setWeight("")
@@ -150,33 +161,43 @@ export const Weight =({ navigation,route})=> {
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
-        <FormInput
-          prependComponent={
-            <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-              <Image
-                source={images.tag}
-                style={{width: 26, height: 26, tintColor: COLORS.Primary}}
-              />
-            </View>
-          }
-          label="Tag Number"
-          // keyboardType="numeric"
+        <Dropdown
+          label="Tags"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
+          borderRadius={SIZES.radius}
+          data={finder(tagl,species)}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          // enableAvatar
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
           value={tag}
           onChange={value => {
             setTag(value);
           }}
-          containerStyle={{
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
             marginTop: SIZES.height > 800 ? SIZES.base : 10,
-
           }}
-          inputContainerStyle={{
+          itemContainerStyle={{
             backgroundColor: COLORS.white,
-            // marginTop: SIZES.height > 800 ? SIZES.base : 10,
-
+            margin: 5,
+            borderRadius: SIZES.radius,
           }}
-          inputStyle={{marginLeft: 20, fontSize: 16}}
         />
         <FormInput
+        returnKeyType={"go"}
           prependComponent={
             <View
               style={{
@@ -214,12 +235,11 @@ export const Weight =({ navigation,route})=> {
         backgroundColor: COLORS.white,
       }}>
         {show &&
-        // &&
         <CustomAlert show={show} setShow={setShow} validation={validation} label={dataText}/>
         } 
       {renderHeader()}
       <KeyboardAwareScrollView
-        keyboardDismissMode="on-drag"
+        keyboardDismissMode="interactive"
         contentContainerStyle={{
           marginTop: SIZES.radius,
           paddingHorizontal: SIZES.padding,

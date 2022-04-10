@@ -24,7 +24,8 @@ const FormInput = ({
     errorMsg = "",
     maxLength,
     keytype="",
-    onPressIn
+    onPressIn,
+    returnKeyType
 }) => {
     return (
         <View style={{ ...containerStyle }}>
@@ -64,7 +65,7 @@ const FormInput = ({
                     autoCapitalize={autoCapitalize}
                     maxLength={maxLength}
                     onChangeText={(text) => onChange(text)}
-                    returnKeyType="default"
+                    returnKeyType={returnKeyType}
                     onPressIn={onPressIn}
                 />
                 {

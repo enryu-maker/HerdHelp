@@ -113,6 +113,7 @@ const MyAccountEdit = ({navigation,route}) => {
           onChange={value => {
             setFullName(value);
           }}
+          returnKeyType={"next"}
           inputContainerStyle={{
             backgroundColor: COLORS.white,
           }}
@@ -126,6 +127,7 @@ const MyAccountEdit = ({navigation,route}) => {
           onChange={value => {
             setPhoneNo(value);
           }}
+          returnKeyType={"next"}
           containerStyle={{
             marginTop: SIZES.radius,
           }}
@@ -143,6 +145,7 @@ const MyAccountEdit = ({navigation,route}) => {
           onChange={value => {
             setIdCard(value);
           }}
+          returnKeyType={"next"}
           containerStyle={{
             marginTop: SIZES.radius,
           }}
@@ -159,6 +162,7 @@ const MyAccountEdit = ({navigation,route}) => {
           onChange={value => {
             setAddr(value);
           }}
+          returnKeyType={"next"}
           containerStyle={{
             marginTop: SIZES.radius,
           }}

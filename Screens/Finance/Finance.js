@@ -174,6 +174,7 @@ export const Finance = ({navigation}) => {
             </View>
           }
           label="Quantity*"
+          returnKeyType={"next"}
           value={Qty}
           onChange={value => {
             setQty(value);
@@ -196,6 +197,7 @@ export const Finance = ({navigation}) => {
               />
             </View>
           }
+          returnKeyType={"go"}
           keyboardType="numeric"
           label="Price*"
           value={price}

@@ -16,7 +16,7 @@ const  ReportB=({
         margin:SIZES.base2,
         borderRadius:SIZES.radius,
         flexDirection:'row',
-        justifyContent:'space-evenly',
+        // justifyContent:'space-evenly',
         shadowColor: COLORS.black,
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
@@ -25,9 +25,9 @@ const  ReportB=({
         width:'88%',
         alignSelf:'center'}}
         onPress={onPress}>
-          <View style={{justifyContent:'center',margin:SIZES.padding}}>
+          <View style={{justifyContent:'center',alignSelf:"center"}}>
               <Image source={{uri:img}}
-              style={{height:50,width:50,}}/>
+              style={{height:50,width:50,margin:30}}/>
           </View>
           <View style={{
               flexDirection:'column',

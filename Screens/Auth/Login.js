@@ -136,7 +136,7 @@ const Login = ({navigation,route}) => {
           placeholder={'Enter Email'}
           keyboardType="email-address"
           autoCompleteType="email"
-          // errorMsg={EmailError}
+          returnKeyType={"next"}
           appendComponent={
             <View
               style={{
@@ -169,7 +169,7 @@ const Login = ({navigation,route}) => {
               setPassword(value);
             }}
             placeholder={'Enter Password'}
-            keytype="go"
+            returnKeyType={"go"}
             appendComponent={
               <TouchableOpacity
                 style={{

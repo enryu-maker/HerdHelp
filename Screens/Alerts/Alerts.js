@@ -14,6 +14,7 @@ export default function Alerts({navigation,route}) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
   const [tag, setTag] = React.useState("");
+  const [tagl, setTagl] = React.useState([]);
   const [date, setDate] = React.useState(null);
   const [datet, setDatet] = React.useState(null);
   const [time, setTime] = React.useState(null);
@@ -33,6 +34,15 @@ export default function Alerts({navigation,route}) {
     setTitle("")
     setContent("")
     setTag("")
+  }
+  function finder(list, value) {
+    var dataValue;
+    list?.map(a => {
+      if (value == a.label) {
+        dataValue = a.data;
+      }
+    });
+    return dataValue;
   }
     const data =JSON.stringify(
       {
@@ -73,7 +83,9 @@ export default function Alerts({navigation,route}) {
     React.useEffect(()=>{
         setId(global.id)
         setSpcies(global.species)
-    })
+        setTagl(global.tags)
+
+    },[])
   function renderHeader() {
     return (
       <Header
@@ -138,7 +150,7 @@ export default function Alerts({navigation,route}) {
           dropdownIcon={images.down}
           dropdownIconSize={22}
           primaryColor={COLORS.Primary}
-          value={species}
+          value={animals}
           animationIn="zoomIn"
           animationOut="zoomOut"
           onChange={onChangeSpec}
@@ -150,27 +162,39 @@ export default function Alerts({navigation,route}) {
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
-        <FormInput
-          prependComponent={
-            <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-              <Image
-                source={images.tag}
-                style={{width: 26, height: 26, tintColor: COLORS.Primary}}
-              />
-            </View>
-          }
-          label="Tag"
+        <Dropdown
+          label="Tags"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
+          borderRadius={SIZES.radius}
+          data={finder(tagl,animals)}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
           value={tag}
           onChange={value => {
             setTag(value);
           }}
-          inputContainerStyle={{
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{
             backgroundColor: COLORS.white,
+            margin: 5,
+            borderRadius: SIZES.radius,
           }}
-          containerStyle={{
-            marginTop: SIZES.radius,
-          }}
-          inputStyle={{marginLeft: 20, fontSize: 16}}
         />
         <FormInput
           prependComponent={
@@ -182,6 +206,7 @@ export default function Alerts({navigation,route}) {
             </View>
           }
           label="Issue?*"
+          returnKeyType={"next"}
           value={title}
           onChange={value => {
             setTitle(value);
@@ -203,6 +228,7 @@ export default function Alerts({navigation,route}) {
               />
             </View>
           }
+          returnKeyType={"next"}
           label="What need to be Done?*"
           value={content}
           onChange={value => {

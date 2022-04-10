@@ -32,12 +32,19 @@ export const Medication = ({navigation, route}) => {
   const [dataText, setDataText] = React.useState('');
   const [dataT,setDataT] = React.useState("");
   const [dataS,setDataS] = React.useState("");
+  const [tagl, setTagl] = React.useState('');
 
   const [cond,setCond] = React.useState(false);
 
   const onChangeSpec = value => {
     setSpcies(value);
   };
+  // const onChangetag = value => {
+  //   setTag(value);
+  // };
+  React.useEffect(()=>{
+    setTagl(global.tags)
+  },[])
   const clear = () => {
     setMed("");
     setWithdraw("");
@@ -45,6 +52,15 @@ export const Medication = ({navigation, route}) => {
     setTag("");
     setDos("");
   };
+  function finder(list, value) {
+    var dataValue;
+    list?.map(a => {
+      if (value == a.label) {
+        dataValue = a.data;
+      }
+    });
+    return dataValue;
+  }
   function addMedical() {
     setLoading(true),
     axiosIns
@@ -179,29 +195,42 @@ export const Medication = ({navigation, route}) => {
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
-        <FormInput
-          prependComponent={
-            <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-              <Image
-                source={images.tag}
-                style={{width: 26, height: 26, tintColor: COLORS.Primary}}
-              />
-            </View>
-          }
-          label="Tag Number"
+        <Dropdown
+          label="Tags"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
+          borderRadius={SIZES.radius}
+          data={finder(tagl,species)}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          // enableAvatar
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
           value={tag}
           onChange={value => {
             setTag(value);
           }}
-          // keyboardType="numeric"
-          inputContainerStyle={{
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{
             backgroundColor: COLORS.white,
+            margin: 5,
+            borderRadius: SIZES.radius,
           }}
-          containerStyle={{
-            marginTop: SIZES.radius,
-          }}
-          inputStyle={{marginLeft: 20, fontSize: 16}}
-        /></>:<View></View>
+        />
+        </>:<View></View>
         }
         <FormInput
           prependComponent={
@@ -212,6 +241,7 @@ export const Medication = ({navigation, route}) => {
               />
             </View>
           }
+          returnKeyType={"next"}
           label="Reason for Medication?"
           value={Dis}
           onChange={value => {
@@ -226,6 +256,7 @@ export const Medication = ({navigation, route}) => {
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
         <FormInput
+        returnKeyType={"next"}
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
               <Image
@@ -248,6 +279,7 @@ export const Medication = ({navigation, route}) => {
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
         <FormDateInput
+        returnKeyType={"next"}
           label="Medication Date"
           placeholder="YYYY-MM-DD"
           value={treat}
@@ -264,6 +296,7 @@ export const Medication = ({navigation, route}) => {
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
         <FormInput
+        returnKeyType={"next"}
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
               <Image

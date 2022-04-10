@@ -223,6 +223,7 @@ import {
             }
             label="Name*"
             value={name}
+          returnKeyType={"next"}
             onChange={value => {
               setName(value);
             }}
@@ -240,6 +241,8 @@ import {
             dropdownIconSize={22}
             borderRadius={SIZES.radius}
             data={animals}
+          returnKeyType={"next"}
+
             textInputStyle={(FONTS.body2, {letterSpacing: 2})}
             selectedItemTextStyle={
               (FONTS.body3,
@@ -341,6 +344,8 @@ import {
                 value={dob}
                 setDate={setDob}
                 formatDate={setDobt}
+          returnKeyType={"next"}
+
                 containerStyle={{
                   marginTop: SIZES.radius,
                   // marginLeft:20
@@ -367,6 +372,8 @@ import {
               </View>
             }
             label="Weight"
+          returnKeyType={"next"}
+
             value={weight}
             keyboardType="numeric"
             onChange={value => {
@@ -391,7 +398,9 @@ import {
                 }
                 label="Mother Tag Number"
                 value={mother}
-                keyboardType="numeric"
+          returnKeyType={"next"}
+
+                // keyboardType="numeric"
                 onChange={value => {
                   setMother(value);
                 }}
@@ -412,7 +421,7 @@ import {
                     />
                   </View>
                 }
-                label="Father Tag Number"
+                // label="Father Tag Number"
                 value={father}
                 keyboardType="numeric"
                 onChange={value => {
@@ -496,6 +505,7 @@ import {
               </View>
             }
             label="Breed"
+          returnKeyType={"next"}
             value={Breed}
             onChange={value => {
               setBreed(value);
@@ -555,6 +565,8 @@ import {
             }
             label="Price"
             value={price}
+          returnKeyType={"next"}
+
             keyboardType="numeric"
             onChange={value => {
               setPrice(value);
@@ -581,7 +593,9 @@ import {
                 />
               </View>
             }
-            label="Age"
+          returnKeyType={"next"}
+          keyboardType="numeric"
+          label="Age"
             value={age}
             onChange={value => {
               setAge(value);
@@ -610,6 +624,8 @@ import {
             }
             label="Weight"
             value={weight}
+          returnKeyType={"next"}
+
             keyboardType="numeric"
             onChange={value => {
               setWeight(value);
@@ -730,6 +746,8 @@ import {
                 />
               </View>
             }
+          returnKeyType={"next"}
+
             label="Breed"
             value={Breed}
             onChange={value => {
@@ -758,6 +776,8 @@ import {
               </View>
             }
             label="Registration"
+          returnKeyType={"go"}
+
             value={registration}
             onChange={value => {
               setRegistration(value);
@@ -826,7 +846,6 @@ import {
   const styles = StyleSheet.create({
     container: {
       width: '88%',
-      // flex: 1,
       flexDirection: 'row',
       alignSelf: 'center',
       marginRight: 30,

@@ -12,6 +12,7 @@ export default function WeightH({navigation}) {
   const [species, setSpcies] = React.useState([]);
   const [animals, setAnimals] = React.useState([]);
   const [tag, setTag] = React.useState('');
+  const [tagl, setTagl] = React.useState('');
   const [err, setErr] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const updateWeight = async () => {
@@ -41,10 +42,20 @@ export default function WeightH({navigation}) {
   React.useEffect(() => {
     setId(global.id);
     setAnimals(global.species);
+    setTagl(global.tags)
   }, []);
   const onChangeSpec = value => {
     setSpcies(value);
   };
+  function finder(list, value) {
+    var dataValue;
+    list?.map(a => {
+      if (value == a.label) {
+        dataValue = a.data;
+      }
+    });
+    return dataValue;
+  }
   function renderHeader() {
     return (
       <Header
@@ -122,29 +133,40 @@ export default function WeightH({navigation}) {
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
-        <FormInput
-          prependComponent={
-            <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-              <Image
-                source={images.tag}
-                style={{width: 26, height: 26, tintColor: COLORS.Primary}}
-              />
-            </View>
-          }
-          label="Tag Number"
+        <Dropdown
+          label="Tags"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
+          borderRadius={SIZES.radius}
+          data={finder(tagl,species)}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          // enableAvatar
+          animationIn="zoomIn"
+          animationOut="zoomOut"
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
           value={tag}
-          // keyboardType="numeric"
           onChange={value => {
             setTag(value);
           }}
-          containerStyle={{
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
             marginTop: SIZES.height > 800 ? SIZES.base : 10,
           }}
-          inputContainerStyle={{
+          itemContainerStyle={{
             backgroundColor: COLORS.white,
-            // marginTop: SIZES.height > 800 ? SIZES.base : 10,
+            margin: 5,
+            borderRadius: SIZES.radius,
           }}
-          inputStyle={{marginLeft: 20, fontSize: 16}}
         />
       </View>
     );
