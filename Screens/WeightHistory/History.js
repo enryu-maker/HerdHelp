@@ -3,6 +3,7 @@ import React from 'react'
 import Header from '../../Components/Header'
 import { images,FONTS,SIZES,COLORS } from '../../Components/Constants'
 import HistoryCard from './HistoryCard'
+import { compareAsc, format } from 'date-fns'
 export default function History({navigation,route}) {
     const [whist,setWhist] = React.useState([])
     const [unit,setUnit] = React.useState(global.unit)
@@ -11,6 +12,7 @@ export default function History({navigation,route}) {
         let {data} =route.params
         setWhist(data)
         setUnit(global.unit)
+        // console.log(whist[0].date_from)
     },[])
     function renderheader() {
         return (
@@ -53,8 +55,8 @@ export default function History({navigation,route}) {
               {
                   whist.map((a,index)=>(
                     unit?
-                    (<HistoryCard key={index} date={a.date_from.slice(0,9)} weight={a.weight}/>):
-                    (<HistoryCard key={index} date={a.date_from.slice(0,9)} weight={a.weight_kg}/>)
+                    (<HistoryCard key={index} date={a.date_from.slice(0,10)} weight={a.weight}/>):
+                    (<HistoryCard key={index} date={a.date_from.slice(0,10)} weight={a.weight_kg}/>)
 
                   ))
               }

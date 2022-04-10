@@ -12,7 +12,7 @@ export default function WeightH({navigation}) {
   const [species, setSpcies] = React.useState([]);
   const [animals, setAnimals] = React.useState([]);
   const [tag, setTag] = React.useState('');
-  const [tagl, setTagl] = React.useState('');
+  const [tagl, setTagl] = React.useState([]);
   const [err, setErr] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const updateWeight = async () => {
@@ -28,7 +28,7 @@ export default function WeightH({navigation}) {
           return data;
         } else {
           setLoading(false)
-          setErr('Animal Not found');
+          setErr('History not found');
         }
       } catch (err) {
         setLoading(false)

@@ -26,7 +26,8 @@ export default function Drawercontent(props) {
           <View style={styles.userInfoSection}>
             <View style={[styles.row, {flexDirection: 'row'}]}>
               <Image
-                source={{uri: 'https://picsum.photos/' + global.id}}
+      source={{uri:`https://ui-avatars.com/api/?name=${global.User[0].username}`}}
+
                 resizeMode="cover"
                 style={{
                   width: 80,

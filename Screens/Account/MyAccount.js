@@ -26,7 +26,8 @@ const MyAccount = ({navigation,route}) => {
   
 function renderFileUri() {
       return <Image
-      source={{uri:"https://picsum.photos/"+global.id}}
+      source={{uri:`https://ui-avatars.com/api/?name=${global.User[0].username}`}}
+      
         style={{width: 100,
           height: 100,
           borderRadius: 100 / 2,

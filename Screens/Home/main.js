@@ -111,27 +111,29 @@ const Main = ({navigation}) => {
         rightComponent={
           <View
             style={{
-              marginTop: 25,
+              marginTop: 20,
             }}>
             <TouchableOpacity
               style={{
-                marginRight: 25,
-                // backgroundColor:COLORS.Primary,
-                height: 40,
-                width: 40,
-                justifyContent: 'center',
-                borderRadius: 40 / 2,
+                marginRight: 20,
+                height: 50,
+                width: 50,
+                // justifyContent: 'center',
+                borderRadius: 50 / 2,
               }}
               onPress={() => {
                 navigation.navigate('MyAccount');
               }}>
               <Image
-                source={{uri: 'https://picsum.photos/' + global.id}}
-                resizeMode="cover"
+      source={{uri:`https://ui-avatars.com/api/?name=${global.User[0].username}`}}
+
+                // resizeMode="cover"
                 style={{
-                  height: 40,
-                  width: 40,
-                  borderRadius: 40 / 2,
+                  height: 50,
+                  width: 50,
+                  borderRadius: 50 / 2,
+                  borderWidth:2,
+                  borderColor:COLORS.Primary
                 }}
               />
             </TouchableOpacity>

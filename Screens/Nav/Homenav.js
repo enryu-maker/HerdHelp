@@ -168,6 +168,6 @@ const styles = StyleSheet.create({
     backgroundColor:         COLORS.Primary,
     borderTopRightRadius:    32,
     borderBottomRightRadius: 32,
-    width:                   '90%',
+    width:                   '88%',
 },
 })
