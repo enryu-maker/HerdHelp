@@ -86,7 +86,7 @@ export const COLORS={
     darkGray: "#525C67",
     darkGray2: "#757D85",
     transparent: "transparent",
-    red: "red",
+    red: "#ff4d4d",
     green: "#27AE60",
     layout:"#f0f0f0"
 }

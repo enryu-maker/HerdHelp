@@ -188,13 +188,13 @@ export default function Drawercontent(props) {
           icon={({color, size}) => (
             <Image
               source={images.logout}
-              style={[{height: 25, width: 25, tintColor: COLORS.red}]}
+              style={[{height: 25, width: 25, tintColor: "#ff4d4d"}]}
             />
           )}
           label="Logout"
           labelStyle={[
             FONTS.body3,
-            {letterSpacing: 2, color: COLORS.red, fontWeight: 'bold'},
+            {letterSpacing: 2, color: "#ff4d4d", fontWeight: 'bold'},
           ]}
           onPress={() => {
             AsyncStorage.clear();
