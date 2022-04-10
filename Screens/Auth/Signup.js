@@ -16,6 +16,7 @@ import Loader from '../../Components/Loader';
 import LoaderOp from '../../Components/LoaderOp';
 import { baseURL } from '../../helpers/helpers';
 import utils from '../../utils/Utils';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 export const Signup = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -33,7 +34,7 @@ export const Signup = ({navigation}) => {
   const [dataText, setDataText] = React.useState('');
 
   function isEnableSignIn() {
-    return email != '' && password != '' && username != '' && Name!="";
+    return email != '' && password != '' && username != '' && first!="" && last!="";
   }
   async function signup() {
     if (isEnableSignIn) {
@@ -90,20 +91,48 @@ export const Signup = ({navigation}) => {
     }
   }
   return (
-    <ScrollView
-      style={{
-        flex: 1,
-        // marginTop:'8%',
-        backgroundColor: COLORS.white,
-      }}>
+    <KeyboardAwareScrollView
+        keyboardDismissMode="interactive"
+        contentContainerStyle={{
+          marginTop: SIZES.radius,
+          // paddingHorizontal: SIZES.padding,
+          paddingBottom: 40,
+        }}>
       {show && (
         <LoaderOp showing={show} validation={validation} dataText={dataText} />
       )}
       <Loader loading={loading} />
       <Header
+      leftComponent={
+        <View
+            style={{
+              justifyContent: 'center',
+              position: 'absolute',
+              marginLeft: -15,
+              // zIndex: 1,
+            }}>
+            <TouchableOpacity
+              style={{
+                // marginLeft: 25,
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:40,
+                justifyContent:"center",
+                borderRadius:40/2,
+                }}
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <Image
+                source={images.back}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
+              />
+            </TouchableOpacity>
+          </View>
+      }
         img={images.herdhelp}
         imgstyle={{
-          marginTop: 80,
+          marginTop:80,
         }}
         containerStyle={{
           margin: '10%',
@@ -347,6 +376,6 @@ export const Signup = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
