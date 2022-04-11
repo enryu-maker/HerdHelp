@@ -65,7 +65,6 @@ const Addanimals = ({navigation, route}) => {
   const [pic, setPic] = React.useState('');
   const [profile_pic, setprofile_pic] = React.useState([]);
   const [picdata, setPicdata] = React.useState('');
-  const formData = new FormData()
   const onChangeMS = value => {
     setValueMS(value);
   };
@@ -151,6 +150,7 @@ const Addanimals = ({navigation, route}) => {
   //   bought: bought,
   //   status: 'Alive',
   // });
+  const formData = new FormData()
   formData.append('name', name)
   formData.append('tag_number', ` ${id}${valueMS}${tag}`)
   formData.append('registration', registration)
@@ -173,15 +173,17 @@ const Addanimals = ({navigation, route}) => {
   formData.append('bought', bought)
   formData.append('status', 'Alive')
   formData.append('animal_image',profile_pic)
+  
   async function postAnimal() {
     setLoading(true);
     if (isEnableSignIn()) {
       await axiosIns
         .post('animals/',formData,{
-          headers: {
-            'content_type':'multipart/form-data',
-          },
-        })
+            headers: {
+              'Content-Type': `multipart/form-data; boundary= ----WebKitFormBoundaryABC`,
+            }
+          }
+        )
         .then(response => {
           if (response.status == 201) {
             clear();
@@ -945,7 +947,6 @@ const Addanimals = ({navigation, route}) => {
       <TextButton
         onPress={() => {
           postAnimal();
-          // console.log(formData)
         }}
         icon={images.add}
         buttonContainerStyle={{
