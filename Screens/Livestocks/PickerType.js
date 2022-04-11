@@ -1,14 +1,15 @@
-import {View, Text, Modal, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Modal, Image, TouchableOpacity,Platform} from 'react-native';
 import {COLORS, SIZES, FONTS, images, Bred} from '../../Components/Constants';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 import React from 'react';
 
 export default function PickerType({
-    show, 
-    setshow,
-    setPic,
-    setPicdata
+  show,
+  setshow,
+  setPic,
+  setPicdata,
+  setprofile_pic,
 }) {
   function openLibrary() {
     let options = {
@@ -16,26 +17,36 @@ export default function PickerType({
         path: 'images',
         mediaType: 'photo',
       },
-      includeBase64: true,
+      // includeBase64: true,
     };
     launchImageLibrary(options, response => {
       if (response.assets) {
         imageAssetsArray = response.assets[0].uri;
+        const uriParts = response.assets[0].uri.split('.')
+        const fileType = uriParts[uriParts.length - 1];
         setPic(imageAssetsArray);
         setPicdata(response.assets[0].base64);
+        setprofile_pic(
+          {
+            type: `image/${fileType}`,
+            uri:
+              Platform.OS === 'ios'
+                ? response.assets[0].uri.replace('file://', '')
+                : response.assets[0].uri,
+          },
+        );
       }
     });
   }
   function openCamera() {
     let options = {
-        quality:1, 
-        maxWidth: 500, 
-        maxHeight: 500,
-        storageOptions: {
-            skipBackup: true,
-            path: 'images',
-    
-          },
+      quality: 1,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
       includeBase64: true,
     };
     launchCamera(options, response => {
@@ -49,23 +60,20 @@ export default function PickerType({
   return (
     <Modal
       transparent={true}
-      animationType={"slide"}
+      animationType={'slide'}
       visible={show}
       onRequestClose={() => {
         setshow(false);
       }}>
       <View
         style={{
-          flex:1,
+          flex: 1,
           backgroundColor: '#00000040',
           justifyContent: 'flex-end',
           alignSelf: 'center',
           alignItems: 'center',
         }}
-        onStartShouldSetResponder={
-            () => setshow(false)
-          }
-        >
+        onStartShouldSetResponder={() => setshow(false)}>
         <View
           style={{
             height: 110,
@@ -81,7 +89,7 @@ export default function PickerType({
           <TouchableOpacity
             onPress={() => {
               setshow(false);
-              openCamera()
+              openCamera();
             }}>
             <Image
               source={images.cam}
@@ -90,18 +98,21 @@ export default function PickerType({
                 width: 45,
                 justifyContent: 'center',
                 alignSelf: 'center',
-                tintColor:COLORS.Primary
+                tintColor: COLORS.Primary,
               }}
             />
-            <Text style={{
-                ...FONTS.h4
-            }}>Camera</Text>
+            <Text
+              style={{
+                ...FONTS.h4,
+              }}>
+              Camera
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
-          onPress={() => {
-            setshow(false);
-            openLibrary()
-          }}>
+            onPress={() => {
+              setshow(false);
+              openLibrary();
+            }}>
             <Image
               source={images.picture}
               style={{
@@ -109,12 +120,15 @@ export default function PickerType({
                 width: 45,
                 justifyContent: 'center',
                 alignSelf: 'center',
-                tintColor:COLORS.Primary
+                tintColor: COLORS.Primary,
               }}
             />
-            <Text style={{
-                ...FONTS.h4
-            }}>Library</Text>
+            <Text
+              style={{
+                ...FONTS.h4,
+              }}>
+              Library
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

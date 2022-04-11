@@ -8,8 +8,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FormDateInput from '../../Components/FormDateInput';
 import axiosIns from '../../helpers/helpers';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
-import Loader from '../../Components/Loader';
-import LoaderOp from '../../Components/LoaderOp';
+import { showMessage, hideMessage } from "react-native-flash-message";
 import CustomAlert from '../../Components/CustomAlert';
 
 export const Medication = ({navigation, route}) => {
@@ -83,26 +82,59 @@ export const Medication = ({navigation, route}) => {
       )
       .then(response => {
         if (response.status == 201) {
-          setLoading(false),
-          setValidation(true),
-          setShow(true),
-          setDataText(`Medication added`),
-          setErr(`Medication added`)
+          setLoading(false)
+          showMessage({
+            message: "Medication Added",
+            type: "default",
+            backgroundColor: COLORS.Primary,
+            color:COLORS.white,
+            titleStyle:{
+              alignSelf:"center",
+              ...FONTS.h3
+            },
+            animationDuration:250,
+            icon:"success",
+            style:{
+              justifyContent:"center"
+            }
+          });
           clear()
         } else {
           setLoading(false),
-          setValidation(false),
-          setShow(true),
-          setDataText('Not Found'),
-          setErr(`Animal Not Found`)
+          showMessage({
+            message: "Animal Not Added",
+            type: "default",
+            backgroundColor: COLORS.red,
+            color:COLORS.white,
+            titleStyle:{
+              alignSelf:"center",
+              ...FONTS.h3
+            },
+            animationDuration:250,
+            icon:"danger",
+            style:{
+              justifyContent:"center"
+            }
+          });
         }
       })
       .catch(err => {
-        setErr('Something went wrong'), 
-        setLoading(false);
-        setShow(true);
-        setDataText('Invalid Input');
-        setErr(`Invalid Input`);
+        setLoading(false)
+        showMessage({
+          message: `${err.response.data.msg}`,
+          type: "default",
+          backgroundColor: COLORS.red,
+          color:COLORS.white,
+          titleStyle:{
+            alignSelf:"center",
+            ...FONTS.h3
+          },
+          animationDuration:250,
+          icon:"danger",
+          style:{
+            justifyContent:"center"
+          }
+        });
       });
   }
   React.useEffect(() => {

@@ -14,6 +14,7 @@ export const Home = ({navigation}) => {
   async function fetchanimal() {
     setLoading(true)
     let {data} = await axiosIns.get('animals/');
+    
     return data;
   }
  
@@ -22,8 +23,7 @@ export const Home = ({navigation}) => {
         setAnimals(data);
         setLoading(false)
       });
-      
-  });
+  },[]);
   function renderHeader() {
     return (
       <Header
