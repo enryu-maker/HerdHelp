@@ -176,11 +176,11 @@ export default function Parents({navigation}) {
   }
   function renderAnimal(data) {
     return (
-      data.map((a) => (
+      data.map((a,index) => (
       <View style={{
       }}>
       <Card 
-      key={a.id} 
+      key={index} 
       Tagnumber={a.support_tag} 
       Gender={a.gender} 
       image={a.image} 

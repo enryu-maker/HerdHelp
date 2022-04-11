@@ -10,7 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { COLORS } from './Components/Constants';
 import axiosIns from './helpers/helpers';
 import { baseURL } from './helpers/helpers';
-import {request, PERMISSIONS} from 'react-native-permissions';
+import {request, PERMISSIONS,requestMultiple} from 'react-native-permissions';
 
 import axios from 'axios';
 
@@ -51,15 +51,15 @@ export default function App() {
       setPub(data.pub_key)
     })
   }, [Route]);
-  request(Platform.OS === 'ios' ? 
-    PERMISSIONS.IOS.CAMERA && PERMISSIONS.IOS.PHOTO_LIBRARY : 
-    PERMISSIONS.ANDROID.CAMERA && PERMISSIONS.ANDROID.ACCESS_MEDIA_LOCATION
+  requestMultiple(Platform.OS === 'ios' ? 
+    [PERMISSIONS.IOS.CAMERA,PERMISSIONS.IOS.PHOTO_LIBRARY]  : 
+    [PERMISSIONS.ANDROID.CAMERA,PERMISSIONS.ANDROID.ACCESS_MEDIA_LOCATION ]
     ).then((result) => {
     setPermissionResult(result)
   });
   return (
     <StripeProvider publishableKey={pub}>
-    <Permission.Provider value={Permission}>
+      <Permission.Provider value={PermissionResult}>
     <View style={{flex: 1,backgroundColor:COLORS.white}}>
       <StatusBar
         barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
@@ -73,7 +73,7 @@ export default function App() {
       )}
       </NavigationContainer>
     </View>
-    </Permission.Provider>
+    </Permission.Provider >
     </StripeProvider>
   );
 }

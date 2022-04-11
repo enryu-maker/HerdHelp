@@ -17,6 +17,7 @@ import LoaderOp from '../../Components/LoaderOp';
 import { baseURL } from '../../helpers/helpers';
 import utils from '../../utils/Utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Permission } from '../../App';
 export const Signup = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -90,6 +91,7 @@ export const Signup = ({navigation}) => {
       setEmailError('Invalid Input');
     }
   }
+
   return (
     <View style={{
       flex:1,
@@ -149,7 +151,7 @@ export const Signup = ({navigation}) => {
         style={{
           ...FONTS.h2,
           alignSelf: 'center',
-          marginTop: '8%',
+          marginTop: '2%',
         }}>
         Getting Started
       </Text>

@@ -23,7 +23,6 @@ export default function Subscription({navigation,route}) {
     }
     else{
       let {data} = await axiosIns.get('subscriptions/user/');
-      console.log(data)
       return(data.data)
     }
   }

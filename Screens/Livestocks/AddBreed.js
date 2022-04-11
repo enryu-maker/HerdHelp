@@ -168,7 +168,7 @@ const Addanimals = ({navigation, route}) => {
         })
         .catch(err => {
           setEmailError(
-            'No subscription found, please purchase a subscription for access to animals',
+            err.response.data.msg
           );
           setLoading(false);
           setValidation(false);
@@ -256,6 +256,7 @@ const Addanimals = ({navigation, route}) => {
             {renderFileUri()}
             <Text style={{
               alignSelf:"center",
+              margin:5,
               ...FONTS.h4
             }}>Edit</Text>
           </TouchableOpacity>

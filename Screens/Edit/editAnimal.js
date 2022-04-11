@@ -127,7 +127,8 @@ import {
           }
         })
         .catch(
-          err => {console.log('api Erorr: ', err)
+          err => {
+        setEmailError(err.response.data.msg)
           setLoading(false)
           setValidation(false)
           setShow(false)}

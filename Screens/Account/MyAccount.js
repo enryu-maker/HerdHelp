@@ -6,9 +6,13 @@ import TextButton from '../../Components/TextButton';
 import InfoItem from '../../Components/InfoItem';
 import {COLORS, SIZES, images, dummyData, FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
+import PickerType from '../Livestocks/PickerType';
 
 const MyAccount = ({navigation,route}) => {
   const [user,setUser]=React.useState([])
+  const [show, setshow] = React.useState(false);
+  const [pic, setPic] = React.useState('');
+  const [picdata, setPicdata] = React.useState('');
   const fetchprofile = async () => {
       try {
         const {data} = await axiosIns.get('profile/');
@@ -24,17 +28,37 @@ const MyAccount = ({navigation,route}) => {
       });
     }, []);
   
-function renderFileUri() {
-      return <Image
-      source={{uri:`https://ui-avatars.com/api/?name=${user.username}`}}
-      
-        style={{width: 100,
-          height: 100,
-          borderRadius: 100 / 2,
-          alignSelf: 'center',
-        }}
-      />
-    };
+    function renderFileUri() {
+      if (pic) {
+        return (
+          <Image
+            source={{uri: pic}}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 100 / 2,
+              alignSelf: 'center',
+            }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={images.login}
+            resizeMethod="auto"
+            resizeMode="contain"
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 100 / 2,
+              borderWidth:1,
+              alignSelf: 'center',
+              // tintColor:COLORS.Primary
+            }}
+          />
+        );
+      }
+    }
   function renderHeader() {
     return (
       <Header
@@ -93,11 +117,22 @@ function renderFileUri() {
   function rederSectionZero(){
     return(
       <View
-        style={{
-          borderRadius: SIZES.radius,
-          paddingHorizontal: SIZES.radius,
-        }}>
-        {renderFileUri()}
+          style={{
+            marginTop: 6,
+            borderRadius: SIZES.radius,
+            paddingHorizontal: SIZES.radius,
+          }}>
+          <TouchableOpacity
+            onPress={() => {
+              setshow(true)
+            }}>
+            {renderFileUri()}
+            <Text style={{
+              alignSelf:"center",
+              margin:5,
+              ...FONTS.h4
+            }}>Edit</Text>
+          </TouchableOpacity>
         </View>
     )
   }
@@ -153,7 +188,7 @@ function renderFileUri() {
         backgroundColor: COLORS.white,
       }}>
       {renderHeader()}
-
+      <PickerType show={show} setshow={setshow} setPic={setPic} setPicdata={setPicdata}/>
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: SIZES.padding,

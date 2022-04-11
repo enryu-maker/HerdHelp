@@ -70,7 +70,6 @@ export default function Payment({navigation,route}) {
   else if (error){
     alert("Payment Declined")
     setLoading(false)
-    console.log(error)
   }
 else{
   alert("somthing went wrong")
@@ -176,10 +175,10 @@ else{
           setCard(cardDetails)
         }}
         onCardChange={cardDetails => {
-          console.log('cardDetails', cardDetails);
+          // console.log('cardDetails', cardDetails);
         }}
         onFocus={focusedField => {
-          console.log('focusField', focusedField);
+          // console.log('focusField', focusedField);
         }}
       />
       
