@@ -32,7 +32,7 @@ export default function WeightH({navigation}) {
         }
       } catch (err) {
         setLoading(false)
-        setErr(err);
+        setErr(err)
       }
     } else {
       setLoading(false);

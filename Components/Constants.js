@@ -61,8 +61,8 @@ export const images ={
     line:require("../assets/Logo/line.png"),
     mail:require("../assets/Logo/mailbox.png"),
     city:require("../assets/Logo/city.png"),
-    star:require("../assets/Logo/star.png")
-
+    star:require("../assets/Logo/star.png"),
+    kg:require("../assets/Logo/lb.png")
 }
 export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',

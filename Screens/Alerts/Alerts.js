@@ -49,6 +49,7 @@ export default function Alerts({navigation,route}) {
         "title": title,
         "content": content,
         "tag_number":tag?`${id}${animals}${tag}`:"",
+        "support_tag":tag,
         "alert_date": datet,
         "alert_time": timet,
       },

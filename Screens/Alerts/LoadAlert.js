@@ -29,6 +29,7 @@ export default function LoadAlert({navigation, route}) {
     setSpcies(global.species);
     loadFinance().then(data => {
       setAlerts(data);
+      // console.log(data)
     });
   }, [alert]);
   function delAlert(id){
@@ -105,7 +106,7 @@ export default function LoadAlert({navigation, route}) {
             {
               data.item.tag_number!=undefined||""?(<Text style={
                 Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h3}
-            }>{`Tag: ${data.item.tag_number}`}</Text>):
+            }>{`Tag: ${data.item.support_number}`}</Text>):
               (<View></View>)
             }
             <View style={{flexDirection:"row",justifyContent:"space-between",width:"55%"}}>

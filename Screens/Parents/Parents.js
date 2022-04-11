@@ -7,7 +7,7 @@ import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import axiosIns from '../../helpers/helpers';
-import Card from './ParentDesign';
+import Card from '../../Components/Card';
 export default function Parents({navigation}) {
   const [species, setSpecies] = React.useState([]);
   const [tag, setTag] = React.useState('');
@@ -28,7 +28,7 @@ export default function Parents({navigation}) {
     setAnimal(value);
   };
   async function findChildren() {
-    if (tag != '') {
+
       setLoading(true);
       try {
         let {data} = await axiosIns.get(
@@ -47,11 +47,7 @@ export default function Parents({navigation}) {
         setLoading(false);
         setErr('Server Error');
       }
-    } else {
-      setLoading(false);
-      setErr('Please Enter valid Data');
     }
-  }
   function renderheader() {
     return (
       <Header
@@ -138,7 +134,6 @@ export default function Parents({navigation}) {
             borderRadius: SIZES.padding,
             width: '88%',
             alignSelf: 'center',
-            // marginTop: SIZES.height > 800 ? SIZES.base : 10,
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
@@ -155,7 +150,6 @@ export default function Parents({navigation}) {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          // enableAvatar
           animationIn="zoomIn"
           animationOut="zoomOut"
           disableSelectionTick
@@ -177,30 +171,29 @@ export default function Parents({navigation}) {
             borderRadius: SIZES.radius,
           }}
         />
-        {/* <View style={{
-        backgroundColor:COLORS.Primary,
-        height:40,
-        // width:160,
-        alignSelf:"center",
-        justifyContent:"center",
-        borderRadius:SIZES.base,
-        // position:"relative",
-        margin:20
-      }}> */}
-      {/* <Text style={Platform.OS=="android"?{color: COLORS.white, alignSelf: 'center', ...FONTS.h3}:{color: COLORS.white, alignSelf: 'center', ...FONTS.h2}}>
-          List of Babies
-        </Text></View> */}
       </View>
     );
   }
   function renderAnimal(data) {
-    return data.map((a,index) => (
+    return (
+      data.map((a) => (
       <View style={{
-        // marginTop:20
       }}>
-      <Card key={index} Tagnumber={a.tag_number} Gender={a.gender} image={a.image} Name={a.name} Weight={a.weight}/>
+      <Card 
+      key={a.id} 
+      Tagnumber={a.support_tag} 
+      Gender={a.gender} 
+      image={a.image} 
+      Name={a.name} 
+      Weight={a.weight} 
+      onPress={()=>{
+        navigation.navigate('Info',{
+          value:a,
+          cond:false
+        })
+      }}/>
       </View>
-    ));
+    )))
   }
   return (
     <View

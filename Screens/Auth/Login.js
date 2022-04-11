@@ -93,7 +93,7 @@ const Login = ({navigation,route}) => {
       <Header
         img={images.herdhelp}
         imgstyle={{
-          marginTop: 80,
+          marginTop: 100,
         }}
       />
       <ScrollView>

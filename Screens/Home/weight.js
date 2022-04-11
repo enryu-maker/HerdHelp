@@ -206,7 +206,7 @@ export const Weight =({ navigation,route})=> {
                 marginLeft: 0,
               }}>
               <Image
-                source={images.scale}
+                source={unit==true?images.kg:images.scale}
                 style={{width: 28, height: 28, tintColor: COLORS.Primary}}
               />
             </View>
