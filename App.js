@@ -11,7 +11,7 @@ import { COLORS } from './Components/Constants';
 import axiosIns from './helpers/helpers';
 import { baseURL } from './helpers/helpers';
 import {request, PERMISSIONS,requestMultiple} from 'react-native-permissions';
-
+import FlashMessage from "react-native-flash-message";
 import axios from 'axios';
 
 export const Permission = React.createContext()
@@ -61,6 +61,7 @@ export default function App() {
     <StripeProvider publishableKey={pub}>
       <Permission.Provider value={PermissionResult}>
     <View style={{flex: 1,backgroundColor:COLORS.white}}>
+    <FlashMessage position="top" />
       <StatusBar
         barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
         backgroundColor={"black"}

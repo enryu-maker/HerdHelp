@@ -10,6 +10,7 @@ import FormTimeInput from '../../Components/FormTimeInput';
 import axiosIns from '../../helpers/helpers';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import CustomAlert from '../../Components/CustomAlert';
+import { showMessage, hideMessage, } from "react-native-flash-message";
 export default function Alerts({navigation,route}) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
@@ -66,19 +67,45 @@ export default function Alerts({navigation,route}) {
       {
       setLoading(false)
         clear();
-        setShow(true)
-        setValidation(true)
-        setDataText("Alerts Added")
+        showMessage({
+          message: "Alerts added",
+          type: "default",
+          backgroundColor: COLORS.red,
+          color:COLORS.white,
+          titleStyle:{
+            alignSelf:"center",
+            ...FONTS.h3
+          },
+          animationDuration:250
+        });
       }
       
     }).catch(err =>{
       setLoading(false)
-      setShow(true)
-      setValidation(false)
-      setDataText("Not Added")
+      showMessage({
+        message:`${err.response.data.msg}`,
+        type: "default",
+        backgroundColor: COLORS.red,
+        color:COLORS.white,
+        titleStyle:{
+          alignSelf:"center",
+          ...FONTS.h3
+        },
+        animationDuration:250
+      });
       })}
       catch{
-        setErr("Animal not found")
+        showMessage({
+          message:`Something went wrong`,
+          type: "default",
+          backgroundColor: COLORS.red,
+          color:COLORS.white,
+          titleStyle:{
+            alignSelf:"center",
+            ...FONTS.h3
+          },
+          animationDuration:250
+        });
       }
     }
     React.useEffect(()=>{

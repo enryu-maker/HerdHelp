@@ -28,6 +28,9 @@ export default function PickerType({
   }
   function openCamera() {
     let options = {
+        quality:1, 
+        maxWidth: 500, 
+        maxHeight: 500,
         storageOptions: {
             skipBackup: true,
             path: 'images',
@@ -65,7 +68,7 @@ export default function PickerType({
         >
         <View
           style={{
-            height: 100,
+            height: 110,
             width: '100%',
             backgroundColor: COLORS.white,
             alignSelf: 'center',
@@ -90,6 +93,9 @@ export default function PickerType({
                 tintColor:COLORS.Primary
               }}
             />
+            <Text style={{
+                ...FONTS.h4
+            }}>Camera</Text>
           </TouchableOpacity>
           <TouchableOpacity
           onPress={() => {
@@ -106,6 +112,9 @@ export default function PickerType({
                 tintColor:COLORS.Primary
               }}
             />
+            <Text style={{
+                ...FONTS.h4
+            }}>Library</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -23,7 +23,7 @@ export const Home = ({navigation}) => {
         setLoading(false)
       });
       
-  }, []);
+  });
   function renderHeader() {
     return (
       <Header

@@ -48,6 +48,7 @@ const Main = ({navigation}) => {
   }
   async function getAnimals(){
     let {data} = await axiosIns.get('animaltags/');
+    console.log(data)
     return data
   }
   React.useEffect(() => {

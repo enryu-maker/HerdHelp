@@ -8,7 +8,7 @@ import axiosIns from '../../helpers/helpers';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import CustomAlert from '../../Components/CustomAlert';
-
+import { showMessage, hideMessage } from "react-native-flash-message";
 export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
   const [tagl, setTagl] = React.useState([]);
@@ -58,33 +58,78 @@ export const Weight =({ navigation,route})=> {
         }).then((Response)=>{
           if (Response.status==200){
             setLoading(false)
-            setValidation(true);
-            setShow(true)
-            setDataText("Weight Updated")
+            showMessage({
+              message: "Weight Updated",
+              type: "default",
+              backgroundColor: COLORS.Primary,
+              color:COLORS.white,
+              titleStyle:{
+                alignSelf:"center",
+                ...FONTS.h3
+              },
+              animationDuration:250,
+              icon:"success",
+              style:{
+                justifyContent:"center"
+              }
+            });
             clear()
           }
           else{
           setLoading(false)
-          setValidation(false);
-          setShow(true)
-          setErr(`Animal with tag ${tag} not found here`)
-          setDataText("Animal Not Found")
+          showMessage({
+            message: `Animal with tag ${tag} not found here`,
+            type: "default",
+            backgroundColor: COLORS.red,
+            color:COLORS.white,
+            titleStyle:{
+              alignSelf:"center",
+              ...FONTS.h3
+            },
+            animationDuration:250,
+            icon:"danger",
+            style:{
+              justifyContent:"center"
+            }
+          });
           }
         })
       }catch(err){
         setLoading(false)
-        setValidation(false);
-        setErr(`Animal with tag ${tag} not found there`)
-        setShow(true)
-        setDataText("Not Found")
+        showMessage({
+          message: `${err.response.data.msg}`,
+          type: "default",
+          backgroundColor: COLORS.red,
+          color:COLORS.white,
+          titleStyle:{
+            alignSelf:"center",
+            ...FONTS.h3
+          },
+          animationDuration:250,
+          icon:"danger",
+          style:{
+            justifyContent:"center"
+          }
+        });
       }
     }
     else{
       setLoading(false)
-      setErr("Please Enter valid Data")
-      setValidation(true);
-      setShow(true)
-      setDataText("Not Found")
+      showMessage({
+        message: `Please Enter valid Data`,
+        type: "default",
+        backgroundColor: COLORS.red,
+        color:COLORS.white,
+        titleStyle:{
+          alignSelf:"center",
+          ...FONTS.h3
+        },
+        animationDuration:250,
+        icon:"danger",
+        style:{
+          justifyContent:"center"
+        }
+      });
     }
   }
   function renderHeader() {
@@ -130,7 +175,6 @@ export const Weight =({ navigation,route})=> {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        <Text style={{color:COLORS.red,alignSelf: 'center',...FONTS.body3}}>{err}</Text>
         <Dropdown
         dropdownIcon={images.down}
         dropdownIconSize={22}
@@ -250,12 +294,11 @@ export const Weight =({ navigation,route})=> {
 
       <TextButton
         onPress={() => {
-          updateWeight()
+          updateWeight()         
         }}
         icon={images.weight}
         loading={loading}
         buttonContainerStyle={{
-          // flex:1,
           height: 60,
           marginTop: SIZES.padding,
           marginHorizontal: SIZES.padding,

@@ -104,9 +104,10 @@ export default function LoadAlert({navigation, route}) {
                 Platform.OS=="android"?{...FONTS.body3}:{...FONTS.body3}
             }>{`Solution: ${data.item.content}`}</Text>
             {
-              data.item.tag_number!=undefined||""?(<Text style={
-                Platform.OS=="android"?{...FONTS.h3}:{...FONTS.h3}
-            }>{`Tag: ${data.item.support_number}`}</Text>):
+              data.item.tag_number != undefined || data.item.tag_number != "" ?
+              (<Text style={
+                {...FONTS.h3}
+            }>{`Tag: ${data.item.tag_number}`}</Text>):
               (<View></View>)
             }
             <View style={{flexDirection:"row",justifyContent:"space-between",width:"55%"}}>

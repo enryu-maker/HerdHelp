@@ -71,8 +71,8 @@ export default function Babies({navigation,route}) {
               backgroundColor:COLORS.Primary,
               height:40,
               width:40,
+              borderRadius:40/2,
               justifyContent:"center",
-              borderRadius:SIZES.base,
               justifyContent:"center"
               }}>
               <Text style={{

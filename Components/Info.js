@@ -6,6 +6,7 @@ import InfoItem from './InfoItem';
 import axiosIns from '../helpers/helpers';
 import Status from './Status';
 import TextButton from './TextButton';
+import CustomButton from '../Screens/Home/CustomButtom';
 
 
 export const Info = ({navigation, route}) => {
@@ -241,7 +242,7 @@ export const Info = ({navigation, route}) => {
   function Babies(){
 
     return(
-    <TextButton
+    <CustomButton
         buttonContainerStyle={{
           marginTop: SIZES.padding,
           borderRadius: SIZES.radius,
@@ -251,17 +252,11 @@ export const Info = ({navigation, route}) => {
         }}
         border={false}
         icon={images.right}
+        iconContainerStyle={{
+          borderWidth:0
+        }}
         label={"Babies"}
         label2={animal.children.length}
-        buttonContainerStyle2={{
-          height:30,
-          width:30,
-          backgroundColor:COLORS.white,
-          justifyContent:"center",
-          alignSelf:"center",
-          padding:0,
-          margin:5
-        }}
         label2Style={{
           color:COLORS.Primary,
           justifyContent:"center",

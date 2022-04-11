@@ -11,6 +11,7 @@ import {
   import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
   import {Dropdown} from 'sharingan-rn-modal-dropdown';
   import axiosIns from '../../helpers/helpers';
+  import PickerType from '../Livestocks/PickerType';
   import {
     COLORS,
     SIZES,
@@ -25,7 +26,7 @@ import {
   import TextButton from '../../Components/TextButton';
   import FormDateInput from '../../Components/FormDateInput';
   import CustomAlert from '../../Components/CustomAlert';
-
+  import { showMessage, hideMessage } from "react-native-flash-message";
   
   const EditAnimal = ({navigation, route}) => {
     React.useEffect(() => {
@@ -59,6 +60,9 @@ import {
     const [dataText, setDataText] = React.useState('');
     const [EmailError, setEmailError] = React.useState('');
     const [unit, setUnit] = React.useState(false);
+    const [showc, setshowc] = React.useState(false);
+    const [pic, setPic] = React.useState('');
+    const [picdata, setPicdata] = React.useState('');
     const onChangeMS = value => {
       setValueMS(value);
     };
@@ -108,6 +112,36 @@ import {
       price: price,
       bought: bought,
     });
+    function renderFileUri() {
+      if (pic) {
+        return (
+          <Image
+            source={{uri: pic}}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 100 / 2,
+              alignSelf: 'center',
+            }}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={images.login}
+            resizeMethod="auto"
+            resizeMode="contain"
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 100 / 2,
+              borderWidth:1,
+              alignSelf: 'center',
+            }}
+          />
+        );
+      }
+    }
     async function postAnimal() {
       setLoading(true);
       if(isEnableSignIn())
@@ -121,9 +155,17 @@ import {
           if (response.status == 200) {
             clear();
             setLoading(false);
-            setValidation(true);
-            setShow(true);
-            setDataText('Animal Updated');
+            showMessage({
+              message: "Animal Updated",
+              type: "default",
+              backgroundColor:COLORS.Primary,
+              color:COLORS.white,
+              titleStyle:{
+                alignSelf:"center",
+                ...FONTS.h3
+              },
+              animationDuration:250
+            });
           }
         })
         .catch(
@@ -193,26 +235,24 @@ import {
             }}>
             {EmailError}
           </Text>
-          {/* <FormInput
-            prependComponent={
-              <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-                <Image
-                  source={images.tag}
-                  style={{width: 26, height: 26, tintColor: COLORS.Primary}}
-                />
-              </View>
-            }
-            label="Tag Number*"
-            // keyboardType="numeric"
-            value={tag}
-            onChange={value => {
-              setTag(value);
-            }}
-            inputContainerStyle={{
-              backgroundColor: COLORS.white,
-            }}
-            inputStyle={{marginLeft: 20, fontSize: 16}}
-          /> */}
+          <View
+          style={{
+            marginTop: 6,
+            borderRadius: SIZES.radius,
+            paddingHorizontal: SIZES.radius,
+          }}>
+          <TouchableOpacity
+            onPress={() => {
+              setshowc(true)
+            }}>
+            {renderFileUri()}
+            <Text style={{
+              alignSelf:"center",
+              margin:5,
+              ...FONTS.h4
+            }}>Edit</Text>
+          </TouchableOpacity>
+        </View>
           <FormInput
             prependComponent={
               <View style={{alignSelf: 'center', justifyContent: 'center'}}>
@@ -812,6 +852,8 @@ import {
         )}
   
         {renderHeader()}
+        <PickerType show={showc} setshow={setshowc} setPic={setPic} setPicdata={setPicdata} />
+
   
         <KeyboardAwareScrollView
           showsVerticalScrollIndicator={false}

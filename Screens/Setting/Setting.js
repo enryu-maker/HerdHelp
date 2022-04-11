@@ -1,4 +1,4 @@
-import { View, Text,Image,TouchableOpacity,ScrollView,ActivityIndicator } from 'react-native'
+import { View, Text,Image,TouchableOpacity,ScrollView,ActivityIndicator,Alert } from 'react-native'
 import React from 'react'
 import { images,COLORS,SIZES ,FONTS} from '../../Components/Constants';
 import Header from '../../Components/Header';
@@ -6,6 +6,8 @@ import SettingContent from './settingContent';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../Home/CustomButtom';
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 export default function Setting({navigation}) {
   const [unit,setUnit] = React.useState("")
   const [loading,setLoading] = React.useState(false)
@@ -20,7 +22,17 @@ export default function Setting({navigation}) {
     setUnit(value)
     setWeightUnit(value)
     setLoading(false)
-    setEmailError("Setting Updated Restart The App")
+    showMessage({
+      message: "Setting Updated Restart The App",
+      type: "default",
+      backgroundColor: COLORS.Primary,
+      color:COLORS.white,
+      titleStyle:{
+        alignSelf:"center",
+        ...FONTS.h3
+      },
+      animationDuration:250
+    });
   }
   const units = [
     {
@@ -119,15 +131,6 @@ export default function Setting({navigation}) {
   return (
     <View style={{flex:1}}>
       {renderheader()}
-      <Text
-          style={{
-            ...FONTS.body3,
-            alignSelf: 'center',
-            color:COLORS.Primary,
-            padding:5
-          }}>
-          {EmailError}
-        </Text>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{

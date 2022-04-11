@@ -73,20 +73,22 @@ const Status = ({show, setShow, animal}) => {
           <View
             style={{
               justifyContent: 'center',
-              // position: 'absolute',
-              // marginTop: 25,
-              // zIndex: 1,
             }}>
             <TouchableOpacity
               style={{
                 marginLeft: 25,
-              }}
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:40,
+                justifyContent:"center",
+                borderRadius:40/2,
+                }}
               onPressIn={() => {
                 setShow(false);
               }}>
               <Image
                 source={images.cancel}
-                style={{width: 35, height: 35, tintColor: COLORS.red}}
+                style={{width: 30, height: 30, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>

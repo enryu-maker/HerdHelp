@@ -15,8 +15,7 @@ import {
 } from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import FormInput from '../../Components/FormInput';
-import LoaderOp from '../../Components/LoaderOp';
-import Loader from '../../Components/Loader';
+import { showMessage, hideMessage, } from "react-native-flash-message";
 import CustomAlert from '../../Components/CustomAlert';
 export const Finance = ({navigation}) => {
   const [cat, setCat] = React.useState(1);
@@ -51,30 +50,62 @@ export const Finance = ({navigation}) => {
         .then(Response => {
           if (Response.status == 201) {
             setLoading(false)
-            setShow(true);
-            setValidation(true);
-            setDataText('Finance added');
+            showMessage({
+              message: "Finance added",
+              type: "default",
+              backgroundColor: COLORS.Primary,
+              color:COLORS.white,
+              titleStyle:{
+                alignSelf:"center",
+                ...FONTS.h3
+              },
+              animationDuration:250
+            });
             clean();
           } else {
             setLoading(false)
-            setValidation(false);
-            setShow(true);
-            setDataText('Not added');
+            showMessage({
+              message: "Finance Not added",
+              type: "default",
+              backgroundColor: COLORS.red,
+              color:COLORS.white,
+              titleStyle:{
+                alignSelf:"center",
+                ...FONTS.h3
+              },
+              animationDuration:250
+            });
             // setLoading(false)
           }
         })
         .catch(err => {
           setLoading(false)
-          setValidation(false),
-          setShow(true),
-          setDataText('Error');
-        });
+          showMessage({
+            message: "Error",
+            type: "default",
+            backgroundColor: COLORS.red,
+            color:COLORS.white,
+            titleStyle:{
+              alignSelf:"center",
+              ...FONTS.h3
+            },
+            animationDuration:250
+          })
+        })
     } 
     else {
       setLoading(false)
-      setValidation(false);
-      setShow(true);
-      setDataText('Invalid Input');
+      showMessage({
+        message: "Invalid Input",
+        type: "default",
+        backgroundColor: COLORS.red,
+        color:COLORS.white,
+        titleStyle:{
+          alignSelf:"center",
+          ...FONTS.h3
+        },
+        animationDuration:250
+      })
     }
   }
   React.useEffect(() => {
