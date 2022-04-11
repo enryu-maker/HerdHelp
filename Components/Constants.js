@@ -62,7 +62,12 @@ export const images ={
     mail:require("../assets/Logo/mailbox.png"),
     city:require("../assets/Logo/city.png"),
     star:require("../assets/Logo/star.png"),
-    kg:require("../assets/Logo/lb.png")
+    kg:require("../assets/Logo/lb.png"),
+    cam:require("../assets/Logo/camera.png"),
+    picture:require("../assets/Logo/picture.png"),
+
+
+
 }
 export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',

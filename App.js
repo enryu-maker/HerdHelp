@@ -10,11 +10,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import { COLORS } from './Components/Constants';
 import axiosIns from './helpers/helpers';
 import { baseURL } from './helpers/helpers';
+import {request, PERMISSIONS} from 'react-native-permissions';
+
 import axios from 'axios';
-const Route = React.createContext()
+
+export const Permission = React.createContext()
 export default function App() {
   const [Route, setRoute] = React.useState("");
   const [pub, setPub] = React.useState("");
+  const [PermissionResult,setPermissionResult] = React.useState(null)
 
 
   async function retrieveData() {
@@ -31,12 +35,7 @@ export default function App() {
     } catch (e) {
     }
   };
-  // React.useEffect(() => {
-  //   if (Route == true ||Route != null ){
-  //   fetchprofile().then(data => {
-  //     global.User = data;
-  //   });}
-  // }, []);
+  
   React.useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
@@ -51,11 +50,16 @@ export default function App() {
     getPubKey().then(data=>{
       setPub(data.pub_key)
     })
-    
   }, [Route]);
-
+  request(Platform.OS === 'ios' ? 
+    PERMISSIONS.IOS.CAMERA && PERMISSIONS.IOS.PHOTO_LIBRARY : 
+    PERMISSIONS.ANDROID.CAMERA && PERMISSIONS.ANDROID.ACCESS_MEDIA_LOCATION
+    ).then((result) => {
+    setPermissionResult(result)
+  });
   return (
     <StripeProvider publishableKey={pub}>
+    <Permission.Provider value={Permission}>
     <View style={{flex: 1,backgroundColor:COLORS.white}}>
       <StatusBar
         barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
@@ -69,6 +73,7 @@ export default function App() {
       )}
       </NavigationContainer>
     </View>
+    </Permission.Provider>
     </StripeProvider>
   );
 }
