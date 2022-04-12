@@ -21,7 +21,7 @@ import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
 import CustomAlert from '../../Components/CustomAlert';
 import {showMessage, hideMessage} from 'react-native-flash-message';
-
+import { Access } from '../../App';
 const EditAnimal = ({navigation, route}) => {
   React.useEffect(() => {
     setId(global.id);
@@ -259,36 +259,6 @@ const EditAnimal = ({navigation, route}) => {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        <Text
-          style={{
-            ...FONTS.body3,
-            alignSelf: 'center',
-            color: COLORS.red,
-            padding: 5,
-          }}>
-          {EmailError}
-        </Text>
-        <View
-          style={{
-            marginTop: 6,
-            borderRadius: SIZES.radius,
-            paddingHorizontal: SIZES.radius,
-          }}>
-          <TouchableOpacity
-            onPress={() => {
-              setshowc(true);
-            }}>
-            {renderFileUri()}
-            <Text
-              style={{
-                alignSelf: 'center',
-                margin: 5,
-                ...FONTS.h4,
-              }}>
-              Edit
-            </Text>
-          </TouchableOpacity>
-        </View>
         <FormInput
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>

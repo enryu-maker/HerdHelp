@@ -27,7 +27,6 @@ export const Info = ({navigation, route}) => {
   }
   async function getanimal(tag) {
     let {data} = await axiosIns.get(`animals/${tag}`);
-    // console.log(data)
     return data;
   }
   React.useEffect(() => {
@@ -46,7 +45,7 @@ export const Info = ({navigation, route}) => {
     return (
       <View
         style={{
-          marginTop: SIZES.padding,
+          marginTop: 15,
           borderRadius: SIZES.radius,
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
@@ -72,77 +71,80 @@ export const Info = ({navigation, route}) => {
       </View>
     );
   }
-  function renderSectionZero() {
-    return (
-      <View
-        style={{
-          marginTop: SIZES.padding,
-          borderRadius: SIZES.radius,
-          // paddingHorizontal: SIZES.radius,
-          backgroundColor: COLORS.lightGray2,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <View
+  function renderFileUri() {
+    if (animal.animal_image) {
+      return (
+        <>
+        <Image
+          source={{uri: animal.animal_image}}
           style={{
-            flexDirection: 'column',
+            width: 100,
+            height: 100,
+            borderRadius: 100 / 2,
             alignSelf: 'center',
-            marginLeft: 65,
-          }}>
-          {cond ? (
-            <Image
-              source={{
-                uri:animal.animal_image
-              }}
-              style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}
-            />
-          ) : (
-            <Image
-              source={{uri: animal?.image}}
-              style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}
-            />
-          )}
-          <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>
+          }}
+        />
+        <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>
+            ID: {animal?.support_tag}
+          </Text>
+          </>
+      );
+    } else {
+      return (
+        <View style={{
+          alignSelf: 'center',
+          justifyContent: 'center',
+          width: 100,
+            height: 100,
+            borderRadius: 100 / 2,
+            borderWidth: 1,
+        }}>
+        <Image
+        resizeMode="contain"
+          source={{uri:animal?.image}}
+          style={{
+            alignSelf: 'center',
+            justifyContent: 'center',
+            width: 80,
+              height: 80,
+          }}/>
+
+        <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>
             ID: {animal?.support_tag}
           </Text>
         </View>
-        <TouchableOpacity
-          style={{
-            backgroundColor: COLORS.Primary,
-            height: 130,
-            width: 80,
-            borderRadius: SIZES.radius,
-            marginLeft: 30,
-            flexDirection: 'column',
-            alignSelf:"center",
-            justifyContent: 'space-evenly',
-          }}
+      );
+    }
+  }
+  function renderSectionZero() {
+    return (
+      
+        <CustomButton
+        border={false}
           onPress={() => {
             navigation.navigate('MedCard', {
               animal:animal
             });
-          }}>
-          <Image
-            source={images.med}
-            style={{
-              width: 30,
-              height: 30,
-              tintColor: COLORS.white,
-              alignSelf: 'center',
-            }}
+          }}
+          icon={images.rightone}
+          iconStyle={{
+            height:20,
+            width:20
+          }}
+          label={"Medical History"}
+          buttonContainerStyle={{
+            marginTop: SIZES.padding,
+            borderRadius: SIZES.radius,
+            paddingHorizontal: SIZES.radius,
+            backgroundColor: COLORS.Primary,
+            width:"100%"
+          }}
+          iconContainerStyle={{
+            borderWidth:0
+          }}
+          label2={med.length}
           />
-          <View style={{flexDirection: 'column'}}>
-            <Text
-              style={{color: COLORS.white, ...FONTS.h3, alignSelf: 'center'}}>
-              Med
-            </Text>
-            <Text
-              style={{color: COLORS.white, ...FONTS.h3, alignSelf: 'center'}}>
-              Details
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      
     );
   }
   function Vaccinated() {
@@ -227,24 +229,6 @@ export const Info = ({navigation, route}) => {
       </View>
     );
   }
-  function medication() {
-    return (
-      <View
-        style={{
-          marginTop: SIZES.padding,
-          borderRadius: SIZES.radius,
-          paddingHorizontal: SIZES.radius,
-          backgroundColor: COLORS.lightGray2,
-          paddingBottom: SIZES.padding,
-        }}>
-        <InfoItem label="Breed" value={animal?.breed} withDivider={false}/>
-        <InfoItem
-          label="Bred"
-          value={animal?.bred == false ? 'No' : 'Yes'}
-        />
-      </View>
-    );
-  }
   function Babies(){
 
     return(
@@ -257,7 +241,11 @@ export const Info = ({navigation, route}) => {
           width:"100%"
         }}
         border={false}
-        icon={images.right}
+        icon={images.rightone}
+          iconStyle={{
+            height:20,
+            width:20
+          }}
         iconContainerStyle={{
           borderWidth:0
         }}
@@ -352,8 +340,9 @@ export const Info = ({navigation, route}) => {
         contentContainerStyle={{
           paddingHorizontal: SIZES.padding,
         }}>
-        {renderSectionZero()}
+          {renderFileUri()}
         {renderSectionOne()}
+        {renderSectionZero()}
         {
           animal.children?.length > 0?Babies():null
         }

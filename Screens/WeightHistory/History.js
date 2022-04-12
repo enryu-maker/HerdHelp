@@ -54,9 +54,10 @@ export default function History({navigation,route}) {
           <ScrollView showsHorizontalScrollIndicator={false}>
               {
                   whist.map((a,index)=>(
+                    a.weight!=0 && a.weight_kg!=0?
                     unit?
                     (<HistoryCard key={index} date={a.date_to.slice(0,10)} weight={a.weight}/>):
-                    (<HistoryCard key={index} date={a.date_to.slice(0,10)} weight={a.weight_kg}/>)
+                    (<HistoryCard key={index} date={a.date_to.slice(0,10)} weight={a.weight_kg}/>):null
 
                   ))
               }

@@ -121,37 +121,12 @@ const Addanimals = ({navigation, route}) => {
             borderRadius: 100 / 2,
             borderWidth: 1,
             alignSelf: 'center',
-            // tintColor:COLORS.Primary
           }}
         />
       );
     }
   }
   const access = React.useContext(Access)
-  // const data = JSON.stringify({
-  //   name: name,
-  //   tag_number: ` ${id}${valueMS}${tag}`,
-  //   registration: registration,
-  //   support_tag: tag,
-  //   gender: valueBS,
-  //   species: valueMS,
-  //   birth_date: dobt,
-  //   mother_supporttag: mother != '' ? mother : '',
-  //   mother_tagnumber: mother != '' ? `${id}${valueMS}${mother}` : '',
-  //   father_supporttag: father != '' ? father : '',
-  //   father_tagnumber: father != '' ? `${id}${valueMS}${father}` : '',
-  //   breed: Breed,
-  //   weight: unit == true ? weight : Math.round(weight / 0.45359237),
-  //   weight_kg: unit == false ? weight : Math.round(weight * 0.45359237),
-  //   bred: bred,
-  //   age: age,
-  //   vaccinated: vaccinated,
-  //   vaccination_date: vaccinateddatet,
-  //   price: price,
-  //   bought: bought,
-  //   status: 'Alive',
-  // });
-
   function postAnimal() {
     setLoading(true);
     const formData = new FormData();
@@ -189,26 +164,6 @@ const Addanimals = ({navigation, route}) => {
     formData.append('bought', bought);
     formData.append('status', 'Alive');
     formData.append('animal_image', profile_pic);
-    // formData.append('remark', 'Hello');
-    // fetch( 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/animals/', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'multipart/form-data',
-    //     'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3NTM3MDIxLCJpYXQiOjE2NDk3NjEwMjEsImp0aSI6IjgxZDMyYjZiNDBkNTRiMWVhY2IzNWE4Yzg2ODdmNDVhIiwidXNlcl9pZCI6NH0.Xky-FR3sg12Ss7uvYobkO5Va97oVbqeLsKaroJN23oI`
-    //   },
-    //   body: formData
-    //  })
-    // .then((responseJson) => {
-    //   console.log(responseJson);
-    //   setLoading(false)
-    // })
-    // .catch(error => {
-    //   console.log(error.response);
-    //   setLoading(false)
-
-    // })
-
     if (isEnableSignIn()) {
       fetch( baseURL + `animals/`,{
       method: 'POST',
