@@ -12,15 +12,15 @@ import { baseURL } from '../../helpers/helpers';
 import {showMessage} from 'react-native-flash-message';
 import React from 'react';
 import {Access} from '../../App';
-export default function Update({showu, setshowu, profile}) {
+export default function Update({showu, setshowu, profile,link,label,msg}) {
   const [loading, setLoading] = React.useState(false);
   const access = React.useContext(Access);
   function updateProfile() {
     setLoading(true);
     const formData = new FormData();
-    formData.append('profile_picture', profile);
-    fetch(baseURL + `updateprofile/${global.id}`, {
-      method: 'PATCh',
+    formData.append(label, profile);
+    fetch(baseURL + link, {
+      method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'multipart/form-data',
@@ -32,7 +32,7 @@ export default function Update({showu, setshowu, profile}) {
         if (response.status == 200) {
           setLoading(false);
           showMessage({
-            message: 'Profile picture',
+            message: msg,
             type: 'default',
             backgroundColor: COLORS.Primary,
             color: COLORS.white,

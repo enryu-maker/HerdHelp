@@ -7,6 +7,7 @@ import axiosIns from '../helpers/helpers';
 import Status from './Status';
 import TextButton from './TextButton';
 import CustomButton from '../Screens/Home/CustomButtom';
+import PickerType from '../Screens/Livestocks/PickerType';
 
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
@@ -16,6 +17,9 @@ export const Info = ({navigation, route}) => {
   const [cond, setCond] = React.useState(false);
   const [show, setShow] = React.useState(false);
   const [profile_pic, setprofile_pic] = React.useState([]);
+  const [picdata, setPicdata] = React.useState('');
+  const [pic, setPic] = React.useState('');
+  const [showu, setshowu] = React.useState(false);
 
 
 
@@ -389,8 +393,8 @@ export const Info = ({navigation, route}) => {
         show &&
         <Status show={show} setShow={setShow} animal={animal}/>
       }
-      
-      
+      <PickerType show={show} setshow={setShow} setPic={setPic} setPicdata={setPicdata} setprofile_pic={setprofile_pic} setshowc={setshowu}/>
+      <Update showu={showu} setshowu={setshowu} profile={profile_pic} link={`animal/${animal?.tag_number}`} lable={'animal_image'} msg={'Profile updated'}/>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{

@@ -247,7 +247,7 @@ const MyAccount = ({navigation,route}) => {
       }}>
       {renderHeader()}
       <PickerType show={show} setshow={setshow} setPic={setPic} setPicdata={setPicdata} setprofile_pic={setprofile_pic} setshowc={setshowu}/>
-      <Update showu={showu} setshowu={setshowu} profile={profile_pic} />
+      <Update showu={showu} setshowu={setshowu} profile={profile_pic} link={`updateprofile/${global.id}`} lable={'profile_picture'} msg={'Profile updated'}/>
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: SIZES.padding,
