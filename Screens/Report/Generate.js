@@ -12,6 +12,7 @@ import Header from '../../Components/Header';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import SelectMultiple from 'react-native-select-multiple';
 import TextButton from '../../Components/TextButton';
+import { showMessage } from 'react-native-flash-message';
 class Generate extends Component {
   state = {
     selectedFruits: [],
@@ -53,18 +54,61 @@ class Generate extends Component {
         },
       )
       .then(response => {
-        if (response.status == 201) {
-        } else {
-          this.setState({EmailError: 'Report send Check the registered mail'});
+        if (response.status == 200) {
           this.setState({loader: false});
-          this.setState({Rang: COLORS.Primary});
+          showMessage({
+            message: 'Report send Check the registered mail',
+            type: 'default',
+            backgroundColor: COLORS.Primary,
+            color: COLORS.white,
+            titleStyle: {
+              alignSelf: 'center',
+              ...FONTS.h3,
+            },
+            animationDuration: 250,
+            icon: "success",
+            style:{
+              justifyContent:"center"
+            }
+          });
+
+        } else {
+          this.setState({loader: false});
+          showMessage({
+            message: 'Something went wrong',
+            type: 'default',
+            backgroundColor: COLORS.red,
+            color: COLORS.white,
+            titleStyle: {
+              alignSelf: 'center',
+              ...FONTS.h3,
+            },
+            animationDuration: 250,
+            icon: "danger",
+            style:{
+              justifyContent:"center"
+            }
+          });
         }
       })
       .catch(error => {
         if (error.response) {
-          this.setState({EmailError: 'Error while Generating Report'});
           this.setState({loader: false});
-          this.setState({Rang: COLORS.red});
+          showMessage({
+            message: `${error.response.data.msg}`,
+            type: 'default',
+            backgroundColor: COLORS.red,
+            color: COLORS.white,
+            titleStyle: {
+              alignSelf: 'center',
+              ...FONTS.h3,
+            },
+            animationDuration: 250,
+            icon: "danger",
+            style:{
+              justifyContent:"center"
+            }
+          });
         }
       });
   }

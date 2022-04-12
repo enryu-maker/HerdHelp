@@ -15,13 +15,16 @@ import FlashMessage from "react-native-flash-message";
 import axios from 'axios';
 
 export const Permission = React.createContext()
+export const Access = React.createContext()
 export default function App() {
   const [Route, setRoute] = React.useState("");
   const [pub, setPub] = React.useState("");
   const [PermissionResult,setPermissionResult] = React.useState(null)
+  const [access, setAccess] = React.useState("");
 
 
   async function retrieveData() {
+    setAccess(await AsyncStorage.getItem('token'))
     return(JSON.parse(await AsyncStorage.getItem('route')))
   }
   async function getPubKey(){
@@ -60,6 +63,7 @@ export default function App() {
   return (
     <StripeProvider publishableKey={pub}>
       <Permission.Provider value={PermissionResult}>
+        <Access.Provider value={access}>
     <View style={{flex: 1,backgroundColor:COLORS.white}}>
     <FlashMessage position="top" />
       <StatusBar
@@ -74,6 +78,7 @@ export default function App() {
       )}
       </NavigationContainer>
     </View>
+    </Access.Provider>
     </Permission.Provider >
     </StripeProvider>
   );

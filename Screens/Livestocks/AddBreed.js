@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
-  Modal
+  Modal,
 } from 'react-native';
 
 import React, {useState, useRef} from 'react';
@@ -29,11 +29,11 @@ import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
 import CustomAlert from '../../Components/CustomAlert';
-import { ImagePickerResponse } from 'react-native-image-picker';
+import {ImagePickerResponse} from 'react-native-image-picker';
 import PickerType from './PickerType';
-import { showMessage, hideMessage } from "react-native-flash-message";
-
-
+import {showMessage, hideMessage} from 'react-native-flash-message';
+import {baseURL} from '../../helpers/helpers';
+import { Access } from '../../App';
 const Addanimals = ({navigation, route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
@@ -47,10 +47,10 @@ const Addanimals = ({navigation, route}) => {
   const [weight, setWeight] = useState(0);
   const [name, setName] = useState('');
   const [dob, setDob] = useState('');
-  const [dobt, setDobt] = useState(null);
+  const [dobt, setDobt] = useState('');
   const [vaccinated, setVaccinated] = useState(false);
   const [vaccinateddate, setVaccinateddate] = useState('');
-  const [vaccinateddatet, setVaccinateddatet] = useState(null);
+  const [vaccinateddatet, setVaccinateddatet] = useState('');
   const [bought, setBought] = useState(false);
   const [loading, setLoading] = React.useState(false);
   const [animals, setAnimals] = React.useState([]);
@@ -64,7 +64,7 @@ const Addanimals = ({navigation, route}) => {
   const [showc, setshowc] = React.useState(false);
   const [pic, setPic] = React.useState('');
   const [profile_pic, setprofile_pic] = React.useState([]);
-  const [picdata, setPicdata] = React.useState('');
+  const [picdata, setPicdata] = React.useState([]);
   const onChangeMS = value => {
     setValueMS(value);
   };
@@ -119,7 +119,7 @@ const Addanimals = ({navigation, route}) => {
             width: 100,
             height: 100,
             borderRadius: 100 / 2,
-            borderWidth:1,
+            borderWidth: 1,
             alignSelf: 'center',
             // tintColor:COLORS.Primary
           }}
@@ -127,6 +127,7 @@ const Addanimals = ({navigation, route}) => {
       );
     }
   }
+  const access = React.useContext(Access)
   // const data = JSON.stringify({
   //   name: name,
   //   tag_number: ` ${id}${valueMS}${tag}`,
@@ -150,96 +151,130 @@ const Addanimals = ({navigation, route}) => {
   //   bought: bought,
   //   status: 'Alive',
   // });
-  const formData = new FormData()
-  formData.append('name', name)
-  formData.append('tag_number', ` ${id}${valueMS}${tag}`)
-  formData.append('registration', registration)
-  formData.append('support_tag', tag)
-  formData.append('gender', valueBS)
-  formData.append('species', valueMS)
-  formData.append('birth_date', dobt)
-  formData.append('mother_supporttag', mother != '' ? mother : '')
-  formData.append('mother_tagnumber', mother != '' ? `${id}${valueMS}${mother}` : '')
-  formData.append('father_supporttag', father != '' ? father : '')
-  formData.append('father_tagnumber', father != '' ? `${id}${valueMS}${father}` : '')
-  formData.append('breed', Breed)
-  formData.append('weight', unit == true ? weight : Math.round(weight / 0.45359237))
-  formData.append('weight_kg', unit == false ? weight : Math.round(weight * 0.45359237))
-  formData.append('bred', bred)
-  formData.append('age', age)
-  formData.append('vaccinated', vaccinated)
-  formData.append('vaccination_date', vaccinateddatet)
-  formData.append('price', price)
-  formData.append('bought', bought)
-  formData.append('status', 'Alive')
-  formData.append('animal_image',profile_pic)
-  
-  async function postAnimal() {
+
+  function postAnimal() {
     setLoading(true);
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('tag_number', ` ${id}${valueMS}${tag}`);
+    formData.append('registration', registration);
+    formData.append('support_tag', tag);
+    formData.append('gender', valueBS);
+    formData.append('species', valueMS);
+    formData.append('birth_date', dobt);
+    formData.append('mother_supporttag', mother != '' ? mother : '');
+    formData.append(
+      'mother_tagnumber',
+      mother != '' ? `${id}${valueMS}${mother}` : '',
+    );
+    formData.append('father_supporttag', father != '' ? father : '');
+    formData.append(
+      'father_tagnumber',
+      father != '' ? `${id}${valueMS}${father}` : '',
+    );
+    formData.append('breed', Breed);
+    formData.append(
+      'weight',
+      unit == true ? weight : Math.round(weight / 0.45359237),
+    );
+    formData.append(
+      'weight_kg',
+      unit == false ? weight : Math.round(weight * 0.45359237),
+    );
+    formData.append('bred', bred);
+    formData.append('age', age);
+    formData.append('vaccinated', vaccinated);
+    formData.append('vaccination_date', vaccinateddatet);
+    formData.append('price', price);
+    formData.append('bought', bought);
+    formData.append('status', 'Alive');
+    formData.append('animal_image', profile_pic);
+    // formData.append('remark', 'Hello');
+    // fetch( 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/animals/', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'multipart/form-data',
+    //     'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3NTM3MDIxLCJpYXQiOjE2NDk3NjEwMjEsImp0aSI6IjgxZDMyYjZiNDBkNTRiMWVhY2IzNWE4Yzg2ODdmNDVhIiwidXNlcl9pZCI6NH0.Xky-FR3sg12Ss7uvYobkO5Va97oVbqeLsKaroJN23oI`
+    //   },
+    //   body: formData
+    //  })
+    // .then((responseJson) => {
+    //   console.log(responseJson);
+    //   setLoading(false)
+    // })
+    // .catch(error => {
+    //   console.log(error.response);
+    //   setLoading(false)
+
+    // })
+
     if (isEnableSignIn()) {
-      await axiosIns
-        .post('animals/',formData._parts,{
-            headers: {
-              'Content-Type': `multipart/form-data; boundry==${22}`,
-            }
-          }
-        )
+      fetch( baseURL + `animals/`,{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${access}`
+      },
+      body: formData
+     })
         .then(response => {
           if (response.status == 201) {
             clear();
             setLoading(false);
             showMessage({
-              message: "Animal Added",
-              type: "default",
+              message: 'Animal Added',
+              type: 'default',
               backgroundColor: COLORS.Primary,
-              color:COLORS.white,
-              titleStyle:{
-                alignSelf:"center",
-                ...FONTS.h3
+              color: COLORS.white,
+              titleStyle: {
+                alignSelf: 'center',
+                ...FONTS.h3,
               },
-              animationDuration:250,
-              icon:"success",
-              style:{
-                justifyContent:"center"
-              }
+              animationDuration: 250,
+              icon: 'success',
+              style: {
+                justifyContent: 'center',
+              },
             });
           }
         })
         .catch(err => {
           setLoading(false);
-          console.log(err.response.data)
+          console.log(err.response.data);
           showMessage({
             message: `${err.response.data.msg}`,
-            type: "default",
+            type: 'default',
             backgroundColor: COLORS.red,
-            color:COLORS.white,
-            titleStyle:{
-              alignSelf:"center",
-              ...FONTS.h3
+            color: COLORS.white,
+            titleStyle: {
+              alignSelf: 'center',
+              ...FONTS.h3,
             },
-            animationDuration:250,
-            icon:"danger",
-            style:{
-              justifyContent:"center"
-            }
+            animationDuration: 250,
+            icon: 'danger',
+            style: {
+              justifyContent: 'center',
+            },
           });
         });
     } else {
       setLoading(false);
       showMessage({
         message: `Required Fields cannot be empty`,
-        type: "default",
+        type: 'default',
         backgroundColor: COLORS.red,
-        color:COLORS.white,
-        titleStyle:{
-          alignSelf:"center",
-          ...FONTS.h3
+        color: COLORS.white,
+        titleStyle: {
+          alignSelf: 'center',
+          ...FONTS.h3,
         },
-        animationDuration:250,
-        icon:"danger",
-        style:{
-          justifyContent:"center"
-        }
+        animationDuration: 250,
+        icon: 'danger',
+        style: {
+          justifyContent: 'center',
+        },
       });
     }
   }
@@ -296,7 +331,13 @@ const Addanimals = ({navigation, route}) => {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-          <PickerType show={showc} setshow={setshowc} setPic={setPic} setPicdata={setPicdata} setprofile_pic={setprofile_pic}/>
+        <PickerType
+          show={showc}
+          setshow={setshowc}
+          setPic={setPic}
+          setPicdata={setPicdata}
+          setprofile_pic={setprofile_pic}
+        />
         <View
           style={{
             marginTop: 6,
@@ -305,14 +346,17 @@ const Addanimals = ({navigation, route}) => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              setshowc(true)
+              setshowc(true);
             }}>
             {renderFileUri()}
-            <Text style={{
-              alignSelf:"center",
-              margin:5,
-              ...FONTS.h4
-            }}>Edit</Text>
+            <Text
+              style={{
+                alignSelf: 'center',
+                margin: 5,
+                ...FONTS.h4,
+              }}>
+              Edit
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -947,7 +991,7 @@ const Addanimals = ({navigation, route}) => {
       <TextButton
         onPress={() => {
           postAnimal();
-          // console.log(formData._parts)
+          // console.log(picdata)
         }}
         icon={images.add}
         buttonContainerStyle={{

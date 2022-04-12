@@ -27,6 +27,7 @@ export const Info = ({navigation, route}) => {
   }
   async function getanimal(tag) {
     let {data} = await axiosIns.get(`animals/${tag}`);
+    // console.log(data)
     return data;
   }
   React.useEffect(() => {
@@ -91,9 +92,7 @@ export const Info = ({navigation, route}) => {
           {cond ? (
             <Image
               source={{
-                uri:
-                  'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' +
-                  animal?.image,
+                uri:animal.animal_image
               }}
               style={{width: 80, height: 80, margin: 10, alignSelf: 'center'}}
             />

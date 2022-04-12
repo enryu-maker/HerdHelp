@@ -33,7 +33,7 @@ export default function PickerType({
               Platform.OS === 'ios'
                 ? response.assets[0].uri.replace('file://', '')
                 : response.assets[0].uri,
-            name: "photo.jpg"
+            name: `photo.${fileType}`
           },
         );
       }

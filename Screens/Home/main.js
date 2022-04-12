@@ -74,7 +74,7 @@ const Main = ({navigation}) => {
  const username = React.useContext(Username)
 
   return (
-    <View style={{flex: 1, backgroundColor: COLORS.white}}>
+    <View style={{flex: 1, backgroundColor: COLORS.lightGray1}}>
       <Header
         img={images.herdhelp}
         imgstyle={{
@@ -154,7 +154,7 @@ const Main = ({navigation}) => {
             paddingVertical: SIZES.padding,
             paddingHorizontal: SIZES.radius,
             borderRadius: SIZES.radius,
-            backgroundColor: COLORS.lightGray2,
+            // backgroundColor: COLORS.lightGray2,
             alignSelf: 'center',
             marginBottom: SIZES.height > 700 ? 37 : 50,
           }}>
