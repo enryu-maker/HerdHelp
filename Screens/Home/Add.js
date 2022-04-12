@@ -102,7 +102,7 @@ export default function Add({navigation,route}) {
               Gender={listItem.gender}
               Species={listItem.category}
               Weight={listItem.weight}
-              image={listItem.image}
+              image={listItem.animal_image==null?listItem.image:listItem.animal_image}
               weight_kg={listItem.weight_kg}
               onPress={() => {
                 navigation.navigate('Info', {

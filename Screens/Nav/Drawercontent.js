@@ -13,7 +13,7 @@ import {Caption, Drawer, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axiosIns from '../../helpers/helpers';
-import { Username } from './Homenav';
+import { Username,Profile_pic } from './Homenav';
 export default function Drawercontent(props) {
   // const [username,setUsername] = React.useState("")
 //   const fetchprofile = async () => {
@@ -26,7 +26,7 @@ export default function Drawercontent(props) {
 //   })
 //   console.log(username)
 // },[])
- const username = useContext(Username)
+ const profile_pic = useContext(Profile_pic)
  
   return (
     <View style={{flex: 1}}>
@@ -40,7 +40,7 @@ export default function Drawercontent(props) {
             <View style={[styles.row, {flexDirection: 'row'}]}>
               <Image
                 source={{
-                  uri: `https://ui-avatars.com/api/?name=${username}`,
+                  uri: profile_pic,
                 }}
                 resizeMode="cover"
                 style={{

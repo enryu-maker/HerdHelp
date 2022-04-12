@@ -34,6 +34,7 @@ import PickerType from './PickerType';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {baseURL} from '../../helpers/helpers';
 import { Access } from '../../App';
+import { Username } from '../Nav/Homenav';
 const Addanimals = ({navigation, route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
@@ -95,10 +96,16 @@ const Addanimals = ({navigation, route}) => {
     setPrice('');
     setName('');
   };
-
+  const username = React.useContext(Username)
   function renderFileUri() {
     if (pic) {
       return (
+        <View style={{
+          height:100,
+          width:100,
+          borderRadius:100/2,
+          alignSelf:"center",
+        }}>
         <Image
           source={{uri: pic}}
           style={{
@@ -106,23 +113,75 @@ const Addanimals = ({navigation, route}) => {
             height: 100,
             borderRadius: 100 / 2,
             alignSelf: 'center',
+            borderWidth:2,
           }}
         />
+        <View style={{
+          position:"absolute",
+          alignSelf:"flex-end",
+          backgroundColor:COLORS.Primary,
+          height:18,
+          width:28,
+          justifyContent:"center",
+          marginTop:70,
+          borderRadius:4
+        }}>
+          <Text style={{
+          color:COLORS.white,
+          ...FONTS.h5,
+          alignSelf:"center"
+          }}>
+          Edit
+          </Text>
+        </View>
+        </View>
       );
     } else {
       return (
+        <View style={{
+          // backgroundColor:COLORS.lightGray1,
+          height:100,
+          width:100,
+          borderRadius:100/2,
+          alignSelf:"center",
+        }}>
+
         <Image
-          source={images.login}
+          source={{uri:`https://ui-avatars.com/api/?name=${username}`}}
           resizeMethod="auto"
           resizeMode="contain"
           style={{
             width: 100,
             height: 100,
             borderRadius: 100 / 2,
-            borderWidth: 1,
             alignSelf: 'center',
+          borderWidth:2,
           }}
         />
+
+
+        <View style={{
+          position:"absolute",
+          alignSelf:"flex-end",
+          backgroundColor:COLORS.Primary,
+          height:18,
+          width:28,
+          justifyContent:"center",
+          marginTop:70,
+          borderRadius:4
+        }}>
+          <Text style={{
+          color:COLORS.white,
+          ...FONTS.h5,
+          alignSelf:"center"
+          }}>
+          Edit
+          </Text>
+        </View>
+        </View>
+
+
+        // 
       );
     }
   }
@@ -304,14 +363,6 @@ const Addanimals = ({navigation, route}) => {
               setshowc(true);
             }}>
             {renderFileUri()}
-            <Text
-              style={{
-                alignSelf: 'center',
-                margin: 5,
-                ...FONTS.h4,
-              }}>
-              Edit
-            </Text>
           </TouchableOpacity>
         </View>
 

@@ -18,7 +18,7 @@ const Card=({
     margin:SIZES.base2,
     borderRadius:SIZES.radius,
     flexDirection:'row',
-    justifyContent:"space-between",
+    justifyContent:"space-evenly",
     shadowColor: COLORS.black,
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
@@ -29,10 +29,10 @@ const Card=({
     onPress={onPress}>
       <View style={{justifyContent:'center',marginLeft:SIZES.padding}}>
           {
-              cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + image}} style={{height:50,width:50,}}/>):(<Image source={{uri: image}} style={{height:50,width:50,}}/>)
+              cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + image}} style={{height:80,width:100,borderRadius:SIZES.base}}/>):(<Image source={{uri: image}} style={{height:50,width:50,}}/>)
           }
       </View>
-      <View
+      {/* <View
             style={{
                 height: 80,
                 width: 1,
@@ -40,9 +40,10 @@ const Card=({
                 justifyContent:"center",
                 alignSelf:"center",
                 position:"absolute",
-                marginLeft:85
+                marginLeft:130,
+                margin:20
             }}
-        />
+        /> */}
       <View style={{
           flexDirection:'column',
           justifyContent:"space-evenly"

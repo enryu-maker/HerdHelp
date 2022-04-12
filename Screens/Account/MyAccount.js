@@ -7,12 +7,17 @@ import InfoItem from '../../Components/InfoItem';
 import {COLORS, SIZES, images, dummyData, FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import PickerType from '../Livestocks/PickerType';
-
+import Update from './Update';
+import { Username } from '../Nav/Homenav';
 const MyAccount = ({navigation,route}) => {
   const [user,setUser]=React.useState([])
   const [show, setshow] = React.useState(false);
+  const [showu, setshowu] = React.useState(false);
   const [pic, setPic] = React.useState('');
   const [picdata, setPicdata] = React.useState('');
+  const [profile_pic, setprofile_pic] = React.useState([]);
+  const [reload,setReload] = React.useState(false)
+  const username = React.useContext(Username)
   const fetchprofile = async () => {
       try {
         const {data} = await axiosIns.get('profile/');
@@ -24,13 +29,19 @@ const MyAccount = ({navigation,route}) => {
     React.useEffect(() => {
       fetchprofile().then(data => {
         setUser(data[0]);
+        setPic(data[0].profile_picture)
         global.User=data
       });
     }, []);
-  
     function renderFileUri() {
       if (pic) {
         return (
+          <View style={{
+            height:100,
+            width:100,
+            borderRadius:100/2,
+            alignSelf:"center",
+          }}>
           <Image
             source={{uri: pic}}
             style={{
@@ -38,24 +49,75 @@ const MyAccount = ({navigation,route}) => {
               height: 100,
               borderRadius: 100 / 2,
               alignSelf: 'center',
+              borderWidth:2,
             }}
           />
+          <View style={{
+            position:"absolute",
+            alignSelf:"flex-end",
+            backgroundColor:COLORS.black,
+            height:18,
+            width:28,
+            justifyContent:"center",
+            marginTop:70,
+            borderRadius:6
+          }}>
+            <Text style={{
+            color:COLORS.white,
+            ...FONTS.h5,
+            alignSelf:"center"
+            }}>
+            Edit
+            </Text>
+          </View>
+          </View>
         );
       } else {
         return (
+          <View style={{
+            // backgroundColor:COLORS.lightGray1,
+            height:100,
+            width:100,
+            borderRadius:100/2,
+            alignSelf:"center",
+          }}>
+  
           <Image
-            source={images.login}
+            source={{uri:`https://ui-avatars.com/api/?name=${username}`}}
             resizeMethod="auto"
             resizeMode="contain"
             style={{
               width: 100,
               height: 100,
               borderRadius: 100 / 2,
-              borderWidth:1,
               alignSelf: 'center',
-              // tintColor:COLORS.Primary
+            borderWidth:2,
             }}
           />
+  
+  
+          <View style={{
+            position:"absolute",
+            alignSelf:"flex-end",
+            backgroundColor:COLORS.black,
+            height:18,
+            width:28,
+            justifyContent:"center",
+            marginTop:70,
+            borderRadius:6
+          }}>
+            <Text style={{
+            color:COLORS.white,
+            ...FONTS.h5,
+            alignSelf:"center"
+            }}>
+            Edit
+            </Text>
+          </View>
+          </View>
+  
+  
+          // 
         );
       }
     }
@@ -121,17 +183,13 @@ const MyAccount = ({navigation,route}) => {
             marginTop: 6,
             borderRadius: SIZES.radius,
             paddingHorizontal: SIZES.radius,
+            justifyContent:"center"
           }}>
           <TouchableOpacity
             onPress={() => {
               setshow(true)
             }}>
             {renderFileUri()}
-            <Text style={{
-              alignSelf:"center",
-              margin:5,
-              ...FONTS.h4
-            }}>Edit</Text>
           </TouchableOpacity>
         </View>
     )
@@ -188,7 +246,8 @@ const MyAccount = ({navigation,route}) => {
         backgroundColor: COLORS.white,
       }}>
       {renderHeader()}
-      <PickerType show={show} setshow={setshow} setPic={setPic} setPicdata={setPicdata}/>
+      <PickerType show={show} setshow={setshow} setPic={setPic} setPicdata={setPicdata} setprofile_pic={setprofile_pic} setshowc={setshowu}/>
+      <Update showu={showu} setshowu={setshowu} profile={profile_pic} />
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: SIZES.padding,

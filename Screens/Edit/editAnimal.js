@@ -112,36 +112,7 @@ const EditAnimal = ({navigation, route}) => {
     price: price,
     bought: bought,
   });
-  function renderFileUri() {
-    if (pic) {
-      return (
-        <Image
-          source={{uri: pic}}
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 100 / 2,
-            alignSelf: 'center',
-          }}
-        />
-      );
-    } else {
-      return (
-        <Image
-          source={images.login}
-          resizeMethod="auto"
-          resizeMode="contain"
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 100 / 2,
-            borderWidth: 1,
-            alignSelf: 'center',
-          }}
-        />
-      );
-    }
-  }
+  
   async function postAnimal() {
     setLoading(true);
     if (isEnableSignIn()) {

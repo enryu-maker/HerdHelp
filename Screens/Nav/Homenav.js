@@ -101,11 +101,14 @@ const DrawerNav = () => {
           }} />
       </Drawer.Navigator>)}
 export const Username = React.createContext()
+export const Profile_pic = React.createContext()
+
 export default class Homenav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username:''
+      username:'',
+      profile_pic:''
     };
 }
    fetchprofile = async () => {
@@ -117,23 +120,24 @@ export default class Homenav extends Component {
     return data;
   }
   componentDidMount(){
-    setTimeout(()=>{
+    setInterval(()=>{
       this.fetchprofile().then((data)=>{
         global.User = data;
         this.setState({
-          username:data[0].username
+          username:data[0].username,
+          profile_pic:data[0].profile_picture
         })
       })
       this.checkSubs().then(data=>{
           global.isActive=data.isactive
         })
-      
     })
   }
 
   render() {
     return (
       <>
+      <Profile_pic.Provider value={this.state.profile_pic}>
       <Username.Provider value={this.state.username}>
         <Stack.Navigator screenOptions={{ headerShown: false}}
           initialRouteName={'DrawNav'}>
@@ -167,6 +171,7 @@ export default class Homenav extends Component {
           <Stack.Screen name='Address' component={BillingAdd}/>
         </Stack.Navigator>
         </Username.Provider>
+        </Profile_pic.Provider>
       </>
     )
   }

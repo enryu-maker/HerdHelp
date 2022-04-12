@@ -10,9 +10,12 @@ import CustomButton from '../Screens/Home/CustomButtom';
 
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
+  const [animals, setAnimals] = React.useState([]);
+
   const [med, setMed] = React.useState([]);
   const [cond, setCond] = React.useState(false);
   const [show, setShow] = React.useState(false);
+  const [profile_pic, setprofile_pic] = React.useState([]);
 
 
 
@@ -31,6 +34,7 @@ export const Info = ({navigation, route}) => {
   }
   React.useEffect(() => {
     let {value} = route.params;
+    setAnimals(value)
     let {cond} = route.params;
     getanimal(value.tag_number).then((data)=>{
       setAnimal(data)
@@ -74,7 +78,12 @@ export const Info = ({navigation, route}) => {
   function renderFileUri() {
     if (animal.animal_image) {
       return (
-        <>
+        <View style={{
+          height:100,
+          width:100,
+          borderRadius:100/2,
+          alignSelf:"center",
+        }}>
         <Image
           source={{uri: animal.animal_image}}
           style={{
@@ -82,40 +91,86 @@ export const Info = ({navigation, route}) => {
             height: 100,
             borderRadius: 100 / 2,
             alignSelf: 'center',
+            borderWidth:2,
           }}
         />
-        <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>
-            ID: {animal?.support_tag}
-          </Text>
-          </>
-      );
-    } else {
-      return (
         <View style={{
-          alignSelf: 'center',
-          justifyContent: 'center',
-          width: 100,
-            height: 100,
-            borderRadius: 100 / 2,
-            borderWidth: 1,
+          position:"absolute",
+          alignSelf:"flex-end",
+          backgroundColor:COLORS.black,
+          height:18,
+          width:28,
+          justifyContent:"center",
+          marginTop:70,
+          borderRadius:6
         }}>
-        <Image
-        resizeMode="contain"
-          source={{uri:animal?.image}}
-          style={{
-            alignSelf: 'center',
-            justifyContent: 'center',
-            width: 80,
-              height: 80,
-          }}/>
-
+          <Text style={{
+          color:COLORS.white,
+          ...FONTS.h5,
+          alignSelf:"center"
+          }}>
+          Edit
+          </Text>
+        </View>
         <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>
             ID: {animal?.support_tag}
           </Text>
         </View>
       );
+    } else {
+      return (
+        <View style={{
+          // backgroundColor:COLORS.lightGray1,
+          height:100,
+          width:100,
+          borderRadius:100/2,
+          alignSelf:"center",
+        }}>
+
+        <Image
+          // source={{uri:`https://ui-avatars.com/api/?name=${username}`}}
+          source={{uri:animal?.image}}
+          resizeMethod="auto"
+          resizeMode="contain"
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 100 / 2,
+            alignSelf: 'center',
+          borderWidth:2,
+          }}
+        />
+
+
+        <View style={{
+          position:"absolute",
+          alignSelf:"flex-end",
+          backgroundColor:COLORS.black,
+          height:18,
+          width:28,
+          justifyContent:"center",
+          marginTop:70,
+          borderRadius:6
+        }}>
+          <Text style={{
+          color:COLORS.white,
+          ...FONTS.h5,
+          alignSelf:"center"
+          }}>
+          Edit
+          </Text>
+        </View>
+        <Text style={{alignSelf: 'center', ...FONTS.h3, paddingBottom: 10}}>
+            ID: {animal?.support_tag}
+          </Text>
+        </View>
+
+
+        // 
+      );
     }
   }
+  
   function renderSectionZero() {
     return (
       
@@ -250,7 +305,7 @@ export const Info = ({navigation, route}) => {
           borderWidth:0
         }}
         label={"Babies"}
-        label2={animal.children.length}
+        label2={animals.children.length}
         label2Style={{
           color:COLORS.Primary,
           justifyContent:"center",
@@ -265,6 +320,7 @@ export const Info = ({navigation, route}) => {
         }}
         />)
   }
+
   function renderHeader() {
     return (
       <Header
@@ -340,11 +396,16 @@ export const Info = ({navigation, route}) => {
         contentContainerStyle={{
           paddingHorizontal: SIZES.padding,
         }}>
-          {renderFileUri()}
+          <TouchableOpacity onPress={()=>{
+            setShow(true)
+          }}>
+            {renderFileUri()}
+          </TouchableOpacity>
+          
         {renderSectionOne()}
         {renderSectionZero()}
         {
-          animal.children?.length > 0?Babies():null
+          animals.children?.length > 0 ?Babies():null
         }
         
         {Type()}

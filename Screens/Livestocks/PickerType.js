@@ -10,6 +10,7 @@ export default function PickerType({
   setPic,
   setPicdata,
   setprofile_pic,
+  setshowc
 }) {
   function openLibrary() {
     let options = {
@@ -36,6 +37,7 @@ export default function PickerType({
             name: `photo.${fileType}`
           },
         );
+        setshowc(true)
       }
     });
   }
@@ -55,8 +57,20 @@ export default function PickerType({
         imageAssetsArray = response.assets[0].uri;
         setPic(imageAssetsArray);
         setPicdata(response.assets[0].base64);
+        setprofile_pic(
+          {
+            type: `image/${fileType}`,
+            uri:
+              Platform.OS === 'ios'
+                ? response.assets[0].uri.replace('file://', '')
+                : response.assets[0].uri,
+            name: `photo.${fileType}`
+          },
+        );
+        setshowc(true)
       }
     });
+    
   }
   return (
     <Modal
@@ -75,18 +89,20 @@ export default function PickerType({
           alignItems: 'center',
         }}
         onStartShouldSetResponder={() => setshow(false)}>
+          
         <View
           style={{
             height: 110,
             width: '100%',
             backgroundColor: COLORS.white,
             alignSelf: 'center',
-            borderTopLeftRadius: SIZES.radius,
-            borderTopRightRadius: SIZES.radius,
+            borderTopLeftRadius: SIZES.radius+10,
+            borderTopRightRadius: SIZES.radius+10,
             flexDirection: 'row',
             justifyContent: 'space-evenly',
             alignItems: 'center',
           }}>
+          
           <TouchableOpacity
             onPress={() => {
               setshow(false);

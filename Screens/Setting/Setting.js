@@ -1,4 +1,4 @@
-import { View, Text,Image,TouchableOpacity,ScrollView,ActivityIndicator,Alert } from 'react-native'
+import { View, Text,Image,TouchableOpacity,ScrollView,ActivityIndicator,Alert,Modal } from 'react-native'
 import React from 'react'
 import { images,COLORS,SIZES ,FONTS} from '../../Components/Constants';
 import Header from '../../Components/Header';
@@ -7,13 +7,12 @@ import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../Home/CustomButtom';
 import { showMessage, hideMessage } from "react-native-flash-message";
-
 export default function Setting({navigation}) {
   const [unit,setUnit] = React.useState("")
   const [loading,setLoading] = React.useState(false)
   const [cond,setCond] = React.useState("")
   const [EmailError,setEmailError] = React.useState("")
-
+  const [color,setCol] = React.useState(COLORS.lightGray1)
   async function setWeightUnit(valu){
     await AsyncStorage.setItem("weight",valu.toString())
   }
@@ -127,9 +126,26 @@ export default function Setting({navigation}) {
         </View>
     )
   }
-  // console.log(unit)
+  const [react,showReact] = React.useState(false)
+  const renderReaction=({
+    react
+  })=>{
+    return(
+      <Modal 
+      animationType={'fade'}
+      visible={react}
+      onRequestClose={() => {
+        setShow(false);
+      }}>
+        <View>
+
+        </View>
+
+      </Modal>
+    )
+  }
   return (
-    <View style={{flex:1}}>
+    <View style={{flex:1, backgroundColor:COLORS.white}}>
       {renderheader()}
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -137,6 +153,7 @@ export default function Setting({navigation}) {
           paddingHorizontal: SIZES.padding,
         }}>
       {renderContent()}
+
       </ScrollView>
     </View>
   )
