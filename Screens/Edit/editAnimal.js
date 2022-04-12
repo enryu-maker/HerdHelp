@@ -166,6 +166,9 @@ const EditAnimal = ({navigation, route}) => {
               },
               animationDuration: 250,
               icon: 'success',
+              style:{
+                justifyContent:"center"
+              }
             });
           }
         })
@@ -182,10 +185,12 @@ const EditAnimal = ({navigation, route}) => {
             },
             animationDuration: 250,
             icon: 'danger',
+            style:{
+              justifyContent:"center"
+            }
           });
         });
     } else {
-      setEmailError('Required Fields cannot be empty');
       setLoading(false);
       showMessage({
         message: `Required Fields cannot be empty`,
@@ -198,6 +203,9 @@ const EditAnimal = ({navigation, route}) => {
         },
         icon: 'danger',
         animationDuration: 250,
+        style:{
+          justifyContent:"center"
+        }
       });
     }
   }

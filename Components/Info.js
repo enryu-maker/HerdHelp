@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Image, ScrollView,Alert} from 'react-native';
+import {View, Text, TouchableOpacity, Image, ScrollView,Alert,ActivityIndicator} from 'react-native';
 import React from 'react';
 import Header from './Header';
 import {COLORS, SIZES, images, FONTS} from './Constants';
@@ -8,12 +8,14 @@ import Status from './Status';
 import TextButton from './TextButton';
 import CustomButton from '../Screens/Home/CustomButtom';
 
-
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
   const [med, setMed] = React.useState([]);
   const [cond, setCond] = React.useState(false);
   const [show, setShow] = React.useState(false);
+
+
+
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -23,16 +25,21 @@ export const Info = ({navigation, route}) => {
     let {data} = await axiosIns.get(`getmedication/${tag}`);
     return data;
   }
+  async function getanimal(tag) {
+    let {data} = await axiosIns.get(`animals/${tag}`);
+    return data;
+  }
   React.useEffect(() => {
     let {value} = route.params;
     let {cond} = route.params;
+    getanimal(value.tag_number).then((data)=>{
+      setAnimal(data)
+    })
     getMedication(value.tag_number).then((data)=>{
       setMed(data)
     });
-    setCond(cond);
-    setAnimal(value);
-    
-  }, []);
+    setCond(cond);    
+  }, [animal]);
 
   function renderSectionOne() {
     return (
@@ -339,6 +346,8 @@ export const Info = ({navigation, route}) => {
         show &&
         <Status show={show} setShow={setShow} animal={animal}/>
       }
+      
+      
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -354,6 +363,7 @@ export const Info = ({navigation, route}) => {
         {renderSectionFour()}
         {Vaccinated()}
       </ScrollView>
+
       {cond?
       <TextButton
         onPress={() => {

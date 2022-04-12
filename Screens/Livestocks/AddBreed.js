@@ -178,9 +178,9 @@ const Addanimals = ({navigation, route}) => {
     setLoading(true);
     if (isEnableSignIn()) {
       await axiosIns
-        .post('animals/',formData,{
+        .post('animals/',formData._parts,{
             headers: {
-              'Content-Type': `multipart/form-data; boundary= ----WebKitFormBoundaryABC`,
+              'Content-Type': `multipart/form-data; boundry==${22}`,
             }
           }
         )
@@ -947,6 +947,7 @@ const Addanimals = ({navigation, route}) => {
       <TextButton
         onPress={() => {
           postAnimal();
+          // console.log(formData._parts)
         }}
         icon={images.add}
         buttonContainerStyle={{

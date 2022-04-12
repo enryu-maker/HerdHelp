@@ -8,7 +8,7 @@ import FormInput from '../../Components/FormInput';
 import {COLORS, SIZES, images} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import CustomAlert from '../../Components/CustomAlert';
-
+import { showMessage } from 'react-native-flash-message';
 const MyAccountEdit = ({navigation,route}) => {
   const [fullName, setFullName] = useState(route.params.user.fullname);
   const [phoneNo, setPhoneNo] = useState(route.params.user.phone);
@@ -16,6 +16,7 @@ const MyAccountEdit = ({navigation,route}) => {
   const [addr, setAddr] = useState(route.params.user.address);
   const [user,setUser]=React.useState([])
   const [show, setShow] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
 
@@ -33,15 +34,40 @@ const MyAccountEdit = ({navigation,route}) => {
             },
           }
         ).then(()=>{
-          setDataText("Details updated")
-          setShow(true)
-          setValidation(true)
+          setLoading(true)
+          showMessage({
+            message: 'Details updated',
+            type: 'default',
+            backgroundColor: COLORS.Primary,
+            color: COLORS.white,
+            titleStyle: {
+              alignSelf: 'center',
+              ...FONTS.h3,
+            },
+            animationDuration: 250,
+            icon: "success",
+            style:{
+              justifyContent:"center"
+            }
+          });
         })
       } catch (e) {
-        // console.log(e.response)
-        setDataText("Not updated")
-        setShow(true)
-        setValidation(false)
+        setLoading(true)
+        showMessage({
+          message: `${e.response.data.msg}`,
+          type: 'default',
+          backgroundColor: COLORS.Primary,
+          color: COLORS.white,
+          titleStyle: {
+            alignSelf: 'center',
+            ...FONTS.h3,
+          },
+          animationDuration: 250,
+          icon: "success",
+          style:{
+            justifyContent:"center"
+          }
+        });
       }
     };
   React.useEffect(() => {

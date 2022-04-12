@@ -17,7 +17,7 @@ import LoaderOp from '../../Components/LoaderOp';
 import { baseURL } from '../../helpers/helpers';
 import utils from '../../utils/Utils';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Permission } from '../../App';
+import { showMessage } from 'react-native-flash-message';
 export const Signup = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -58,37 +58,79 @@ export const Signup = ({navigation}) => {
         )
         .then(response => {
           if (response.status === 201) {
-            setLoading(false);
-            setValidation(true);
-            setShow(true);
-            setDataText('User created');
-            setEmailError('User created');
-            setInterval(() => {
-              setShow(false);
-            }, 3000);
-            // navigation.navigate('Login');
+            setLoading(false)
+            showMessage({
+              message: 'User created',
+              type: 'default',
+              backgroundColor: COLORS.Primary,
+              color: COLORS.white,
+              titleStyle: {
+                alignSelf: 'center',
+                ...FONTS.h3,
+              },
+              animationDuration: 250,
+              icon: 'success',
+              style:{
+                justifyContent:"center"
+              }
+            });
           } else {
             setLoading(false);
-            setValidation(false);
-            setShow(true);
-            setDataText('User Registered');
+            showMessage({
+              message: 'User Registered',
+              type: 'default',
+              backgroundColor: COLORS.red,
+              color: COLORS.white,
+              titleStyle: {
+                alignSelf: 'center',
+                ...FONTS.h3,
+              },
+              animationDuration: 250,
+              icon: "danger",
+              style:{
+                justifyContent:"center"
+              }
+            });
           }
         })
         .catch(error => {
           if (error.response) {
             setLoading(false);
-            setShow(true);
-            setValidation(false);
-            setDataText('User Registered');
-            setEmailError('Invalid Input');
+            showMessage({
+              message: `${error.response.data.msg}`,
+              type: 'default',
+              backgroundColor: COLORS.red,
+              color: COLORS.white,
+              titleStyle: {
+                alignSelf: 'center',
+                ...FONTS.h3,
+              },
+              animationDuration: 250,
+              icon: "danger",
+              style:{
+                justifyContent:"center"
+              }
+            });
+            
           }
         });
     } else {
-      setValidation(false);
-      setShow(true);
       setLoading(false);
-      setDataText('User Registered');
-      setEmailError('Invalid Input');
+      showMessage({
+        message: `Invalid Input`,
+        type: 'default',
+        backgroundColor: COLORS.red,
+        color: COLORS.white,
+        titleStyle: {
+          alignSelf: 'center',
+          ...FONTS.h3,
+        },
+        animationDuration: 250,
+        icon: "danger",
+        style:{
+          justifyContent:"center"
+        }
+      });
     }
   }
 
