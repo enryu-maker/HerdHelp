@@ -120,7 +120,6 @@ export default class Homenav extends Component {
     return data;
   }
   componentDidMount(){
-    setInterval(()=>{
       this.fetchprofile().then((data)=>{
         global.User = data;
         this.setState({
@@ -131,7 +130,6 @@ export default class Homenav extends Component {
       this.checkSubs().then(data=>{
           global.isActive=data.isactive
         })
-    })
   }
 
   render() {

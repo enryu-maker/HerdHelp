@@ -63,6 +63,8 @@ const Addanimals = ({navigation, route}) => {
   const [EmailError, setEmailError] = React.useState('');
   const [unit, setUnit] = React.useState(false);
   const [showc, setshowc] = React.useState(false);
+  const [showu, setshowu] = React.useState(false);
+
   const [pic, setPic] = React.useState('');
   const [profile_pic, setprofile_pic] = React.useState([]);
   const [picdata, setPicdata] = React.useState([]);
@@ -121,7 +123,7 @@ const Addanimals = ({navigation, route}) => {
           alignSelf:"flex-end",
           backgroundColor:COLORS.Primary,
           height:18,
-          width:28,
+          width:30,
           justifyContent:"center",
           marginTop:70,
           borderRadius:4
@@ -139,11 +141,12 @@ const Addanimals = ({navigation, route}) => {
     } else {
       return (
         <View style={{
-          // backgroundColor:COLORS.lightGray1,
           height:100,
           width:100,
           borderRadius:100/2,
           alignSelf:"center",
+          borderColor:COLORS.black
+
         }}>
 
         <Image
@@ -165,7 +168,7 @@ const Addanimals = ({navigation, route}) => {
           alignSelf:"flex-end",
           backgroundColor:COLORS.Primary,
           height:18,
-          width:28,
+          width:30,
           justifyContent:"center",
           marginTop:70,
           borderRadius:4
@@ -351,6 +354,7 @@ const Addanimals = ({navigation, route}) => {
           setPic={setPic}
           setPicdata={setPicdata}
           setprofile_pic={setprofile_pic}
+          setshowc={setshowu}
         />
         <View
           style={{

@@ -55,7 +55,7 @@ const MyAccount = ({navigation,route}) => {
           <View style={{
             position:"absolute",
             alignSelf:"flex-end",
-            backgroundColor:COLORS.black,
+            backgroundColor:COLORS.Primary,
             height:18,
             width:28,
             justifyContent:"center",
@@ -99,7 +99,7 @@ const MyAccount = ({navigation,route}) => {
           <View style={{
             position:"absolute",
             alignSelf:"flex-end",
-            backgroundColor:COLORS.black,
+            backgroundColor:COLORS.Primary,
             height:18,
             width:28,
             justifyContent:"center",

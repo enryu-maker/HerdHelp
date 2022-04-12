@@ -27,7 +27,7 @@ const Card=({
     width:'88%',
     alignSelf:'center'}}
     onPress={onPress}>
-      <View style={{justifyContent:'center',marginLeft:SIZES.padding}}>
+      <View style={{justifyContent:'center',marginRight:SIZES.padding}}>
           {
               cond?(<Image source={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + image}} style={{height:80,width:100,borderRadius:SIZES.base}}/>):(<Image source={{uri: image}} style={{height:50,width:50,}}/>)
           }

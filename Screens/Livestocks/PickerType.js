@@ -55,6 +55,8 @@ export default function PickerType({
     launchCamera(options, response => {
       if (response.assets) {
         imageAssetsArray = response.assets[0].uri;
+        const uriParts = response.assets[0].uri.split('.')
+        const fileType = uriParts[uriParts.length - 1];
         setPic(imageAssetsArray);
         setPicdata(response.assets[0].base64);
         setprofile_pic(

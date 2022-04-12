@@ -14,7 +14,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import CustomButton from './CustomButtom';
-import { Username,Profile_pic } from '../Nav/Homenav';
+import {Username, Profile_pic} from '../Nav/Homenav';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [show, setShow] = React.useState('');
@@ -46,9 +46,9 @@ const Main = ({navigation}) => {
     let {data} = await axiosIns.get('subscriptions/isactive/');
     return data;
   }
-  async function getAnimals(){
+  async function getAnimals() {
     let {data} = await axiosIns.get('animaltags/');
-    return data
+    return data;
   }
   React.useEffect(() => {
     fetchStatus();
@@ -59,7 +59,7 @@ const Main = ({navigation}) => {
     });
     getWeightUnit();
     checkSubs().then(data => {
-      global.isActive=data.isactive
+      global.isActive = data.isactive;
       !data.isactive
         ? navigation.navigate('Subscription', {
             msg: 'No Active Subscription Please Purchase the Tier',
@@ -67,11 +67,13 @@ const Main = ({navigation}) => {
           })
         : null;
     });
-    getAnimals().then((data)=>{
-      global.tags=data
-    })
+    getAnimals().then(data => {
+      global.tags = data;
+    });
   }, [show]);
- const profile_pic = React.useContext(Profile_pic)
+  const profile_pic = React.useContext(Profile_pic);
+  const username = React.useContext(Username);
+
 
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -128,18 +130,14 @@ const Main = ({navigation}) => {
                 navigation.navigate('MyAccount');
               }}>
               <Image
-
-              
-      source={{uri:profile_pic}}
-      
-
+                source={{uri: profile_pic==null?`https://ui-avatars.com/api/?name=${username}`:profile_pic}}
                 // resizeMode="cover"
                 style={{
                   height: 50,
                   width: 50,
                   borderRadius: 50 / 2,
-                  borderWidth:2,
-                  borderColor:COLORS.Primary
+                  borderWidth: 2,
+                  borderColor: COLORS.Primary,
                 }}
               />
             </TouchableOpacity>

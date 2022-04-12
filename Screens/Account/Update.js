@@ -12,13 +12,14 @@ import { baseURL } from '../../helpers/helpers';
 import {showMessage} from 'react-native-flash-message';
 import React from 'react';
 import {Access} from '../../App';
-export default function Update({showu, setshowu, profile,link,label,msg}) {
+export default function Update({showu, setshowu, profile,link,name,msg}) {
   const [loading, setLoading] = React.useState(false);
   const access = React.useContext(Access);
+  
   function updateProfile() {
     setLoading(true);
     const formData = new FormData();
-    formData.append(label, profile);
+    formData.append(name, profile);
     fetch(baseURL + link, {
       method: 'PATCH',
       headers: {
@@ -46,10 +47,12 @@ export default function Update({showu, setshowu, profile,link,label,msg}) {
               justifyContent: 'center',
             },
           });
+          setshowu(false)
         }
       })
       .catch((err) => {
         setLoading(false);
+        console.log(err)
         showMessage({
           message: `${err.response.data.msg}`,
           type: 'default',
@@ -65,6 +68,7 @@ export default function Update({showu, setshowu, profile,link,label,msg}) {
             justifyContent: 'center',
           },
         });
+        setshowu(false)
       });
   }
   return (
@@ -125,10 +129,6 @@ export default function Update({showu, setshowu, profile,link,label,msg}) {
           <TouchableOpacity
             onPress={() => {
                 updateProfile()
-                setshowu(false)
-
-                // console.log(profile)
-              //   openLibrary();
             }}>
             <Image
               source={images.correct}

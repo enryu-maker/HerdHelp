@@ -8,7 +8,7 @@ import Status from './Status';
 import TextButton from './TextButton';
 import CustomButton from '../Screens/Home/CustomButtom';
 import PickerType from '../Screens/Livestocks/PickerType';
-
+import Update from '../Screens/Account/Update';
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
   const [animals, setAnimals] = React.useState([]);
@@ -20,6 +20,8 @@ export const Info = ({navigation, route}) => {
   const [picdata, setPicdata] = React.useState('');
   const [pic, setPic] = React.useState('');
   const [showu, setshowu] = React.useState(false);
+  const [showc, setshowc] = React.useState(false);
+
 
 
 
@@ -47,13 +49,13 @@ export const Info = ({navigation, route}) => {
       setMed(data)
     });
     setCond(cond);    
-  }, [animal]);
+  }, []);
 
   function renderSectionOne() {
     return (
       <View
         style={{
-          marginTop: 15,
+          marginTop: SIZES.padding,
           borderRadius: SIZES.radius,
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
@@ -101,9 +103,9 @@ export const Info = ({navigation, route}) => {
         <View style={{
           position:"absolute",
           alignSelf:"flex-end",
-          backgroundColor:COLORS.black,
+          backgroundColor:COLORS.Primary,
           height:18,
-          width:28,
+          width:30,
           justifyContent:"center",
           marginTop:70,
           borderRadius:6
@@ -149,9 +151,9 @@ export const Info = ({navigation, route}) => {
         <View style={{
           position:"absolute",
           alignSelf:"flex-end",
-          backgroundColor:COLORS.black,
+          backgroundColor:COLORS.Primary,
           height:18,
-          width:28,
+          width:30,
           justifyContent:"center",
           marginTop:70,
           borderRadius:6
@@ -393,15 +395,15 @@ export const Info = ({navigation, route}) => {
         show &&
         <Status show={show} setShow={setShow} animal={animal}/>
       }
-      <PickerType show={show} setshow={setShow} setPic={setPic} setPicdata={setPicdata} setprofile_pic={setprofile_pic} setshowc={setshowu}/>
-      <Update showu={showu} setshowu={setshowu} profile={profile_pic} link={`animal/${animal?.tag_number}`} lable={'animal_image'} msg={'Profile updated'}/>
+      <PickerType show={showc} setshow={setshowc} setPic={setPic} setPicdata={setPicdata} setprofile_pic={setprofile_pic} setshowc={setshowu}/>
+      <Update showu={showu} setshowu={setshowu} profile={profile_pic} link={`animals/${animal?.tag_number}`} name={'animal_image'} msg={'Profile updated'}/>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingHorizontal: SIZES.padding,
         }}>
           <TouchableOpacity onPress={()=>{
-            setShow(true)
+            setshowc(true)
           }}>
             {renderFileUri()}
           </TouchableOpacity>

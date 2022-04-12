@@ -27,6 +27,8 @@ export default function Drawercontent(props) {
 //   console.log(username)
 // },[])
  const profile_pic = useContext(Profile_pic)
+ const username = useContext(Username)
+
  
   return (
     <View style={{flex: 1}}>
@@ -39,9 +41,8 @@ export default function Drawercontent(props) {
           <View style={styles.userInfoSection}>
             <View style={[styles.row, {flexDirection: 'row'}]}>
               <Image
-                source={{
-                  uri: profile_pic,
-                }}
+                source={{uri: profile_pic==null?`https://ui-avatars.com/api/?name=${username}`:profile_pic}}
+
                 resizeMode="cover"
                 style={{
                   width: 80,
