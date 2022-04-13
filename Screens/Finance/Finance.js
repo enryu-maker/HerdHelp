@@ -164,7 +164,7 @@ export const Finance = ({navigation}) => {
           label="Category"
           borderRadius={SIZES.radius}
           data={animals}
-          textInputStyle={[FONTS.body3, {letterSpacing: 2}]}
+          textInputStyle={{...FONTS.body3,letterSpacing: 2}}
           selectedItemTextStyle={[FONTS.body3, {color: COLORS.white}]}
           selectedItemViewStyle={{
             backgroundColor: COLORS.Primary,
@@ -179,9 +179,11 @@ export const Finance = ({navigation}) => {
           primaryColor={COLORS.Primary}
           avatarSize={28}
           value={cat}
-          onChange={onChangeB}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          onChange={(value)=>{
+            setCat(value)
+          }}
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           // mode="outlined"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
