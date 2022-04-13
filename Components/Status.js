@@ -135,7 +135,7 @@ const Status = ({show, setShow, animal}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          enableAvatar
+          // enableAvatar
           required
           disableSelectionTick
           primaryColor={COLORS.Primary}

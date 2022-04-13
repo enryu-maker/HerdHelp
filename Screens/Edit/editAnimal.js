@@ -302,7 +302,7 @@ const EditAnimal = ({navigation, route}) => {
             borderRadius: SIZES.radius,
             height: 40,
           }}
-          enableAvatar
+          // enableAvatar
           required
           disableSelectionTick
           primaryColor={COLORS.Primary}
@@ -334,7 +334,7 @@ const EditAnimal = ({navigation, route}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          enableAvatar
+          // enableAvatar
           required
           // showLoader
           // mode="outlined"
@@ -663,7 +663,7 @@ const EditAnimal = ({navigation, route}) => {
                   margin: 5,
                   borderRadius: SIZES.radius,
                 }}
-                enableAvatar
+                // enableAvatar
                 // required
                 disableSelectionTick
                 primaryColor={COLORS.Primary}
@@ -701,7 +701,7 @@ const EditAnimal = ({navigation, route}) => {
                 margin: 5,
                 borderRadius: SIZES.radius,
               }}
-              enableAvatar
+              // enableAvatar
               // required
               disableSelectionTick
               animationIn="zoomIn"

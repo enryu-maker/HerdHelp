@@ -363,7 +363,7 @@ export const Medication = ({navigation, route}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          enableAvatar
+          // enableAvatar
           animationIn="zoomIn"
           animationOut="zoomOut"
           disableSelectionTick

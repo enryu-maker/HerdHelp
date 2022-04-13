@@ -465,7 +465,7 @@ const Addanimals = ({navigation, route}) => {
             borderRadius: SIZES.radius,
             height: 40,
           }}
-          enableAvatar
+          // enableAvatar
           required
           // mode="outlined"
           disableSelectionTick
@@ -499,7 +499,7 @@ const Addanimals = ({navigation, route}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          enableAvatar
+          // enableAvatar
           required
           // showLoader
           // mode="outlined"
@@ -627,7 +627,7 @@ const Addanimals = ({navigation, route}) => {
                 margin: 5,
                 borderRadius: SIZES.radius,
               }}
-              enableAvatar
+              // enableAvatar
               // required
               disableSelectionTick
               animationIn="zoomIn"
@@ -828,7 +828,7 @@ const Addanimals = ({navigation, route}) => {
                   margin: 5,
                   borderRadius: SIZES.radius,
                 }}
-                enableAvatar
+                // enableAvatar
                 // required
                 disableSelectionTick
                 primaryColor={COLORS.Primary}
@@ -866,7 +866,7 @@ const Addanimals = ({navigation, route}) => {
                 margin: 5,
                 borderRadius: SIZES.radius,
               }}
-              enableAvatar
+              // enableAvatar
               // required
               disableSelectionTick
               animationIn="zoomIn"

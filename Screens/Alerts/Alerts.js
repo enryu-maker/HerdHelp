@@ -70,13 +70,18 @@ export default function Alerts({navigation,route}) {
         showMessage({
           message: "Alerts added",
           type: "default",
-          backgroundColor: COLORS.red,
+          backgroundColor: COLORS.Primary,
           color:COLORS.white,
           titleStyle:{
             alignSelf:"center",
             ...FONTS.h3
           },
-          animationDuration:250
+          animationDuration:250,
+          icon:"success",
+            style:{
+              justifyContent:"center"
+            }
+          
         });
       }
       
@@ -91,7 +96,11 @@ export default function Alerts({navigation,route}) {
           alignSelf:"center",
           ...FONTS.h3
         },
-        animationDuration:250
+        animationDuration:250,
+        icon:"danger",
+            style:{
+              justifyContent:"center"
+            }
       });
       })}
       catch{
@@ -104,7 +113,11 @@ export default function Alerts({navigation,route}) {
             alignSelf:"center",
             ...FONTS.h3
           },
-          animationDuration:250
+          animationDuration:250,
+          icon:"danger",
+            style:{
+              justifyContent:"center"
+            }
         });
       }
     }
