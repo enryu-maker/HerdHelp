@@ -9,6 +9,7 @@ import axiosIns from '../../helpers/helpers';
 import PickerType from '../Livestocks/PickerType';
 import Update from './Update';
 import { Username } from '../Nav/Homenav';
+import { tr } from 'date-fns/locale';
 const MyAccount = ({navigation,route}) => {
   const [user,setUser]=React.useState([])
   const [show, setshow] = React.useState(false);
@@ -238,7 +239,6 @@ const MyAccount = ({navigation,route}) => {
       </View>
     );
   }
-
   return (
     <View
       style={{
@@ -247,7 +247,7 @@ const MyAccount = ({navigation,route}) => {
       }}>
       {renderHeader()}
       <PickerType show={show} setshow={setshow} setPic={setPic} setPicdata={setPicdata} setprofile_pic={setprofile_pic} setshowc={setshowu}/>
-      <Update showu={showu} setshowu={setshowu} profile={profile_pic} link={`updateprofile/${global.id}`} lable={'profile_picture'} msg={'Profile updated'}/>
+      <Update showu={showu} setshowu={setshowu} profile={profile_pic} cond={true}/>
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: SIZES.padding,

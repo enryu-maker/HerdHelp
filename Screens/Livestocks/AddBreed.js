@@ -437,9 +437,11 @@ const Addanimals = ({navigation, route}) => {
           primaryColor={COLORS.Primary}
           // avatarSize={28}
           value={valueMS}
-          onChange={onChangeMS}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          onChange={(value)=>{
+            setValueMS(value)
+          }}
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -468,13 +470,15 @@ const Addanimals = ({navigation, route}) => {
           // enableAvatar
           required
           // mode="outlined"
-          disableSelectionTick
+          // disableSelectionTick
           primaryColor={COLORS.Primary}
           // avatarSize={28}
           value={valueBS}
-          onChange={onChangeBS}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          onChange={(value)=>{
+            setValueBS(value)
+          }}
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -507,9 +511,11 @@ const Addanimals = ({navigation, route}) => {
           primaryColor={COLORS.Primary}
           // avatarSize={28}
           value={bought}
-          onChange={onChangebought}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          onChange={(value)=>{
+            setBought(value)
+          }}
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -630,12 +636,14 @@ const Addanimals = ({navigation, route}) => {
               // enableAvatar
               // required
               disableSelectionTick
-              animationIn="zoomIn"
-              animationOut="zoomOut"
+              animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
               primaryColor={COLORS.Primary}
               avatarSize={28}
               value={vaccinated}
-              onChange={onChangeVacc}
+              onChange={(value)=>{
+                setVaccinated(value)
+              }}
               mainContainerStyle={{
                 borderRadius: SIZES.padding,
                 width: '88%',
@@ -834,9 +842,11 @@ const Addanimals = ({navigation, route}) => {
                 primaryColor={COLORS.Primary}
                 avatarSize={28}
                 value={bred}
-                onChange={onChangeB}
-                animationIn="zoomIn"
-                animationOut="zoomOut"
+                onChange={(value)=>{
+                  setBred(value)
+                }}
+                animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
                 // mode="outlined"
                 mainContainerStyle={{
                   borderRadius: SIZES.padding,

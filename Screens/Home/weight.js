@@ -27,9 +27,6 @@ export const Weight =({ navigation,route})=> {
       setAnimals(global.species)
       setTagl(global.tags)
   },[]);
-  const onChangeSpec = value => {
-    setSpcies(value);
-  };
   function finder(list, value) {
     var dataValue;
     list?.map(a => {
@@ -191,17 +188,18 @@ export const Weight =({ navigation,route})=> {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           disableSelectionTick
           primaryColor={COLORS.Primary}
           value={species}
-          onChange={onChangeSpec}
+          onChange={(value)=>{
+            setSpcies(value)
+          }}
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
-            alignSelf: 'center',
-            // marginTop: SIZES.height > 800 ? SIZES.base : 10,
+            alignSelf: 'center'
           }}
           itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
         />
@@ -219,13 +217,13 @@ export const Weight =({ navigation,route})=> {
             borderRadius: SIZES.radius,
           }}
           // enableAvatar
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           disableSelectionTick
           primaryColor={COLORS.Primary}
           avatarSize={28}
           value={tag}
-          onChange={value => {
+          onChange={(value) => {
             setTag(value);
           }}
           mainContainerStyle={{

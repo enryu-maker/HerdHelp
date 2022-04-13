@@ -14,6 +14,7 @@ export const Home = ({navigation}) => {
   async function fetchanimal() {
     setLoading(true)
     let {data} = await axiosIns.get('animals/');
+    // console.log(data[4])
     return data;
   }
  

@@ -124,12 +124,14 @@ export default function Parents({navigation}) {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           disableSelectionTick
           primaryColor={COLORS.Primary}
           value={species}
-          onChange={onChangeSpec}
+          onChange={(value)=>{
+            setSpecies(value)
+          }}
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -156,7 +158,7 @@ export default function Parents({navigation}) {
           primaryColor={COLORS.Primary}
           avatarSize={28}
           value={tag}
-          onChange={value => {
+          onChange={(value) => {
             setTag(value);
           }}
           mainContainerStyle={{

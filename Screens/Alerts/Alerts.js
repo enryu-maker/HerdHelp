@@ -192,9 +192,11 @@ export default function Alerts({navigation,route}) {
           dropdownIconSize={22}
           primaryColor={COLORS.Primary}
           value={animals}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
-          onChange={onChangeSpec}
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
+          onChange={(value)=>{
+            setAnimals(value)
+          }}
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -216,13 +218,13 @@ export default function Alerts({navigation,route}) {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           disableSelectionTick
           primaryColor={COLORS.Primary}
           avatarSize={28}
           value={tag}
-          onChange={value => {
+          onChange={(value) => {
             setTag(value);
           }}
           mainContainerStyle={{

@@ -88,7 +88,7 @@ export default function LoadAlert({navigation, route}) {
               style={{
                 backgroundColor: COLORS.lightGray2,
                 flex:1,
-                height: 120,
+                height: data.item.support_tag != "" ? 120:100,
                 margin: SIZES.base2,
                 borderRadius: SIZES.radius,
                 width: '88%',
@@ -104,10 +104,10 @@ export default function LoadAlert({navigation, route}) {
                 Platform.OS=="android"?{...FONTS.body3}:{...FONTS.body3}
             }>{`Solution: ${data.item.content}`}</Text>
             {
-              data.item.tag_number != undefined || data.item.tag_number != "" ?
+              data.item.support_tag != "" ?
               (<Text style={
                 {...FONTS.h3}
-            }>{`Tag: ${data.item.tag_number}`}</Text>):
+            }>{`Tag: ${data.item.support_tag}`}</Text>):
               (<View></View>)
             }
             <View style={{flexDirection:"row",justifyContent:"space-between",width:"55%"}}>
@@ -125,10 +125,11 @@ export default function LoadAlert({navigation, route}) {
             <TextButton
             key={rowMap}
               buttonContainerStyle={{
-                flex: 1,
+                // flex: 1,
+                height:data.item.support_tag != "" ? 120:100,
                 justifyContent: 'flex-end',
-                marginTop: 10,
-                marginBottom: 10,
+                marginTop: 5,
+                // marginBottom: 10,
                 backgroundColor:"#ff5b5b"
               }}
               

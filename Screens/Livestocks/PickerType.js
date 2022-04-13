@@ -14,6 +14,8 @@ export default function PickerType({
 }) {
   function openLibrary() {
     let options = {
+      quality: 0,
+      noData : true,
       storageOptions: {
         path: 'images',
         mediaType: 'photo',
@@ -43,14 +45,12 @@ export default function PickerType({
   }
   function openCamera() {
     let options = {
-      quality: 1,
-      maxWidth: 500,
-      maxHeight: 500,
+      quality: 0,
+      noData : true,
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
-      includeBase64: true,
     };
     launchCamera(options, response => {
       if (response.assets) {
@@ -70,6 +70,9 @@ export default function PickerType({
           },
         );
         setshowc(true)
+      }
+      else{
+        alert("error")
       }
     });
     

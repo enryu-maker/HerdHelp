@@ -396,7 +396,7 @@ export const Info = ({navigation, route}) => {
         <Status show={show} setShow={setShow} animal={animal}/>
       }
       <PickerType show={showc} setshow={setshowc} setPic={setPic} setPicdata={setPicdata} setprofile_pic={setprofile_pic} setshowc={setshowu}/>
-      <Update showu={showu} setshowu={setshowu} profile={profile_pic} link={`animals/${animal?.tag_number}`} name={'animal_image'} msg={'Profile updated'}/>
+      <Update showu={showu} setshowu={setshowu} profile={profile_pic} tag={animal?.tag_number} cond={false}/>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{

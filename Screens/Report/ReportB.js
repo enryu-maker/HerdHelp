@@ -9,6 +9,7 @@ const  ReportB=({
     reportTextstyle,
     btnStyle,
     onPress,
+    
 })=>{
   return (
     <TouchableOpacity style={{backgroundColor:COLORS.lightGray2,

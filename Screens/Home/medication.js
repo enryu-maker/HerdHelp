@@ -214,11 +214,13 @@ export const Medication = ({navigation, route}) => {
             borderRadius: SIZES.radius,
           }}
           disableSelectionTick
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           primaryColor={COLORS.Primary}
           value={species}
-          onChange={onChangeSpec}
+          onChange={(value)=>{
+            setSpcies(value)
+          }}
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -241,13 +243,13 @@ export const Medication = ({navigation, route}) => {
             borderRadius: SIZES.radius,
           }}
           // enableAvatar
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           disableSelectionTick
           primaryColor={COLORS.Primary}
           avatarSize={28}
           value={tag}
-          onChange={value => {
+          onChange={(value) => {
             setTag(value);
           }}
           mainContainerStyle={{
@@ -276,7 +278,7 @@ export const Medication = ({navigation, route}) => {
           returnKeyType={"next"}
           label="Reason for Medication?"
           value={Dis}
-          onChange={value => {
+          onChange={(value) => {
             setDis(value);
           }}
           inputContainerStyle={{
@@ -338,7 +340,7 @@ export const Medication = ({navigation, route}) => {
             </View>
           }
           value={dos}
-          onChange={value => {
+          onChange={(value) => {
             setDos(value);
           }}
           label={'Dosage'}
@@ -370,7 +372,7 @@ export const Medication = ({navigation, route}) => {
           primaryColor={COLORS.Primary}
           avatarSize={28}
           value={withdraw}
-          onChange={value => {
+          onChange={(value) => {
             setWithdraw(value);
           }}
           mainContainerStyle={{

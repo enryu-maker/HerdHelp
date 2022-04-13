@@ -12,15 +12,14 @@ import { baseURL } from '../../helpers/helpers';
 import {showMessage} from 'react-native-flash-message';
 import React from 'react';
 import {Access} from '../../App';
-export default function Update({showu, setshowu, profile,link,name,msg}) {
+export default function Update({showu, setshowu, profile,cond,tag}) {
   const [loading, setLoading] = React.useState(false);
   const access = React.useContext(Access);
-  
   function updateProfile() {
     setLoading(true);
     const formData = new FormData();
-    formData.append(name, profile);
-    fetch(baseURL + link, {
+    formData.append('profile_picture', profile);
+    fetch(baseURL + `updateprofile/${global.id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
@@ -33,7 +32,62 @@ export default function Update({showu, setshowu, profile,link,name,msg}) {
         if (response.status == 200) {
           setLoading(false);
           showMessage({
-            message: msg,
+            message: 'Profile Pic updated',
+            type: 'default',
+            backgroundColor: COLORS.Primary,
+            color: COLORS.white,
+            titleStyle: {
+              alignSelf: 'center',
+              ...FONTS.h3,
+            },
+            animationDuration: 250,
+            icon: 'success',
+            style: {
+              justifyContent: 'center',
+            },
+          });
+          setshowu(false)
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err)
+        showMessage({
+          message: `${err.response.data.msg}`,
+          type: 'default',
+          backgroundColor: COLORS.red,
+          color: COLORS.white,
+          titleStyle: {
+            alignSelf: 'center',
+            ...FONTS.h3,
+          },
+          animationDuration: 250,
+          icon: 'danger',
+          style: {
+            justifyContent: 'center',
+          },
+        });
+        setshowu(false)
+      });
+  }
+  function animalProfile() {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append('animal_image', profile);
+    fetch(baseURL + `animals/${tag}`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${access}`,
+      },
+      body: formData,
+    })
+      .then(response => {
+        if (response.status == 200) {
+          setLoading(false);
+          showMessage({
+            message: "Profile updated",
             type: 'default',
             backgroundColor: COLORS.Primary,
             color: COLORS.white,
@@ -128,7 +182,7 @@ export default function Update({showu, setshowu, profile,link,name,msg}) {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-                updateProfile()
+                cond?updateProfile():animalProfile()
             }}>
             <Image
               source={images.correct}
