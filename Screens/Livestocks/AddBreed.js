@@ -29,9 +29,8 @@ import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
 import CustomAlert from '../../Components/CustomAlert';
-import {ImagePickerResponse} from 'react-native-image-picker';
 import PickerType from './PickerType';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 import {baseURL} from '../../helpers/helpers';
 import { Access } from '../../App';
 import { Username } from '../Nav/Homenav';
@@ -73,15 +72,6 @@ const Addanimals = ({navigation, route}) => {
   };
   const onChangeVacc = value => {
     setVaccinated(value);
-  };
-  const onChangeBS = value => {
-    setValueBS(value);
-  };
-  const onChangeB = value => {
-    setBred(value);
-  };
-  const onChangebought = value => {
-    setBought(value);
   };
   function isEnableSignIn() {
     return tag != '' && valueMS != '' && valueBS != '';
@@ -227,7 +217,7 @@ const Addanimals = ({navigation, route}) => {
     formData.append('status', 'Alive');
     formData.append('animal_image', profile_pic);
     if (isEnableSignIn()) {
-      fetch( baseURL + `animals/`,{
+      fetch( baseURL + `/animals/`,{
       method: 'POST',
       headers: {
         'Accept': 'application/json',

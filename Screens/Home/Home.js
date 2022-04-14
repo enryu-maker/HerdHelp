@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../../Components/Header';
 import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
 import TextButton from '../../Components/TextButton';
-import axiosIns from '../../helpers/helpers';
+import axiosIns, { baseURL } from '../../helpers/helpers';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomButton from './CustomButtom';
 export const Home = ({navigation}) => {
@@ -84,7 +84,7 @@ export const Home = ({navigation}) => {
                 buttonContainerStyle={{
                   marginTop: SIZES.padding,
                 }}
-                icon={{uri: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' + a.data[0].image}}
+                icon={{uri: baseURL + a.data[0].image}}
                 key={a.id}
                 label={`My ${a.label}`}
                 label2={`${a.data.length}`}

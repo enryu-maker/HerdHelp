@@ -19,7 +19,7 @@ export default function Update({showu, setshowu, profile,cond,tag}) {
     setLoading(true);
     const formData = new FormData();
     formData.append('profile_picture', profile);
-    fetch(baseURL + `updateprofile/${global.id}`, {
+    fetch(baseURL + `/updateprofile/${global.id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
@@ -74,7 +74,7 @@ export default function Update({showu, setshowu, profile,cond,tag}) {
     setLoading(true);
     const formData = new FormData();
     formData.append('animal_image', profile);
-    fetch(baseURL + `animals/${tag}`, {
+    fetch(baseURL + `/animals/${tag}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',

@@ -17,7 +17,7 @@ export default function Subscription({navigation}) {
   const [loading, setLoading] = React.useState(false);
   async function loadSubs() {
     setLoading(true);
-    let {data} = await axios.get(baseURL + 'subscriptions/');
+    let {data} = await axios.get(baseURL + '/subscriptions/');
     return data;
   }
   React.useEffect(() => {

@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-export const baseURL = 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/'
+export const baseURL = 'https://api-nerdtech.herdhelp.com'
 let headers = {};
 
 const axiosIns = axios.create({
-    baseURL: 'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app/',
+    baseURL: 'https://api-nerdtech.herdhelp.com/',
     headers,
 });
 

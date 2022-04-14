@@ -42,7 +42,7 @@ export const Signup = ({navigation}) => {
       setLoading(true);
       await axios
         .post(
-          baseURL + 'register/',
+          baseURL + '/register/',
           {
             username: username,
             password: password,

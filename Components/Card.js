@@ -1,6 +1,7 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {COLORS, FONTS, images, SIZES} from './Constants';
+import { baseURL } from '../helpers/helpers';
 const Card = ({
   Tagnumber,
   Name,
@@ -36,7 +37,7 @@ const Card = ({
           <Image
             source={{
               uri:
-                'https://api-herdhelp-nerdtech-q984k.ondigitalocean.app' +
+                baseURL +
                 image,
             }}
             resizeMode="cover"

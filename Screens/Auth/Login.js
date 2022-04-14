@@ -45,7 +45,7 @@ const Login = ({navigation,route}) => {
    async function login() {
     if (isEnableSignIn()) {
       setLoading(true);
-      await axios.post( baseURL  + 'login/',
+      await axios.post( baseURL  + '/login/',
           {
             email: email,
             password: password,
@@ -58,6 +58,7 @@ const Login = ({navigation,route}) => {
         )
         .then(response => {
           if (response.status == 200) {
+            console.log(response.data.access)
             storeData(
               response.data.access,
               response.data.refresh,
