@@ -366,8 +366,8 @@ export const Medication = ({navigation, route}) => {
             borderRadius: SIZES.radius,
           }}
           // enableAvatar
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           disableSelectionTick
           primaryColor={COLORS.Primary}
           avatarSize={28}

@@ -7,22 +7,22 @@ import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../Home/CustomButtom';
 import { showMessage, hideMessage } from "react-native-flash-message";
+import { useDispatch, useSelector } from 'react-redux';
+import { WeightUnit } from '../../Store/actions';
 export default function Setting({navigation}) {
   const [unit,setUnit] = React.useState("")
   const [loading,setLoading] = React.useState(false)
   const [cond,setCond] = React.useState("")
   const [EmailError,setEmailError] = React.useState("")
   const [color,setCol] = React.useState(COLORS.lightGray1)
-  async function setWeightUnit(valu){
-    await AsyncStorage.setItem("weight",valu.toString())
-  }
+  const dispatch = useDispatch()
   const onChangeUnit = (value) =>{
     setLoading(true)
     setUnit(value)
-    setWeightUnit(value)
+    dispatch(WeightUnit(value.toString()))
     setLoading(false)
     showMessage({
-      message: "Setting Updated Restart The App",
+      message: "Setting Updated",
       type: "default",
       backgroundColor: COLORS.Primary,
       color:COLORS.white,
@@ -104,8 +104,8 @@ export default function Setting({navigation}) {
           dropdownIcon={images.down}
           dropdownIconSize={20}
           borderRadius={SIZES.radius}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInRight"
+          animationOut="bounceOutRight"
           textInputStyle={(FONTS.body2, {letterSpacing: 2})}
           selectedItemTextStyle={
             (FONTS.body3,

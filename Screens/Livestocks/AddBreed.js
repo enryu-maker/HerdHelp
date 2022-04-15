@@ -13,7 +13,7 @@ import React, {useState, useRef} from 'react';
 import Header from '../../Components/Header';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
-import axiosIns from '../../helpers/helpers';
+import {useSelector} from 'react-redux';
 import {
   COLORS,
   SIZES,
@@ -32,8 +32,8 @@ import CustomAlert from '../../Components/CustomAlert';
 import PickerType from './PickerType';
 import {showMessage} from 'react-native-flash-message';
 import {baseURL} from '../../helpers/helpers';
-import { Access } from '../../App';
-import { Username } from '../Nav/Homenav';
+import {Access} from '../../App';
+import {Username} from '../Nav/Homenav';
 const Addanimals = ({navigation, route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
@@ -60,19 +60,14 @@ const Addanimals = ({navigation, route}) => {
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
   const [EmailError, setEmailError] = React.useState('');
-  const [unit, setUnit] = React.useState(false);
   const [showc, setshowc] = React.useState(false);
   const [showu, setshowu] = React.useState(false);
 
   const [pic, setPic] = React.useState('');
   const [profile_pic, setprofile_pic] = React.useState([]);
   const [picdata, setPicdata] = React.useState([]);
-  const onChangeMS = value => {
-    setValueMS(value);
-  };
-  const onChangeVacc = value => {
-    setVaccinated(value);
-  };
+  const token = useSelector(state => state.Reducers.authToken);
+  const unit = JSON.parse(useSelector(state => state.Reducers.unit))
   function isEnableSignIn() {
     return tag != '' && valueMS != '' && valueBS != '';
   }
@@ -88,97 +83,99 @@ const Addanimals = ({navigation, route}) => {
     setPrice('');
     setName('');
   };
-  const username = React.useContext(Username)
+  const username = React.useContext(Username);
   function renderFileUri() {
     if (pic) {
       return (
-        <View style={{
-          height:100,
-          width:100,
-          borderRadius:100/2,
-          alignSelf:"center",
-        }}>
-        <Image
-          source={{uri: pic}}
+        <View
           style={{
-            width: 100,
             height: 100,
+            width: 100,
             borderRadius: 100 / 2,
             alignSelf: 'center',
-            borderWidth:2,
-          }}
-        />
-        <View style={{
-          position:"absolute",
-          alignSelf:"flex-end",
-          backgroundColor:COLORS.Primary,
-          height:18,
-          width:30,
-          justifyContent:"center",
-          marginTop:70,
-          borderRadius:4
-        }}>
-          <Text style={{
-          color:COLORS.white,
-          ...FONTS.h5,
-          alignSelf:"center"
           }}>
-          Edit
-          </Text>
-        </View>
+          <Image
+            source={{uri: pic}}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 100 / 2,
+              alignSelf: 'center',
+              borderWidth: 2,
+            }}
+          />
+          <View
+            style={{
+              position: 'absolute',
+              alignSelf: 'flex-end',
+              backgroundColor: COLORS.Primary,
+              height: 18,
+              width: 30,
+              justifyContent: 'center',
+              marginTop: 70,
+              borderRadius: 4,
+            }}>
+            <Text
+              style={{
+                color: COLORS.white,
+                ...FONTS.h5,
+                alignSelf: 'center',
+              }}>
+              Edit
+            </Text>
+          </View>
         </View>
       );
     } else {
       return (
-        <View style={{
-          height:100,
-          width:100,
-          borderRadius:100/2,
-          alignSelf:"center",
-          borderColor:COLORS.black
-
-        }}>
-
-        <Image
-          source={{uri:`https://ui-avatars.com/api/?name=${username}`}}
-          resizeMethod="auto"
-          resizeMode="contain"
+        <View
           style={{
-            width: 100,
             height: 100,
+            width: 100,
             borderRadius: 100 / 2,
             alignSelf: 'center',
-          borderWidth:2,
-          }}
-        />
-
-
-        <View style={{
-          position:"absolute",
-          alignSelf:"flex-end",
-          backgroundColor:COLORS.Primary,
-          height:18,
-          width:30,
-          justifyContent:"center",
-          marginTop:70,
-          borderRadius:4
-        }}>
-          <Text style={{
-          color:COLORS.white,
-          ...FONTS.h5,
-          alignSelf:"center"
+            borderColor: COLORS.black,
           }}>
-          Edit
-          </Text>
-        </View>
+          <Image
+            source={{uri: `https://ui-avatars.com/api/?name=${username}`}}
+            resizeMethod="auto"
+            resizeMode="contain"
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 100 / 2,
+              alignSelf: 'center',
+              borderWidth: 2,
+            }}
+          />
+
+          <View
+            style={{
+              position: 'absolute',
+              alignSelf: 'flex-end',
+              backgroundColor: COLORS.Primary,
+              height: 18,
+              width: 30,
+              justifyContent: 'center',
+              marginTop: 70,
+              borderRadius: 4,
+            }}>
+            <Text
+              style={{
+                color: COLORS.white,
+                ...FONTS.h5,
+                alignSelf: 'center',
+              }}>
+              Edit
+            </Text>
+          </View>
         </View>
 
-
-        // 
+        //
       );
     }
   }
-  const access = React.useContext(Access)
+  // const access = React.useContext(Access)
   function postAnimal() {
     setLoading(true);
     const formData = new FormData();
@@ -217,15 +214,15 @@ const Addanimals = ({navigation, route}) => {
     formData.append('status', 'Alive');
     formData.append('animal_image', profile_pic);
     if (isEnableSignIn()) {
-      fetch( baseURL + `/animals/`,{
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${access}`
-      },
-      body: formData
-     })
+      fetch(baseURL + `/animals/`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      })
         .then(response => {
           if (response.status == 201) {
             clear();
@@ -288,8 +285,7 @@ const Addanimals = ({navigation, route}) => {
   React.useEffect(() => {
     setId(global.id);
     setAnimals(global.species);
-    setUnit(global.unit);
-  }, []);
+  },[]);
   function renderHeader() {
     return (
       <Header
@@ -311,7 +307,7 @@ const Addanimals = ({navigation, route}) => {
                 borderRadius: 40 / 2,
               }}
               onPress={() => {
-                navigation.goBack();
+                navigation.replace("DrawNav");
               }}>
               <Image
                 source={images.back}
@@ -392,7 +388,7 @@ const Addanimals = ({navigation, route}) => {
           returnKeyType={'next'}
           label="Name*"
           value={name}
-          onChange={value => {
+          onChange={(value) => {
             setName(value);
           }}
           inputContainerStyle={{
@@ -427,8 +423,8 @@ const Addanimals = ({navigation, route}) => {
           primaryColor={COLORS.Primary}
           // avatarSize={28}
           value={valueMS}
-          onChange={(value)=>{
-            setValueMS(value)
+          onChange={(value) => {
+            setValueMS(value);
           }}
           animationIn="bounceInLeft"
           animationOut="bounceOutLeft"
@@ -464,8 +460,8 @@ const Addanimals = ({navigation, route}) => {
           primaryColor={COLORS.Primary}
           // avatarSize={28}
           value={valueBS}
-          onChange={(value)=>{
-            setValueBS(value)
+          onChange={(value) => {
+            setValueBS(value);
           }}
           animationIn="bounceInLeft"
           animationOut="bounceOutLeft"
@@ -501,8 +497,8 @@ const Addanimals = ({navigation, route}) => {
           primaryColor={COLORS.Primary}
           // avatarSize={28}
           value={bought}
-          onChange={(value)=>{
-            setBought(value)
+          onChange={(value) => {
+            setBought(value);
           }}
           animationIn="bounceInLeft"
           animationOut="bounceOutLeft"
@@ -551,7 +547,7 @@ const Addanimals = ({navigation, route}) => {
               label="Weight"
               value={weight}
               keyboardType="numeric"
-              onChange={value => {
+              onChange={(value) => {
                 setWeight(value);
               }}
               containerStyle={{
@@ -575,7 +571,7 @@ const Addanimals = ({navigation, route}) => {
               label="Mother Tag Number"
               value={mother}
               keyboardType="numeric"
-              onChange={value => {
+              onChange={(value) => {
                 setMother(value);
               }}
               inputContainerStyle={{
@@ -599,7 +595,7 @@ const Addanimals = ({navigation, route}) => {
               label="Father Tag Number"
               value={father}
               keyboardType="numeric"
-              onChange={value => {
+              onChange={(value) => {
                 setFather(value);
               }}
               inputContainerStyle={{
@@ -627,12 +623,12 @@ const Addanimals = ({navigation, route}) => {
               // required
               disableSelectionTick
               animationIn="bounceInLeft"
-          animationOut="bounceOutLeft"
+              animationOut="bounceOutLeft"
               primaryColor={COLORS.Primary}
               avatarSize={28}
               value={vaccinated}
-              onChange={(value)=>{
-                setVaccinated(value)
+              onChange={value => {
+                setVaccinated(value);
               }}
               mainContainerStyle={{
                 borderRadius: SIZES.padding,
@@ -832,11 +828,11 @@ const Addanimals = ({navigation, route}) => {
                 primaryColor={COLORS.Primary}
                 avatarSize={28}
                 value={bred}
-                onChange={(value)=>{
-                  setBred(value)
+                onChange={value => {
+                  setBred(value);
                 }}
                 animationIn="bounceInLeft"
-          animationOut="bounceOutLeft"
+                animationOut="bounceOutLeft"
                 // mode="outlined"
                 mainContainerStyle={{
                   borderRadius: SIZES.padding,
@@ -874,7 +870,9 @@ const Addanimals = ({navigation, route}) => {
               primaryColor={COLORS.Primary}
               avatarSize={28}
               value={vaccinated}
-              onChange={onChangeVacc}
+              onChange={value => {
+                setVaccinated(value);
+              }}
               mainContainerStyle={{
                 borderRadius: SIZES.padding,
                 width: '88%',

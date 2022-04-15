@@ -135,13 +135,7 @@ import axios from 'axios';
 
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from '@react-navigation/stack';
 import {StatusBar, View} from 'react-native';
-import {Signup} from './Screens/Auth/Signup';
-import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import {Init} from './Store/actions';
 import {store} from './Store';

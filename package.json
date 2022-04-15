@@ -29,6 +29,7 @@
     "react-native-family-tree": "^0.0.31",
     "react-native-flash-message": "^0.2.1",
     "react-native-gesture-handler": "^2.3.1",
+    "react-native-image-crop-picker": "^0.37.3",
     "react-native-image-picker": "^4.7.3",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.5.6",

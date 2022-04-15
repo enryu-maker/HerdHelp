@@ -8,29 +8,21 @@ import {
 import React,{useContext} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {COLORS, SIZES, FONTS, images} from '../../Components/Constants';
-import userData from '../../Components/Constants';
+
 import {Caption, Drawer, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axiosIns from '../../helpers/helpers';
-import { Username,Profile_pic } from './Homenav';
+
+
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { Logout } from '../../Store/actions';
+import { Logout, UserData } from '../../Store/actions';
 export default function Drawercontent(props) {
-  // const [username,setUsername] = React.useState("")
-//   const fetchprofile = async () => {
-//     const {data} = await axiosIns.get('profile/');
-//     return data;
-// };
-// React.useEffect(()=>{
-//   fetchprofile().then((data)=>{
-//     setUsername(data)
-//   })
-//   console.log(username)
-// },[])
- const profile_pic = useContext(Profile_pic)
- const username = useContext(Username)
-  const dispatch = useDispatch()
+const dispatch = useDispatch()
+React.useEffect(()=>{
+  dispatch(UserData())
+},[])
+ 
+ const User = useSelector(state=>state.Reducers.userData)
  
   return (
     <View style={{flex: 1}}>
@@ -43,8 +35,7 @@ export default function Drawercontent(props) {
           <View style={styles.userInfoSection}>
             <View style={[styles.row, {flexDirection: 'row'}]}>
               <Image
-                source={{uri: profile_pic==null?`https://ui-avatars.com/api/?name=${username}`:profile_pic}}
-
+                source={{uri: User.profile_picture==null?`https://ui-avatars.com/api/?name=${User.username}`: User.profile_picture}}
                 resizeMode="cover"
                 style={{
                   width: 80,
@@ -60,7 +51,7 @@ export default function Drawercontent(props) {
                       flexDirection: 'row',
                     }}>
                     <Title style={styles.title}>
-                      {global.User[0]?.fullname}
+                      {User?.fullname}
                     </Title>
                     {global.isActive ? (
                       <Image
@@ -74,12 +65,12 @@ export default function Drawercontent(props) {
                     ) : null}
                   </View>
                   <Caption style={[styles.caption, {color: COLORS.white}]}>
-                    {global.User[0]?.farm_name}
+                    {User?.farm_name}
                   </Caption>
                   <Caption
                     style={
                       styles.caption
-                    }>{`@ ${global.User[0]?.username}`}</Caption>
+                    }>{`@ ${User?.username}`}</Caption>
                 </View>
               )}
             </View>

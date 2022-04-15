@@ -11,10 +11,12 @@ import {COLORS, SIZES, FONTS, images, Bred} from '../../Components/Constants';
 import { baseURL } from '../../helpers/helpers';
 import {showMessage} from 'react-native-flash-message';
 import React from 'react';
-import {Access} from '../../App';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserData } from '../../Store/actions';
 export default function Update({showu, setshowu, profile,cond,tag}) {
   const [loading, setLoading] = React.useState(false);
-  const access = React.useContext(Access);
+const token = useSelector(state => state.Reducers.authToken);
+const dispatch = useDispatch()
   function updateProfile() {
     setLoading(true);
     const formData = new FormData();
@@ -24,7 +26,7 @@ export default function Update({showu, setshowu, profile,cond,tag}) {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${access}`,
+        'Authorization': `Bearer ${token}`,
       },
       body: formData,
     })
@@ -46,6 +48,7 @@ export default function Update({showu, setshowu, profile,cond,tag}) {
               justifyContent: 'center',
             },
           });
+          dispatch(UserData())
           setshowu(false)
         }
       })
@@ -79,7 +82,7 @@ export default function Update({showu, setshowu, profile,cond,tag}) {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${access}`,
+        'Authorization': `Bearer ${token}`,
       },
       body: formData,
     })

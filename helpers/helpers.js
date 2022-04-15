@@ -1,13 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 export const baseURL = 'https://api-nerdtech.herdhelp.com'
 let headers = {};
-
 const axiosIns = axios.create({
     baseURL: 'https://api-nerdtech.herdhelp.com/',
     headers,
 });
-
+// const token = useSelector(state => state.Reducers.authToken);
 axiosIns.interceptors.request.use(
 
     async (config) => {

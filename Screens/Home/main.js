@@ -15,6 +15,8 @@ import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import CustomButton from './CustomButtom';
 import {Username, Profile_pic} from '../Nav/Homenav';
+import { useSelector } from 'react-redux';
+import { Use } from 'react-native-svg';
 const Main = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [show, setShow] = React.useState('');
@@ -70,11 +72,9 @@ const Main = ({navigation}) => {
     getAnimals().then(data => {
       global.tags = data;
     });
+    
   }, [show]);
-  const profile_pic = React.useContext(Profile_pic);
-  const username = React.useContext(Username);
-
-
+  const User = useSelector(state=>state.Reducers.userData)
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <Header
@@ -123,14 +123,13 @@ const Main = ({navigation}) => {
                 marginRight: 20,
                 height: 50,
                 width: 50,
-                // justifyContent: 'center',
                 borderRadius: 50 / 2,
               }}
               onPress={() => {
                 navigation.navigate('MyAccount');
               }}>
               <Image
-                source={{uri: profile_pic==null?`https://ui-avatars.com/api/?name=${username}`:profile_pic}}
+                source={{uri: User.profile_picture==null?`https://ui-avatars.com/api/?name=${User.username}`: User.profile_picture}}
                 // resizeMode="cover"
                 style={{
                   height: 50,

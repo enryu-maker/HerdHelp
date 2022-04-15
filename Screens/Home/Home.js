@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity, ScrollView,ActivityIndicator} from 'react-native';
+import {View, Text, Image, TouchableOpacity, ScrollView,} from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
 import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
@@ -6,15 +6,13 @@ import TextButton from '../../Components/TextButton';
 import axiosIns, { baseURL } from '../../helpers/helpers';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomButton from './CustomButtom';
+import { ActivityIndicator } from 'react-native-paper';
 export const Home = ({navigation}) => {
   const [animals, setAnimals] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  const [active, setActive] = React.useState(false);
-
   async function fetchanimal() {
     setLoading(true)
     let {data} = await axiosIns.get('animals/');
-    // console.log(data[4])
     return data;
   }
  
@@ -75,7 +73,7 @@ export const Home = ({navigation}) => {
         }}>
           {
             loading?(
-              <ActivityIndicator size="large" color={COLORS.Primary}/>
+              <ActivityIndicator size="small" color={COLORS.Primary}/>
             ):(            
         animals.map(a => {
           if (a.data.length != 0) {

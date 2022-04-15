@@ -3,16 +3,15 @@ import React from 'react'
 import Header from '../../Components/Header'
 import { images,FONTS,SIZES,COLORS } from '../../Components/Constants'
 import HistoryCard from './HistoryCard'
-import { compareAsc, format } from 'date-fns'
+import { useSelector } from 'react-redux'
 export default function History({navigation,route}) {
     const [whist,setWhist] = React.useState([])
-    const [unit,setUnit] = React.useState(global.unit)
+    // const [unit,setUnit] = React.useState(global.unit)
+    const unit = JSON.parse(useSelector(state => state.Reducers.unit))
 
     React.useEffect(()=>{
         let {data} =route.params
         setWhist(data)
-        setUnit(global.unit)
-        // console.log(whist[0].date_from)
     },[])
     function renderheader() {
         return (
@@ -45,6 +44,21 @@ export default function History({navigation,route}) {
           </View>
             }
             title={"History"}
+            titleStyle={{
+              marginLeft:60
+            }}
+            rightComponent={
+              <View style={{
+                marginRight:25,
+                marginTop: 25,
+
+              }}>
+                <Image
+                source={unit==true?images.kg:images.scale}
+                style={{width: 28, height: 28, tintColor: COLORS.Primary}}
+              />
+              </View>
+            }
           />
         );
       }
@@ -54,10 +68,9 @@ export default function History({navigation,route}) {
           <ScrollView showsHorizontalScrollIndicator={false}>
               {
                   whist.map((a,index)=>(
-                    a.weight!=0 && a.weight_kg!=0?
                     unit?
                     (<HistoryCard key={index} date={a.date_to.slice(0,10)} weight={a.weight}/>):
-                    (<HistoryCard key={index} date={a.date_to.slice(0,10)} weight={a.weight_kg}/>):null
+                    (<HistoryCard key={index} date={a.date_to.slice(0,10)} weight={a.weight_kg}/>)
 
                   ))
               }

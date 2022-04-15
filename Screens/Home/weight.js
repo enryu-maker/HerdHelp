@@ -8,20 +8,20 @@ import axiosIns from '../../helpers/helpers';
 import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import CustomAlert from '../../Components/CustomAlert';
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
+import { useSelector } from 'react-redux';
 export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
   const [tagl, setTagl] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [weight, setWeight] = React.useState(0);
-  const [err, setErr] = React.useState("");
   const [species, setSpcies] = React.useState([]);
-  const [supportTag,setSupportTag] = React.useState("")
   const [animals, setAnimals] = React.useState([]);
   const [id, setId] = React.useState("");
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText,setDataText] = React.useState("")
+  const unit = JSON.parse(useSelector(state => state.Reducers.unit))
   React.useEffect(() => {
       setId(global.id)
       setAnimals(global.species)

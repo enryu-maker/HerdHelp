@@ -9,17 +9,18 @@ import {COLORS, SIZES, images} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import CustomAlert from '../../Components/CustomAlert';
 import { showMessage } from 'react-native-flash-message';
+import { useDispatch } from 'react-redux';
+import { UserData } from '../../Store/actions';
+
+
 const MyAccountEdit = ({navigation,route}) => {
   const [fullName, setFullName] = useState(route.params.user.fullname);
   const [phoneNo, setPhoneNo] = useState(route.params.user.phone);
   const [idCard, setIdCard] = useState(route.params.user.farm_name);
   const [addr, setAddr] = useState(route.params.user.address);
   const [user,setUser]=React.useState([])
-  const [show, setShow] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [validation, setValidation] = React.useState(false);
-  const [dataText, setDataText] = React.useState('');
-
+  const dispatch = useDispatch()
   const updateprofile = async () => {
     setLoading(true)
       try {
@@ -51,6 +52,7 @@ const MyAccountEdit = ({navigation,route}) => {
               justifyContent:"center"
             }
           });
+          dispatch(UserData())
         })
       } catch (e) {
         setLoading(false)
@@ -96,7 +98,7 @@ const MyAccountEdit = ({navigation,route}) => {
               borderRadius:40/2,
               }}
             onPress={() => {
-              navigation.replace("MyAccount");
+              navigation.goBack()
 
             }}>
             <Image
@@ -208,7 +210,6 @@ const MyAccountEdit = ({navigation,route}) => {
         backgroundColor: COLORS.white,
       }}>
       {renderHeader()}
-      <CustomAlert show={show} setShow={setShow} validation={validation} label={dataText}/>
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"

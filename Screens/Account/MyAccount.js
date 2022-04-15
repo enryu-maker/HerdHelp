@@ -1,15 +1,11 @@
 import React from 'react';
 import {View, ScrollView, TouchableOpacity, Image,Text} from 'react-native';
-
 import Header from '../../Components/Header';
-import TextButton from '../../Components/TextButton';
 import InfoItem from '../../Components/InfoItem';
 import {COLORS, SIZES, images, dummyData, FONTS} from '../../Components/Constants';
-import axiosIns from '../../helpers/helpers';
 import PickerType from '../Livestocks/PickerType';
 import Update from './Update';
-import { Username } from '../Nav/Homenav';
-import { tr } from 'date-fns/locale';
+import { useSelector } from 'react-redux';
 const MyAccount = ({navigation,route}) => {
   const [user,setUser]=React.useState([])
   const [show, setshow] = React.useState(false);
@@ -17,23 +13,11 @@ const MyAccount = ({navigation,route}) => {
   const [pic, setPic] = React.useState('');
   const [picdata, setPicdata] = React.useState('');
   const [profile_pic, setprofile_pic] = React.useState([]);
-  const [reload,setReload] = React.useState(false)
-  const username = React.useContext(Username)
-  const fetchprofile = async () => {
-      try {
-        const {data} = await axiosIns.get('profile/');
-        return data;
-      } catch (e) {
-       alert("Something Went Wrong")
-      }
-    };
+ const User = useSelector(state=>state.Reducers.userData)
+
     React.useEffect(() => {
-      fetchprofile().then(data => {
-        setUser(data[0]);
-        setPic(data[0].profile_picture)
-        global.User=data
-      });
-    }, []);
+        setPic(User.profile_picture)
+    }, [User]);
     function renderFileUri() {
       if (pic) {
         return (
@@ -84,7 +68,7 @@ const MyAccount = ({navigation,route}) => {
           }}>
   
           <Image
-            source={{uri:`https://ui-avatars.com/api/?name=${username}`}}
+            source={{uri:`https://ui-avatars.com/api/?name=${User.username}`}}
             resizeMethod="auto"
             resizeMode="contain"
             style={{
@@ -143,7 +127,7 @@ const MyAccount = ({navigation,route}) => {
                 borderRadius:40/2,
                 }}
               onPress={() => {
-                navigation.replace("DrawNav");
+                navigation.goBack()
               }}>
               <Image
                 source={images.back}
@@ -160,7 +144,7 @@ const MyAccount = ({navigation,route}) => {
         rightComponent={
           <TouchableOpacity
           onPress={()=>navigation.navigate("MyAccountEdit",{
-            user:user
+            user:User
           })}
           >
           <Text
@@ -204,15 +188,15 @@ const MyAccount = ({navigation,route}) => {
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        <InfoItem label="Full Name" value={user.fullname} />
-        <InfoItem label="Username" value={user.username} />
+        <InfoItem label="Full Name" value={User.fullname} />
+        <InfoItem label="Username" value={User.username} />
         <InfoItem
           label="Phone Number"
-          value={user.phone}
+          value={User.phone}
         />
         <InfoItem
           label="Email"
-          value={user.email}
+          value={User.email}
           withDivider={false}
         />
       </View>
@@ -231,11 +215,11 @@ const MyAccount = ({navigation,route}) => {
 
         <InfoItem
           label="Farm Name"
-          value={user.farm_name}
+          value={User.farm_name}
 
           // withDivider={false}
         />
-        <InfoItem label="Address"value={user.address} withDivider={false} />
+        <InfoItem label="Address"value={User.address} withDivider={false} />
       </View>
     );
   }
