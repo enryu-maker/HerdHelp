@@ -1,10 +1,7 @@
 import {View, Text, Modal, Image, TouchableOpacity,Platform} from 'react-native';
 import {COLORS, SIZES, FONTS, images, Bred} from '../../Components/Constants';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-
 import React from 'react';
-
 export default function PickerType({
   show,
   setshow,

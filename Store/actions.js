@@ -24,6 +24,7 @@ export const Login = (token,id) => {
     dispatch({
       type: 'LOGIN',
       payload: token,
+      payload:id
     })
   }
 }
@@ -44,6 +45,33 @@ export const WeightUnit = (cond) => {
       dispatch({
         type: 'USER',
         payload:data[0]
+      })
+    }
+  }
+  export const getStatus = () => {
+    return async dispatch => {
+      let {data} = await axiosIns.get('getstatuses/');
+      dispatch({
+        type: 'STATUS',
+        payload:data
+      })
+    }
+  }
+  export const getTags = () => {
+    return async dispatch => {
+      let {data} = await axiosIns.get('animaltags/');
+      dispatch({
+        type: 'TAGS',
+        payload:data
+      })
+    }
+  }
+  export const getSpecies = () => {
+    return async dispatch => {
+      let {data} = await axiosIns.get('getcategories/');
+      dispatch({
+        type: 'CATEGORY',
+        payload:data
       })
     }
   }

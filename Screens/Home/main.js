@@ -7,36 +7,15 @@ import {
   Platform,
 } from 'react-native';
 import React from 'react';
-import TextButton from '../../Components/TextButton';
 import Header from '../../Components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import CustomButton from './CustomButtom';
-import {Username, Profile_pic} from '../Nav/Homenav';
-import { useSelector } from 'react-redux';
-import { Use } from 'react-native-svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSpecies, getStatus, getTags, UserData } from '../../Store/actions';
 const Main = ({navigation}) => {
-  const [loading, setLoading] = React.useState(false);
-  const [show, setShow] = React.useState('');
-  const [user, setUser] = React.useState([]);
-  async function fetchanimal() {
-    let {data} = await axiosIns.get('getcategories/');
-    setLoading(true);
-    global.species = data;
-    return data;
-  }
-  async function getWeightUnit() {
-    global.unit = JSON.parse(await AsyncStorage.getItem('weight'));
-    // return data
-  }
-  async function fetchStatus() {
-    let {data} = await axiosIns.get('getstatuses/');
-    setLoading(true);
-    global.stat = data;
-    return data;
-  }
+  const [alerts, setAlerts] = React.useState([]);
   async function loadId() {
     global.id = await AsyncStorage.getItem('id');
   }
@@ -48,18 +27,16 @@ const Main = ({navigation}) => {
     let {data} = await axiosIns.get('subscriptions/isactive/');
     return data;
   }
-  async function getAnimals() {
-    let {data} = await axiosIns.get('animaltags/');
-    return data;
-  }
+  const dispatch = useDispatch()
   React.useEffect(() => {
-    fetchStatus();
-    fetchanimal();
+    dispatch(getStatus())
+    dispatch(UserData())
+    dispatch(getSpecies())
+    dispatch(getTags())
     loadId();
     getALerts().then(data => {
-      setUser(data);
+      setAlerts(data);
     });
-    getWeightUnit();
     checkSubs().then(data => {
       global.isActive = data.isactive;
       !data.isactive
@@ -69,11 +46,7 @@ const Main = ({navigation}) => {
           })
         : null;
     });
-    getAnimals().then(data => {
-      global.tags = data;
-    });
-    
-  }, [show]);
+  }, []);
   const User = useSelector(state=>state.Reducers.userData)
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -129,8 +102,7 @@ const Main = ({navigation}) => {
                 navigation.navigate('MyAccount');
               }}>
               <Image
-                source={{uri: User.profile_picture==null?`https://ui-avatars.com/api/?name=${User.username}`: User.profile_picture}}
-                // resizeMode="cover"
+                source={{uri: User?.profile_picture==null?`https://ui-avatars.com/api/?name=${User?.username}`: User?.profile_picture}}
                 style={{
                   height: 50,
                   width: 50,
@@ -244,19 +216,19 @@ const Main = ({navigation}) => {
               label={`ALERTS  `}
               icon={images.bell}
               iconStyle={{
-                tintColor: user?.length > 0 ? COLORS.red : COLORS.white,
+                tintColor: alerts?.length > 0 ? COLORS.red : COLORS.white,
               }}
               onPress={() => {
                 navigation.navigate('LoadAlert');
               }}
-              label2={`${user?.length}`}
+              label2={`${alerts?.length}`}
               buttonContainerStyle2={{
-                backgroundColor: user?.length > 0 ? COLORS.red : COLORS.Primary,
+                backgroundColor: alerts?.length > 0 ? COLORS.red : COLORS.Primary,
                 justifyContent: 'center',
                 alignSelf: 'center',
               }}
               label2Style={{
-                color: user?.length > 0 ? COLORS.white : COLORS.Primary,
+                color: alerts?.length > 0 ? COLORS.white : COLORS.Primary,
                 justifyContent: 'center',
                 alignSelf: 'center',
               }}

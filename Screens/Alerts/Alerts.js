@@ -11,26 +11,23 @@ import axiosIns from '../../helpers/helpers';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import CustomAlert from '../../Components/CustomAlert';
 import { showMessage, hideMessage, } from "react-native-flash-message";
+import { useSelector } from 'react-redux';
 export default function Alerts({navigation,route}) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
   const [tag, setTag] = React.useState("");
-  const [tagl, setTagl] = React.useState([]);
   const [date, setDate] = React.useState(null);
   const [datet, setDatet] = React.useState(null);
   const [time, setTime] = React.useState(null);
   const [timet, setTimet] = React.useState(null);
   const [err, setErr] = React.useState("");
-  const [species, setSpcies] = React.useState([]);
   const [animals, setAnimals] = React.useState("");
-  const [show, setShow] = React.useState(false);
-  const [validation, setValidation] = React.useState(false);
-  const [dataText, setDataText] = React.useState('');
   const [id,setId] = React.useState(null)
   const [loading, setLoading] = React.useState(false);
-  const onChangeSpec = value => {
-    setAnimals(value);
-  };
+  const species = useSelector(state => state.Reducers.cat)
+  const tagl = useSelector(state => state.Reducers.tags)
+
+  
   const clear=()=>{
     setTitle("")
     setContent("")
@@ -123,9 +120,6 @@ export default function Alerts({navigation,route}) {
     }
     React.useEffect(()=>{
         setId(global.id)
-        setSpcies(global.species)
-        setTagl(global.tags)
-
     },[])
   function renderHeader() {
     return (
@@ -170,9 +164,6 @@ export default function Alerts({navigation,route}) {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        <Text style={{color: COLORS.red, ...FONTS.h3, alignSelf: 'center'}}>
-          {err}
-        </Text>
         <Dropdown
           label="Species"
           borderRadius={SIZES.radius}
@@ -323,10 +314,6 @@ export default function Alerts({navigation,route}) {
   return (
     <View style={{flex: 1}}>
       {renderHeader()}
-      {
-        show&&
-      <CustomAlert show={show} validation={validation} label={dataText} setShow={setShow}/>
-      }
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"

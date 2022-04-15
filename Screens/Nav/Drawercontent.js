@@ -35,7 +35,7 @@ React.useEffect(()=>{
           <View style={styles.userInfoSection}>
             <View style={[styles.row, {flexDirection: 'row'}]}>
               <Image
-                source={{uri: User.profile_picture==null?`https://ui-avatars.com/api/?name=${User.username}`: User.profile_picture}}
+                source={{uri: User?.profile_picture==null?`https://ui-avatars.com/api/?name=${User?.username}`: User?.profile_picture}}
                 resizeMode="cover"
                 style={{
                   width: 80,

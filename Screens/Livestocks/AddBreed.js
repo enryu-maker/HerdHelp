@@ -24,15 +24,12 @@ import {
   Bred,
   Bought,
 } from '../../Components/Constants';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
-import CustomAlert from '../../Components/CustomAlert';
 import PickerType from './PickerType';
 import {showMessage} from 'react-native-flash-message';
 import {baseURL} from '../../helpers/helpers';
-import {Access} from '../../App';
 import {Username} from '../Nav/Homenav';
 const Addanimals = ({navigation, route}) => {
   const [bred, setBred] = useState(false);
@@ -53,21 +50,16 @@ const Addanimals = ({navigation, route}) => {
   const [vaccinateddatet, setVaccinateddatet] = useState('');
   const [bought, setBought] = useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [animals, setAnimals] = React.useState([]);
   const [id, setId] = React.useState('');
   const [registration, setRegistration] = React.useState('');
-  const [show, setShow] = React.useState(false);
-  const [validation, setValidation] = React.useState(false);
-  const [dataText, setDataText] = React.useState('');
-  const [EmailError, setEmailError] = React.useState('');
   const [showc, setshowc] = React.useState(false);
   const [showu, setshowu] = React.useState(false);
-
   const [pic, setPic] = React.useState('');
   const [profile_pic, setprofile_pic] = React.useState([]);
   const [picdata, setPicdata] = React.useState([]);
   const token = useSelector(state => state.Reducers.authToken);
   const unit = JSON.parse(useSelector(state => state.Reducers.unit))
+  const animals = useSelector(state => state.Reducers.cat)
   function isEnableSignIn() {
     return tag != '' && valueMS != '' && valueBS != '';
   }
@@ -284,7 +276,6 @@ const Addanimals = ({navigation, route}) => {
   }
   React.useEffect(() => {
     setId(global.id);
-    setAnimals(global.species);
   },[]);
   function renderHeader() {
     return (
@@ -973,15 +964,6 @@ const Addanimals = ({navigation, route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-      {show && (
-        <CustomAlert
-          show={show}
-          validation={validation}
-          setShow={setShow}
-          label={dataText}
-        />
-      )}
-
       {renderHeader()}
 
       <KeyboardAwareScrollView

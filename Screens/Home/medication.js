@@ -10,7 +10,7 @@ import axiosIns from '../../helpers/helpers';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import CustomAlert from '../../Components/CustomAlert';
-
+import { useSelector } from 'react-redux';
 export const Medication = ({navigation, route}) => {
   const [tag, setTag] = React.useState('');
   const [treat, setTreat] = React.useState('');
@@ -21,29 +21,14 @@ export const Medication = ({navigation, route}) => {
   const [withdraw, setWithdraw] = React.useState(false);
   const [date, setDate] = React.useState('');
   const [datet, setDatet] = React.useState('');
-  const [animals, setAnimals] = React.useState([]);
   const [species, setSpcies] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  const [err, setErr] = React.useState('');
   const [id, setId] = React.useState('');
-  const [show, setShow] = React.useState(false);
-  const [validation, setValidation] = React.useState(false);
-  const [dataText, setDataText] = React.useState('');
   const [dataT,setDataT] = React.useState("");
   const [dataS,setDataS] = React.useState("");
-  const [tagl, setTagl] = React.useState('');
+  const tagl = useSelector(state => state.Reducers.tags)
 
   const [cond,setCond] = React.useState(false);
-
-  const onChangeSpec = value => {
-    setSpcies(value);
-  };
-  // const onChangetag = value => {
-  //   setTag(value);
-  // };
-  React.useEffect(()=>{
-    setTagl(global.tags)
-  },[])
   const clear = () => {
     setMed("");
     setWithdraw("");
@@ -139,7 +124,6 @@ export const Medication = ({navigation, route}) => {
   }
   React.useEffect(() => {
     setId(global.id);
-    setAnimals(global.species);
     let {cond} = route.params
     setCond(cond)
     if (!cond){
@@ -149,6 +133,8 @@ export const Medication = ({navigation, route}) => {
       setDataS(species)
     }
   }, []);
+  const animals = useSelector(state => state.Reducers.cat)
+
   function renderheader() {
     return (
       <Header
@@ -192,9 +178,6 @@ export const Medication = ({navigation, route}) => {
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        <Text style={{color:validation? COLORS.Primary : COLORS.red, alignSelf: 'center', ...FONTS.body3}}>
-          {err}
-        </Text>
         {
           cond?
           <><Dropdown
@@ -418,10 +401,6 @@ export const Medication = ({navigation, route}) => {
         backgroundColor: COLORS.white,
       }}>
       {renderheader()}
-      {
-        show&&
-      <CustomAlert show={show} setShow={setShow} validation={validation} label={dataText}/>
-      }
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"
@@ -434,8 +413,6 @@ export const Medication = ({navigation, route}) => {
       </KeyboardAwareScrollView>
       <TextButton
         onPress={() => {
-          // `${global.id}${dataS}${dataT}`
-          // setSupportTag(`${species}${tag}`)
           addMedical();
         }}
         icon={images.med}

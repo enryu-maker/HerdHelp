@@ -5,16 +5,17 @@ import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import TextButton from '../../Components/TextButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
-import FormInput from '../../Components/FormInput';
+import { useSelector } from 'react-redux';
 import axiosIns from '../../helpers/helpers';
 export default function WeightH({navigation}) {
   const [id, setId] = React.useState('');
   const [species, setSpcies] = React.useState([]);
-  const [animals, setAnimals] = React.useState([]);
   const [tag, setTag] = React.useState('');
-  const [tagl, setTagl] = React.useState([]);
   const [err, setErr] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const animals = useSelector(state => state.Reducers.cat)
+  const tagl = useSelector(state => state.Reducers.tags)
+  
   const updateWeight = async () => {
     if (tag != '') {
       setLoading(true);
@@ -41,8 +42,6 @@ export default function WeightH({navigation}) {
   };
   React.useEffect(() => {
     setId(global.id);
-    setAnimals(global.species);
-    setTagl(global.tags)
   }, []);
   const onChangeSpec = value => {
     setSpcies(value);

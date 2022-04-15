@@ -5,7 +5,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import FormInput from '../../Components/FormInput';
-import {COLORS, SIZES, images} from '../../Components/Constants';
+import {COLORS, SIZES, images,FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import CustomAlert from '../../Components/CustomAlert';
 import { showMessage } from 'react-native-flash-message';

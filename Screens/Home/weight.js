@@ -12,20 +12,19 @@ import { showMessage } from "react-native-flash-message";
 import { useSelector } from 'react-redux';
 export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
-  const [tagl, setTagl] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [weight, setWeight] = React.useState(0);
   const [species, setSpcies] = React.useState([]);
-  const [animals, setAnimals] = React.useState([]);
   const [id, setId] = React.useState("");
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText,setDataText] = React.useState("")
   const unit = JSON.parse(useSelector(state => state.Reducers.unit))
+  const animals = useSelector(state => state.Reducers.cat)
+  const tagl = useSelector(state => state.Reducers.tags)
+
   React.useEffect(() => {
       setId(global.id)
-      setAnimals(global.species)
-      setTagl(global.tags)
   },[]);
   function finder(list, value) {
     var dataValue;

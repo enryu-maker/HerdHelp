@@ -3,25 +3,24 @@ import React from 'react';
 import Header from '../../Components/Header';
 import {images, SIZES, FONTS, COLORS} from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
-import FormInput from '../../Components/FormInput';
+import { useSelector } from 'react-redux';
 import TextButton from '../../Components/TextButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import axiosIns from '../../helpers/helpers';
 import Card from '../../Components/Card';
 export default function Parents({navigation}) {
-  const [species, setSpecies] = React.useState([]);
   const [tag, setTag] = React.useState('');
-  const [tagl, setTagl] = React.useState([]);
   const [id, setId] = React.useState('');
   const [err, setErr] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [animal, setAnimal] = React.useState([]);
   const [babies, setBabies] = React.useState([]);
+  const species = useSelector(state => state.Reducers.cat)
+  const tagl = useSelector(state => state.Reducers.tags)
 
   React.useEffect(() => {
     setId(global.id);
-    setSpecies(global.species);
-    setTagl(global.tags)
+
 
   }, []);
  

@@ -5,7 +5,8 @@ import InfoItem from '../../Components/InfoItem';
 import {COLORS, SIZES, images, dummyData, FONTS} from '../../Components/Constants';
 import PickerType from '../Livestocks/PickerType';
 import Update from './Update';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserData } from '../../Store/actions';
 const MyAccount = ({navigation,route}) => {
   const [user,setUser]=React.useState([])
   const [show, setshow] = React.useState(false);
@@ -14,10 +15,11 @@ const MyAccount = ({navigation,route}) => {
   const [picdata, setPicdata] = React.useState('');
   const [profile_pic, setprofile_pic] = React.useState([]);
  const User = useSelector(state=>state.Reducers.userData)
-
+const dispatch = useDispatch()
     React.useEffect(() => {
-        setPic(User.profile_picture)
-    }, [User]);
+      dispatch(UserData())
+      setPic(User.profile_picture)
+    }, []);
     function renderFileUri() {
       if (pic) {
         return (

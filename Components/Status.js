@@ -7,23 +7,15 @@ import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import TextButton from './TextButton';
 import FormInput from './FormInput';
 import axiosIns from '../helpers/helpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStatus } from '../Store/actions';
 const Status = ({show, setShow, animal}) => {
   const [status, setStatus] = React.useState("Alive");
   const [Price, setPrice] = React.useState(0);
   const [loading, setloading] = React.useState(false);
-  const [statusCat, setStatusCat] = React.useState([]);
   const [bred, setBred] = React.useState(false);
-
   const [err, setErr] = React.useState('');
-  const updateStatus = value => {
-    setStatus(value);
-  };
-  const onChangeB = value => {
-    setBred(value);
-  };
-  React.useEffect(() => {
-    setStatusCat(global.stat);
-  }, []);
+  const statusCat = useSelector(state=>state.Reducers.status)
   async function delAnimal() {
     try {
       await axiosIns.delete(`animals/${animal.tag_number}`);
@@ -140,7 +132,9 @@ const Status = ({show, setShow, animal}) => {
           disableSelectionTick
           primaryColor={COLORS.Primary}
           value={status}
-          onChange={updateStatus}
+          onChange={(value)=>{
+            setStatus(value)
+          }}
           animationIn="zoomIn"
           animationOut="zoomOut"
           mainContainerStyle={{
@@ -173,44 +167,6 @@ const Status = ({show, setShow, animal}) => {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
-        {/* {
-          animal.gender!="Male"?
-        
-        (<Dropdown
-          label="Bred"
-          dropdownIcon={images.down}
-          dropdownIconSize={22}
-          borderRadius={SIZES.radius}
-          data={Bred}
-          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
-          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
-          selectedItemViewStyle={{
-            backgroundColor: COLORS.Primary,
-            margin: 5,
-            borderRadius: SIZES.radius,
-          }}
-          enableAvatar
-          // required
-          disableSelectionTick
-          primaryColor={COLORS.Primary}
-          avatarSize={28}
-          value={bred}
-          onChange={onChangeB}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
-          // mode="outlined"
-          mainContainerStyle={{
-            borderRadius: SIZES.padding,
-            width: '88%',
-            alignSelf: 'center',
-            marginTop: SIZES.height > 800 ? SIZES.base : 10,
-          }}
-          itemContainerStyle={{
-            backgroundColor: COLORS.white,
-            margin: 5,
-            borderRadius: SIZES.radius,
-          }}
-        />):(<View></View>)} */}
       </View>
     );
   }
