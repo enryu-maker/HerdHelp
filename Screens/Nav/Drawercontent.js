@@ -14,6 +14,8 @@ import LineDivider from '../../Components/LineDivider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axiosIns from '../../helpers/helpers';
 import { Username,Profile_pic } from './Homenav';
+import { useDispatch } from 'react-redux';
+import { Logout } from '../../Store/actions';
 export default function Drawercontent(props) {
   // const [username,setUsername] = React.useState("")
 //   const fetchprofile = async () => {
@@ -28,7 +30,7 @@ export default function Drawercontent(props) {
 // },[])
  const profile_pic = useContext(Profile_pic)
  const username = useContext(Username)
-
+  const dispatch = useDispatch()
  
   return (
     <View style={{flex: 1}}>
@@ -198,8 +200,7 @@ export default function Drawercontent(props) {
             {letterSpacing: 2, color: "#ff4d4d", fontWeight: 'bold'},
           ]}
           onPress={() => {
-            AsyncStorage.clear();
-            props.navigation.replace('Auth');
+            dispatch(Logout())
           }}
         />
       </Drawer.Section>

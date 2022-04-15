@@ -18,8 +18,9 @@ import axios from 'axios';
 import Loader from '../../Components/Loader';
 import utils from '../../utils/Utils';
 import { baseURL } from '../../helpers/helpers';
-
-const Login = ({navigation,route}) => {
+import { useDispatch } from 'react-redux'
+import { Login } from '../../Store/actions';
+const LoginScreen = ({navigation,route}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [showPass, setShowPass] = React.useState(false);
@@ -27,7 +28,7 @@ const Login = ({navigation,route}) => {
   const [EmailError, setEmailError] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [EmailErr, setEmailErr] = React.useState('');
-
+  const dispatch = useDispatch()
   function isEnableSignIn() {
     return email != '' && password != '';
   }
@@ -58,16 +59,8 @@ const Login = ({navigation,route}) => {
         )
         .then(response => {
           if (response.status == 200) {
-            console.log(response.data.access)
-            storeData(
-              response.data.access,
-              response.data.refresh,
-              response.data.userid.toString(),
-            ).then(() => {
-              navigation.replace('DrawNav'),
-              setLoading(false)
-            });
-            
+              dispatch(Login(response.data.access,response.data.userid.toString()))
+              setLoading(false)            
           } else {
             setEmailError('User Not Registered');
             setLoading(false);
@@ -260,4 +253,4 @@ const Login = ({navigation,route}) => {
     </View>
   );
 };
-export default Login;
+export default LoginScreen;

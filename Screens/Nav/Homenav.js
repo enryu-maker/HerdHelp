@@ -19,7 +19,7 @@ import Alerts from '../Alerts/Alerts';
 import FinanceInfo from '../Finance/FinanceInfo';
 import LoadAlert from '../Alerts/LoadAlert';
 import MedCard from '../../Components/MedCard';
-const Stack = createNativeStackNavigator();
+
 import Setting from '../Setting/Setting';
 import Report from '../Report/Report';
 import ReportOP from '../Report/ReportOP';
@@ -39,6 +39,9 @@ import Payment from '../Subscription/Payment';
 import SubDetails from '../Subscription/SubDetails';
 import Confirm from '../Subscription/Confirm';
 import BillingAdd from '../Subscription/BillingAdd';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+const Stack = createSharedElementStackNavigator()
+
 const DrawerNav = () => {
   return (
     <Drawer.Navigator initialRouteName='Home'
