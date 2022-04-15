@@ -21,6 +21,7 @@ const MyAccountEdit = ({navigation,route}) => {
   const [dataText, setDataText] = React.useState('');
 
   const updateprofile = async () => {
+    setLoading(true)
       try {
         await axiosIns.patch(`updateprofile/${global.id}`,
         {
@@ -34,7 +35,7 @@ const MyAccountEdit = ({navigation,route}) => {
             },
           }
         ).then(()=>{
-          setLoading(true)
+          setLoading(false)
           showMessage({
             message: 'Details updated',
             type: 'default',
@@ -52,18 +53,18 @@ const MyAccountEdit = ({navigation,route}) => {
           });
         })
       } catch (e) {
-        setLoading(true)
+        setLoading(false)
         showMessage({
           message: `${e.response.data.msg}`,
           type: 'default',
-          backgroundColor: COLORS.Primary,
+          backgroundColor: COLORS.red,
           color: COLORS.white,
           titleStyle: {
             alignSelf: 'center',
             ...FONTS.h3,
           },
           animationDuration: 250,
-          icon: "success",
+          icon:"danger",
           style:{
             justifyContent:"center"
           }
@@ -220,6 +221,7 @@ const MyAccountEdit = ({navigation,route}) => {
       </KeyboardAwareScrollView>
 
       <TextButton
+      loading={loading}
       icon={images.update}
         buttonContainerStyle={{
           height: 60,
