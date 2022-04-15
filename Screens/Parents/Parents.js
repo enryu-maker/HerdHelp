@@ -24,9 +24,7 @@ export default function Parents({navigation}) {
     setTagl(global.tags)
 
   }, []);
-  const onChangeSpec = value => {
-    setAnimal(value);
-  };
+ 
   async function findChildren() {
 
       setLoading(true);
