@@ -5,9 +5,9 @@ import {
   Image,
   TouchableOpacity,
   Platform,
-  ActivityIndicator
 } from 'react-native';
 import {COLORS, SIZES, FONTS, images, Bred} from '../../Components/Constants';
+import { ActivityIndicator } from 'react-native-paper';
 import { baseURL } from '../../helpers/helpers';
 import {showMessage} from 'react-native-flash-message';
 import React from 'react';
@@ -148,7 +148,7 @@ const dispatch = useDispatch()
             <ActivityIndicator animating={loading} size={"large"} color={COLORS.Primary} style={{
                 justifyContent:"center",
                 alignSelf:"center",
-                marginBottom:SIZES.height/2
+                marginBottom:SIZES.height/1.5
             }}/>
         <View
           style={{

@@ -4,10 +4,10 @@ import {
     Text,
     View,
     Image,
-    ActivityIndicator
 } from 'react-native';
 import { FONTS, COLORS ,SIZES} from "./Constants";
 import LinearGradient from "react-native-linear-gradient";
+import { ActivityIndicator } from 'react-native-paper';
 const TextButton = ({
     buttonContainerStyle,
     disabled,

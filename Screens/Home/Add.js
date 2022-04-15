@@ -1,8 +1,8 @@
-import { View, Text ,TouchableOpacity,Image,ScrollView} from 'react-native'
+import { View, Text ,TouchableOpacity,Image,ScrollView,FlatList} from 'react-native'
 import React from 'react'
 import Header from '../../Components/Header';
 import Card from '../../Components/Card';
-import ActivityIndicatorExample from '../../Components/Loading';
+
 import {
   COLORS,
   FONTS,
@@ -89,21 +89,21 @@ export default function Add({navigation,route}) {
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       {renderHeader()} 
-      
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{flexGrow: 1}}>
-          {data.map((listItem, index) => (
+      <FlatList
+      data={data}
+      keyExtractor={item => `${item.tag_number}`}
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item, index }) => (
             <Card
               key={index}
               cond={cond}
-              Name={listItem.name}
-              Tagnumber={listItem.support_tag}
-              Gender={listItem.gender}
-              Species={listItem.category}
-              Weight={listItem.weight}
-              image={listItem.animal_image==null?listItem.image:listItem.animal_image}
-              weight_kg={listItem.weight_kg}
+              Name={item.name}
+              Tagnumber={item.support_tag}
+              Gender={item.gender}
+              Species={item.category}
+              Weight={item.weight}
+              image={item.animal_image==null ? item.image:item.animal_image}
+              weight_kg={item.weight_kg}
               onPress={() => {
                 navigation.navigate('Info', {
                   value: listItem,
@@ -111,8 +111,7 @@ export default function Add({navigation,route}) {
                 });
               }}
             />
-          ))}
-        </ScrollView>
+          )}/>
     </View>
   )
 }

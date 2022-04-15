@@ -8,7 +8,6 @@ import Update from './Update';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserData } from '../../Store/actions';
 const MyAccount = ({navigation,route}) => {
-  const [user,setUser]=React.useState([])
   const [show, setshow] = React.useState(false);
   const [showu, setshowu] = React.useState(false);
   const [pic, setPic] = React.useState('');

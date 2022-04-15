@@ -7,7 +7,6 @@ const axiosIns = axios.create({
     baseURL: 'https://api-nerdtech.herdhelp.com/',
     headers,
 });
-// const token = useSelector(state => state.Reducers.authToken);
 axiosIns.interceptors.request.use(
 
     async (config) => {

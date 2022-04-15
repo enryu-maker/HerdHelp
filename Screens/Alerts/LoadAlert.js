@@ -20,8 +20,8 @@ export default function LoadAlert({navigation, route}) {
   const [loading, setLoading] = React.useState(false);
 
   async function loadFinance() {
-    let {data} = await axiosIns.get('alerts/');
     setLoading(true);
+    let {data} = await axiosIns.get('alerts/');
     return data;
   }
   React.useEffect(() => {
@@ -29,6 +29,7 @@ export default function LoadAlert({navigation, route}) {
     setSpcies(global.species);
     loadFinance().then(data => {
       setAlerts(data);
+      setLoading(false)
       // console.log(data)
     });
   }, [alert]);

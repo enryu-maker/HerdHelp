@@ -125,9 +125,9 @@ export default function Parents({navigation}) {
           animationOut="bounceOutLeft"
           disableSelectionTick
           primaryColor={COLORS.Primary}
-          value={species}
+          value={animal}
           onChange={(value)=>{
-            setSpecies(value)
+            setAnimal(value)
           }}
           mainContainerStyle={{
             borderRadius: SIZES.padding,
