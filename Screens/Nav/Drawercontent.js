@@ -22,8 +22,7 @@ React.useEffect(()=>{
   dispatch(UserData())
 },[])
  
- const User = useSelector(state=>state.Reducers.userData)
- 
+ const User = useSelector(state=>state.Reducers.userData) 
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView

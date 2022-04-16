@@ -2,6 +2,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {COLORS, FONTS, images, SIZES} from './Constants';
 import { baseURL } from '../helpers/helpers';
+import { useSelector } from 'react-redux';
 const Card = ({
   Tagnumber,
   Name,
@@ -13,6 +14,7 @@ const Card = ({
   weight_kg,
   navigation,
 }) => {
+  const unit = useSelector(state=>state.Reducers.unit)
   return (
     <TouchableOpacity
       style={{
@@ -73,7 +75,7 @@ const Card = ({
           {Name}
         </Text>
         <Text style={[FONTS.h4, {letterSpacing: 3,padding:3}]}>
-          {global.unit ? `${Weight} lbs` : `${weight_kg} kg`}
+          {unit ? `${Weight} lbs` : `${weight_kg} kg`}
         </Text>
       </View>
       <View

@@ -13,7 +13,7 @@ import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import CustomButton from './CustomButtom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSpecies, getStatus, getTags, UserData } from '../../Store/actions';
+import { getSpecies, getStatus, getTags, UserData,getHerds, getUnit } from '../../Store/actions';
 const Main = ({navigation}) => {
   const [alerts, setAlerts] = React.useState([]);
   async function loadId() {
@@ -33,6 +33,8 @@ const Main = ({navigation}) => {
     dispatch(UserData())
     dispatch(getSpecies())
     dispatch(getTags())
+    dispatch(getHerds())
+    dispatch(getUnit())
     loadId();
     getALerts().then(data => {
       setAlerts(data);

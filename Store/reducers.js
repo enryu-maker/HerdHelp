@@ -4,20 +4,26 @@ const initialState = {
   userData: {},
   status: [],
   cat: [],
-  tags:[]
+  tags: [],
+  herds: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'LOGIN':
       return {
-        ...state, 
+        ...state,
         authToken: action.payload,
       };
     case 'UNIT':
       return {
-        ...state, 
+        ...state,
         unit: action.payload,
+      };
+    case 'HERDS':
+      return {
+        ...state,
+        herds: action.payload,
       };
     case 'LOGOUT':
       return {
@@ -28,7 +34,7 @@ export default (state = initialState, action) => {
         ...state,
         status: action.payload,
       };
-      case 'TAGS':
+    case 'TAGS':
       return {
         ...state,
         tags: action.payload,

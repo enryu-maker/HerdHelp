@@ -9,6 +9,7 @@ import TextButton from './TextButton';
 import CustomButton from '../Screens/Home/CustomButtom';
 import PickerType from '../Screens/Livestocks/PickerType';
 import Update from '../Screens/Account/Update';
+import { useSelector } from 'react-redux';
 export const Info = ({navigation, route}) => {
   const [animal, setAnimal] = React.useState([]);
   const [animals, setAnimals] = React.useState([]);
@@ -40,7 +41,7 @@ export const Info = ({navigation, route}) => {
   }
   React.useEffect(() => {
     let {value} = route.params;
-    setAnimals(value)
+    setAnimal(value)
     let {cond} = route.params;
     getanimal(value.tag_number).then((data)=>{
       setAnimal(data)
@@ -50,6 +51,7 @@ export const Info = ({navigation, route}) => {
     });
     setCond(cond);    
   }, []);
+  const unit = useSelector(state=>state.Reducers.unit)
 
   function renderSectionOne() {
     return (
@@ -75,7 +77,7 @@ export const Info = ({navigation, route}) => {
         <InfoItem label="Tag Number" value={animal?.support_tag} />
         <InfoItem
           label="Weight"
-          value={global.unit?`${animal?.weight} lbs`:`${animal?.weight_kg} kg`}
+          value={unit?`${animal?.weight} lbs`:`${animal?.weight_kg} kg`}
           withDivider={false}
         />
       </View>

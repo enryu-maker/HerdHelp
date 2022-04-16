@@ -7,21 +7,13 @@ import axiosIns, { baseURL } from '../../helpers/helpers';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomButton from './CustomButtom';
 import { ActivityIndicator } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { getHerds } from '../../Store/actions';
 export const Home = ({navigation}) => {
-  const [animals, setAnimals] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  async function fetchanimal() {
-    setLoading(true)
-    let {data} = await axiosIns.get('animals/');
-    return data;
-  }
- 
-  React.useEffect(() => {
-      fetchanimal().then(data => {
-        setAnimals(data);
-        setLoading(false)
-      });
-  },[]);
+  const animals = useSelector(state=>state.Reducers.herds)
+  const id = useSelector(state=>state.Reducers.id)
+  console.log(id)
   function renderHeader() {
     return (
       <Header

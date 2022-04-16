@@ -19,14 +19,12 @@ import {
 import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
-import CustomAlert from '../../Components/CustomAlert';
 import {showMessage, hideMessage} from 'react-native-flash-message';
-import { Access } from '../../App';
+import { useDispatch, useSelector } from 'react-redux';
+import { getHerds } from '../../Store/actions';
 const EditAnimal = ({navigation, route}) => {
   React.useEffect(() => {
     setId(global.id);
-    setAnimals(global.species);
-    setUnit(global.unit);
   }, []);
   const [bred, setBred] = useState(route.params.animal?.bred);
   const [valueMS, setValueMS] = useState(route.params.animal?.species);
@@ -38,7 +36,7 @@ const EditAnimal = ({navigation, route}) => {
   const [mother, setMother] = useState(route.params.animal?.mother_supporttag);
   const [father, setFather] = useState(route.params.animal?.father_supporttag);
   const [weight, setWeight] = useState(
-    global.unit ? route.params.animal?.weight : route.params.animal?.weight_kg,
+    unit ? route.params.animal?.weight : route.params.animal?.weight_kg,
   );
   const [name, setName] = useState(route.params.animal?.name);
   const [dob, setDob] = useState('');
@@ -50,16 +48,14 @@ const EditAnimal = ({navigation, route}) => {
   );
   const [bought, setBought] = useState(route.params.animal?.bought);
   const [loading, setLoading] = React.useState(false);
-  const [animals, setAnimals] = React.useState([]);
+  const animals = useSelector(state=>state.Reducers.cat)
   const [id, setId] = React.useState('');
   const [registration, setRegistration] = React.useState(
     route.params.animal?.registration,
   );
-  const [show, setShow] = React.useState(false);
-  const [validation, setValidation] = React.useState(false);
-  const [dataText, setDataText] = React.useState('');
-  const [EmailError, setEmailError] = React.useState('');
-  const [unit, setUnit] = React.useState(false);
+
+  const unit = JSON.parse(useSelector(state=>state.Reducers.unit))
+
   const [showc, setshowc] = React.useState(false);
   const [pic, setPic] = React.useState('');
   const [picdata, setPicdata] = React.useState('');
@@ -112,7 +108,7 @@ const EditAnimal = ({navigation, route}) => {
     price: price,
     bought: bought,
   });
-  
+  const dispatch = useDispatch()
   async function postAnimal() {
     setLoading(true);
     if (isEnableSignIn()) {
@@ -141,6 +137,7 @@ const EditAnimal = ({navigation, route}) => {
                 justifyContent:"center"
               }
             });
+            dispatch(getHerds())
           }
         })
         .catch(err => {
@@ -275,8 +272,8 @@ const EditAnimal = ({navigation, route}) => {
           primaryColor={COLORS.Primary}
           value={valueMS}
           onChange={onChangeMS}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -308,8 +305,8 @@ const EditAnimal = ({navigation, route}) => {
           primaryColor={COLORS.Primary}
           value={valueBS}
           onChange={onChangeBS}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -343,8 +340,8 @@ const EditAnimal = ({navigation, route}) => {
           // avatarSize={28}
           value={bought}
           onChange={onChangebought}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -382,7 +379,7 @@ const EditAnimal = ({navigation, route}) => {
                     marginLeft: 0,
                   }}>
                   <Image
-                    source={images.scale}
+                    source={unit === true ? images.kg : images.scale}
                     style={{width: 28, height: 28, tintColor: COLORS.Primary}}
                   />
                 </View>
@@ -465,8 +462,8 @@ const EditAnimal = ({navigation, route}) => {
               // enableAvatar
               // required
               disableSelectionTick
-              animationIn="zoomIn"
-              animationOut="zoomOut"
+              animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
               primaryColor={COLORS.Primary}
               avatarSize={28}
               value={vaccinated}
@@ -629,7 +626,7 @@ const EditAnimal = ({navigation, route}) => {
                     marginLeft: 0,
                   }}>
                   <Image
-                    source={images.scale}
+                    source={unit === true ? images.kg : images.scale}
                     style={{width: 28, height: 28, tintColor: COLORS.Primary}}
                   />
                 </View>
@@ -810,14 +807,6 @@ const EditAnimal = ({navigation, route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-      {show && (
-        <CustomAlert
-          show={show}
-          validation={validation}
-          setShow={setShow}
-          label={dataText}
-        />
-      )}
 
       {renderHeader()}
       <PickerType

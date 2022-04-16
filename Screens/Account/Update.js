@@ -12,7 +12,7 @@ import { baseURL } from '../../helpers/helpers';
 import {showMessage} from 'react-native-flash-message';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UserData } from '../../Store/actions';
+import { getHerds, UserData } from '../../Store/actions';
 export default function Update({showu, setshowu, profile,cond,tag}) {
   const [loading, setLoading] = React.useState(false);
 const token = useSelector(state => state.Reducers.authToken);
@@ -105,6 +105,7 @@ const dispatch = useDispatch()
             },
           });
           setshowu(false)
+          dispatch(getHerds())
         }
       })
       .catch((err) => {

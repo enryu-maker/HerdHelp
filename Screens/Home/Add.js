@@ -106,7 +106,7 @@ export default function Add({navigation,route}) {
               weight_kg={item.weight_kg}
               onPress={() => {
                 navigation.navigate('Info', {
-                  value: listItem,
+                  value: item,
                   cond:cond
                 });
               }}

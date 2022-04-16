@@ -24,7 +24,6 @@ export const Login = (token,id) => {
     dispatch({
       type: 'LOGIN',
       payload: token,
-      payload:id
     })
   }
 }
@@ -39,12 +38,30 @@ export const WeightUnit = (cond) => {
       })
     }
   }
+  export const getUnit = () => {
+    return async dispatch => {
+       let unit =  await AsyncStorage.getItem('unit');
+      dispatch({
+        type: 'UNIT',
+        payload: unit,
+      })
+    }
+  }
   export const UserData = () => {
     return async dispatch => {
       let {data} = await axiosIns.get('profile/');
       dispatch({
         type: 'USER',
         payload:data[0]
+      })
+    }
+  }
+  export const getHerds = () => {
+    return async dispatch => {
+      let {data} = await axiosIns.get('animals/');
+      dispatch({
+        type: 'HERDS',
+        payload:data
       })
     }
   }
