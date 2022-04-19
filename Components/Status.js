@@ -13,7 +13,6 @@ const Status = ({show, setShow, animal}) => {
   const [status, setStatus] = React.useState("Alive");
   const [Price, setPrice] = React.useState(0);
   const [loading, setloading] = React.useState(false);
-  const [bred, setBred] = React.useState(false);
   const [err, setErr] = React.useState('');
   const statusCat = useSelector(state=>state.Reducers.status)
   async function delAnimal() {
@@ -34,7 +33,6 @@ const Status = ({show, setShow, animal}) => {
             tag_number: `${animal.tag_number}${
               status.toString() == 'Dead' ? 'D' : 'S'
             }`,
-            bred:bred
           },
           {
             headers: {
@@ -135,8 +133,8 @@ const Status = ({show, setShow, animal}) => {
           onChange={(value)=>{
             setStatus(value)
           }}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
@@ -195,10 +193,9 @@ const Status = ({show, setShow, animal}) => {
             borderRadius: SIZES.radius,
           }}>
           {renderHeader()}
-
           <KeyboardAwareScrollView
             showsVerticalScrollIndicator={false}
-            keyboardDismissMode="interactive"
+            keyboardDismissMode="on-drag"
             keyboardShouldPersistTaps="handled"
             contentContainerStyle={{
               marginTop: SIZES.radius,
@@ -214,7 +211,6 @@ const Status = ({show, setShow, animal}) => {
             border={false}
             icon={images.update}
             buttonContainerStyle={{
-              // flex:1,
               height: 60,
               marginTop: SIZES.padding,
               marginHorizontal: SIZES.padding,
@@ -223,7 +219,7 @@ const Status = ({show, setShow, animal}) => {
               backgroundColor: COLORS.Primary,
             }}
             label={'Update'}
-            // label2={true}
+            loading={loading}
           />
         </View>
       </View>
