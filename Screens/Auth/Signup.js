@@ -207,16 +207,8 @@ export const Signup = ({navigation}) => {
       <View
         style={{
           flex: 1,
-          marginTop: SIZES.height > 800 ? SIZES.padding * 2 : SIZES.radius,
+          marginTop: SIZES.height > 800 ? SIZES.padding * 1.2 : SIZES.radius,
         }}>
-        <Text
-          style={{
-            color: validation ? COLORS.Primary : COLORS.red,
-            alignSelf: 'center',
-            ...FONTS.body3,
-          }}>
-          {EmailError}
-        </Text>
         {/* Input */}
         <FormInput
           label={'Email'}
@@ -230,7 +222,6 @@ export const Signup = ({navigation}) => {
           placeholder={'Enter Email'}
           keyboardType="email-address"
           autoCompleteType="email"
-          // errorMsg={EmailError}
           appendComponent={
             <View
               style={{
@@ -306,16 +297,16 @@ export const Signup = ({navigation}) => {
               }}>
               <Image
                 source={
-                  username == ''? images.correct : username != '' && UserErr == ''? images.correct : images.cancel
+                  first == ''? images.correct : first != ''? images.correct : images.cancel
 
                 }
                 style={{
                   height: 20,
                   width: 20,
                   tintColor:
-                    username == ''
+                  first == ''
                       ? COLORS.gray
-                      : username != '' && UserErr == ''
+                      : first != ''
                       ? COLORS.green
                       : COLORS.red,
                 }}
@@ -340,16 +331,16 @@ export const Signup = ({navigation}) => {
               }}>
               <Image
                 source={
-                  username == ''? images.correct : username != '' && UserErr == ''? images.correct : images.cancel
+                  last == ''? images.correct : last != ''? images.correct : images.cancel
 
                 }
                 style={{
                   height: 20,
                   width: 20,
                   tintColor:
-                    username == ''
+                    last == ''
                       ? COLORS.gray
-                      : username != '' && UserErr == ''
+                      : last != '' 
                       ? COLORS.green
                       : COLORS.red,
                 }}

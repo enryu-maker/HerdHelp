@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import axiosIns from '../../helpers/helpers';
 export default function WeightH({navigation}) {
   const [id, setId] = React.useState('');
-  const [species, setSpcies] = React.useState([]);
+  const [species, setSpcies] = React.useState('');
   const [tag, setTag] = React.useState('');
   const [err, setErr] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -24,7 +24,8 @@ export default function WeightH({navigation}) {
           `getweighthistory/${id}${species}${tag}`,
         );
         if (data.length > 0 && data != undefined) {
-          setTag("")
+          setTag('')
+          setSpcies('')
           setLoading(false)
           return data;
         } else {
@@ -68,20 +69,19 @@ export default function WeightH({navigation}) {
             }}>
             <TouchableOpacity
               style={{
-              marginLeft: 25,
-              backgroundColor:COLORS.Primary,
-              height:40,
-              width:40,
-              justifyContent:"center",
-              borderRadius:40/2,
-
-              }}
+                marginLeft: 25,
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:40,
+                justifyContent:"center",
+                borderRadius:40/2,
+                }}
               onPress={() => {
                 navigation.openDrawer();
               }}>
               <Image
                 source={images.menu}
-                style={{width: 30, height: 30, tintColor: COLORS.white,alignSelf:"center"}}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>

@@ -28,8 +28,26 @@ React.useEffect(()=>{
       <DrawerContentScrollView
         {...props}
         style={{borderBottomWidth: 0.8, borderBottomColor: COLORS.Primary}}>
+          <TouchableWithoutFeedback
+          onPress={()=>{
+            props.navigation.closeDrawer()
+          }}
+          >
+          <Image source={images.x} style={{
+            height:25,
+            width:25,
+            marginLeft:20,
+            marginBottom:10,
+            tintColor:COLORS.white
+          }}/>
+
+          </TouchableWithoutFeedback>
+          
         <TouchableWithoutFeedback
           style={styles.drawerContent}
+          onPress={()=>{
+            props.navigation.navigate('MyAccount')
+          }}
         >
           <View style={styles.userInfoSection}>
             <View style={[styles.row, {flexDirection: 'row'}]}>
@@ -163,7 +181,7 @@ React.useEffect(()=>{
       </DrawerContentScrollView>
 
       <Drawer.Section style={styles.bottomDrawerSection}>
-        <DrawerItem
+        {/* <DrawerItem
           icon={({color, size}) => (
             <Image
               source={images.setting}
@@ -176,7 +194,7 @@ React.useEffect(()=>{
             props.navigation.closeDrawer();
             props.navigation.navigate('Setting');
           }}
-        />
+        /> */}
         <DrawerItem
           icon={({color, size}) => (
             <Image

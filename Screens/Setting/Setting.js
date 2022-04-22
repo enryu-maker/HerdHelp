@@ -12,11 +12,15 @@ import { WeightUnit } from '../../Store/actions';
 export default function Setting({navigation}) {
   const [unit,setUnit] = React.useState("")
   const [loading,setLoading] = React.useState(false)
+  const [show,setShow] = React.useState(false)
   const [cond,setCond] = React.useState("")
   const [EmailError,setEmailError] = React.useState("")
   const [color,setCol] = React.useState(COLORS.lightGray1)
   const dispatch = useDispatch()
+  const CurrentUnit = JSON.parse(useSelector(state=>state.Reducers.unit))
+   
   const onChangeUnit = (value) =>{
+    console.log(value)
     setLoading(true)
     setUnit(value)
     dispatch(WeightUnit(value.toString()))
@@ -85,22 +89,75 @@ export default function Setting({navigation}) {
         style={{
           marginTop: SIZES.padding,
           borderRadius: SIZES.radius,
-          paddingHorizontal: SIZES.radius,
+          // paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
-          paddingBottom: SIZES.padding,
+          // paddingBottom: SIZES.padding,
         }}>
-          {
-            loading?<ActivityIndicator size="large" color={COLORS.Primary}/>:
-          
           <SettingContent title={"Weight"}
+          onPress={()=>{
+            setShow(true)
+          }}
           append={
+            <Text style={{
+              ...FONTS.h3
+            }}>
+              {CurrentUnit?"Lbs":"Kg"}
+            </Text>
+
+          
+          }
+          />
+          {/* <SettingContent title={"Weight"}
+          append={
+            <Text style={{
+              ...FONTS.h3
+            }}>
+              {CurrentUnit?"Lbs":"Kg"}
+            </Text>
+          }
+          /> */}
+        </View>
+    )
+  }
+  function popUp(){
+    return(
+      <Modal
+      transparent={true}
+      animationType={'fade'}
+      visible={show}
+      onRequestClose={() => {
+        setShow(false);
+      }}>
+      <View
+        style={{
+          height: '100%',
+          width: '100%',
+          backgroundColor: '#00000040',
+          justifyContent: 'center',
+          alignSelf: 'center',
+        }}
+        onStartShouldSetResponder={() => setShow(false)}
+        >
+        <View
+          style={{
+            height: 100,
+            width: "88%",
+            backgroundColor: COLORS.lightGray2,
+            alignSelf: 'center',
+            borderRadius: SIZES.radius,
+            alignContent:"center",
+          }}>
+            
             <Dropdown
             data={units}
             mainContainerStyle={{
-              width:120,
-              alignSelf:"flex-end"
+              width:"88%",
+              alignSelf:"center",
+              justifyContent:"center",
+            marginTop:15
             }}
-            label="Unit"
+          label="Unit"
+          // mode="outlined"
           dropdownIcon={images.down}
           dropdownIconSize={20}
           borderRadius={SIZES.radius}
@@ -121,32 +178,19 @@ export default function Setting({navigation}) {
           value={unit}
           onChange={onChangeUnit}
             />
-          }
-          />}
-        </View>
+            </View>
+            </View>
+            </Modal>
     )
   }
-  const [react,showReact] = React.useState(false)
-  const renderReaction=({
-    react
-  })=>{
-    return(
-      <Modal 
-      animationType={'fade'}
-      visible={react}
-      onRequestClose={() => {
-        setShow(false);
-      }}>
-        <View>
 
-        </View>
-
-      </Modal>
-    )
-  }
   return (
     <View style={{flex:1, backgroundColor:COLORS.white}}>
       {renderheader()}
+      {
+        show && 
+        popUp()
+      }
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{

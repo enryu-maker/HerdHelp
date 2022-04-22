@@ -113,9 +113,7 @@ export const Finance = ({navigation}) => {
       setAnimals(data);
     });
   }, []);
-  const onChangeB = value => {
-    setCat(value);
-  };
+
   function renderHeader() {
     return (
       <Header
@@ -225,7 +223,7 @@ export const Finance = ({navigation}) => {
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
               <Image
-                source={images.money}
+                source={images.coin}
                 style={{width: 26, height: 26, tintColor: COLORS.Primary}}
               />
             </View>
@@ -235,6 +233,8 @@ export const Finance = ({navigation}) => {
           label="Price*"
           value={price}
           onChange={value => {
+            value = value.replace(/,/g,"")
+            value=parseInt(value.replace(/$/g,""))
             setPrice(value);
           }}
           containerStyle={{
@@ -274,7 +274,7 @@ export const Finance = ({navigation}) => {
         onPress={() => {
           postfinance();
         }}
-        icon={images.money}
+        icon={images.coin}
         loading={loading}
         buttonContainerStyle={{
           // flex:1,

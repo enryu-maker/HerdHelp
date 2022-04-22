@@ -59,23 +59,18 @@ export default function Parents({navigation}) {
             <TouchableOpacity
               style={{
                 marginLeft: 25,
-                backgroundColor: COLORS.Primary,
-                height: 40,
-                width: 40,
-                justifyContent: 'center',
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:40,
+                justifyContent:"center",
                 borderRadius:40/2,
-              }}
+                }}
               onPress={() => {
                 navigation.openDrawer();
               }}>
               <Image
                 source={images.menu}
-                style={{
-                  width: 30,
-                  height: 30,
-                  tintColor: COLORS.white,
-                  alignSelf: 'center',
-                }}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>

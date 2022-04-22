@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import {View, StyleSheet } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 import { FONTS, SIZES, COLORS, icons, dummyData } from './Constants';
 class ActivityIndicatorExample extends Component {
     _isMounted = false;

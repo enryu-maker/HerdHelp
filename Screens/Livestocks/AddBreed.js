@@ -13,7 +13,7 @@ import React, {useState, useRef} from 'react';
 import Header from '../../Components/Header';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   COLORS,
   SIZES,
@@ -31,6 +31,7 @@ import PickerType from './PickerType';
 import {showMessage} from 'react-native-flash-message';
 import {baseURL} from '../../helpers/helpers';
 import {Username} from '../Nav/Homenav';
+import { getHerds } from '../../Store/actions';
 const Addanimals = ({navigation, route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
@@ -64,7 +65,7 @@ const Addanimals = ({navigation, route}) => {
     return tag != '' && valueMS != '' && valueBS != '';
   }
   const clear = () => {
-    // setSpcies([])
+    setSpcies(null)
     setWeight('');
     setTag('');
     setRegistration('');
@@ -74,6 +75,7 @@ const Addanimals = ({navigation, route}) => {
     setFather('');
     setPrice('');
     setName('');
+    setPic('')
   };
   const username = React.useContext(Username);
   function renderFileUri() {
@@ -167,7 +169,7 @@ const Addanimals = ({navigation, route}) => {
       );
     }
   }
-  // const access = React.useContext(Access)
+  const dispatch = useDispatch()
   function postAnimal() {
     setLoading(true);
     const formData = new FormData();
@@ -217,6 +219,7 @@ const Addanimals = ({navigation, route}) => {
       })
         .then(response => {
           if (response.status == 201) {
+            dispatch(getHerds())
             clear();
             setLoading(false);
             showMessage({
@@ -298,7 +301,7 @@ const Addanimals = ({navigation, route}) => {
                 borderRadius: 40 / 2,
               }}
               onPress={() => {
-                navigation.replace("DrawNav");
+                navigation.goBack();
               }}>
               <Image
                 source={images.back}
@@ -406,13 +409,9 @@ const Addanimals = ({navigation, route}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          // enableAvatar
           required
-          // showLoader={1000}
-          // mode="outlined"
           disableSelectionTick
           primaryColor={COLORS.Primary}
-          // avatarSize={28}
           value={valueMS}
           onChange={(value) => {
             setValueMS(value);
@@ -444,12 +443,8 @@ const Addanimals = ({navigation, route}) => {
             borderRadius: SIZES.radius,
             height: 40,
           }}
-          // enableAvatar
           required
-          // mode="outlined"
-          // disableSelectionTick
           primaryColor={COLORS.Primary}
-          // avatarSize={28}
           value={valueBS}
           onChange={(value) => {
             setValueBS(value);
@@ -539,6 +534,7 @@ const Addanimals = ({navigation, route}) => {
               value={weight}
               keyboardType="numeric"
               onChange={(value) => {
+                value=parseInt(value.replace(/,/g,""))
                 setWeight(value);
               }}
               containerStyle={{
@@ -561,7 +557,6 @@ const Addanimals = ({navigation, route}) => {
               returnKeyType={'next'}
               label="Mother Tag Number"
               value={mother}
-              keyboardType="numeric"
               onChange={(value) => {
                 setMother(value);
               }}
@@ -585,7 +580,6 @@ const Addanimals = ({navigation, route}) => {
               returnKeyType={'next'}
               label="Father Tag Number"
               value={father}
-              keyboardType="numeric"
               onChange={(value) => {
                 setFather(value);
               }}
@@ -610,8 +604,6 @@ const Addanimals = ({navigation, route}) => {
                 margin: 5,
                 borderRadius: SIZES.radius,
               }}
-              // enableAvatar
-              // required
               disableSelectionTick
               animationIn="bounceInLeft"
               animationOut="bounceOutLeft"
@@ -723,7 +715,7 @@ const Addanimals = ({navigation, route}) => {
                     marginLeft: 0,
                   }}>
                   <Image
-                    source={images.money}
+                    source={images.coin}
                     style={{width: 28, height: 28, tintColor: COLORS.Primary}}
                   />
                 </View>
@@ -732,6 +724,8 @@ const Addanimals = ({navigation, route}) => {
               value={price}
               keyboardType="numeric"
               onChange={value => {
+                value = value.replace(/,/g,"")
+                value=parseInt(value.replace(/$/g,""))
                 setPrice(value);
               }}
               containerStyle={{
@@ -789,6 +783,7 @@ const Addanimals = ({navigation, route}) => {
               value={weight}
               keyboardType="numeric"
               onChange={value => {
+                value = parseInt(value.replace(/,/g,""))
                 setWeight(value);
               }}
               containerStyle={{
@@ -981,7 +976,6 @@ const Addanimals = ({navigation, route}) => {
       <TextButton
         onPress={() => {
           postAnimal();
-          // console.log(picdata)
         }}
         icon={images.add}
         buttonContainerStyle={{

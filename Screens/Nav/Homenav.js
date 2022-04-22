@@ -155,7 +155,7 @@ export default class Homenav extends Component {
           <Stack.Screen name='Alerts' component={Alerts} />
           <Stack.Screen name='FinanceInfo' component={FinanceInfo} />
           <Stack.Screen name='LoadAlert' component={LoadAlert}/>
-          <Stack.Screen name='Add' component={Add}/>
+          <Stack.Screen name='add' component={Add}/>
           <Stack.Screen name='MedCard' component={MedCard}/>
           <Stack.Screen name='Setting' component={Setting}/>
           <Stack.Screen name='Report' component={Report}/>
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     backgroundColor:         COLORS.Primary,
     borderTopRightRadius:    40,
     borderBottomRightRadius: 40,
-    width:                   '88%',
+    width:                   '90%',
 
 },
 })

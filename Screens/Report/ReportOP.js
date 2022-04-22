@@ -1,4 +1,4 @@
-import { View, Text ,TouchableOpacity,Image,ScrollView,Platform,ActivityIndicator} from 'react-native'
+import { View, Text ,TouchableOpacity,FlatList,Image,ScrollView,Platform,ActivityIndicator} from 'react-native'
 import React from 'react'
 import Header from '../../Components/Header';
 import Card from '../../Components/Card';
@@ -208,28 +208,30 @@ async function getData(api){
           alignSelf:"center"
         }}/></View>
         ):
-        (<ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{flexGrow: 1}}>
-          {filterList(Data).map((listItem, index) => (
+        <FlatList
+        data={filterList(Data)}
+        keyExtractor={item => `${item.support_tag}`}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item, index }) => (
             <Card
               key={index}
               cond={con}
-              Name={listItem.name}
-              Tagnumber={listItem.support_tag}
-              Gender={listItem.gender}
-              Species={listItem.category}
-              Weight={listItem.weight}
-              image={listItem.animal_image==null?listItem.image:listItem.animal_image}
+              Name={item.name}
+              Tagnumber={item.support_tag}
+              Gender={item.gender}
+              Species={item.category}
+              Weight={item.weight}
+              image={item.animal_image==null?item.image:item.animal_image}
               onPress={() => {
                 navigation.navigate('Info', {
-                  value: listItem,
+                  value: item,
                   cond:con
                 });
               }}
             />
-          ))}
-        </ScrollView>)}
+          )}/>
+            }
+
         <TextButton label={"Generate Report"}
         icon={images.file}
         buttonContainerStyle={{

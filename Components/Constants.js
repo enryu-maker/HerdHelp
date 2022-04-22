@@ -12,10 +12,9 @@ export const images ={
     menu:require("../assets/Logo/menu.png"),
     bread:require("../assets/animal_logo/newborn.png"),
     purchased:require("../assets/animal_logo/cash.png"),
-    menu:require("../assets/Logo/open-menu.png"),
     back:require("../assets/Logo/previous.png"),
     home:require("../assets/Logo/home.png"),
-    add:require("../assets/Logo/pet-care.png"),
+    addanimal:require("../assets/Logo/pet-care.png"),
     med:require("../assets/Logo/first-aid-kit.png"),
     weight:require("../assets/Logo/weight-scale.png"),
     tag:require("../assets/Add/price-tag.png"),
@@ -65,6 +64,10 @@ export const images ={
     kg:require("../assets/Logo/lb.png"),
     cam:require("../assets/Logo/camera.png"),
     picture:require("../assets/Logo/picture.png"),
+    add:require("../assets/Logo/add.png"),
+    coin:require("../assets/Logo/coin.png"),
+    gain:require("../assets/Logo/gain.png"),
+    x:require("../assets/Logo/x.png"),
 
 
 
@@ -77,8 +80,6 @@ export const formatter = new Intl.NumberFormat('en-US', {
 export const COLORS={
     // Primary:"rgb(126,204,122)",
     Primary:"#0DB44C",
-    
-    // Primary:"#757D85",
     transparentPrimary: "#d6f5d6",
     transparentPrimary2: "#eaf7e9",
     white:"#ffffff",

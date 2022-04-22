@@ -142,10 +142,11 @@ const EditAnimal = ({navigation, route}) => {
         })
         .catch(err => {
           setLoading(false);
+          console.log(err)
           showMessage({
             message: `${err.response.data.msg}`,
             type: 'default',
-            backgroundColor: COLORS.Primary,
+            backgroundColor: COLORS.red,
             color: COLORS.white,
             titleStyle: {
               alignSelf: 'center',
@@ -389,6 +390,7 @@ const EditAnimal = ({navigation, route}) => {
               value={weight}
               keyboardType="numeric"
               onChange={value => {
+                value = parseInt(value.replace(/,/g,""))
                 setWeight(value);
               }}
               containerStyle={{
@@ -432,9 +434,8 @@ const EditAnimal = ({navigation, route}) => {
                   />
                 </View>
               }
-              // label="Father Tag Number"
+              label="Father Tag Number"
               value={father}
-              keyboardType="numeric"
               onChange={value => {
                 setFather(value);
               }}
@@ -568,7 +569,7 @@ const EditAnimal = ({navigation, route}) => {
                     marginLeft: 0,
                   }}>
                   <Image
-                    source={images.money}
+                    source={images.coin}
                     style={{width: 28, height: 28, tintColor: COLORS.Primary}}
                   />
                 </View>
@@ -578,6 +579,9 @@ const EditAnimal = ({navigation, route}) => {
               returnKeyType={'next'}
               keyboardType="numeric"
               onChange={value => {
+                // const v = value
+                value = value.replace(/,/g,"")
+                value=parseInt(value.replace(/$/g,""))
                 setPrice(value);
               }}
               containerStyle={{
@@ -603,7 +607,6 @@ const EditAnimal = ({navigation, route}) => {
                 </View>
               }
               returnKeyType={'next'}
-              keyboardType="numeric"
               label="Age"
               value={age}
               onChange={value => {
@@ -636,6 +639,7 @@ const EditAnimal = ({navigation, route}) => {
               returnKeyType={'next'}
               keyboardType="numeric"
               onChange={value => {
+                value = parseInt(value.replace(/,/g,""))
                 setWeight(value);
               }}
               containerStyle={{
@@ -831,6 +835,7 @@ const EditAnimal = ({navigation, route}) => {
       <TextButton
         onPress={() => {
           postAnimal();
+          // console.log(typeof(price))
         }}
         icon={images.add}
         buttonContainerStyle={{

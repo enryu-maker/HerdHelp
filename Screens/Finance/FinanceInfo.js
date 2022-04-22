@@ -1,10 +1,10 @@
-import {View, Text, TouchableOpacity, Image, ScrollView,ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity, Image, FlatList,ActivityIndicator} from 'react-native';
 import React from 'react';
 import axiosIns from '../../helpers/helpers';
 import Header from '../../Components/Header';
 import TextButton from '../../Components/TextButton';
 import FinanceCard from './FinanceCard';
-import {COLORS, SIZES, images} from '../../Components/Constants';
+import {COLORS, SIZES, images,FONTS} from '../../Components/Constants';
 import ActivityIndicatorExample from '../../Components/Loading';
 
 export default function FinanceInfo({navigation}) {
@@ -42,16 +42,48 @@ export default function FinanceInfo({navigation}) {
                 borderRadius:40/2,
                 }}
               onPress={() => {
-                navigation.goBack();
+                navigation.openDrawer();
               }}>
               <Image
-                source={images.back}
+                source={images.menu}
                 style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>
         }
-        title={'Finance Details'}
+        title={'Finance'}
+        titleStyle={{
+          marginLeft:130
+        }}
+        rightComponent={
+          <View
+            style={{
+              justifyContent: 'center',
+              // position: 'absolute',
+              marginRight: 15,
+              // zIndex: 1,
+            }}>
+            <TouchableOpacity
+              style={{
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:120,
+                justifyContent:"center",
+                borderRadius:40/2,
+                }}
+                onPress={() => {
+                  navigation.push('Finance');
+                  }}>
+              <Text style={{
+                ...FONTS.h3,
+                color:COLORS.white,
+                alignSelf:"center"
+              }}>
+                Add Finance
+              </Text>
+            </TouchableOpacity>
+          </View>
+        }
       />
     );
   }
@@ -59,25 +91,24 @@ export default function FinanceInfo({navigation}) {
     <View style={{flex: 1}}>
       {renderHeader()}
       {loading? (
-        <ScrollView
+        <FlatList
+        data={finance}
+        keyExtractor={item => `${item.id}`}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{flexGrow: 1}}>
-        {finance.map((listItem, index) => (
+        renderItem={({ item, index }) => (
           <FinanceCard
             key={index}
-            category={listItem.category}
-            price={listItem.price}
-            quantity={listItem.quantity}
-            date={listItem.added_date}
+            category={item.category}
+            price={item.price}
+            quantity={item.quantity}
+            date={item.added_date}
           />
-        ))}
-      </ScrollView>
+          )}/>
       ) : (
-        
         <ActivityIndicatorExample />
       )}
         
-      <TextButton
+      {/* <TextButton
         onPress={() => {
           navigation.replace('Finance');
         }}
@@ -92,7 +123,7 @@ export default function FinanceInfo({navigation}) {
           backgroundColor: COLORS.Primary,
         }}
         label={'Add Finance'}
-      />
+      /> */}
     </View>
   );
 }

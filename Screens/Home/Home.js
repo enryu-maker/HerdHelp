@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity, ScrollView,} from 'react-native';
+import {View, Text, Image, TouchableOpacity, FlatList,} from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
 import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
@@ -9,11 +9,12 @@ import CustomButton from './CustomButtom';
 import { ActivityIndicator } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getHerds } from '../../Store/actions';
+import ActivityIndicatorExample from '../../Components/Loading';
 export const Home = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const animals = useSelector(state=>state.Reducers.herds)
-  const id = useSelector(state=>state.Reducers.id)
-  console.log(id)
+  // const id = useSelector(state=>state.Reducers.id)
+  // console.log(id)
   function renderHeader() {
     return (
       <Header
@@ -35,11 +36,16 @@ export const Home = ({navigation}) => {
                 borderRadius:40/2,
                 }}
               onPress={() => {
-                navigation.goBack();
+                navigation.openDrawer();
               }}>
               <Image
-                source={images.back}
-                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
+                source={images.menu}
+                style={{
+                  width: 25,
+                  height: 25,
+                  tintColor: COLORS.white,
+                  alignSelf: 'center',
+                }}
               />
             </TouchableOpacity>
           </View>
@@ -51,47 +57,36 @@ export const Home = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       {renderHeader()}
-      <KeyboardAwareScrollView
+      {
+        animals.length==0?<ActivityIndicatorExample/>:
+      <FlatList
+      style={{
+        alignSelf:"center",
+      }}
+        data={animals}
+        numColumns={2}
+        keyExtractor={item => `${item.id}`}
         showsVerticalScrollIndicator={false}
-        keyboardDismissMode="on-drag"
-        contentContainerStyle={{
-          marginVertical: 0,
-          width: '88%',
-          paddingVertical: SIZES.padding,
-          paddingHorizontal: SIZES.radius,
-          borderRadius: SIZES.radius,
-          backgroundColor: COLORS.lightGray2,
-          alignSelf: 'center'
-        }}>
-          {
-            loading?(
-              <ActivityIndicator size="small" color={COLORS.Primary}/>
-            ):(            
-        animals.map(a => {
-          if (a.data.length != 0) {
-            return (
+        renderItem={({ item, index }) => (
+          item.data.length>0?
               <CustomButton
                 buttonContainerStyle={{
-                  marginTop: SIZES.padding,
+                  margin:10
                 }}
-                icon={{uri: baseURL + a.data[0].image}}
-                key={a.id}
-                label={`My ${a.label}`}
-                label2={`${a.data.length}`}
+                icon={{uri: baseURL + item.data[0].image}}
+                key={item.id}
+                label={`My ${item.label}`}
+                label2={`${item.data.length}`}
                 onPress={() => {
-                  navigation.navigate('Add', {
-                    label: `My ${a.label}'s`,
-                    data: a.data,
+                  navigation.navigate('add', {
+                    label: `My ${item.label}'s`,
+                    data: item.data,
                     cond:true
                   });
                 }}
-              />
-            );
-          }
-        })
-        )
-          }
-      </KeyboardAwareScrollView>
+              />:null
+        )}/>
+              }
     </View>
   );
 };

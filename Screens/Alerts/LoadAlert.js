@@ -13,7 +13,7 @@ import Header from '../../Components/Header';
 import ActivityIndicatorExample from '../../Components/Loading';
 import TextButton from '../../Components/TextButton';
 import {SwipeListView} from 'react-native-swipe-list-view';
-export default function LoadAlert({navigation, route}) {
+export default function LoadAlert({navigation}) {
   const [alert, setAlerts] = React.useState([]);
   const [species, setSpcies] = React.useState([]);
   const [id, setId] = React.useState(null);
@@ -26,13 +26,12 @@ export default function LoadAlert({navigation, route}) {
   }
   React.useEffect(() => {
     setId(global.id);
-    setSpcies(global.species);
     loadFinance().then(data => {
+      console.log(data)
       setAlerts(data);
       setLoading(false)
-      // console.log(data)
     });
-  }, [alert]);
+  }, []);
   function delAlert(id){
     axiosIns.delete(`alerts/${id}`).then(()=>{alert("Alert deleted sucessfully")})
    }
@@ -57,16 +56,51 @@ export default function LoadAlert({navigation, route}) {
                 borderRadius:40/2,
                 }}
               onPress={() => {
-                navigation.navigate("Draw");
+                navigation.openDrawer();
               }}>
               <Image
-                source={images.back}
+                source={images.menu}
                 style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>
         }
         title={'Alerts'}
+        titleStyle={{
+          marginLeft:110
+        }}
+        rightComponent={
+          <View
+            style={{
+              justifyContent: 'center',
+              // position: 'absolute',
+              marginRight: 15,
+              // zIndex: 1,
+            }}>
+            <TouchableOpacity
+              style={{
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:100,
+                justifyContent:"center",
+                borderRadius:40/2,
+                }}
+                onPress={() => 
+                  navigation.push('Alerts', {
+                    sep: species,
+                    id: id,
+                  })}
+                  >
+              <Text style={{
+                ...FONTS.h3,
+                color:COLORS.white,
+                alignSelf:"center"
+              }}>
+                Add Alerts
+              </Text>
+            </TouchableOpacity>
+          </View>
+        }
       />
     );
   }
@@ -80,7 +114,6 @@ export default function LoadAlert({navigation, route}) {
              Delete
             </Text>
             </Text>
-      {loading ? (
         <SwipeListView
           data={alert}
           keyExtractor={item => `${item.id}`}
@@ -145,12 +178,12 @@ export default function LoadAlert({navigation, route}) {
           // leftOpenValue={0}
           rightOpenValue={-75}
         />
-      ) : (
-        <ActivityIndicatorExample />
-      )}
+    
 
-      <TextButton
+
+      {/* <TextButton
         onPress={() => {
+          console.log(navigation)
           navigation.replace('Alerts', {
             sep: species,
             id: id,
@@ -167,7 +200,7 @@ export default function LoadAlert({navigation, route}) {
           backgroundColor: COLORS.Primary,
         }}
         label={'Add Alert'}
-      />
+      /> */}
     </View>
   );
 }

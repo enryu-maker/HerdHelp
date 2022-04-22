@@ -3,11 +3,12 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  ActivityIndicator,
+  FlatList
 } from 'react-native';
 import React from 'react';
 import {images, COLORS, SIZES} from '../../Components/Constants';
 import Header from '../../Components/Header';
+import { ActivityIndicator } from 'react-native-paper';
 import ReportB from './ReportB';
 import axiosIns from '../../helpers/helpers';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -46,23 +47,18 @@ export default function Report(props) {
             <TouchableOpacity
               style={{
                 marginLeft: 25,
-                backgroundColor: COLORS.Primary,
-                height: 40,
-                width: 40,
-                justifyContent: 'center',
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:40,
+                justifyContent:"center",
                 borderRadius:40/2,
-              }}
+                }}
               onPress={() => {
                 props.navigation.openDrawer();
               }}>
               <Image
                 source={images.menu}
-                style={{
-                  width: 30,
-                  height: 30,
-                  tintColor: COLORS.white,
-                  alignSelf: 'center',
-                }}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>
@@ -85,26 +81,30 @@ export default function Report(props) {
             style={{marginTop: SIZES.height * 0.35}}
           />
         ) : (
-          report.map((listItem, index) => (
+          <FlatList
+      data={report}
+      keyExtractor={item => `${item.id}`}
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item, index }) => (
             <ReportB
-              key={listItem.id}
-              img={listItem.image}
-              reportText={listItem.name}
+              key={item.id}
+              img={item.image}
+              reportText={item.name}
               onPress={() => {
                 props.navigation.navigate('ReportOP', {
-                  label: listItem.name,
-                  api: listItem.api.toString(),
+                  label: item.name,
+                  api: item.api.toString(),
                   cond: false,
                   footer:
-                    listItem.name == 'Lost Animals' ||
-                    listItem.name == 'Sold Animals' ||
-                    listItem.name == 'Purchased Animals'
+                  item.name == 'Lost Animals' ||
+                  item.name == 'Sold Animals' ||
+                  item.name == 'Purchased Animals'
                       ? true
                       : false,
                 });
               }}
             />
-          ))
+          )}/>
         )}
       </View>
     );

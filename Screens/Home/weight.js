@@ -9,7 +9,8 @@ import {COLORS, images, SIZES, FONTS} from '../../Components/Constants';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import CustomAlert from '../../Components/CustomAlert';
 import { showMessage } from "react-native-flash-message";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getHerds } from '../../Store/actions';
 export const Weight =({ navigation,route})=> {
   const [tag, setTag] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -35,10 +36,11 @@ export const Weight =({ navigation,route})=> {
     });
     return dataValue;
   }
+  const dispatch = useDispatch()
   const clear=()=>{
     setSpcies([])
     setWeight("")
-    setTag("")
+    setTag([])
   }
   async function updateWeight(){
     if (tag!="",weight!=0){
@@ -53,6 +55,7 @@ export const Weight =({ navigation,route})=> {
           },
         }).then((Response)=>{
           if (Response.status==200){
+            dispatch(getHerds())
             setLoading(false)
             showMessage({
               message: "Weight Updated",
@@ -256,6 +259,7 @@ export const Weight =({ navigation,route})=> {
           label="Weight"
           value={weight}
           onChange={value => {
+            value=parseInt(value.replace(/,/g,""))
             setWeight(value);
           }}
           containerStyle={{

@@ -12,9 +12,10 @@ const Card = ({
   image,
   onPress,
   weight_kg,
+  Flagged,
   navigation,
 }) => {
-  const unit = useSelector(state=>state.Reducers.unit)
+  const unit = JSON.parse(useSelector(state=>state.Reducers.unit))
   return (
     <TouchableOpacity
       style={{
@@ -24,7 +25,7 @@ const Card = ({
         borderRadius: SIZES.radius,
         flexDirection: 'row',
         justifyContent: "space-between",
-        shadowColor: COLORS.black,
+        shadowColor:Flagged? "red" : COLORS.black,
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
         shadowRadius: 5,
@@ -50,18 +51,6 @@ const Card = ({
           />
         )}
       </View>
-      {/* <View
-            style={{
-                height: 80,
-                width: 1,
-                backgroundColor: COLORS.Primary,
-                justifyContent:"center",
-                alignSelf:"center",
-                position:"absolute",
-                marginLeft:130,
-                margin:20
-            }}
-        /> */}
       <View
         style={{
           flexDirection: 'column',
@@ -81,7 +70,6 @@ const Card = ({
       <View
         style={{
           flexDirection: 'column',
-        //   justifyContent: 'center',
         }}>
             <Image
         source={images.rightone}
@@ -90,7 +78,6 @@ const Card = ({
           width: 15,
           margin: 10,
           tintColor: COLORS.black,
-        //   position:"absolute",
           alignSelf:"flex-end"
         }}
       />

@@ -40,7 +40,7 @@ export default function PickerType({
         cropping: true,
         compressImageQuality:true
       }).then(image => {
-        console.log(image);
+        // console.log(image);
           const uriParts = image.path.split('.')
           const fileType = uriParts[uriParts.length - 1];
           setPic(image.path);

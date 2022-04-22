@@ -7,12 +7,13 @@ import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import TextButton from './TextButton';
 import FormInput from './FormInput';
 import axiosIns from '../helpers/helpers';
-import { useDispatch, useSelector } from 'react-redux';
-import { getStatus } from '../Store/actions';
+import { useSelector } from 'react-redux';
 const Status = ({show, setShow, animal}) => {
   const [status, setStatus] = React.useState("Alive");
   const [Price, setPrice] = React.useState(0);
   const [loading, setloading] = React.useState(false);
+  const [Flagged, setFlagged] = React.useState(false);
+  const [Flaggedesp, setFlaggedesp] = React.useState("");
   const [err, setErr] = React.useState('');
   const statusCat = useSelector(state=>state.Reducers.status)
   async function delAnimal() {
@@ -77,8 +78,8 @@ const Status = ({show, setShow, animal}) => {
                 setShow(false);
               }}>
               <Image
-                source={images.cancel}
-                style={{width: 30, height: 30, tintColor: COLORS.white,alignSelf:"center"}}
+                source={images.x}
+                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
           </View>
@@ -147,7 +148,7 @@ const Status = ({show, setShow, animal}) => {
           prependComponent={
             <View style={{alignSelf: 'center', justifyContent: 'center'}}>
               <Image
-                source={images.money}
+                source={images.coin}
                 style={{width: 26, height: 26, tintColor: COLORS.Primary}}
               />
             </View>
@@ -155,6 +156,8 @@ const Status = ({show, setShow, animal}) => {
           label={'Amount*'}
           value={Price}
           onChange={value => {
+            value = value.replace(/,/g,"")
+            value=parseInt(value.replace(/$/g,""))
             setPrice(value);
           }}
           inputContainerStyle={{
@@ -165,13 +168,72 @@ const Status = ({show, setShow, animal}) => {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
+        <Dropdown
+          label="Flagged"
+          borderRadius={SIZES.radius}
+          data={Bred}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
+          selectedItemTextStyle={
+            (FONTS.body3,
+            {color: COLORS.white, letterSpacing: 2, alignSelf: 'center'})
+          }
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          required
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          value={Flagged}
+          onChange={(value)=>{
+            setFlagged(value)
+          }}
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{backgroundColor: COLORS.white, margin: 5}}
+        />
+        {
+          Flagged?
+        <FormInput
+          prependComponent={
+            <View style={{alignSelf: 'center', justifyContent: 'center'}}>
+              <Image
+                source={images.add}
+                style={{width: 26, height: 26, tintColor: COLORS.Primary}}
+              />
+            </View>
+          }
+          label={'Description*'}
+          value={Flaggedesp}
+          onChange={value => {
+            setFlaggedesp(value);
+          }}
+          inputContainerStyle={{
+            backgroundColor: COLORS.white,
+          }}
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          inputStyle={{marginLeft: 20, fontSize: 16}}
+        />:null
+  }
       </View>
     );
   }
+
   return (
     <Modal
       transparent={true}
-      animationType={'fade'}
+      animationType={"slide"}
       visible={show}
       onRequestClose={() => {
         setShow(false);
@@ -181,16 +243,17 @@ const Status = ({show, setShow, animal}) => {
           height: '100%',
           width: '100%',
           backgroundColor: '#00000040',
-          justifyContent: 'center',
+          justifyContent: "flex-end",
           alignSelf: 'center',
         }}>
         <View
           style={{
-            height: 500,
-            width: 342,
+            height: '88%',
+          width: '100%',
             backgroundColor: COLORS.white,
             alignSelf: 'center',
-            borderRadius: SIZES.radius,
+            borderTopLeftRadius: SIZES.padding,
+            borderTopRightRadius:SIZES.padding,
           }}>
           {renderHeader()}
           <KeyboardAwareScrollView
@@ -200,7 +263,6 @@ const Status = ({show, setShow, animal}) => {
             contentContainerStyle={{
               marginTop: SIZES.radius,
               paddingHorizontal: SIZES.padding,
-              paddingBottom: 40,
             }}>
             {renderForm()}
           </KeyboardAwareScrollView>
@@ -222,7 +284,7 @@ const Status = ({show, setShow, animal}) => {
             loading={loading}
           />
         </View>
-      </View>
+        </View>
     </Modal>
   );
 };
