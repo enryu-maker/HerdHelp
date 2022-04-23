@@ -225,12 +225,13 @@ const MyAccountEdit = ({navigation,route}) => {
       loading={loading}
       icon={images.update}
         buttonContainerStyle={{
-          height: 60,
+          // height: 60,
           marginTop: SIZES.padding,
-          marginHorizontal: SIZES.padding,
-          marginBottom: SIZES.padding,
-          borderRadius: SIZES.radius,
-          backgroundColor: COLORS.Primary,
+            marginHorizontal: SIZES.padding,
+            marginBottom: SIZES.padding,
+            borderTopLeftRadius: SIZES.radius,
+            borderTopRightRadius: SIZES.radius,
+            backgroundColor: COLORS.Primary,
         }}
         label="Save"
         onPress={() => {

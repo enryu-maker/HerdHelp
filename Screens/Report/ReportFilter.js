@@ -5,6 +5,7 @@ import {images, SIZES, FONTS, COLORS} from '../../Components/Constants';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import TextButton from '../../Components/TextButton';
+import { useSelector } from 'react-redux';
 export default function ReportFilter({
   show,
   setShow,
@@ -15,45 +16,49 @@ export default function ReportFilter({
   med,
 }) {
   const [species, setSpecies] = React.useState(null);
-  const [animal, setAnimal] = React.useState([]);
+  // const [animal, setAnimal] = React.useState([]);
   const updateStatus = value => {
     setSpecies(value);
     setSpec(value);
   };
-  React.useEffect(() => {
-    setAnimal(global.species);
-  }, []);
+  const animal = useSelector(state=>state.Reducers.cat)
+  
   function renderHeader() {
     return (
       <Header
-        rightComponent={
-          <View
+      leftComponent={
+        <View
+          style={{
+            justifyContent: 'center',
+          }}>
+          <TouchableOpacity
             style={{
-              justifyContent: 'center',
-              position: 'absolute',
-              marginTop: 25,
-              // padding:10,
-              zIndex: 1,
-            }}>
-            <TouchableOpacity
-              style={{
-                marginLeft: 25,
+              marginLeft: 25,
+              backgroundColor:COLORS.Primary,
+              height:40,
+              width:40,
+              justifyContent:"center",
+              borderRadius:40/2,
               }}
-              onPressIn={() => {
-                setShow(false);
-              }}>
-              <Image
-                source={images.cancel}
-                style={{width: 35, height: 35, tintColor: COLORS.red}}
-              />
-            </TouchableOpacity>
-          </View>
-        }
+            onPressIn={() => {
+              setShow(false);
+            }}>
+            <Image
+              source={images.x}
+              style={{width: 20, height: 20, tintColor: COLORS.white,alignSelf:"center"}}
+            />
+          </TouchableOpacity>
+        </View>
+      }
         title={'Filter'}
+        titleStyle={{
+          marginRight:60,
+          alignSelf:"center"
+        }}
       />
     );
   }
-  function filterOption() {
+  function catFilter() {
     return (
       <View
         style={{
@@ -87,79 +92,73 @@ export default function ReportFilter({
           mainContainerStyle={{
             borderRadius: SIZES.padding,
             width: '88%',
-            alignSelf: 'center',
-            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+            alignSelf: 'center'
           }}
           itemContainerStyle={{
             backgroundColor: COLORS.white,
             margin: 5,
           }}
         />
-
-        <TextButton
-          label={'Vaccinated'}
-          icon={images.correct}
-          border={false}
-
-          buttonContainerStyle={{
-            marginTop: 15,
-            backgroundColor: vacc ? COLORS.Primary : COLORS.gray,
-          }}
-          onPress={() => {
-            setVacc(true);
-          }}
-        />
-        <TextButton
-          label={'Not Vaccinated'}
-          icon={images.cancel}
-          iconStyle={{
-            tintColor: COLORS.red,
-          }}
-          border={false}
-
-          onPress={() => {
-            setVacc(false);
-          }}
-          buttonContainerStyle={{
-            marginTop: 10,
-            backgroundColor: vacc == false ? COLORS.Primary : COLORS.gray,
-          }}
-        />
-        <TextButton
-          label={'Medicated'}
-          icon={images.correct}
-          iconStyle={{
-            tintColor: COLORS.white,
-          }}
-          border={false}
-
-          onPress={() => {
-            setMed(true);
-          }}
-          buttonContainerStyle={{
-            marginTop: 10,
-            backgroundColor: med ? COLORS.Primary : COLORS.gray,
-          }}
-        />
-        <TextButton
-          label={'Not Medicated'}
-          border={false}
-          icon={images.cancel}
-          iconStyle={{
-            tintColor: COLORS.red,
-          }}
-          onPress={() => {
-            setMed(false);
-          }}
-          buttonContainerStyle={{
-            marginTop: 10,
-            backgroundColor: med == false ? COLORS.Primary : COLORS.gray,
-
-            // width:150
-          }}
-        />
       </View>
     );
+  }
+  function buttonFilter(){
+    return(
+      <View
+        style={{
+          marginTop:15,
+          paddingVertical: SIZES.padding,
+          paddingHorizontal: SIZES.radius,
+          borderRadius: SIZES.radius,
+          backgroundColor: COLORS.lightGray2,
+        }}>
+      <View style={{
+        flex:1,
+        flexDirection:"row",
+        justifyContent:"space-evenly",
+        marginTop:10
+      }}>
+      <TouchableOpacity
+      style={{
+        backgroundColor:vacc?COLORS.Primary:COLORS.transparentPrimary,
+        height:50,
+        width:120,
+        borderRadius:SIZES.radius,
+        justifyContent:"center",
+        alignItems:"center"
+      }}
+      onPress={()=>{
+        setVacc(!vacc)
+      }}
+      >
+        <Text style={{
+          ...FONTS.h3,
+          color:vacc?COLORS.white:COLORS.black
+        }}>Vaccinated</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+      style={{
+        backgroundColor:med? COLORS.Primary:COLORS.transparentPrimary,
+        height:50,
+        width:120,
+        borderRadius:SIZES.radius,
+        justifyContent:"center",
+        alignItems:"center"
+        // alignSelf:"center"
+      }}
+      onPress={()=>{
+        setMed(!med)
+      }}
+      >
+       <Text style={{
+          ...FONTS.h3,
+          color:med?COLORS.white:COLORS.black
+        }}>Medicated</Text>
+      </TouchableOpacity>
+      
+      </View>
+      </View>
+    )
   }
   return (
     <Modal
@@ -173,7 +172,7 @@ export default function ReportFilter({
         style={{
           height: '100%',
           width: '100%',
-          backgroundColor: '#00000010',
+          backgroundColor: '#00000040',
           justifyContent: 'flex-end',
           alignSelf: 'center',
         }}
@@ -183,12 +182,12 @@ export default function ReportFilter({
       >
         <View
           style={{
-            height: '85%',
+            height: '88%',
             width: '100%',
             backgroundColor: COLORS.white,
             alignSelf: 'center',
-            borderTopLeftRadius: SIZES.radius + 20,
-            borderTopRightRadius: SIZES.radius + 20,
+            borderTopLeftRadius: SIZES.padding,
+            borderTopRightRadius: SIZES.padding,
           }}>
           {renderHeader()}
           <KeyboardAwareScrollView
@@ -200,16 +199,18 @@ export default function ReportFilter({
               paddingHorizontal: SIZES.padding,
               paddingBottom: 10,
             }}>
-            {filterOption()}
+            {catFilter()}
+            {buttonFilter()}
           </KeyboardAwareScrollView>
           <View
             style={{
               flexDirection: 'row',
-              flex: 1,
-              alignSelf: 'center',
-              justifyContent: 'flex-start',
-              position: 'relative',
-              marginBottom:SIZES.height>700?30:130
+              // flex: 1,
+              // alignSelf: 'center',
+              justifyContent: "space-evenly",
+              // position: 'relative',
+              // alignContent:"center",
+              marginBottom:SIZES.height>700?30:20
             }}>
             <TextButton
               onPress={() => {
@@ -218,10 +219,10 @@ export default function ReportFilter({
               icon={images.correct}
               buttonContainerStyle={{
                 height: 60,
-                width: 150,
+                width: 180,
                 marginTop: SIZES.padding,
-                marginHorizontal: SIZES.padding,
-                marginBottom: SIZES.padding + 10,
+                // marginHorizontal: SIZES.padding,
+                // marginBottom: SIZES.padding + 10,
                 borderRadius: SIZES.radius,
                 backgroundColor: COLORS.Primary,
               }}
@@ -236,10 +237,10 @@ export default function ReportFilter({
               icon={images.cancel}
               buttonContainerStyle={{
                 height: 60,
-                width: 150,
+                width: 140,
                 marginTop: SIZES.padding,
-                marginHorizontal: SIZES.padding,
-                marginBottom: SIZES.padding + 10,
+                // marginHorizontal: SIZES.padding,
+                // marginBottom: SIZES.padding + 10,
                 borderRadius: SIZES.radius,
                 backgroundColor: COLORS.Primary,
               }}

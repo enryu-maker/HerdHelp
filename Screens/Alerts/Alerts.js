@@ -333,11 +333,12 @@ export default function Alerts({navigation,route}) {
         loading={loading}
         buttonContainerStyle={{
           // flex:1,
-          height: 60,
+          // height: 60,
           marginTop: SIZES.padding,
           marginHorizontal: SIZES.padding,
           marginBottom: SIZES.padding,
-          borderRadius: SIZES.radius,
+          borderTopLeftRadius: SIZES.radius,
+          borderTopRightRadius: SIZES.radius,
           backgroundColor: COLORS.Primary,
         }}
         label={'Add Alert'}

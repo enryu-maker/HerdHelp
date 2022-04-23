@@ -25,7 +25,7 @@ const Card = ({
         borderRadius: SIZES.radius,
         flexDirection: 'row',
         justifyContent: "space-between",
-        shadowColor:Flagged? "red" : COLORS.black,
+        shadowColor:Flagged? "blue" : COLORS.black,
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
         shadowRadius: 5,

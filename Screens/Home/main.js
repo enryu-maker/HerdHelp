@@ -265,6 +265,7 @@ const Main = ({navigation}) => {
   return (
     <>
     <BottomTab.Navigator
+
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarIcon: ({focused, color, size}) => {
@@ -329,9 +330,9 @@ const Main = ({navigation}) => {
           fontWeight:iconweight
         },
         tabBarStyle: {
-          height: 110,
-          borderTopLeftRadius: SIZES.padding,
-          borderTopRightRadius: SIZES.padding,
+          height:SIZES.height>700?110:75,
+          // borderTopLeftRadius: SIZES.padding,
+          // borderTopRightRadius: SIZES.padding,
           backgroundColor: COLORS.Primary,
         },
         tabBarActiveTintColor: COLORS.transparentPrimary2,

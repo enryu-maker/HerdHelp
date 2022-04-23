@@ -1,4 +1,4 @@
-import { View, Text ,TouchableOpacity,FlatList,Image,ScrollView,Platform,ActivityIndicator} from 'react-native'
+import { View, Text ,TouchableOpacity,FlatList,Image,ScrollView,Platform} from 'react-native'
 import React from 'react'
 import Header from '../../Components/Header';
 import Card from '../../Components/Card';
@@ -11,8 +11,7 @@ import {
 } from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
 import ReportFilter from './ReportFilter';
-import { set } from 'react-native-reanimated';
-import ActivityIndicatorExample from '../../Components/Loading';
+import {ActivityIndicator} from 'react-native-paper'
 import TextButton from '../../Components/TextButton';
 import Generate from './Generate';
 export default function ReportOP({navigation,route}) {

@@ -78,7 +78,7 @@ export default function Report(props) {
             animating={loading}
             color={COLORS.Primary}
             size="large"
-            style={{marginTop: SIZES.height * 0.35}}
+            style={{height: SIZES.height/2}}
           />
         ) : (
           <FlatList

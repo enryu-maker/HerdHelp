@@ -46,7 +46,6 @@ export const Info = ({navigation, route}) => {
   }
   React.useEffect(() => {
     let {value} = route.params;
-    console.log(value);
     setAnimal(value);
     let {cond} = route.params;
     getanimal(value.tag_number).then(data => {
@@ -320,7 +319,23 @@ export const Info = ({navigation, route}) => {
       />
     );
   }
-
+  function renderSectionLast() {
+    return (
+      <View
+        style={{
+          marginBottom: SIZES.padding,
+          borderRadius: SIZES.radius,
+          paddingHorizontal: SIZES.radius,
+          backgroundColor: COLORS.lightGray2,
+        }}>
+        <InfoItem label="Flagged Description?" value={animal?.breed} withDivider={false} />
+        <Text style={{
+          ...FONTS.body2,
+        marginBottom:5
+        }} >{animal?.flag_desc}</Text>
+      </View>
+    );
+  }
   function renderHeader() {
     return (
       <Header
@@ -425,6 +440,10 @@ export const Info = ({navigation, route}) => {
         {Type()}
         {renderSectionFour()}
         {Vaccinated()}
+        {
+          animal.flagged?renderSectionLast():null
+        }
+        
       </ScrollView>
 
       {cond ? (
@@ -448,10 +467,10 @@ export const Info = ({navigation, route}) => {
           }}
           icon={images.update}
           buttonContainerStyle={{
-            height: 60,
-            marginTop: SIZES.padding - 10,
+            // height: 60,
+            marginTop: SIZES.padding,
             marginHorizontal: SIZES.padding,
-            marginBottom: SIZES.padding + 10,
+            marginBottom: SIZES.padding,
             borderTopLeftRadius: SIZES.radius,
             borderTopRightRadius: SIZES.radius,
             backgroundColor: COLORS.Primary,

@@ -418,13 +418,12 @@ export const Medication = ({navigation, route}) => {
         icon={images.med}
         loading={loading}
         buttonContainerStyle={{
-          // flex:1,
-          height: 60,
           marginTop: SIZES.padding,
-          marginHorizontal: SIZES.padding,
-          marginBottom: SIZES.padding + 10,
-          borderRadius: SIZES.radius,
-          backgroundColor: COLORS.Primary,
+            marginHorizontal: SIZES.padding,
+            marginBottom: SIZES.padding,
+            borderTopLeftRadius: SIZES.radius,
+            borderTopRightRadius: SIZES.radius,
+            backgroundColor: COLORS.Primary,
         }}
         label={'Add Medication'}
       />

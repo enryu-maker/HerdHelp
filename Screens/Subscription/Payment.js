@@ -190,12 +190,11 @@ else{
         icon={images.sack}
         // loading={loading}
         buttonContainerStyle={{
-          // flex:1,
-          height: 60,
           marginTop: SIZES.padding,
-          marginHorizontal: SIZES.padding,
-          marginBottom: SIZES.padding + 10,
-          borderRadius: SIZES.radius,
+            marginHorizontal: SIZES.padding,
+            marginBottom: SIZES.padding,
+            borderTopLeftRadius: SIZES.radius,
+            borderTopRightRadius: SIZES.radius,
           backgroundColor:cond? COLORS.Primary:COLORS.transparentPrimary2,
         }}
         label={'Confirm Payment'}

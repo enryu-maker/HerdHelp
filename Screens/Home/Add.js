@@ -179,7 +179,7 @@ export default function Add({navigation,route}) {
       renderItem={({ item, index }) => (
             <Card
               key={index}
-              Flagged={true}
+              Flagged={item?.flagged}
               cond={cond}
               Name={item.name}
               Tagnumber={item.support_tag}

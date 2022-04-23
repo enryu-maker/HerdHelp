@@ -58,7 +58,7 @@ export const Home = ({navigation}) => {
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       {renderHeader()}
       {
-        animals.length==0?<ActivityIndicatorExample/>:
+        animals?.length===0?<ActivityIndicatorExample/>:
       <FlatList
       style={{
         alignSelf:"center",

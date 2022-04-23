@@ -13,17 +13,18 @@ export default function Parents({navigation}) {
   const [id, setId] = React.useState('');
   const [err, setErr] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-  const [animal, setAnimal] = React.useState([]);
+  const [animal, setAnimal] = React.useState('');
   const [babies, setBabies] = React.useState([]);
   const species = useSelector(state => state.Reducers.cat)
   const tagl = useSelector(state => state.Reducers.tags)
 
   React.useEffect(() => {
     setId(global.id);
-
-
   }, []);
- 
+  function clear(){
+    setTag('');
+    setAnimal('');
+  }
   async function findChildren() {
 
       setLoading(true);
@@ -32,8 +33,10 @@ export default function Parents({navigation}) {
           `reports/getchildren/${id}${animal}${tag}`,
         );
         if (data.length > 0 && data != undefined) {
+          clear()
           setBabies(data)
-          setTag('');
+          
+
           setLoading(false);
           return data;
         } else {
@@ -41,6 +44,8 @@ export default function Parents({navigation}) {
           setErr('babies Not found');
         }
       } catch (e) {
+        setTag('');
+        set('');
         setLoading(false);
         setErr('Server Error');
       }
@@ -222,13 +227,12 @@ export default function Parents({navigation}) {
         icon={images.parents}
         loading={loading}
         buttonContainerStyle={{
-          // flex:1,
-          height: 60,
           marginTop: SIZES.padding,
-          marginHorizontal: SIZES.padding,
-          marginBottom: SIZES.padding + 10,
-          borderRadius: SIZES.radius,
-          backgroundColor: COLORS.Primary,
+            marginHorizontal: SIZES.padding,
+            marginBottom: SIZES.padding,
+            borderTopLeftRadius: SIZES.radius,
+            borderTopRightRadius: SIZES.radius,
+            backgroundColor: COLORS.Primary,
         }}
         label={'Search Babies'}
       />

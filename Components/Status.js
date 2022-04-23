@@ -7,13 +7,14 @@ import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import TextButton from './TextButton';
 import FormInput from './FormInput';
 import axiosIns from '../helpers/helpers';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getHerds } from '../Store/actions';
 const Status = ({show, setShow, animal}) => {
   const [status, setStatus] = React.useState("Alive");
   const [Price, setPrice] = React.useState(0);
   const [loading, setloading] = React.useState(false);
-  const [Flagged, setFlagged] = React.useState(false);
-  const [Flaggedesp, setFlaggedesp] = React.useState("");
+  const [Flagged, setFlagged] = React.useState(animal.flagged);
+  const [Flaggedesp, setFlaggedesp] = React.useState(animal.flag_desc);
   const [err, setErr] = React.useState('');
   const statusCat = useSelector(state=>state.Reducers.status)
   async function delAnimal() {
@@ -23,17 +24,19 @@ const Status = ({show, setShow, animal}) => {
       setErr('Something Went Wrong');
     }
   }
+
+  const dispatch = useDispatch()
   const updateAnimal = async () => {
-   
+      setloading(true)
       axiosIns
         .patch(
           `animals/${animal.tag_number}`,
           {
             status: status.toString(),
             soldprice: Price,
-            tag_number: `${animal.tag_number}${
-              status.toString() == 'Dead' ? 'D' : 'S'
-            }`,
+            tag_number: status.toString() == 'Alive' ? `${animal.tag_number}` : status.toString() == 'Dead' ?`${animal.tag_number + "D"}`:`${animal.tag_number + "S"}`,
+            flagged:Flagged,
+            flag_desc:Flaggedesp
           },
           {
             headers: {
@@ -44,17 +47,26 @@ const Status = ({show, setShow, animal}) => {
         .then(Response => {
           if (Response.status == 200) {
             setErr('Status Update sucessfully');
-            setloading(true);
-            delAnimal().then(() => {
-              setShow(false);
-            });
+            setloading(false);
+            dispatch(getHerds())
+            if(status.toString()!="Alive"){
+              delAnimal().then(() => {
+                setShow(false);
+                dispatch(getHerds())
+
+              });
+            }
           }
-          // })
+
           else {
             setErr('Status Not Update');
             setloading(false);
           }
-        });
+        })
+        .catch(err=>{
+          console.log(err)
+          setErr(err.data.msg);
+        })
   
   };
   function renderHeader() {
@@ -212,6 +224,7 @@ const Status = ({show, setShow, animal}) => {
               />
             </View>
           }
+          placeholder={animal.flag_desc}
           label={'Description*'}
           value={Flaggedesp}
           onChange={value => {
@@ -273,12 +286,13 @@ const Status = ({show, setShow, animal}) => {
             border={false}
             icon={images.update}
             buttonContainerStyle={{
-              height: 60,
+              // height: 60,
               marginTop: SIZES.padding,
-              marginHorizontal: SIZES.padding,
-              marginBottom: SIZES.padding + 10,
-              borderRadius: SIZES.radius,
-              backgroundColor: COLORS.Primary,
+            marginHorizontal: SIZES.padding,
+            marginBottom: SIZES.padding,
+            borderTopLeftRadius: SIZES.radius,
+            borderTopRightRadius: SIZES.radius,
+            backgroundColor: COLORS.Primary,
             }}
             label={'Update'}
             loading={loading}
