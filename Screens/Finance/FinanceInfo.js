@@ -6,20 +6,10 @@ import TextButton from '../../Components/TextButton';
 import FinanceCard from './FinanceCard';
 import {COLORS, SIZES, images,FONTS} from '../../Components/Constants';
 import ActivityIndicatorExample from '../../Components/Loading';
+import { useSelector } from 'react-redux';
 
 export default function FinanceInfo({navigation}) {
-  const [finance, setFinance] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-
-  async function loadFinance() {
-    let {data} = await axiosIns.get('finance/');
-    setLoading(true)
-    return data;
-  }
-  React.useEffect(() => {
-      loadFinance().then(data => setFinance(data));
-    
-  },[]);
+  const finance = useSelector(state=>state.Reducers.finance)
   function renderHeader() {
     return (
       <Header
@@ -90,7 +80,8 @@ export default function FinanceInfo({navigation}) {
   return (
     <View style={{flex: 1}}>
       {renderHeader()}
-      {loading? (
+      {
+        finance?.length===0?<ActivityIndicatorExample/>:
         <FlatList
         data={finance}
         keyExtractor={item => `${item.id}`}
@@ -104,9 +95,7 @@ export default function FinanceInfo({navigation}) {
             date={item.added_date}
           />
           )}/>
-      ) : (
-        <ActivityIndicatorExample />
-      )}
+        }
         
       {/* <TextButton
         onPress={() => {

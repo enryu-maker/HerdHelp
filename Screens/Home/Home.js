@@ -13,8 +13,8 @@ import ActivityIndicatorExample from '../../Components/Loading';
 export const Home = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const animals = useSelector(state=>state.Reducers.herds)
-  // const id = useSelector(state=>state.Reducers.id)
-  // console.log(id)
+  const User = useSelector(state=>state.Reducers.userData)
+  
   function renderHeader() {
     return (
       <Header
@@ -51,6 +51,38 @@ export const Home = ({navigation}) => {
           </View>
         }
         title={'My Herds'}
+        titleStyle={{
+          marginLeft:70
+        }}
+        rightComponent={
+                  <View
+                    style={{
+                      marginTop: 20,
+                    }}>
+                    <TouchableOpacity
+                      style={{
+                        marginRight: 25,
+                        height: 40,
+                        width: 40,
+                        borderRadius: 40 / 2,
+                justifyContent:"center",
+                      }}
+                      onPress={() => {
+                        navigation.navigate('MyAccount');
+                      }}>
+                      <Image
+                        source={{uri: User?.profile_picture==null?`https://ui-avatars.com/api/?name=${User?.username}`: User?.profile_picture}}
+                        style={{
+                          height: 40,
+                          width: 40,
+                          borderRadius: 40 / 2,
+                          borderWidth: 0.8,
+                          borderColor: COLORS.Primary,
+                        }}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                }
       />
     );
   }

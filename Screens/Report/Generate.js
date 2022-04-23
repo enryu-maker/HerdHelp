@@ -93,6 +93,7 @@ class Generate extends Component {
       })
       .catch(error => {
         if (error.response) {
+          console.log(error)
           this.setState({loader: false});
           showMessage({
             message: `${error.response.data.msg}`,

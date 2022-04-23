@@ -31,7 +31,7 @@ import PickerType from './PickerType';
 import {showMessage} from 'react-native-flash-message';
 import {baseURL} from '../../helpers/helpers';
 import {Username} from '../Nav/Homenav';
-import { getHerds } from '../../Store/actions';
+import { getHerds, getTags } from '../../Store/actions';
 const Addanimals = ({navigation, route}) => {
   const [bred, setBred] = useState(false);
   const [valueMS, setValueMS] = useState('');
@@ -65,7 +65,6 @@ const Addanimals = ({navigation, route}) => {
     return tag != '' && valueMS != '' && valueBS != '';
   }
   const clear = () => {
-    setSpcies(null)
     setWeight('');
     setTag('');
     setRegistration('');
@@ -75,7 +74,8 @@ const Addanimals = ({navigation, route}) => {
     setFather('');
     setPrice('');
     setName('');
-    setPic('')
+    setPic('');
+    setValueMS("");
   };
   const username = React.useContext(Username);
   function renderFileUri() {
@@ -220,6 +220,7 @@ const Addanimals = ({navigation, route}) => {
         .then(response => {
           if (response.status == 201) {
             dispatch(getHerds())
+            dispatch(getTags())
             clear();
             setLoading(false);
             showMessage({
@@ -241,7 +242,7 @@ const Addanimals = ({navigation, route}) => {
         })
         .catch(err => {
           setLoading(false);
-          console.log(err.response.data);
+          console.log(err);
           showMessage({
             message: `${err.response.data.msg}`,
             type: 'default',

@@ -92,6 +92,42 @@ export const WeightUnit = (cond) => {
       })
     }
   }
+  export const getFinance = () => {
+    return async dispatch => {
+      let {data} = await axiosIns.get('finance/');
+      dispatch({
+        type: 'FINANCE',
+        payload:data
+      })
+    }
+  }
+  export const getAlerts = () => {
+    return async dispatch => {
+      let {data} = await axiosIns.get('alerts/');
+      dispatch({
+        type: 'ALERTS',
+        payload:data
+      })
+    }
+  }
+  export const getAnimal = (tag) => {
+    return async dispatch => {
+      let {data} = await axiosIns.get(`animals/${tag}`);
+      dispatch({
+        type: 'ONEANIMAL',
+        payload:data
+      })
+    }
+  }
+  export const getMedical = (tag) => {
+    return async dispatch => {
+      let {data} = await axiosIns.get(`getmedication/${tag}`);
+      dispatch({
+        type: 'ONEMED',
+        payload:data
+      })
+    }
+  }
 
 export const Logout = () => {
   return async dispatch => {

@@ -11,7 +11,8 @@ import axiosIns from '../../helpers/helpers';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
 import CustomAlert from '../../Components/CustomAlert';
 import { showMessage, hideMessage, } from "react-native-flash-message";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {getAlerts} from '../../Store/actions'
 export default function Alerts({navigation,route}) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
@@ -52,6 +53,7 @@ export default function Alerts({navigation,route}) {
         "alert_time": timet,
       },
     )
+    const dispatch = useDispatch()
     function postAlert(){
       setLoading(true)
       try
@@ -64,6 +66,7 @@ export default function Alerts({navigation,route}) {
       {
       setLoading(false)
         clear();
+        dispatch(getAlerts())
         showMessage({
           message: "Alerts added",
           type: "default",

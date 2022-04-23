@@ -13,24 +13,16 @@ import Header from '../../Components/Header';
 import ActivityIndicatorExample from '../../Components/Loading';
 import TextButton from '../../Components/TextButton';
 import {SwipeListView} from 'react-native-swipe-list-view';
+import { ActivityIndicator } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 export default function LoadAlert({navigation}) {
-  const [alert, setAlerts] = React.useState([]);
   const [species, setSpcies] = React.useState([]);
   const [id, setId] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const alert = useSelector(state=>state.Reducers.alerts)
 
-  async function loadFinance() {
-    setLoading(true);
-    let {data} = await axiosIns.get('alerts/');
-    return data;
-  }
   React.useEffect(() => {
     setId(global.id);
-    loadFinance().then(data => {
-      console.log(data)
-      setAlerts(data);
-      setLoading(false)
-    });
   }, []);
   function delAlert(id){
     axiosIns.delete(`alerts/${id}`).then(()=>{alert("Alert deleted sucessfully")})
@@ -114,6 +106,10 @@ export default function LoadAlert({navigation}) {
              Delete
             </Text>
             </Text>
+            {
+              alert.length===0?
+              <ActivityIndicatorExample/>
+              :
         <SwipeListView
           data={alert}
           keyExtractor={item => `${item.id}`}
@@ -178,7 +174,7 @@ export default function LoadAlert({navigation}) {
           // leftOpenValue={0}
           rightOpenValue={-75}
         />
-    
+            }
 
 
       {/* <TextButton

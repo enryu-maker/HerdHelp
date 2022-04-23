@@ -17,6 +17,8 @@ import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import FormInput from '../../Components/FormInput';
 import { showMessage, hideMessage, } from "react-native-flash-message";
 import CustomAlert from '../../Components/CustomAlert';
+import { useDispatch } from 'react-redux';
+import { getFinance } from '../../Store/actions';
 export const Finance = ({navigation}) => {
   const [cat, setCat] = React.useState(1);
   const [Qty, setQty] = React.useState("");
@@ -26,10 +28,7 @@ export const Finance = ({navigation}) => {
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
-  async function getfinance() {
-    const {data} = await axiosIns.get('getfinancecategories/');
-    return data;
-  }
+  
   const clean = () => {
     setQty(''), setPrice('');
   };
@@ -38,6 +37,7 @@ export const Finance = ({navigation}) => {
     category: cat,
     quantity: Qty,
   });
+  const dispatch = useDispatch()
   async function postfinance() {
     setLoading(true)
     if (price != "" && Qty != "") {
@@ -50,6 +50,7 @@ export const Finance = ({navigation}) => {
         .then(Response => {
           if (Response.status == 201) {
             setLoading(false)
+            dispatch(getFinance())
             showMessage({
               message: "Finance added",
               type: "default",

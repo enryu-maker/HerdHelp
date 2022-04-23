@@ -17,12 +17,10 @@ import TextButton from './TextButton';
 import CustomButton from './CustomButton';
 import PickerType from '../Screens/Livestocks/PickerType';
 import Update from '../Screens/Account/Update';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import { getAnimal, getMedical } from '../Store/actions';
 export const Info = ({navigation, route}) => {
-  const [animal, setAnimal] = React.useState([]);
   const [animals, setAnimals] = React.useState([]);
-
-  const [med, setMed] = React.useState([]);
   const [cond, setCond] = React.useState(false);
   const [show, setShow] = React.useState(false);
   const [profile_pic, setprofile_pic] = React.useState([]);
@@ -36,24 +34,15 @@ export const Info = ({navigation, route}) => {
     currency: 'USD',
     minimumFractionDigits: 2,
   });
-  async function getMedication(tag) {
-    let {data} = await axiosIns.get(`getmedication/${tag}`);
-    return data;
-  }
-  async function getanimal(tag) {
-    let {data} = await axiosIns.get(`animals/${tag}`);
-    return data;
-  }
+  const dispatch = useDispatch()
+  const animal = useSelector(state=>state.Reducers.animal)
+  const med = useSelector(state=>state.Reducers.med)
+
   React.useEffect(() => {
     let {value} = route.params;
-    setAnimal(value);
     let {cond} = route.params;
-    getanimal(value.tag_number).then(data => {
-      setAnimal(data);
-    });
-    getMedication(value.tag_number).then(data => {
-      setMed(data);
-    });
+    dispatch(getAnimal(value.tag_number))
+    dispatch(getMedical(value.tag_number))
     setCond(cond);
   }, []);
   const unit = useSelector(state => state.Reducers.unit);

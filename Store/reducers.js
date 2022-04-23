@@ -6,6 +6,10 @@ const initialState = {
   cat: [],
   tags: [],
   herds: [],
+  finance: [],
+  alerts: [],
+  animal:{},
+  med:{}
 };
 
 export default (state = initialState, action) => {
@@ -49,6 +53,26 @@ export default (state = initialState, action) => {
         ...state,
         cat: action.payload,
       };
+    case 'FINANCE':
+      return {
+        ...state,
+        finance: action.payload,
+      };
+    case 'ALERTS':
+      return {
+        ...state,
+        alerts: action.payload,
+      };
+      case 'ONEANIMAL':
+        return {
+          ...state,
+          animal: action.payload,
+        };
+        case 'ONEMED':
+          return {
+            ...state,
+            med: action.payload,
+          };
     default:
       return state;
   }
