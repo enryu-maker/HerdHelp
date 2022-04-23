@@ -317,11 +317,9 @@ export const Info = ({navigation, route}) => {
           paddingHorizontal: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
         }}>
-        <InfoItem label="Flagged Description?" value={animal?.breed} withDivider={false} />
-        <Text style={{
-          ...FONTS.body2,
-        marginBottom:5
-        }} >{animal?.flag_desc}</Text>
+        <InfoItem label="Flagged Description?" withDivider={false} />
+        <Text  style={Platform.OS=="android"?{ flex: 1, textAlign: 'left',  ...FONTS.body3,paddingBottom:20 }:{ flex: 1, textAlign: 'left',  ...FONTS.body2,paddingBottom:20 }}>{animal.flag_desc}</Text>
+
       </View>
     );
   }

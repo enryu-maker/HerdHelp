@@ -17,18 +17,18 @@ import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import FormInput from '../../Components/FormInput';
 import { showMessage, hideMessage, } from "react-native-flash-message";
 import CustomAlert from '../../Components/CustomAlert';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getFinance } from '../../Store/actions';
 export const Finance = ({navigation}) => {
   const [cat, setCat] = React.useState(1);
   const [Qty, setQty] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  const [animals, setAnimals] = React.useState([]);
+  // const [animals, setAnimals] = React.useState([]);
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
-  
+  const animals = useSelector(state=>state.Reducers.cat)
   const clean = () => {
     setQty(''), setPrice('');
   };
@@ -109,11 +109,7 @@ export const Finance = ({navigation}) => {
       })
     }
   }
-  React.useEffect(() => {
-    getfinance().then(data => {
-      setAnimals(data);
-    });
-  }, []);
+
 
   function renderHeader() {
     return (
