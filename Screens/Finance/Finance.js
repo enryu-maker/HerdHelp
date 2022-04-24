@@ -28,7 +28,7 @@ export const Finance = ({navigation}) => {
   const [show, setShow] = React.useState(false);
   const [validation, setValidation] = React.useState(false);
   const [dataText, setDataText] = React.useState('');
-  const animals = useSelector(state=>state.Reducers.cat)
+  const animals = useSelector(state=>state.Reducers.fcat)
   const clean = () => {
     setQty(''), setPrice('');
   };

@@ -128,6 +128,15 @@ export const WeightUnit = (cond) => {
       })
     }
   }
+  export const getFcat = () => {
+    return async dispatch => {
+      let {data} = await axiosIns.get(`financecategory/`);
+      dispatch({
+        type: 'FCAT',
+        payload:data
+      })
+    }
+  }
 
 export const Logout = () => {
   return async dispatch => {

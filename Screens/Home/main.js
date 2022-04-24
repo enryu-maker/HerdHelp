@@ -15,7 +15,7 @@ import CustomButton from './CustomButtom';
 import { useDispatch, useSelector } from 'react-redux';
 import Add from './Add';
 import LinearGradient from 'react-native-linear-gradient';
-import { getSpecies, getStatus, getTags, UserData,getHerds, getUnit, getFinance,getAlerts } from '../../Store/actions';
+import { getSpecies, getStatus, getTags, UserData,getHerds, getUnit, getFinance,getAlerts, getFcat } from '../../Store/actions';
 import { Weight } from './weight';
 import FinanceInfo from '../Finance/FinanceInfo';
 import {Home} from "./Home"
@@ -25,19 +25,13 @@ import {
   BottomTabBar,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import Update from './AddModel';
+
 import AddModel from './AddModel';
 import Setting from '../Setting/Setting';
 const Main = ({navigation}) => {
-  const [alerts, setAlerts] = React.useState([]);
-  const [showu, setshowu] = React.useState(true);
-
+  const alerts = useSelector(state=>state.Reducers.fcat)
   async function loadId() {
     global.id = await AsyncStorage.getItem('id');
-  }
-  async function getALerts() {
-    let {data} = await axiosIns.get('alerts/');
-    return data;
   }
   async function checkSubs() {
     let {data} = await axiosIns.get('subscriptions/isactive/');
@@ -53,10 +47,8 @@ const Main = ({navigation}) => {
     dispatch(getUnit())
     dispatch(getAlerts())
     dispatch(getFinance())
+    dispatch(getFcat())
     loadId();
-    getALerts().then(data => {
-      setAlerts(data);
-    });
     checkSubs().then(data => {
       global.isActive = data.isactive;
       !data.isactive
@@ -98,7 +90,7 @@ const Main = ({navigation}) => {
           }
           else if (route.name === 'Alerts') {
             iconName = focused ? images.bell :images.bell
-            iconColor=focused ? COLORS.Primary : COLORS.white
+            iconColor=focused ? COLORS.Primary :alerts.length >0? COLORS.red : COLORS.white 
             iconweight=focused ? "700": null
 
 
@@ -138,22 +130,16 @@ const Main = ({navigation}) => {
         },
         tabBarStyle: {
           height:SIZES.height>700?110:75,
-          // borderTopLeftRadius: SIZES.padding,
-          // borderTopRightRadius: SIZES.padding,
           backgroundColor: COLORS.Primary,
         },
         tabBarActiveTintColor: COLORS.transparentPrimary2,
         tabBarInactiveTintColor: COLORS.black,
       })}>
-      <BottomTab.Screen name="Herds" component={Home} options={{
-        
-      }}/>
+      <BottomTab.Screen name="Herds" component={Home}/>
       <BottomTab.Screen name="Finance" component={FinanceInfo} />
       <BottomTab.Screen name="Add" component={AddModel} />
       <BottomTab.Screen name="Alerts" component={LoadAlert}/>
       <BottomTab.Screen name="Settings" component={Setting} />
-
-
     </BottomTab.Navigator>
     </>
   );
