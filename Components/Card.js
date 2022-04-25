@@ -25,7 +25,7 @@ const Card = ({
         borderRadius: SIZES.radius,
         flexDirection: 'row',
         justifyContent: "space-between",
-        shadowColor:Flagged? "blue" : COLORS.black,
+        shadowColor: COLORS.black,
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
         shadowRadius: 5,
@@ -35,6 +35,36 @@ const Card = ({
 
       }}
       onPress={onPress}>
+        {
+          Flagged?
+        <>
+        <View style={{
+          height:30,
+          width:2,
+          transform: [{
+            rotate: '45deg'
+            }],
+          backgroundColor:COLORS.red,
+          position:"absolute",
+          // marginTop:10,
+          marginLeft:15,
+
+          // alignSelf:"center"
+        }}/>
+        <View style={{
+          height:40,
+          width:2,
+          transform: [{
+            rotate: '45deg'
+            }],
+          backgroundColor:COLORS.red,
+          position:"absolute",
+          // marginTop:10,
+          marginLeft:20,
+
+          // alignSelf:"center"
+        }}/>
+        </>:null}
       <View style={{justifyContent: 'center', marginRight: SIZES.padding,height: 80, width: 80,alignSelf:"center",marginLeft:15}}>
         {cond ? (
           <Image

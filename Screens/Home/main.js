@@ -11,12 +11,8 @@ import Header from '../../Components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {images, COLORS, SIZES, FONTS} from '../../Components/Constants';
 import axiosIns from '../../helpers/helpers';
-import CustomButton from './CustomButtom';
 import { useDispatch, useSelector } from 'react-redux';
-import Add from './Add';
-import LinearGradient from 'react-native-linear-gradient';
 import { getSpecies, getStatus, getTags, UserData,getHerds, getUnit, getFinance,getAlerts, getFcat } from '../../Store/actions';
-import { Weight } from './weight';
 import FinanceInfo from '../Finance/FinanceInfo';
 import {Home} from "./Home"
 import LoadAlert from '../Alerts/LoadAlert';
