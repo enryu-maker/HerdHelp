@@ -140,7 +140,12 @@ export default class Homenav extends Component {
       <>
       <Profile_pic.Provider value={this.state.profile_pic}>
       <Username.Provider value={this.state.username}>
-        <Stack.Navigator screenOptions={{ headerShown: false}}
+        <Stack.Navigator screenOptions={({navigation})=>{
+          return{
+            detachPreviousScreen:!navigation.isFocused(),
+            headerShown: false
+          }
+        }}
           initialRouteName={'DrawNav'}>
           <Stack.Screen name='DrawNav' component={DrawerNav} />
           <Stack.Screen name='Home' component={Home}/>

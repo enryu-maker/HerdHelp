@@ -86,7 +86,7 @@ const Main = ({navigation}) => {
           }
           else if (route.name === 'Alerts') {
             iconName = focused ? images.bell :images.bell
-            iconColor=focused ? COLORS.Primary :alerts.length >0? COLORS.red : COLORS.white 
+            iconColor=focused ? COLORS.Primary :alerts?.length==0? COLORS.red : COLORS.white 
             iconweight=focused ? "700": null
 
 

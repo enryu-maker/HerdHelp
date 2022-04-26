@@ -14,7 +14,12 @@ export default class Rootnav extends Component {
   render() {
     return (
       <>
-        <Stack.Navigator screenOptions={{ headerShown: false}}
+        <Stack.Navigator screenOptions={({navigation})=>{
+          return{
+            detachPreviousScreen:!navigation.isFocused(),
+            headerShown: false
+          }
+        }}
           initialRouteName={'Login'} >
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />

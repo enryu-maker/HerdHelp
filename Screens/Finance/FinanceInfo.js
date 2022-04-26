@@ -59,7 +59,7 @@ export default function FinanceInfo({navigation}) {
                 height:40,
                 width:120,
                 justifyContent:"center",
-                borderRadius:40/2,
+                borderRadius:15,
                 }}
                 onPress={() => {
                   navigation.push('Finance');

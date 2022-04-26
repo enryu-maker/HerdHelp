@@ -143,6 +143,7 @@ import {ActivityIndicator} from 'react-native-paper';
 import {COLORS} from './Components/Constants';
 import Homenav from './Screens/Nav/Homenav';
 import Rootnav from './Screens/Nav/Rootnav';
+import {enableScreens} from 'react-native-screens';
 
 const RootNavigation = () => {
   const token = useSelector(state => state.Reducers.authToken);
@@ -155,6 +156,7 @@ const RootNavigation = () => {
   };
 
   useEffect(() => {
+    enableScreens(false);
     setTimeout(() => {
       SplashScreen.hide();
     }, 2000);
@@ -186,13 +188,13 @@ const App = () => {
   }
   const [pub, setPub] = React.useState('');
   const [PermissionResult, setPermissionResult] = React.useState(null);
- requestMultiple(
-        Platform.OS === 'ios'
-          ? [PERMISSIONS.IOS.CAMERA, PERMISSIONS.IOS.PHOTO_LIBRARY]
-          : [PERMISSIONS.ANDROID.CAMERA, PERMISSIONS.ANDROID.ACCESS_MEDIA_LOCATION],
-      ).then(result => {
-        setPermissionResult(result);
-      });
+  requestMultiple(
+    Platform.OS === 'ios'
+      ? [PERMISSIONS.IOS.CAMERA, PERMISSIONS.IOS.PHOTO_LIBRARY]
+      : [PERMISSIONS.ANDROID.CAMERA, PERMISSIONS.ANDROID.ACCESS_MEDIA_LOCATION],
+  ).then(result => {
+    setPermissionResult(result);
+  });
 
   return (
     <Provider store={store}>
