@@ -220,6 +220,7 @@ async function getData(api){
               Gender={item.gender}
               Species={item.category}
               Weight={item.weight}
+              weight_kg={item.weight_kg}
               image={item.animal_image==null?item.image:item.animal_image}
               onPress={() => {
                 navigation.navigate('Info', {
