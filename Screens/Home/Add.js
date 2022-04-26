@@ -16,7 +16,6 @@ export default function Add({navigation,route}) {
   const [show,setShow]=React.useState(false)
   const [data,setData]=React.useState([])
   const [searched,setSearched] = React.useState("")
-
   React.useEffect(()=>{
     
     let {label} = route.params
@@ -65,7 +64,12 @@ export default function Add({navigation,route}) {
               }}>
               <Image
                 source={images.back}
-                style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
+                style={{width: 25, 
+                  height: 25, 
+                  tintColor: COLORS.white,
+                  alignSelf:"center",
+                  
+                }}
               />
             </TouchableOpacity>
           </View>

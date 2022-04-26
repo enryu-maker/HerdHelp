@@ -25,6 +25,11 @@ export default (state = initialState, action) => {
         ...state,
         unit: action.payload,
       };
+      case 'CLEAN':
+        return {
+          ...state,
+          animal: action.payload,
+        };
     case 'HERDS':
       return {
         ...state,

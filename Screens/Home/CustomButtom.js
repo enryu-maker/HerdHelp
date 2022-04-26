@@ -20,6 +20,7 @@ const CustomButton = ({
   buttonContainerStyle2,
   loading,
   iconContainerStyle,
+  cond
 }) => {
   return (
     <TouchableOpacity
@@ -49,6 +50,18 @@ const CustomButton = ({
               //   margin: 10,
               ...iconContainerStyle,
             }}>
+              {
+                cond?<Image
+                source={{uri:icon}}
+                style={{
+                  height: 70,
+                  width: 70,
+                  tintColor: COLORS.black,
+                  alignSelf: 'center',
+                  ...iconStyle,
+                }}
+              />:
+              
             <Image
               source={icon}
               style={{
@@ -58,7 +71,7 @@ const CustomButton = ({
                 alignSelf: 'center',
                 ...iconStyle,
               }}
-            />
+            />}
           </View>
         )}
         <View
@@ -90,8 +103,9 @@ const CustomButton = ({
             alignSelf: 'center',
             ...buttonContainerStyle2,
           }}>
+            
           <Image
-            source={icon}
+             source={icon}
             style={{
               height: 30,
               width: 30,

@@ -185,9 +185,6 @@ export default class Homenav extends Component {
 const styles = StyleSheet.create({
   drawerStyle: {
     backgroundColor:         COLORS.Primary,
-    borderTopRightRadius:    40,
-    borderBottomRightRadius: 40,
-    width:                   '90%',
-
+    width:                   '100%',
 },
 })

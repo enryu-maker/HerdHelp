@@ -47,7 +47,6 @@ const HistoryCard=({
             backgroundColor:COLORS.Primary,
             height:5,
             margin:5
-            // borderRadius:50/2
         }}/>
 
         <View
@@ -67,7 +66,7 @@ const HistoryCard=({
             alignSelf:"center",
             ...FONTS.h2
         }}>
-            {date}
+            {date==""?"Current Weight" : date}
         </Text>
         </View>
         </View>

@@ -9,21 +9,24 @@ import {
 } from "../Components/Constants"
 import Med from './Med';
 import axiosIns from '../helpers/helpers';
+import { useSelector } from 'react-redux';
 export default function MedCard({ navigation,route }) {
-  const [med, setMed] = React.useState([]);
+  // const [med, setMed] = React.useState([]);
   const [err, setErr] = React.useState("");
   const [animal,setAnimal] = React.useState([])
-  async function getMedication(tag) {
-    let {data} = await axiosIns.get(`getmedication/${tag}`);
-    return data;
-  }
+  // async function getMedication(tag) {
+  //   let {data} = await axiosIns.get(`getmedication/${tag}`);
+  //   return data;
+  // }
+  const med = useSelector(state=>state.Reducers.med)
+
   React.useEffect(() => {
     let {animal} = route.params
-    getMedication(animal.tag_number).then((data)=>{
-    setMed(data)
-    });
+    // getMedication(animal.tag_number).then((data)=>{
+    // setMed(data)
+    // });
     setAnimal(animal)
-  }, [med]);
+  }, []);
     function renderHeader() {
         return (
           <Header
@@ -55,16 +58,28 @@ export default function MedCard({ navigation,route }) {
             </TouchableOpacity>
           </View>
             }
-            title={'Medication Details'}
+            title={'Medication'}
             titleStyle={{
               marginLeft:120,
               alignSelf:"center"
             }}
             rightComponent={
-              <TouchableOpacity
-          style={{
-            justifyContent:"center"
-            }}
+              <View
+            style={{
+              justifyContent: 'center',
+              // position: 'absolute',
+              marginRight: 15,
+              // zIndex: 1,
+            }}>
+            <TouchableOpacity
+              style={{
+                backgroundColor:COLORS.Primary,
+                height:40,
+                width:85,
+                flexDirection:"row",
+                justifyContent:"space-evenly",
+                borderRadius:15,
+                }}
           onPress={()=>{
             navigation.navigate('medication',{
               tag:animal.support_tag.toString(),
@@ -73,17 +88,24 @@ export default function MedCard({ navigation,route }) {
             })
           }}
           >
-          <Text
-          style={{
-            padding:SIZES.padding,
-            color:COLORS.Primary,
-            ...FONTS.h2
-          }}
-          >+Med</Text>
-          </TouchableOpacity>
+            <Image source={images.add} style={{
+              height:25,
+              width:25,
+              tintColor:COLORS.white,
+              alignSelf:"center"
+            }}/>
+          <Text style={{
+                ...FONTS.h3,
+                color:COLORS.white,
+                alignSelf:"center"
+              }}>
+                 Med
+              </Text>
+            </TouchableOpacity>
+          </View>
             }
-          />
-        );
+            />
+        )
       }
   return (
     <View style={{flex: 1,backgroundColor:COLORS.white}}>

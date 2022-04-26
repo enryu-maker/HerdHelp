@@ -10,7 +10,8 @@ import axiosIns from '../../helpers/helpers';
 import {Dropdown} from 'sharingan-rn-modal-dropdown';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import CustomAlert from '../../Components/CustomAlert';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMedical } from '../../Store/actions';
 export const Medication = ({navigation, route}) => {
   const [tag, setTag] = React.useState('');
   const [treat, setTreat] = React.useState('');
@@ -45,6 +46,7 @@ export const Medication = ({navigation, route}) => {
     });
     return dataValue;
   }
+  const dispatch = useDispatch()
   function addMedical() {
     setLoading(true),
     axiosIns
@@ -68,6 +70,7 @@ export const Medication = ({navigation, route}) => {
       .then(response => {
         if (response.status == 201) {
           setLoading(false)
+          !cond?dispatch(getMedical(`${global.id}${dataS}${dataT}`)):null
           showMessage({
             message: "Medication Added",
             type: "default",

@@ -113,7 +113,7 @@ React.useEffect(()=>{
             labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
             onPress={() => {
               props.navigation.closeDrawer();
-              props.navigation.navigate('Draw');
+              props.navigation.navigate('Herds');
             }}
           />
           <DrawerItem

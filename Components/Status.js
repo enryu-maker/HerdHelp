@@ -8,7 +8,7 @@ import TextButton from './TextButton';
 import FormInput from './FormInput';
 import axiosIns from '../helpers/helpers';
 import { useDispatch, useSelector } from 'react-redux';
-import { getHerds } from '../Store/actions';
+import { getAnimal, getHerds } from '../Store/actions';
 const Status = ({show, setShow, animal}) => {
   const [status, setStatus] = React.useState("Alive");
   const [Price, setPrice] = React.useState(0);
@@ -34,7 +34,7 @@ const Status = ({show, setShow, animal}) => {
           {
             status: status.toString(),
             soldprice: Price,
-            tag_number: status.toString() == 'Alive' ? `${animal.tag_number}` : status.toString() == 'Dead' ?`${animal.tag_number + "D"}`:`${animal.tag_number + "S"}`,
+            tag_number: status.toString() == 'Alive' ? `${animal?.tag_number}` : status.toString() == 'Dead' ?`${animal.tag_number + "D"}`:`${animal.tag_number + "S"}`,
             flagged:Flagged,
             flag_desc:Flaggedesp
           },
@@ -49,6 +49,7 @@ const Status = ({show, setShow, animal}) => {
             setErr('Status Update sucessfully');
             setloading(false);
             dispatch(getHerds())
+            dispatch(getAnimal(animal?.tag_number))
             if(status.toString()!="Alive"){
               delAnimal().then(() => {
                 setShow(false);

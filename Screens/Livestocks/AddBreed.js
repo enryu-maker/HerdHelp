@@ -61,6 +61,16 @@ const Addanimals = ({navigation, route}) => {
   const token = useSelector(state => state.Reducers.authToken);
   const unit = JSON.parse(useSelector(state => state.Reducers.unit))
   const animals = useSelector(state => state.Reducers.cat)
+  const tagl = useSelector(state => state.Reducers.tags)
+  function finder(list, value) {
+    var dataValue;
+    list?.map(a => {
+      if (value == a.label) {
+        dataValue = a.data;
+      }
+    });
+    return dataValue;
+  }
   function isEnableSignIn() {
     return tag != '' && valueMS != '' && valueBS != '';
   }
@@ -546,52 +556,77 @@ const Addanimals = ({navigation, route}) => {
               }}
               inputStyle={{marginLeft: 20, fontSize: 16}}
             />
-            <FormInput
-              prependComponent={
-                <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-                  <Image
-                    source={images.tag}
-                    style={{width: 26, height: 26, tintColor: COLORS.Primary}}
-                  />
-                </View>
-              }
-              returnKeyType={'next'}
-              label="Mother Tag Number"
-              value={mother}
-              onChange={(value) => {
-                setMother(value);
-              }}
-              inputContainerStyle={{
-                backgroundColor: COLORS.white,
-              }}
-              containerStyle={{
-                marginTop: SIZES.radius,
-              }}
-              inputStyle={{marginLeft: 20, fontSize: 16}}
-            />
-            <FormInput
-              prependComponent={
-                <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-                  <Image
-                    source={images.tag}
-                    style={{width: 26, height: 26, tintColor: COLORS.Primary}}
-                  />
-                </View>
-              }
-              returnKeyType={'next'}
-              label="Father Tag Number"
-              value={father}
-              onChange={(value) => {
-                setFather(value);
-              }}
-              inputContainerStyle={{
-                backgroundColor: COLORS.white,
-              }}
-              containerStyle={{
-                marginTop: SIZES.radius,
-              }}
-              inputStyle={{marginLeft: 20, fontSize: 16}}
-            />
+            <Dropdown
+          label="Mother Tag"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
+          borderRadius={SIZES.radius}
+          data={finder(tagl,valueMS)}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          // enableAvatar
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
+          value={mother}
+          onChange={(value) => {
+            setMother(value);
+          }}
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{
+            backgroundColor: COLORS.white,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+        />
+        <Dropdown
+          label="Father Tag"
+          dropdownIcon={images.down}
+          dropdownIconSize={22}
+          borderRadius={SIZES.radius}
+          data={finder(tagl,valueMS)}
+          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
+          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
+          selectedItemViewStyle={{
+            backgroundColor: COLORS.Primary,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+          // enableAvatar
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
+          disableSelectionTick
+          primaryColor={COLORS.Primary}
+          avatarSize={28}
+          value={father}
+          onChange={(value) => {
+            setFather(value);
+          }}
+          mainContainerStyle={{
+            borderRadius: SIZES.padding,
+            width: '88%',
+            alignSelf: 'center',
+            marginTop: SIZES.height > 800 ? SIZES.base : 10,
+          }}
+          itemContainerStyle={{
+            backgroundColor: COLORS.white,
+            margin: 5,
+            borderRadius: SIZES.radius,
+          }}
+        />
+            
             <Dropdown
               label="Vaccinated"
               dropdownIcon={images.down}

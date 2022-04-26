@@ -43,7 +43,7 @@ export default function FinanceInfo({navigation}) {
         }
         title={'Finance'}
         titleStyle={{
-          marginLeft:130
+          marginLeft:120
         }}
         rightComponent={
           <View
@@ -57,19 +57,26 @@ export default function FinanceInfo({navigation}) {
               style={{
                 backgroundColor:COLORS.Primary,
                 height:40,
-                width:120,
-                justifyContent:"center",
+                width:110,
+                flexDirection:"row",
+                justifyContent:"space-evenly",
                 borderRadius:15,
                 }}
                 onPress={() => {
                   navigation.push('Finance');
                   }}>
+                    <Image source={images.add} style={{
+              height:25,
+              width:25,
+              tintColor:COLORS.white,
+              alignSelf:"center"
+            }}/>
               <Text style={{
                 ...FONTS.h3,
                 color:COLORS.white,
                 alignSelf:"center"
               }}>
-                Add Finance
+              Finance
               </Text>
             </TouchableOpacity>
           </View>
@@ -81,7 +88,7 @@ export default function FinanceInfo({navigation}) {
     <View style={{flex: 1}}>
       {renderHeader()}
       {
-        finance?.length===0?<ActivityIndicatorExample/>:
+        finance?.length<0?<ActivityIndicatorExample />:
         <FlatList
         data={finance}
         keyExtractor={item => `${item.id}`}

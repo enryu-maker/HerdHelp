@@ -12,6 +12,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import ReportB from './ReportB';
 import axiosIns from '../../helpers/helpers';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import CustomButton from '../Home/CustomButtom';
 
 export default function Report(props) {
   const [report, setReport] = React.useState([]);
@@ -24,14 +25,12 @@ export default function Report(props) {
     setLoading(false);
     return data;
   }
-  // async function getfields() {
-  //   global.fields = await axiosIns.get('getfields/');
-  // }
+  
   React.useEffect(() => {
     getReports().then(data => {
       setReport(data);
     });
-    // getfields()
+
   }, []);
   function renderheader() {
     return (
@@ -69,27 +68,26 @@ export default function Report(props) {
   }
   function renderButtons() {
     return (
-      <View
-        style={{
-          flex: 1,
-        }}>
-        {loading ? (
-          <ActivityIndicator
-            animating={loading}
-            color={COLORS.Primary}
-            size="large"
-            style={{height: SIZES.height/2}}
-          />
-        ) : (
+      
+          
           <FlatList
       data={report}
+      style={{
+        alignSelf:"center",
+        paddingBottom:20
+      }}
+      numColumns={2}
       keyExtractor={item => `${item.id}`}
       showsVerticalScrollIndicator={false}
       renderItem={({ item, index }) => (
-            <ReportB
+            <CustomButton
+            buttonContainerStyle={{
+              margin:10
+            }}
+            cond={true}
               key={item.id}
-              img={item.image}
-              reportText={item.name}
+              icon={item.image}
+              label={item.name}
               onPress={() => {
                 props.navigation.navigate('ReportOP', {
                   label: item.name,
@@ -105,23 +103,22 @@ export default function Report(props) {
               }}
             />
           )}/>
-        )}
-      </View>
+  
     );
   }
   return (
     <View style={{flex: 1,backgroundColor:COLORS.white}}>
       {renderheader()}
-      <KeyboardAwareScrollView
-        showsVerticalScrollIndicator={false}
-        keyboardDismissMode="interactive"
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{
-          marginTop: SIZES.radius,
-          paddingBottom: 40,
-        }}>
-        {renderButtons()}
-      </KeyboardAwareScrollView>
+      {loading ? (
+          <ActivityIndicator
+            animating={loading}
+            color={COLORS.Primary}
+            size="large"
+            style={{height: SIZES.height/2}}
+          />
+        ):
+        renderButtons()
+      }
     </View>
   );
 }

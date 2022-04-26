@@ -18,9 +18,9 @@ import CustomButton from './CustomButton';
 import PickerType from '../Screens/Livestocks/PickerType';
 import Update from '../Screens/Account/Update';
 import {useDispatch, useSelector} from 'react-redux';
-import { getAnimal, getMedical } from '../Store/actions';
+import { CleanAnimal, getAnimal, getMedical } from '../Store/actions';
+import ActivityIndicatorExample from './Loading';
 export const Info = ({navigation, route}) => {
-  const [animals, setAnimals] = React.useState([]);
   const [cond, setCond] = React.useState(false);
   const [show, setShow] = React.useState(false);
   const [profile_pic, setprofile_pic] = React.useState([]);
@@ -73,7 +73,7 @@ export const Info = ({navigation, route}) => {
     );
   }
   function renderFileUri() {
-    if (animal.animal_image) {
+    if (animal?.animal_image) {
       return (
         <View
           style={{
@@ -83,7 +83,7 @@ export const Info = ({navigation, route}) => {
             alignSelf: 'center',
           }}>
           <Image
-            source={{uri: animal.animal_image}}
+            source={{uri: animal?.animal_image}}
             style={{
               width: 100,
               height: 100,
@@ -193,7 +193,7 @@ export const Info = ({navigation, route}) => {
         iconContainerStyle={{
           borderWidth: 0,
         }}
-        label2={med.length}
+        label2={med?.length}
       />
     );
   }
@@ -292,7 +292,7 @@ export const Info = ({navigation, route}) => {
           borderWidth: 0,
         }}
         label={'Babies'}
-        label2={animals.children.length}
+        label2={animal?.children.length}
         label2Style={{
           color: COLORS.Primary,
           justifyContent: 'center',
@@ -345,6 +345,8 @@ export const Info = ({navigation, route}) => {
               }}
               onPress={() => {
                 navigation.goBack();
+                dispatch(CleanAnimal())
+
               }}>
               <Image
                 source={images.back}
@@ -410,6 +412,9 @@ export const Info = ({navigation, route}) => {
         tag={animal?.tag_number}
         cond={false}
       />
+      {
+        animal?.length<0? <ActivityIndicatorExample/> :
+      
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -423,15 +428,16 @@ export const Info = ({navigation, route}) => {
         </TouchableOpacity>
         {renderSectionOne()}
         {renderSectionZero()}
-        {animals.children?.length > 0 ? Babies() : null}
+        {animal?.children?.length > 0 ? Babies() : null}
         {Type()}
         {renderSectionFour()}
         {Vaccinated()}
         {
-          animal.flagged?renderSectionLast():null
+          animal?.flagged?renderSectionLast():null
         }
         
       </ScrollView>
+}
 
       {cond ? (
         <TextButton

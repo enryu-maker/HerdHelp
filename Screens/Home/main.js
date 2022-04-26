@@ -25,7 +25,7 @@ import {
 import AddModel from './AddModel';
 import Setting from '../Setting/Setting';
 const Main = ({navigation}) => {
-  const alerts = useSelector(state=>state.Reducers.fcat)
+  const alerts = useSelector(state=>state.Reducers.alerts)
   async function loadId() {
     global.id = await AsyncStorage.getItem('id');
   }
@@ -56,13 +56,14 @@ const Main = ({navigation}) => {
     });
   }, []);
   
-  let iconweight;
+  var iconweight;
   return (
     <>
     <BottomTab.Navigator
 
       screenOptions={({route}) => ({
         headerShown: false,
+        // tabBarShowLabel:false,
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
           let iconColor;
@@ -81,15 +82,11 @@ const Main = ({navigation}) => {
             iconName = focused ? images.coin :images.coin
             iconColor=focused ? COLORS.Primary : COLORS.white
             iconweight=focused ? "700": null
-
-
           }
           else if (route.name === 'Alerts') {
             iconName = focused ? images.bell :images.bell
-            iconColor=focused ? COLORS.Primary :alerts?.length==0? COLORS.red : COLORS.white 
+            iconColor=focused ? COLORS.Primary :alerts?.length>0? COLORS.red : COLORS.white 
             iconweight=focused ? "700": null
-
-
           }
           else if (route.name === 'Add') {
             iconName = focused ? images.add :images.add
@@ -100,10 +97,11 @@ const Main = ({navigation}) => {
           return (
             <View
               style={{
-                height: 40,
-                width: 40,
+                height: 45,
+                width:45,
                 backgroundColor: focused ? COLORS.transparentPrimary : COLORS.Primary,
-                justifyContent: 'center',
+                // justifyContent: 'center',
+                justifyContent:"space-evenly",
                 alignSelf: 'center',
                 borderRadius: 12,
               }}>
@@ -112,21 +110,31 @@ const Main = ({navigation}) => {
                 source={iconName}
                 style={{
                   alignSelf: 'center',
-                  height: 25,
-                  width: 25,
-                  tintColor:iconColor
+                  height:focused ? 30 : 25,
+                  width: focused ? 30 : 25,
+                  tintColor:iconColor,
                 }}
-              />                
+              />
+                {/* <Text style={{
+                  // justifyContent:"center",
+                  alignSelf:"center",
+                  ...FONTS.h4,
+                  color: COLORS.black 
+                }}>
+                {route.name}
+                </Text>  */}
+                             
             </View>
           );
         },
         tabBarLabelStyle: {
-          ...FONTS.body4,
+          ...FONTS.body3,
           fontWeight:iconweight
         },
         tabBarStyle: {
           height:SIZES.height>700?110:75,
           backgroundColor: COLORS.Primary,
+          // borderRadius:20
         },
         tabBarActiveTintColor: COLORS.transparentPrimary2,
         tabBarInactiveTintColor: COLORS.black,

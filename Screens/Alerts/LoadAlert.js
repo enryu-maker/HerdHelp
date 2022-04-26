@@ -59,7 +59,7 @@ export default function LoadAlert({navigation}) {
         }
         title={'Alerts'}
         titleStyle={{
-          marginLeft:110
+          marginLeft:100
         }}
         rightComponent={
           <View
@@ -73,9 +73,10 @@ export default function LoadAlert({navigation}) {
               style={{
                 backgroundColor:COLORS.Primary,
                 height:40,
-                width:100,
-                justifyContent:"center",
-                borderRadius:40/2,
+                width:90,
+                justifyContent:"space-evenly",
+                borderRadius:15,
+                flexDirection:"row"
                 }}
                 onPress={() => 
                   navigation.push('Alerts', {
@@ -83,12 +84,18 @@ export default function LoadAlert({navigation}) {
                     id: id,
                   })}
                   >
+                    <Image source={images.add} style={{
+              height:25,
+              width:25,
+              tintColor:COLORS.white,
+              alignSelf:"center"
+            }}/>
               <Text style={{
                 ...FONTS.h3,
                 color:COLORS.white,
                 alignSelf:"center"
               }}>
-                Add Alerts
+                 Alerts
               </Text>
             </TouchableOpacity>
           </View>
@@ -107,7 +114,7 @@ export default function LoadAlert({navigation}) {
             </Text>
             </Text>
             {
-              alert.length===0?
+              alert.length<0?
               <ActivityIndicatorExample/>
               :
         <SwipeListView
