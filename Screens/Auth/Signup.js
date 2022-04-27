@@ -182,7 +182,8 @@ export const Signup = ({navigation}) => {
       }
         img={images.herdhelp}
         imgstyle={{
-          marginTop:80,
+          marginTop:100,
+          marginLeft:-20
         }}
         containerStyle={{
           margin: '10%',

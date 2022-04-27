@@ -4,10 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../Auth/Login';
 import {Signup} from "../Auth/Signup"
 
-import Homenav from './Homenav';
-import Subsciption from '../Auth/Subsciption'
-import SubDetails from '../Subscription/SubDetails';
-import Payment from '../Subscription/Payment';
+import forgetPass from '../ForgetPass/forgetPass';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 const Stack = createSharedElementStackNavigator()
 export default class Rootnav extends Component {
@@ -23,7 +20,7 @@ export default class Rootnav extends Component {
           initialRouteName={'Login'} >
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />
-          {/* <Stack.Screen name='DrawNav' component={Homenav} /> */}
+          <Stack.Screen name='ForgetPass' component={forgetPass}/>
         </Stack.Navigator>
       </>
     )

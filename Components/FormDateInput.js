@@ -18,7 +18,8 @@ const FormDateInput = ({
     setDate,
     value,
     errorMsg = "",
-    formatDate
+    formatDate,
+    mode="date"
 }) => {
 
     const [open, setOpen] = useState(false)
@@ -59,7 +60,7 @@ const FormDateInput = ({
                         marginLeft: 20
                     }}
                 >
-                    {value ? moment(value).format("YYYY-MM-DD") : placeholder}
+                    {value ? moment(value).format("YYYY-MM-DD HH:MM:SS") : placeholder}
                 </Text>
 
                 
@@ -69,7 +70,7 @@ const FormDateInput = ({
                 modal
                 open={open}
                 date={value ? value : new Date()}
-                mode="date"
+                mode={mode}
                 title={label}
                 onConfirm={(date) => {
                     setOpen(false)

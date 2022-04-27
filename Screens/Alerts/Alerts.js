@@ -1,4 +1,4 @@
-import {View, TouchableOpacity, Image, Text} from 'react-native';
+import {View, TouchableOpacity, Image, Text,} from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
 import {COLORS, FONTS, images, SIZES} from '../../Components/Constants';
@@ -13,22 +13,26 @@ import CustomAlert from '../../Components/CustomAlert';
 import { showMessage, hideMessage, } from "react-native-flash-message";
 import { useDispatch, useSelector } from 'react-redux';
 import {getAlerts} from '../../Store/actions'
+import * as AddCalendarEvent from 'react-native-add-calendar-event';
+import moment from 'moment';
+
 export default function Alerts({navigation,route}) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
   const [tag, setTag] = React.useState("");
   const [date, setDate] = React.useState(null);
+  const [Edate, setEdate] = React.useState(null);
+  const [Edatet, setEdatet] = React.useState(null);
   const [datet, setDatet] = React.useState(null);
   const [time, setTime] = React.useState(null);
   const [timet, setTimet] = React.useState(null);
-  const [err, setErr] = React.useState("");
   const [animals, setAnimals] = React.useState("");
   const [id,setId] = React.useState(null)
   const [loading, setLoading] = React.useState(false);
   const species = useSelector(state => state.Reducers.cat)
   const tagl = useSelector(state => state.Reducers.tags)
 
-  
+
   const clear=()=>{
     setTitle("")
     setContent("")
@@ -42,6 +46,39 @@ export default function Alerts({navigation,route}) {
       }
     });
     return dataValue;
+  }
+  const actualContent ="content:" + content + "\ntag :" + JSON.stringify(tag?`${id}${animals}${tag}`:"")
+  const addCalander=async()=>{
+    const eventConfig = {
+      title:title,
+      startDate:moment(date).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
+      endDate:moment(Edate).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
+      allDay:true,
+      notes:actualContent,
+    };
+    await AddCalendarEvent.presentEventCreatingDialog(eventConfig)
+    .then((response) => {
+      if(response.action=="SAVED"){
+        postAlert()
+      }
+    })
+    .catch((error) => {
+      showMessage({
+        message:error,
+        type: "default",
+        backgroundColor: COLORS.red,
+        color:COLORS.white,
+        titleStyle:{
+          alignSelf:"center",
+          ...FONTS.h3
+        },
+        animationDuration:250,
+        icon:"danger",
+          style:{
+            justifyContent:"center"
+          }
+      });
+    });
   }
     const data =JSON.stringify(
       {
@@ -280,9 +317,10 @@ export default function Alerts({navigation,route}) {
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
         <FormDateInput
-          label="Date of Alert*"
-          placeholder="YYYY/MM/DD"
+          label="Start of Alert*"
+          // placeholder="YYYY/MM/DD"
           value={date}
+          mode={"datetime"}
           setDate={setDate}
           formatDate={setDatet}
           containerStyle={{
@@ -295,12 +333,13 @@ export default function Alerts({navigation,route}) {
           }}
           inputStyle={{marginLeft: 20, fontSize: 16}}
         />
-        <FormTimeInput
-          label="Time of Alert*"
-          placeholder="HH:MM"
-          value={time}
-          setDate={setTime}
-          formatDate={setTimet}
+        <FormDateInput
+          label="End of Alert*"
+          // placeholder="YYYY/MM/DD"
+          value={Edate}
+          mode={"datetime"}
+          setDate={setEdate}
+          formatDate={setEdatet}
           containerStyle={{
             marginTop: SIZES.radius,
           }}
@@ -314,6 +353,7 @@ export default function Alerts({navigation,route}) {
       </View>
     );
   }
+
   return (
     <View style={{flex: 1}}>
       {renderHeader()}
@@ -330,7 +370,9 @@ export default function Alerts({navigation,route}) {
       <TextButton
         onPress={() => {
           // alert(id)
-          postAlert();
+          // postAlert();
+          addCalander()
+
         }}
         icon={images.bell}
         loading={loading}

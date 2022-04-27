@@ -189,29 +189,28 @@ const LoginScreen = ({navigation,route}) => {
               marginTop: SIZES.radius,
               width: '88%',
               alignSelf: 'center',
-              // marginLeft: '7%',
+              justifyContent:"space-evenly",
+              alignItems:"center",
+              marginLeft:20
             }}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            {/* <View style={{flexDirection: 'row', alignItems: 'center'}}> */}
               <CustomSwitch
                 label="Save Me"
                 value={saveMe}
                 onChange={value => setSaveMe(value)}
               />
-            </View>
+            {/* </View> */}
             <TextButton
               label="Forgot Password?"
               buttonContainerStyle={{
                 backgroundColor: null,
                 width: 250,
-                // marginRight:120
               }}
               labelStyle={{
                 color: COLORS.Primary,
                 ...FONTS.h4,
-                marginRight: 50,
               }}
-              disabled={isEnableSignIn()}
-              onPress={() => navigation.navigate('ForgotPassword')}
+              onPress={() => navigation.navigate('ForgetPass')}
             />
           </View>
           <TextButton

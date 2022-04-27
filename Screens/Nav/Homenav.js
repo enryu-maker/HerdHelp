@@ -40,6 +40,7 @@ import SubDetails from '../Subscription/SubDetails';
 import Confirm from '../Subscription/Confirm';
 import BillingAdd from '../Subscription/BillingAdd';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import forgetPass from '../ForgetPass/forgetPass';
 const Stack = createSharedElementStackNavigator()
 
 const DrawerNav = () => {
@@ -114,22 +115,19 @@ export default class Homenav extends Component {
       profile_pic:''
     };
 }
-   fetchprofile = async () => {
-      const {data} = await axiosIns.get('profile/');
-      return data;
-  };
+   
   checkSubs= async()=>{
     let {data} = await axiosIns.get('subscriptions/isactive/');
     return data;
   }
   componentDidMount(){
-      this.fetchprofile().then((data)=>{
-        global.User = data;
-        this.setState({
-          username:data[0].username,
-          profile_pic:data[0].profile_picture
-        })
-      })
+      // this.fetchprofile().then((data)=>{
+      //   global.User = data;
+      //   this.setState({
+      //     username:data[0].username,
+      //     profile_pic:data[0].profile_picture
+      //   })
+      // })
       this.checkSubs().then(data=>{
           global.isActive=data.isactive
         })
@@ -138,8 +136,6 @@ export default class Homenav extends Component {
   render() {
     return (
       <>
-      <Profile_pic.Provider value={this.state.profile_pic}>
-      <Username.Provider value={this.state.username}>
         <Stack.Navigator screenOptions={({navigation})=>{
           return{
             detachPreviousScreen:!navigation.isFocused(),
@@ -175,9 +171,8 @@ export default class Homenav extends Component {
           <Stack.Screen name='Details' component={SubDetails}/>
           <Stack.Screen name='Confirm' component={Confirm}/>
           <Stack.Screen name='Address' component={BillingAdd}/>
+
         </Stack.Navigator>
-        </Username.Provider>
-        </Profile_pic.Provider>
       </>
     )
   }
