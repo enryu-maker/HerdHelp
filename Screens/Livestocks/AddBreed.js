@@ -43,6 +43,9 @@ const Addanimals = ({navigation, route}) => {
   const [mother, setMother] = useState('');
   const [father, setFather] = useState('');
   const [weight, setWeight] = useState(0);
+  const [weight30, setWeight30] = useState(0);
+  const [weight60, setWeight60] = useState(0);
+  const [weight90, setWeight90] = useState(0);
   const [name, setName] = useState('');
   const [dob, setDob] = useState('');
   const [dobt, setDobt] = useState('');
@@ -391,7 +394,7 @@ const Addanimals = ({navigation, route}) => {
             </View>
           }
           returnKeyType={'next'}
-          label="Name*"
+          label="Name"
           value={name}
           onChange={(value) => {
             setName(value);
@@ -486,13 +489,9 @@ const Addanimals = ({navigation, route}) => {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          // enableAvatar
           required
-          // showLoader
-          // mode="outlined"
           disableSelectionTick
           primaryColor={COLORS.Primary}
-          // avatarSize={28}
           value={bought}
           onChange={(value) => {
             setBought(value);
@@ -541,7 +540,7 @@ const Addanimals = ({navigation, route}) => {
                 </View>
               }
               returnKeyType={'next'}
-              label="Weight"
+              label="Birth Weight"
               value={weight}
               keyboardType="numeric"
               onChange={(value) => {
@@ -556,76 +555,112 @@ const Addanimals = ({navigation, route}) => {
               }}
               inputStyle={{marginLeft: 20, fontSize: 16}}
             />
-            <Dropdown
-          label="Mother Tag"
-          dropdownIcon={images.down}
-          dropdownIconSize={22}
-          borderRadius={SIZES.radius}
-          data={finder(tagl,valueMS)}
-          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
-          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
-          selectedItemViewStyle={{
-            backgroundColor: COLORS.Primary,
-            margin: 5,
-            borderRadius: SIZES.radius,
-          }}
-          // enableAvatar
-          animationIn="bounceInLeft"
-          animationOut="bounceOutLeft"
-          disableSelectionTick
-          primaryColor={COLORS.Primary}
-          avatarSize={28}
-          value={mother}
-          onChange={(value) => {
-            setMother(value);
-          }}
-          mainContainerStyle={{
-            borderRadius: SIZES.padding,
-            width: '88%',
-            alignSelf: 'center',
-            marginTop: SIZES.height > 800 ? SIZES.base : 10,
-          }}
-          itemContainerStyle={{
-            backgroundColor: COLORS.white,
-            margin: 5,
-            borderRadius: SIZES.radius,
-          }}
-        />
-        <Dropdown
-          label="Father Tag"
-          dropdownIcon={images.down}
-          dropdownIconSize={22}
-          borderRadius={SIZES.radius}
-          data={finder(tagl,valueMS)}
-          textInputStyle={(FONTS.body2, {letterSpacing: 2})}
-          selectedItemTextStyle={(FONTS.body3, {color: COLORS.white})}
-          selectedItemViewStyle={{
-            backgroundColor: COLORS.Primary,
-            margin: 5,
-            borderRadius: SIZES.radius,
-          }}
-          // enableAvatar
-          animationIn="bounceInLeft"
-          animationOut="bounceOutLeft"
-          disableSelectionTick
-          primaryColor={COLORS.Primary}
-          avatarSize={28}
-          value={father}
-          onChange={(value) => {
-            setFather(value);
-          }}
-          mainContainerStyle={{
-            borderRadius: SIZES.padding,
-            width: '88%',
-            alignSelf: 'center',
-            marginTop: SIZES.height > 800 ? SIZES.base : 10,
-          }}
-          itemContainerStyle={{
-            backgroundColor: COLORS.white,
-            margin: 5,
-            borderRadius: SIZES.radius,
-          }}
-        />
+            <View style={{
+              flexDirection:"row",
+              justifyContent:"space-evenly"
+            }}>
+            <FormInput
+              returnKeyType={'next'}
+              label="30 Day"
+              value={weight30}
+              keyboardType="numeric"
+              onChange={(value) => {
+                value=parseInt(value.replace(/,/g,""))
+                setWeight30(value);
+              }}
+              containerStyle={{
+                marginTop: SIZES.radius,
+                width:80
+              }}
+              inputContainerStyle={{
+                backgroundColor: COLORS.white,
+              }}
+              inputStyle={{fontSize: 16}}
+            />
+             <FormInput
+              returnKeyType={'next'}
+              label="60 Day"
+              value={weight60}
+              keyboardType="numeric"
+              onChange={(value) => {
+                value=parseInt(value.replace(/,/g,""))
+                setWeight60(value);
+              }}
+              containerStyle={{
+                marginTop: SIZES.radius,
+                width:80
+              }}
+              inputContainerStyle={{
+                backgroundColor: COLORS.white,
+              }}
+              inputStyle={{fontSize: 16}}
+            />
+             <FormInput
+              returnKeyType={'next'}
+              label="90 Day"
+              value={weight90}
+              keyboardType="numeric"
+              onChange={(value) => {
+                value=parseInt(value.replace(/,/g,""))
+                setWeight90(value);
+              }}
+              containerStyle={{
+                marginTop: SIZES.radius,
+                width:80
+              }}
+              inputContainerStyle={{
+                backgroundColor: COLORS.white,
+              }}
+              inputStyle={{fontSize: 16}}
+            />
+            </View>
+            <FormInput
+              prependComponent={
+                <View style={{alignSelf: 'center', justifyContent: 'center'}}>
+                  <Image
+                    source={images.tag}
+                    style={{width: 26, height: 26, tintColor: COLORS.Primary}}
+                  />
+                </View>
+              }
+              returnKeyType={'next'}
+              label="Mother Tag Number"
+              value={mother}
+              onChange={(value) => {
+                setMother(value);
+              }}
+              inputContainerStyle={{
+                backgroundColor: COLORS.white,
+              }}
+              containerStyle={{
+                marginTop: SIZES.radius,
+              }}
+              inputStyle={{marginLeft: 20, fontSize: 16}}
+            />
+            <FormInput
+              prependComponent={
+                <View style={{alignSelf: 'center', justifyContent: 'center'}}>
+                  <Image
+                    source={images.tag}
+                    style={{width: 26, height: 26, tintColor: COLORS.Primary}}
+                  />
+                </View>
+              }
+              returnKeyType={'next'}
+              label="Father Tag Number"
+              value={father}
+              onChange={(value) => {
+                setFather(value);
+              }}
+              inputContainerStyle={{
+                backgroundColor: COLORS.white,
+              }}
+              containerStyle={{
+                marginTop: SIZES.radius,
+              }}
+              inputStyle={{marginLeft: 20, fontSize: 16}}
+            />
+        
             
             <Dropdown
               label="Vaccinated"

@@ -59,6 +59,9 @@ const EditAnimal = ({navigation, route}) => {
   const [showc, setshowc] = React.useState(false);
   const [pic, setPic] = React.useState('');
   const [picdata, setPicdata] = React.useState('');
+  const [weight30, setWeight30] = useState(0);
+  const [weight60, setWeight60] = useState(0);
+  const [weight90, setWeight90] = useState(0);
   const onChangeMS = value => {
     setValueMS(value);
   };
@@ -237,7 +240,7 @@ const EditAnimal = ({navigation, route}) => {
               />
             </View>
           }
-          label="Name*"
+          label="Name"
           value={name}
           returnKeyType={'next'}
           onChange={value => {
@@ -385,7 +388,7 @@ const EditAnimal = ({navigation, route}) => {
                   />
                 </View>
               }
-              label="Weight"
+              label="Birth Weight"
               returnKeyType={'next'}
               value={weight}
               keyboardType="numeric"
@@ -401,6 +404,65 @@ const EditAnimal = ({navigation, route}) => {
               }}
               inputStyle={{marginLeft: 20, fontSize: 16}}
             />
+            <View style={{
+              flexDirection:"row",
+              justifyContent:"space-evenly"
+            }}>
+            <FormInput
+              returnKeyType={'next'}
+              label="30 Day"
+              value={weight30}
+              keyboardType="numeric"
+              onChange={(value) => {
+                value=parseInt(value.replace(/,/g,""))
+                setWeight30(value);
+              }}
+              containerStyle={{
+                marginTop: SIZES.radius,
+                width:80
+              }}
+              inputContainerStyle={{
+                backgroundColor: COLORS.white,
+              }}
+              inputStyle={{fontSize: 16}}
+            />
+             <FormInput
+              returnKeyType={'next'}
+              label="60 Day"
+              value={weight60}
+              keyboardType="numeric"
+              onChange={(value) => {
+                value=parseInt(value.replace(/,/g,""))
+                setWeight60(value);
+              }}
+              containerStyle={{
+                marginTop: SIZES.radius,
+                width:80
+              }}
+              inputContainerStyle={{
+                backgroundColor: COLORS.white,
+              }}
+              inputStyle={{fontSize: 16}}
+            />
+             <FormInput
+              returnKeyType={'next'}
+              label="90 Day"
+              value={weight90}
+              keyboardType="numeric"
+              onChange={(value) => {
+                value=parseInt(value.replace(/,/g,""))
+                setWeight90(value);
+              }}
+              containerStyle={{
+                marginTop: SIZES.radius,
+                width:80
+              }}
+              inputContainerStyle={{
+                backgroundColor: COLORS.white,
+              }}
+              inputStyle={{fontSize: 16}}
+            />
+            </View>
             <FormInput
               prependComponent={
                 <View style={{alignSelf: 'center', justifyContent: 'center'}}>

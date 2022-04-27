@@ -4,11 +4,12 @@ import {
   StyleSheet,
   Image,
   TouchableWithoutFeedback,
+  TouchableOpacity
 } from 'react-native';
 import React,{useContext} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {COLORS, SIZES, FONTS, images} from '../../Components/Constants';
-
+import CustomButton from '../Home/CustomButtom';
 import {Caption, Drawer, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
 
@@ -28,7 +29,17 @@ React.useEffect(()=>{
       <DrawerContentScrollView
         {...props}
         style={{borderBottomWidth: 0.8, borderBottomColor: COLORS.Primary}}>
-          <TouchableWithoutFeedback
+          <TouchableOpacity
+          style={{
+            flex:1,
+            height:40,
+            width:40,
+            backgroundColor:COLORS.white,
+            borderRadius:40/2,
+            justifyContent:"center",
+            alignSelf:"flex-end",
+            marginRight:20,
+          }}
           onPress={()=>{
             props.navigation.closeDrawer()
           }}
@@ -36,12 +47,11 @@ React.useEffect(()=>{
           <Image source={images.x} style={{
             height:25,
             width:25,
-            marginLeft:20,
-            marginBottom:10,
-            tintColor:COLORS.white
+            tintColor:COLORS.Primary,
+            alignSelf:"center"
           }}/>
 
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
           
         <TouchableWithoutFeedback
           style={styles.drawerContent}
@@ -58,6 +68,8 @@ React.useEffect(()=>{
                   width: 80,
                   height: 80,
                   borderRadius: 80 / 2,
+                  borderColor:COLORS.white,
+                  borderWidth:1
                 }}
               />
               <View />
@@ -178,23 +190,52 @@ React.useEffect(()=>{
             }}
           />
         </Drawer.Section>
+        <Drawer.Section>
+        <Text style={[FONTS.h3, {letterSpacing: 2, color: COLORS.white,alignSelf:"center",textDecorationLine:"underline"}]}>OverView</Text>
+        <View
+          style={{
+            backgroundColor: COLORS.white,
+            height: 40,
+            width: 120,
+            justifyContent: 'center',
+            flexDirection: 'row',
+            borderRadius: 15,
+            alignSelf: 'center',
+          }}>
+            
+          <Image
+             source={images.coin}
+            style={{
+              height: 25,
+              width: 25,
+              tintColor: COLORS.Primary,
+              alignSelf: 'center',
+              padding: 5,
+            }}
+          />
+          <Text
+            style={{
+              ...FONTS.h3,
+              alignSelf: 'center',
+              padding: 5,
+            }}>
+            X
+          </Text>
+          <Text
+            style={{
+              color: COLORS.Primary,
+              ...FONTS.h2,
+              alignSelf: 'center',
+              padding: 5,
+            }}>
+            {"Male"}
+          </Text>
+        </View>
+      </Drawer.Section>
       </DrawerContentScrollView>
+      
 
       <Drawer.Section style={styles.bottomDrawerSection}>
-        {/* <DrawerItem
-          icon={({color, size}) => (
-            <Image
-              source={images.setting}
-              style={[{height: 25, width: 25, tintColor: COLORS.white}]}
-            />
-          )}
-          label="Setting"
-          labelStyle={[FONTS.body3, {letterSpacing: 2, color: COLORS.white}]}
-          onPress={() => {
-            props.navigation.closeDrawer();
-            props.navigation.navigate('Setting');
-          }}
-        /> */}
         <DrawerItem
           icon={({color, size}) => (
             <Image

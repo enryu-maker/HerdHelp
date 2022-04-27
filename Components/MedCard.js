@@ -11,20 +11,12 @@ import Med from './Med';
 import axiosIns from '../helpers/helpers';
 import { useSelector } from 'react-redux';
 export default function MedCard({ navigation,route }) {
-  // const [med, setMed] = React.useState([]);
   const [err, setErr] = React.useState("");
   const [animal,setAnimal] = React.useState([])
-  // async function getMedication(tag) {
-  //   let {data} = await axiosIns.get(`getmedication/${tag}`);
-  //   return data;
-  // }
   const med = useSelector(state=>state.Reducers.med)
 
   React.useEffect(() => {
     let {animal} = route.params
-    // getMedication(animal.tag_number).then((data)=>{
-    // setMed(data)
-    // });
     setAnimal(animal)
   }, []);
     function renderHeader() {
@@ -60,7 +52,7 @@ export default function MedCard({ navigation,route }) {
             }
             title={'Medication'}
             titleStyle={{
-              marginLeft:120,
+              marginLeft:110,
               alignSelf:"center"
             }}
             rightComponent={
