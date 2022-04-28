@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Image,
   TouchableWithoutFeedback,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList
 } from 'react-native';
 import React,{useContext} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
@@ -12,15 +13,23 @@ import {COLORS, SIZES, FONTS, images} from '../../Components/Constants';
 import CustomButton from '../Home/CustomButtom';
 import {Caption, Drawer, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
-
+import axiosIns from '../../helpers/helpers';
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Logout, UserData } from '../../Store/actions';
 export default function Drawercontent(props) {
+  const [overView,setoverView] = React.useState([])
+  const fetchOverview = async () => {
+    const {data} = await axiosIns.get('reports/getoverview/');
+    return data;
+  };
 const dispatch = useDispatch()
 React.useEffect(()=>{
   dispatch(UserData())
+  fetchOverview().then(data=>{
+    setoverView(data)
+  })
 },[])
  
  const User = useSelector(state=>state.Reducers.userData) 
@@ -192,45 +201,6 @@ React.useEffect(()=>{
         </Drawer.Section>
         <Drawer.Section>
         <Text style={[FONTS.h3, {letterSpacing: 2, color: COLORS.white,alignSelf:"center",textDecorationLine:"underline"}]}>OverView</Text>
-        <View
-          style={{
-            backgroundColor: COLORS.white,
-            height: 40,
-            width: 120,
-            justifyContent: 'center',
-            flexDirection: 'row',
-            borderRadius: 15,
-            alignSelf: 'center',
-          }}>
-            
-          <Image
-             source={images.coin}
-            style={{
-              height: 25,
-              width: 25,
-              tintColor: COLORS.Primary,
-              alignSelf: 'center',
-              padding: 5,
-            }}
-          />
-          <Text
-            style={{
-              ...FONTS.h3,
-              alignSelf: 'center',
-              padding: 5,
-            }}>
-            X
-          </Text>
-          <Text
-            style={{
-              color: COLORS.Primary,
-              ...FONTS.h2,
-              alignSelf: 'center',
-              padding: 5,
-            }}>
-            {"Male"}
-          </Text>
-        </View>
       </Drawer.Section>
       </DrawerContentScrollView>
       

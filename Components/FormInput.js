@@ -25,7 +25,8 @@ const FormInput = ({
     maxLength,
     keytype="",
     onPressIn,
-    returnKeyType
+    returnKeyType,
+    col=COLORS.red
 }) => {
     return (
         <View style={{ ...containerStyle }}>
@@ -35,7 +36,7 @@ const FormInput = ({
                     alignSelf:"center"
                      }}>
                 <Text style={{ color: COLORS.gray, ...FONTS.body4}}>{label}</Text>
-                <Text style={{ color: COLORS.red, ...FONTS.body4 }}>{errorMsg}</Text>
+                <Text style={{ color: col, ...FONTS.body4 }}>{errorMsg}</Text>
             </View>
 
             <View

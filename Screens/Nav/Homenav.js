@@ -115,19 +115,22 @@ export default class Homenav extends Component {
       profile_pic:''
     };
 }
-   
+fetchprofile = async () => {
+  const {data} = await axiosIns.get('profile/');
+  return data;
+};
   checkSubs= async()=>{
     let {data} = await axiosIns.get('subscriptions/isactive/');
     return data;
   }
   componentDidMount(){
-      // this.fetchprofile().then((data)=>{
-      //   global.User = data;
-      //   this.setState({
-      //     username:data[0].username,
-      //     profile_pic:data[0].profile_picture
-      //   })
-      // })
+      this.fetchprofile().then((data)=>{
+        global.User = data;
+        this.setState({
+          username:data[0].username,
+          profile_pic:data[0].profile_picture
+        })
+      })
       this.checkSubs().then(data=>{
           global.isActive=data.isactive
         })

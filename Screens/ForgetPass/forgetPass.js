@@ -15,13 +15,25 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import TextButton from '../../Components/TextButton';
 import axios from 'axios';
 import {baseURL} from '../../helpers/helpers';
+import {ActivityIndicator} from 'react-native-paper';
+import {showMessage} from 'react-native-flash-message';
+
 export default function forgetPass({navigation}) {
   const [email, setEmail] = React.useState('');
   const [token, setToken] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [password2, setPassword2] = React.useState('');
+  const [passErr, setPassErr] = React.useState('');
+  const [passErr2, setPassErr2] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-  const [show, setShow] = React.useState(false);
+  const [showB1, setShowB1] = React.useState(true);
+  const [showB2, setShowB2] = React.useState(true);
+  const [isEmailvalid, setEmailisvalid] = React.useState(false);
+  const [isTokenvalid, setTokeisvalid] = React.useState(false);
   const [EmailErr, setEmailErr] = React.useState('');
   const [tokenErr, settokenErr] = React.useState('');
+  const [showPass, setShowPass] = React.useState(false);
+
 
   function isEnableSignIn() {
     return email != '';
@@ -43,23 +55,113 @@ export default function forgetPass({navigation}) {
       .then(response => {
         if (response.status == 201) {
           setLoading(false);
-          setShow(true);
+          setEmailisvalid(true);
+          setShowB1(false);
           setEmailErr(`OTP sent to ${email}`);
-
         } else {
           setLoading(false);
           setEmailErr('Email Not Registered');
+          setShowB1(false);
         }
       })
       .catch(e => {
-        console.log(e);
+        setLoading(false);
+        setEmailErr('Email Not Registered');
+        setShowB1(false);
+      });
+  }
+  async function setNewPass() {
+    setLoading(true);
+    await axios
+      .post(
+        baseURL + `/reset-password/submit?token=${token}`,
+        {
+          password: password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .then(response => {
+        if (response.status == 200) {
+          setLoading(false);
+          showMessage({
+            message:`Password Updated`,
+            type: 'default',
+            backgroundColor: COLORS.Primary,
+            color: COLORS.white,
+            titleStyle: {
+              alignSelf: 'center',
+              ...FONTS.h3,
+            },
+            animationDuration: 250,
+            icon: 'success',
+            style: {
+              justifyContent: 'center',
+            },
+          });
+        
+        } else {
+          setLoading(false);
+          showMessage({
+            message:`${response.data.msg}`,
+            type:"danger",
+            backgroundColor: COLORS.red,
+            color: COLORS.white,
+            titleStyle: {
+              alignSelf: 'center',
+              ...FONTS.h3,
+            },
+            animationDuration: 250,
+            icon: "danger",
+            style: {
+              justifyContent: 'center',
+            },
+          });
+        }
+      })
+      .catch(e => {
+        setLoading(false)
+        showMessage({
+          message: 'Something Went Wrong',
+          type:"danger",
+          backgroundColor: COLORS.red,
+          color: COLORS.white,
+          titleStyle: {
+            alignSelf: 'center',
+            ...FONTS.h3,
+          },
+          animationDuration: 250,
+          icon: "danger",
+          style: {
+            justifyContent: 'center',
+          },
+        });
       });
   }
   async function checkToken() {
-    let {data} = await axios.get(
+    setLoading(true);
+    await axios.get(
       baseURL + `/reset-password/token-validation?token=${token}`,
-    );
-    console.log(data);
+    ).then(response=>{
+      if(response.status==200){
+        setLoading(false);
+        setShowB2(false)
+        setTokeisvalid(true)
+      }
+      else{
+        settokenErr("Invalid OTP Please Check")
+        setLoading(false);
+        setShowB2(false)
+      }
+    }).catch(e=>{
+      settokenErr("Invalid OTP Please Check")
+      setLoading(false);
+      setShowB2(false)
+    })
+    
   }
 
   function renderHeader() {
@@ -139,6 +241,9 @@ export default function forgetPass({navigation}) {
               utils.validateEmail(text, setEmailErr);
               setEmail(text);
             }}
+            col={
+              EmailErr.split(' ').includes('OTP') ? COLORS.Primary : COLORS.red
+            }
             returnKeyType={'next'}
             errorMsg={EmailErr}
             placeholder={'Enter Registered Email'}
@@ -149,107 +254,174 @@ export default function forgetPass({navigation}) {
                 style={{
                   justifyContent: 'center',
                 }}>
+                  {
+                    isEmailvalid?
                 <Image
                   source={
-                    email == ''
-                      ? images.correct
-                      : email != '' && EmailErr == ''
-                      ? images.correct
-                      : images.cancel
+                    images.correct
                   }
                   style={{
                     height: 20,
                     width: 20,
                     tintColor:
-                      email == ''
-                        ? COLORS.gray
-                        : email != '' && EmailErr == ''
-                        ? COLORS.green
-                        : COLORS.red,
+                    COLORS.Primary
+
                   }}
-                />
+                />:null
+            }
               </View>
             }
           />
-          {email != '' ? (
+          {email != '' && showB1 ? (
+            !loading ? (
+              <TouchableOpacity
+                style={{
+                  padding: 10,
+                }}
+                onPress={() => getToken()}>
+                <Text
+                  style={{
+                    ...FONTS.h3,
+                    alignSelf: 'center',
+                    color: COLORS.Primary,
+                  }}>
+                  Generate OTP
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <ActivityIndicator
+                color={COLORS.Primary}
+                style={{
+                  margin: 10,
+                }}
+              />
+            )
+          ) : null}
+        </View>
+      </View>
+    );
+  }
+  function hiddenContent1() {
+    return (
+      <View
+        style={{
+          flex: 1,
+        }}>
+        <FormInput
+          label={'OTP'}
+          value={token}
+          onChange={text => {
+            setToken(text);
+          }}
+          returnKeyType={'next'}
+          placeholder={'Enter OTP'}
+          appendComponent={
+            <View
+              style={{
+                justifyContent: 'center',
+              }}>
+              {
+                    isTokenvalid?
+                <Image
+                  source={
+                    images.correct
+                  }
+                  style={{
+                    height: 20,
+                    width: 20,
+                    tintColor:
+                    COLORS.Primary
+
+                  }}
+                />:null
+            }
+            </View>
+          }
+        />
+        {token != '' && showB2 ? (
+          !loading ? (
             <TouchableOpacity
               style={{
                 padding: 10,
               }}
-              onPress={() => getToken()}>
+              onPress={() => checkToken()}>
               <Text
                 style={{
                   ...FONTS.h3,
                   alignSelf: 'center',
                   color: COLORS.Primary,
                 }}>
-                Generate OTP
+                Verify Token
               </Text>
             </TouchableOpacity>
-          ) : null}
-        </View>
+          ) : (
+            <ActivityIndicator
+              color={COLORS.Primary}
+              style={{
+                margin: 10,
+              }}
+            />
+          )
+        ) : null}
       </View>
     );
   }
-  function hiddenContent() {
+  function hiddenContent2() {
     return (
       <View
         style={{
           flex: 1,
-          marginTop: SIZES.height > 800 ? SIZES.padding * 1.2 : SIZES.radius,
+          marginTop:40
         }}>
         <FormInput
-          label={'Token'}
-          value={token}
+          label={'New Password'}
+          value={password}
           onChange={text => {
-            setToken(text);
+            utils.validatePassword(text,setPassErr)
+            setPassword(text);
           }}
+          errorMsg={passErr}
           returnKeyType={'next'}
-          placeholder={'Enter Token'}
-          autoCompleteType="email"
+          placeholder={'Enter New Password'}
+          secureTextEntry={!showPass}
           appendComponent={
-            <View
+            <TouchableOpacity
               style={{
+                width: 40,
+                alignItems: 'flex-end',
                 justifyContent: 'center',
-              }}>
+              }}
+              onPress={() => setShowPass(!showPass)}>
               <Image
-                source={
-                  token == ''
-                    ? images.correct
-                    : token != '' && tokenErr == ''
-                    ? images.correct
-                    : images.cancel
-                }
+                source={showPass ? images.eye_close : images.eye}
                 style={{
                   height: 20,
                   width: 20,
-                  tintColor:
-                    token == ''
-                      ? COLORS.gray
-                      : token != '' && tokenErr == ''
-                      ? COLORS.green
-                      : COLORS.red,
+                  tintColor: showPass ? COLORS.Primary : COLORS.gray,
                 }}
               />
-            </View>
+            </TouchableOpacity>
           }
         />
-        {token != '' ? (
-          <TouchableOpacity
-            style={{
-              padding: 10,
-            }}
-            onPress={() => checkToken()}>
-            <Text
-              style={{
-                ...FONTS.h3,
-                alignSelf: 'center',
-                color: COLORS.Primary,
-              }}>
-              Verify Token
-            </Text>
-          </TouchableOpacity>
-        ) : null}
+        
+        <TextButton
+        border={false}
+        icon={images.update}
+        buttonContainerStyle={{
+          height: 55,
+          alignItems: 'center',
+          borderRadius: SIZES.radius,
+          marginTop: 40,
+          backgroundColor:
+            password != '' ? COLORS.Primary : COLORS.transparentPrimary2,
+        }}
+        loading={loading}
+        onPress={() => {
+          setNewPass()
+        }}
+        label={'Set Password'}
+      />
+        
       </View>
     );
   }
@@ -268,27 +440,10 @@ export default function forgetPass({navigation}) {
           // paddingHorizontal: SIZES.padding,
         }}>
         {renderForm()}
-        {show ? hiddenContent() : null}
+        {isEmailvalid ? hiddenContent1() : null}
+        {isTokenvalid ? hiddenContent2() : null}
       </KeyboardAwareScrollView>
-      <TextButton
-        border={false}
-        icon={images.update}
-        buttonContainerStyle={{
-          height: 55,
-          alignItems: 'center',
-          borderRadius: SIZES.radius,
-          marginBottom: 40,
-          backgroundColor:
-            token != '' ? COLORS.Primary : COLORS.transparentPrimary2,
-        }}
-        loading={loading}
-        onPress={() => {
-          getToken();
-          // checkToken()
-        }}
-        // disabled={!isEnableSignIn()}
-        label={'GetToken'}
-      />
+      
     </View>
   );
 }

@@ -80,15 +80,7 @@ export default function Subscription({navigation,route}) {
         alignSelf:"center",
         ...FONTS.h3
       }}>{route.params.msg}</Text>
-      <ScrollView  
-        showsVerticalScrollIndicator={false}
-        style={{
-          flex:1,
-          // justifyContent:"center",
-          // alignSelf:"center"
-        }}
-
-      >
+     
         {loading ? (
           <ActivityIndicator size={'large'} color={COLORS.Primary} style={{
             height:SIZES.height/2
@@ -116,7 +108,6 @@ export default function Subscription({navigation,route}) {
           )}
         />
         )}
-      </ScrollView>
     </View>
   );
 }
