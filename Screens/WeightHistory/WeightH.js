@@ -180,6 +180,7 @@ export default function WeightH({navigation}) {
       }}>
       {renderHeader()}
       <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"
         contentContainerStyle={{
           marginTop: SIZES.radius,

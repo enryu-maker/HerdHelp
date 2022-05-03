@@ -6,10 +6,8 @@ import FormDateInput from '../../Components/FormDateInput';
 import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import FormTimeInput from '../../Components/FormTimeInput';
 import axiosIns from '../../helpers/helpers';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
-import CustomAlert from '../../Components/CustomAlert';
 import { showMessage, hideMessage, } from "react-native-flash-message";
 import { useDispatch, useSelector } from 'react-redux';
 import {getAlerts} from '../../Store/actions'
@@ -182,10 +180,10 @@ export default function Alerts({navigation,route}) {
                 borderRadius:40/2,
                 }}
               onPress={() => {
-                navigation.goBack();
+                navigation.openDrawer();
               }}>
               <Image
-                source={images.back}
+                source={images.menu}
                 style={{width: 25, height: 25, tintColor: COLORS.white,alignSelf:"center"}}
               />
             </TouchableOpacity>
@@ -335,7 +333,6 @@ export default function Alerts({navigation,route}) {
         />
         <FormDateInput
           label="End of Alert*"
-          // placeholder="YYYY/MM/DD"
           value={Edate}
           mode={"datetime"}
           setDate={setEdate}
@@ -368,6 +365,7 @@ export default function Alerts({navigation,route}) {
         {renderForm()}
       </KeyboardAwareScrollView>
       <TextButton
+      border={false}
         onPress={() => {
           // alert(id)
           // postAlert();

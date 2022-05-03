@@ -6,7 +6,6 @@ import HistoryCard from './HistoryCard'
 import { useSelector } from 'react-redux'
 export default function History({navigation,route}) {
     const [whist,setWhist] = React.useState([])
-    // const [unit,setUnit] = React.useState(global.unit)
     const unit = JSON.parse(useSelector(state => state.Reducers.unit))
 
     React.useEffect(()=>{
@@ -65,7 +64,10 @@ export default function History({navigation,route}) {
       return (
         <View style={{flex:1,backgroundColor:COLORS.white}}>
           {renderheader()}
-          <ScrollView showsHorizontalScrollIndicator={false}>
+          <ScrollView 
+        showsVerticalScrollIndicator={false}
+          
+          >
               {
                   whist.map((a,index)=>(
                     unit?

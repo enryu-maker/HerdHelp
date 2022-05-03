@@ -16,6 +16,7 @@ import { getSpecies, getStatus, getTags, UserData,getHerds, getUnit, getFinance,
 import FinanceInfo from '../Finance/FinanceInfo';
 import {Home} from "./Home"
 import LoadAlert from '../Alerts/LoadAlert';
+import Alerts from '../Alerts/Alerts';
 const BottomTab = createBottomTabNavigator();
 import {
   BottomTabBar,
@@ -114,16 +115,7 @@ const Main = ({navigation}) => {
                   width: focused ? 30 : 25,
                   tintColor:iconColor,
                 }}
-              />
-                {/* <Text style={{
-                  // justifyContent:"center",
-                  alignSelf:"center",
-                  ...FONTS.h4,
-                  color: COLORS.black 
-                }}>
-                {route.name}
-                </Text>  */}
-                             
+              />             
             </View>
           );
         },
@@ -134,7 +126,6 @@ const Main = ({navigation}) => {
         tabBarStyle: {
           height:SIZES.height>700?110:75,
           backgroundColor: COLORS.Primary,
-          // borderRadius:20
         },
         tabBarActiveTintColor: COLORS.transparentPrimary2,
         tabBarInactiveTintColor: COLORS.black,
@@ -142,7 +133,7 @@ const Main = ({navigation}) => {
       <BottomTab.Screen name="Herds" component={Home}/>
       <BottomTab.Screen name="Finance" component={FinanceInfo} />
       <BottomTab.Screen name="Add" component={AddModel} />
-      <BottomTab.Screen name="Alerts" component={LoadAlert}/>
+      <BottomTab.Screen name="Alerts" component={Alerts}/>
       <BottomTab.Screen name="Settings" component={Setting} />
     </BottomTab.Navigator>
     </>
