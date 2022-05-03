@@ -5,13 +5,11 @@ import {
   Image,
   ScrollView,
   Alert,
-  ActivityIndicator,
 } from 'react-native';
 import React from 'react';
 import Header from './Header';
 import {COLORS, SIZES, images, FONTS} from './Constants';
 import InfoItem from './InfoItem';
-import axiosIns from '../helpers/helpers';
 import Status from './Status';
 import TextButton from './TextButton';
 import CustomButton from './CustomButton';
