@@ -238,6 +238,21 @@ export const Info = ({navigation, route}) => {
         />
         {animal?.bought == false ? (
           <View>
+            <InfoItem
+              label="30 Days"
+              value={unit == true ?animal?.weight_30:animal?.weight_30_kg}
+              withDivider={false}
+            />
+            <InfoItem
+              label="60 Days"
+              value={unit == true ?animal?.weight_60:animal?.weight_60_kg}
+              withDivider={false}
+            />
+            <InfoItem
+              label="90 Days"
+              value={unit == true ?animal?.weight_90:animal?.weight_90_kg}
+              withDivider={false}
+            />
             <InfoItem label="Date Of Birth" value={animal?.birth_date} />
             <InfoItem label="Mother Tag" value={animal?.mother_supporttag} />
             <InfoItem

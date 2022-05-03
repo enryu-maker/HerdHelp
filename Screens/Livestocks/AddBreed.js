@@ -217,12 +217,24 @@ const Addanimals = ({navigation, route}) => {
       unit == true ? weight30 : Math.round(weight30 / 0.45359237),
     );
     formData.append(
+      'weight_30_kg',
+      unit == false ? weight : Math.round(weight * 0.45359237),
+    );
+    formData.append(
       'weight_60',
       unit == true ? weight60 : Math.round(weight60 / 0.45359237),
     );
     formData.append(
+      'weight_60_kg',
+      unit == false ? weight : Math.round(weight * 0.45359237),
+    );
+    formData.append(
       'weight_90',
       unit == true ? weight90 : Math.round(weight90 / 0.45359237),
+    );
+    formData.append(
+      'weight_90_kg',
+      unit == false ? weight : Math.round(weight * 0.45359237),
     );
     formData.append('bred', bred);
     formData.append('age', age);

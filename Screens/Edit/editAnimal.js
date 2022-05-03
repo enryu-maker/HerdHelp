@@ -20,8 +20,8 @@ import FormInput from '../../Components/FormInput';
 import TextButton from '../../Components/TextButton';
 import FormDateInput from '../../Components/FormDateInput';
 import {showMessage, hideMessage} from 'react-native-flash-message';
-import { useDispatch, useSelector } from 'react-redux';
-import { getHerds } from '../../Store/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {getHerds} from '../../Store/actions';
 const EditAnimal = ({navigation, route}) => {
   React.useEffect(() => {
     setId(global.id);
@@ -48,13 +48,13 @@ const EditAnimal = ({navigation, route}) => {
   );
   const [bought, setBought] = useState(route.params.animal?.bought);
   const [loading, setLoading] = React.useState(false);
-  const animals = useSelector(state=>state.Reducers.cat)
+  const animals = useSelector(state => state.Reducers.cat);
   const [id, setId] = React.useState('');
   const [registration, setRegistration] = React.useState(
     route.params.animal?.registration,
   );
 
-  const unit = JSON.parse(useSelector(state=>state.Reducers.unit))
+  const unit = JSON.parse(useSelector(state => state.Reducers.unit));
 
   const [showc, setshowc] = React.useState(false);
   const [pic, setPic] = React.useState('');
@@ -62,6 +62,7 @@ const EditAnimal = ({navigation, route}) => {
   const [weight30, setWeight30] = useState(0);
   const [weight60, setWeight60] = useState(0);
   const [weight90, setWeight90] = useState(0);
+
   const onChangeMS = value => {
     setValueMS(value);
   };
@@ -104,6 +105,12 @@ const EditAnimal = ({navigation, route}) => {
     breed: Breed,
     weight: unit == true ? weight : Math.round(weight / 0.45359237),
     weight_kg: unit == false ? weight : Math.round(weight * 0.45359237),
+    weight_30: unit == true ? weight30 : Math.round(weight30 / 0.45359237),
+    weight_30_kg: unit == false ? weight : Math.round(weight * 0.45359237),
+    weight_60: unit == true ? weight60 : Math.round(weight60 / 0.45359237),
+    weight_60_kg: unit == false ? weight : Math.round(weight * 0.45359237),
+    weight_90: unit == true ? weight90 : Math.round(weight90 / 0.45359237),
+    weight_90_kg: unit == false ? weight : Math.round(weight * 0.45359237),
     bred: bred,
     age: age,
     vaccinated: vaccinated,
@@ -111,7 +118,7 @@ const EditAnimal = ({navigation, route}) => {
     price: price,
     bought: bought,
   });
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   async function postAnimal() {
     setLoading(true);
     if (isEnableSignIn()) {
@@ -136,16 +143,16 @@ const EditAnimal = ({navigation, route}) => {
               },
               animationDuration: 250,
               icon: 'success',
-              style:{
-                justifyContent:"center"
-              }
+              style: {
+                justifyContent: 'center',
+              },
             });
-            dispatch(getHerds())
+            dispatch(getHerds());
           }
         })
         .catch(err => {
           setLoading(false);
-          console.log(err)
+          console.log(err);
           showMessage({
             message: `${err.response.data.msg}`,
             type: 'default',
@@ -157,9 +164,9 @@ const EditAnimal = ({navigation, route}) => {
             },
             animationDuration: 250,
             icon: 'danger',
-            style:{
-              justifyContent:"center"
-            }
+            style: {
+              justifyContent: 'center',
+            },
           });
         });
     } else {
@@ -175,9 +182,9 @@ const EditAnimal = ({navigation, route}) => {
         },
         icon: 'danger',
         animationDuration: 250,
-        style:{
-          justifyContent:"center"
-        }
+        style: {
+          justifyContent: 'center',
+        },
       });
     }
   }
@@ -393,7 +400,7 @@ const EditAnimal = ({navigation, route}) => {
               value={weight}
               keyboardType="numeric"
               onChange={value => {
-                value = parseInt(value.replace(/,/g,""))
+                value = parseInt(value.replace(/,/g, ''));
                 setWeight(value);
               }}
               containerStyle={{
@@ -404,64 +411,65 @@ const EditAnimal = ({navigation, route}) => {
               }}
               inputStyle={{marginLeft: 20, fontSize: 16}}
             />
-            <View style={{
-              flexDirection:"row",
-              justifyContent:"space-evenly"
-            }}>
-            <FormInput
-              returnKeyType={'next'}
-              label="30 Day"
-              value={weight30}
-              keyboardType="numeric"
-              onChange={(value) => {
-                value=parseInt(value.replace(/,/g,""))
-                setWeight30(value);
-              }}
-              containerStyle={{
-                marginTop: SIZES.radius,
-                width:80
-              }}
-              inputContainerStyle={{
-                backgroundColor: COLORS.white,
-              }}
-              inputStyle={{fontSize: 16}}
-            />
-             <FormInput
-              returnKeyType={'next'}
-              label="60 Day"
-              value={weight60}
-              keyboardType="numeric"
-              onChange={(value) => {
-                value=parseInt(value.replace(/,/g,""))
-                setWeight60(value);
-              }}
-              containerStyle={{
-                marginTop: SIZES.radius,
-                width:80
-              }}
-              inputContainerStyle={{
-                backgroundColor: COLORS.white,
-              }}
-              inputStyle={{fontSize: 16}}
-            />
-             <FormInput
-              returnKeyType={'next'}
-              label="90 Day"
-              value={weight90}
-              keyboardType="numeric"
-              onChange={(value) => {
-                value=parseInt(value.replace(/,/g,""))
-                setWeight90(value);
-              }}
-              containerStyle={{
-                marginTop: SIZES.radius,
-                width:80
-              }}
-              inputContainerStyle={{
-                backgroundColor: COLORS.white,
-              }}
-              inputStyle={{fontSize: 16}}
-            />
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+              }}>
+              <FormInput
+                returnKeyType={'next'}
+                label="30 Day"
+                value={weight30}
+                keyboardType="numeric"
+                onChange={value => {
+                  value = parseInt(value.replace(/,/g, ''));
+                  setWeight30(value);
+                }}
+                containerStyle={{
+                  marginTop: SIZES.radius,
+                  width: 80,
+                }}
+                inputContainerStyle={{
+                  backgroundColor: COLORS.white,
+                }}
+                inputStyle={{fontSize: 16}}
+              />
+              <FormInput
+                returnKeyType={'next'}
+                label="60 Day"
+                value={weight60}
+                keyboardType="numeric"
+                onChange={value => {
+                  value = parseInt(value.replace(/,/g, ''));
+                  setWeight60(value);
+                }}
+                containerStyle={{
+                  marginTop: SIZES.radius,
+                  width: 80,
+                }}
+                inputContainerStyle={{
+                  backgroundColor: COLORS.white,
+                }}
+                inputStyle={{fontSize: 16}}
+              />
+              <FormInput
+                returnKeyType={'next'}
+                label="90 Day"
+                value={weight90}
+                keyboardType="numeric"
+                onChange={value => {
+                  value = parseInt(value.replace(/,/g, ''));
+                  setWeight90(value);
+                }}
+                containerStyle={{
+                  marginTop: SIZES.radius,
+                  width: 80,
+                }}
+                inputContainerStyle={{
+                  backgroundColor: COLORS.white,
+                }}
+                inputStyle={{fontSize: 16}}
+              />
             </View>
             <FormInput
               prependComponent={
@@ -526,7 +534,7 @@ const EditAnimal = ({navigation, route}) => {
               // required
               disableSelectionTick
               animationIn="bounceInLeft"
-          animationOut="bounceOutLeft"
+              animationOut="bounceOutLeft"
               primaryColor={COLORS.Primary}
               avatarSize={28}
               value={vaccinated}
@@ -642,8 +650,8 @@ const EditAnimal = ({navigation, route}) => {
               keyboardType="numeric"
               onChange={value => {
                 // const v = value
-                value = value.replace(/,/g,"")
-                value=parseInt(value.replace(/$/g,""))
+                value = value.replace(/,/g, '');
+                value = parseInt(value.replace(/$/g, ''));
                 setPrice(value);
               }}
               containerStyle={{
@@ -701,7 +709,7 @@ const EditAnimal = ({navigation, route}) => {
               returnKeyType={'next'}
               keyboardType="numeric"
               onChange={value => {
-                value = parseInt(value.replace(/,/g,""))
+                value = parseInt(value.replace(/,/g, ''));
                 setWeight(value);
               }}
               containerStyle={{
@@ -873,7 +881,6 @@ const EditAnimal = ({navigation, route}) => {
         flex: 1,
         backgroundColor: COLORS.white,
       }}>
-
       {renderHeader()}
       <PickerType
         show={showc}
@@ -903,11 +910,11 @@ const EditAnimal = ({navigation, route}) => {
         buttonContainerStyle={{
           // height: 60,
           marginTop: SIZES.padding,
-            marginHorizontal: SIZES.padding,
-            marginBottom: SIZES.padding,
-            borderTopLeftRadius: SIZES.radius,
-            borderTopRightRadius: SIZES.radius,
-            backgroundColor: COLORS.Primary,
+          marginHorizontal: SIZES.padding,
+          marginBottom: SIZES.padding,
+          borderTopLeftRadius: SIZES.radius,
+          borderTopRightRadius: SIZES.radius,
+          backgroundColor: COLORS.Primary,
         }}
         label={'Update Animals'}
         loading={loading}
