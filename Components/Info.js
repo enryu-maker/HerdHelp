@@ -43,7 +43,7 @@ export const Info = ({navigation, route}) => {
     dispatch(getMedical(value.tag_number))
     setCond(cond);
   }, []);
-  const unit = useSelector(state => state.Reducers.unit);
+  const unit = JSON.parse(useSelector(state => state.Reducers.unit))
 
   function renderSectionOne() {
     return (
@@ -64,7 +64,7 @@ export const Info = ({navigation, route}) => {
         <InfoItem label="Tag Number" value={animal?.support_tag} />
         <InfoItem
           label="Weight"
-          value={unit ? `${animal?.weight} lbs` : `${animal?.weight_kg} kg`}
+          value={ unit == true ? `${animal?.weight} lbs` : `${animal?.weight_kg} kg`}
           withDivider={false}
         />
       </View>
@@ -166,6 +166,7 @@ export const Info = ({navigation, route}) => {
       );
     }
   }
+
   function renderSectionZero() {
     return (
       <CustomButton
@@ -238,18 +239,15 @@ export const Info = ({navigation, route}) => {
           <View>
             <InfoItem
               label="30 Days"
-              value={unit == true ?animal?.weight_30:animal?.weight_30_kg}
-              withDivider={false}
+              value={unit == true ?`${animal?.weight_30} lbs` :`${animal?.weight_30_kg} kg`}
             />
             <InfoItem
               label="60 Days"
-              value={unit == true ?animal?.weight_60:animal?.weight_60_kg}
-              withDivider={false}
+              value={unit == true ?`${animal?.weight_60} lbs`:`${animal?.weight_60_kg} kg`}
             />
             <InfoItem
               label="90 Days"
-              value={unit == true ?animal?.weight_90:animal?.weight_90_kg}
-              withDivider={false}
+              value={unit == true ?`${animal?.weight_90} lbs`:`${animal?.weight_90_kg} kg`}
             />
             <InfoItem label="Date Of Birth" value={animal?.birth_date} />
             <InfoItem label="Mother Tag" value={animal?.mother_supporttag} />
