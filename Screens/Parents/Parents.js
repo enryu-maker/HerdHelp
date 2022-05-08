@@ -27,8 +27,8 @@ export default function Parents({navigation}) {
     setTag('');
     setAnimal('');
   }
+  
   async function findChildren() {
-
       setLoading(true);
       try {
         let {data} = await axiosIns.get(
@@ -37,9 +37,9 @@ export default function Parents({navigation}) {
         if (data.length > 0 && data != undefined) {
           console.log(data)
           clear()
-          setBabies(data)
-          
-
+            navigation.navigate('ParentPage',{
+              data:data,
+            })
           setLoading(false);
           return data;
         } else {
@@ -48,7 +48,6 @@ export default function Parents({navigation}) {
         }
       } catch (e) {
         setTag('');
-        set('');
         setLoading(false);
         setErr('Server Error');
       }
@@ -176,13 +175,13 @@ export default function Parents({navigation}) {
       </View>
     );
   }
-  function renderAnimal(data) {
-    return (
-      data.map((a,index) => (
-        a.status=='Alive'?Herd.push(a):Sold.push(a)
-    )))
+  // async function renderAnimal(data) {
+
+  //     await data.map((a,index) => (
+  //       a.status=='Alive'?Herd.push(a):Sold.push(a)
+  //   ))
       
-  }
+  // }
   return (
     <View
       style={{
@@ -201,18 +200,18 @@ export default function Parents({navigation}) {
         {renderForm()}
       </KeyboardAwareScrollView>
       
-      {
+      {/* {
         babies != undefined || !loading ?
       (
       
       <ScrollView>{renderAnimal(babies)}</ScrollView> 
       ):
       (<ActivityIndicator size={"large"} color={COLORS.Primary}/>)
-      }
+      } */}
       <TextButton
         onPress={() => {
           findChildren()
-          // navigation.navigate('ParentPage')
+          
         }}
         icon={images.parents}
         loading={loading}

@@ -1,12 +1,36 @@
-import {View, TouchableOpacity, Image, Text} from 'react-native';
+import {View, TouchableOpacity, Image, Text,FlatList} from 'react-native';
 import React from 'react';
 import {COLORS, SIZES, FONTS, images,formatter} from '../../Components/Constants';
 import Header from '../../Components/Header';
-
-export default function parentPage({navigation}) {
+import Card from '../../Components/Card';
+import { ActivityIndicator } from 'react-native-paper';
+export default function parentPage({navigation,route}) {
   const [selected, setSelected] = React.useState('Herd');
   const [Herd,setHerd] = React.useState([])
   const [Sold,setSold] = React.useState([])
+  const [active,setActive] = React.useState([])
+  const [Amount,setAmount] = React.useState(0)
+
+
+  React.useEffect(()=>{
+    let {data} = route.params
+    Seperator(data)
+  },[])
+  function Seperator(data){
+    data.map(a=>{
+      a.status=="Alive"?Herd.push(a):Sold.push(a)
+    })
+    setActive(Herd)
+  }
+
+  function getAmount(Sold){
+    let sum=0
+    Sold.forEach(x => {
+      sum += x;
+  });
+  return sum;
+    
+  }
   function renderheader() {
     return (
       <Header
@@ -66,6 +90,7 @@ export default function parentPage({navigation}) {
           }}
           onPress={() => {
             setSelected('Herd');
+            setActive(Herd)
           }}>
           <Text
             style={{
@@ -88,6 +113,7 @@ export default function parentPage({navigation}) {
           }}
           onPress={() => {
             setSelected('Sold');
+            setActive(Sold)
           }}>
           <Text
             style={{
@@ -101,13 +127,42 @@ export default function parentPage({navigation}) {
       </View>
     );
   }
+  function renderCards(){
+    return(
+      <FlatList
+      data={active}
+      keyExtractor={item => `${item.support_tag}`}
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item, index }) => (
+        <Card
+        key={index}
+        Flagged={item?.flagged}
+        cond={false}
+        Name={item.name}
+        Tagnumber={item.support_tag}
+        Gender={item.gender}
+        Species={item.category}
+        Weight={item.weight}
+        image={item.animal_image==null ? item.image:item.animal_image}
+        weight_kg={item.weight_kg}
+        onPress={() => {
+          navigation.navigate('Info', {
+            value: item,
+            cond:false
+          });
+        }}
+      />
+      )}
+      />
+    )
+  
+  }
   function renderFooter(price){
     return(
       <View style={{
         justifyContent:"flex-end",
         height:55,
         borderRadius:SIZES.radius,
-        // borderTopRightRadius:SIZES.radius,
         backgroundColor:COLORS.Primary,
         flexDirection:"row",
         justifyContent:"center",
@@ -151,26 +206,11 @@ export default function parentPage({navigation}) {
       }}>
       {renderheader()}
       {renderButtons()}
+      {renderCards()}
       {
-          selected=="Sold"?renderFooter(1200):null
+          selected=="Sold"?renderFooter(getAmount(Sold)):null
       }
     </View>
   );
 }
 
-{/* <View style={{
-      }}>
-      <Card 
-      key={index} 
-      Tagnumber={a.support_tag} 
-      Gender={a.gender} 
-      image={a.image} 
-      Name={a.name} 
-      Weight={a.weight} 
-      onPress={()=>{
-        navigation.navigate('Info',{
-          value:a,
-          cond:false
-        })
-      }}/>
-      </View> */}
