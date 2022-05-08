@@ -35,7 +35,6 @@ export const Info = ({navigation, route}) => {
   const dispatch = useDispatch()
   const animal = useSelector(state=>state.Reducers.animal)
   const med = useSelector(state=>state.Reducers.med)
-
   React.useEffect(() => {
     let {value} = route.params;
     let {cond} = route.params;

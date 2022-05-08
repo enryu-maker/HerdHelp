@@ -41,6 +41,7 @@ import Confirm from '../Subscription/Confirm';
 import BillingAdd from '../Subscription/BillingAdd';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import forgetPass from '../ForgetPass/forgetPass';
+import parentPage from '../Parents/parentPage';
 const Stack = createSharedElementStackNavigator()
 
 const DrawerNav = () => {
@@ -174,6 +175,8 @@ fetchprofile = async () => {
           <Stack.Screen name='Details' component={SubDetails}/>
           <Stack.Screen name='Confirm' component={Confirm}/>
           <Stack.Screen name='Address' component={BillingAdd}/>
+          <Stack.Screen name='ParentPage' component={parentPage}/>
+
 
         </Stack.Navigator>
       </>

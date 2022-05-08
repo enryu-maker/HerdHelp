@@ -15,6 +15,8 @@ export default function Parents({navigation}) {
   const [loading, setLoading] = React.useState(false);
   const [animal, setAnimal] = React.useState('');
   const [babies, setBabies] = React.useState([]);
+  const [Herd,setHerd] = React.useState([])
+  const [Sold,setSold] = React.useState([])
   const species = useSelector(state => state.Reducers.cat)
   const tagl = useSelector(state => state.Reducers.tags)
 
@@ -33,6 +35,7 @@ export default function Parents({navigation}) {
           `reports/getchildren/${id}${animal}${tag}`,
         );
         if (data.length > 0 && data != undefined) {
+          console.log(data)
           clear()
           setBabies(data)
           
@@ -176,23 +179,9 @@ export default function Parents({navigation}) {
   function renderAnimal(data) {
     return (
       data.map((a,index) => (
-      <View style={{
-      }}>
-      <Card 
-      key={index} 
-      Tagnumber={a.support_tag} 
-      Gender={a.gender} 
-      image={a.image} 
-      Name={a.name} 
-      Weight={a.weight} 
-      onPress={()=>{
-        navigation.navigate('Info',{
-          value:a,
-          cond:false
-        })
-      }}/>
-      </View>
+        a.status=='Alive'?Herd.push(a):Sold.push(a)
     )))
+      
   }
   return (
     <View
@@ -223,6 +212,7 @@ export default function Parents({navigation}) {
       <TextButton
         onPress={() => {
           findChildren()
+          // navigation.navigate('ParentPage')
         }}
         icon={images.parents}
         loading={loading}
