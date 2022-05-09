@@ -35,7 +35,6 @@ export default function Parents({navigation}) {
           `reports/getchildren/${id}${animal}${tag}`,
         );
         if (data.length > 0 && data != undefined) {
-          console.log(data)
           clear()
             navigation.navigate('ParentPage',{
               data:data,

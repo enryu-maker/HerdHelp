@@ -13,7 +13,7 @@ import {COLORS, SIZES, FONTS, images} from '../../Components/Constants';
 import CustomButton from '../Home/CustomButtom';
 import {Caption, Drawer, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
-import axiosIns from '../../helpers/helpers';
+import axiosIns, { baseURL } from '../../helpers/helpers';
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -31,11 +31,12 @@ React.useEffect(()=>{
     setoverView(data)
   })
 },[])
- 
+ console.log(overView)
  const User = useSelector(state=>state.Reducers.userData) 
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
+      showsVerticalScrollIndicator={false}
         {...props}
         style={{borderBottomWidth: 0.8, borderBottomColor: COLORS.Primary}}>
           <TouchableOpacity
@@ -200,7 +201,51 @@ React.useEffect(()=>{
           />
         </Drawer.Section>
         <Drawer.Section>
-        <Text style={[FONTS.h3, {letterSpacing: 2, color: COLORS.white,alignSelf:"center",textDecorationLine:"underline"}]}>OverView</Text>
+        <Text style={[FONTS.h3, {letterSpacing: 2, color: COLORS.white,alignSelf:"center"}]}>OverView</Text>
+        <FlatList
+        style={{
+          alignSelf:"center",
+          margin:5
+        }}
+        data={overView.animals_overview}
+      numColumns={2}
+        showsVerticalScrollIndicator={false}
+      renderItem={({ item, index }) => (
+        <View key={index} style={{
+          flexDirection:'row',
+          justifyContent:"space-evenly",
+          margin:10
+        }}>
+          <View style={{
+          height:35,
+          width:35,
+          borderRadius:35/2,
+          alignSelf:"center",
+          backgroundColor:COLORS.white,
+          margin:4,
+          justifyContent:"center"
+        }}>
+          <Text style={{
+          alignSelf:"center",
+          ...FONTS.h3,
+          color:COLORS.Primary
+        }} >
+         {item.count}
+        </Text>
+
+        </View>
+        <Text style={{
+          alignSelf:"center",
+          ...FONTS.body3,
+          color:COLORS.white
+        }} >
+         {item.label}
+        </Text>
+
+        </View>
+      )}
+        />
+        
       </Drawer.Section>
       </DrawerContentScrollView>
       
