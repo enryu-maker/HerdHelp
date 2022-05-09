@@ -151,8 +151,8 @@ export default function Parents({navigation}) {
             margin: 5,
             borderRadius: SIZES.radius,
           }}
-          animationIn="zoomIn"
-          animationOut="zoomOut"
+          animationIn="bounceInLeft"
+          animationOut="bounceOutLeft"
           disableSelectionTick
           primaryColor={COLORS.Primary}
           avatarSize={28}
@@ -175,13 +175,6 @@ export default function Parents({navigation}) {
       </View>
     );
   }
-  // async function renderAnimal(data) {
-
-  //     await data.map((a,index) => (
-  //       a.status=='Alive'?Herd.push(a):Sold.push(a)
-  //   ))
-      
-  // }
   return (
     <View
       style={{
