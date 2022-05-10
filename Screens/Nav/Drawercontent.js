@@ -31,7 +31,6 @@ React.useEffect(()=>{
     setoverView(data)
   })
 },[])
- console.log(overView)
  const User = useSelector(state=>state.Reducers.userData) 
   return (
     <View style={{flex: 1}}>
@@ -201,13 +200,13 @@ React.useEffect(()=>{
           />
         </Drawer.Section>
         <Drawer.Section>
-        <Text style={[FONTS.h3, {letterSpacing: 2, color: COLORS.white,alignSelf:"center"}]}>OverView</Text>
+        <Text style={[FONTS.h3, {letterSpacing: 2, color: COLORS.white,alignSelf:"center"}]}>Herds OverView</Text>
         <FlatList
         style={{
           alignSelf:"center",
           margin:5
         }}
-        data={overView.animals_overview}
+        data={overView?.animals_overview}
       numColumns={2}
         showsVerticalScrollIndicator={false}
       renderItem={({ item, index }) => (
