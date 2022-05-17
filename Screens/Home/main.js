@@ -15,14 +15,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSpecies, getStatus, getTags, UserData,getHerds, getUnit, getFinance,getAlerts, getFcat } from '../../Store/actions';
 import FinanceInfo from '../Finance/FinanceInfo';
 import {Home} from "./Home"
-import LoadAlert from '../Alerts/LoadAlert';
 import Alerts from '../Alerts/Alerts';
 const BottomTab = createBottomTabNavigator();
 import {
-  BottomTabBar,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-
 import AddModel from './AddModel';
 import Setting from '../Setting/Setting';
 const Main = ({navigation}) => {
