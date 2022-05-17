@@ -4,6 +4,7 @@ import { images,FONTS,SIZES, COLORS, formatter } from '../../Components/Constant
 import Header from '../../Components/Header'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomButton from '../Home/CustomButtom';
+import TextButton from '../../Components/TextButton'
 function SubDetails({navigation,route}) {
   const [Amount,setAmount] =React.useState(0)
   const [Data,setData] =React.useState(0)
@@ -227,7 +228,7 @@ function SubDetails({navigation,route}) {
       {renderContent()}
       {renderTable()}
       </KeyboardAwareScrollView>
-      <CustomButton
+      <TextButton
         onPress={() => {
           navigation.navigate("Address",{
             data:Amount,
@@ -241,18 +242,29 @@ function SubDetails({navigation,route}) {
         buttonContainerStyle={{
           height: 60,
           marginTop: SIZES.padding,
-          marginHorizontal: SIZES.padding,
+          // marginHorizontal: SIZES.padding,
           marginBottom: SIZES.padding + 10,
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.Primary,
         }}
         label={active && route.params.cond?'Renew':'Proceed'}
         label2={formatter.format( route.params.data.price)}
+        label2Style={{
+          justifyContent:"center",
+          color:COLORS.Primary,
+          alignSelf:"center",
+          marginBottom:3
+
+        }}
         labelStyle={{
             marginLeft:50
         }}
         buttonContainerStyle2={{
-            width:100
+            width:80,
+            height:30,
+            backgroundColor:COLORS.white,
+            marginBottom:15,
+            marginLeft:15
         }}
       />
     </View>

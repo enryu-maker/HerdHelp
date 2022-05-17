@@ -32,6 +32,7 @@ const Main = ({navigation}) => {
   }
   async function checkSubs() {
     let {data} = await axiosIns.get('subscriptions/isactive/');
+    console.log(data)
     return data;
   }
   const dispatch = useDispatch()
