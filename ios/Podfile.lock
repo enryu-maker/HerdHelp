@@ -361,6 +361,8 @@ PODS:
     - React-Core
   - RNGestureHandler (2.3.1):
     - React-Core
+  - RNIap (8.0.8):
+    - React-Core
   - RNImageCropPicker (0.37.3):
     - React-Core
     - React-RCTImage
@@ -495,6 +497,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNIap (from `../node_modules/react-native-iap`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -609,6 +612,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/push-notification-ios"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNIap:
+    :path: "../node_modules/react-native-iap"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
   RNPermissions:
@@ -681,6 +686,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: b49b4e38a1548d03b74b30e558a1d18465b94be7
   RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
   RNGestureHandler: 68f660f1080d3300936a67ce5c6879bd8f26ecc2
+  RNIap: bb56165cc68bfa269e2effd407d6ec0af63e796f
   RNImageCropPicker: 44e2807bc410741f35d4c45b6586aedfe3da39d2
   RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
   RNReanimated: 32c91e28f5780937b8efc07ddde1bab8d373fe0b

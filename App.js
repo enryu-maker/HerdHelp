@@ -184,8 +184,15 @@ export const Access = React.createContext();
 const App = () => {
   async function getPubKey() {
     let {data} = await axios.get(baseURL + 'payments/getpubkey/');
+    console.log(data)
     return data;
   }
+  React.useEffect(()=>{
+    getPubKey().then(data=>{
+      // console.log(data)
+      setPub(data)
+    })
+  },[])
   const [pub, setPub] = React.useState('');
   const [PermissionResult, setPermissionResult] = React.useState(null);
   requestMultiple(
@@ -195,10 +202,11 @@ const App = () => {
   ).then(result => {
     setPermissionResult(result);
   });
+  // console.log(pub)
 
   return (
     <Provider store={store}>
-      <StripeProvider publishableKey={pub}>
+      <StripeProvider publishableKey={"pk_test_51KkRiWSCRjhQ59aV02LeMYb4qDlPbjYjDzNg6tkqbQaslExRye4QO9m1Do7FgnuAeKmVzpvTAjbVKQYnPANExl900000675L28"}>
         <Permission.Provider value={PermissionResult}>
           <StatusBar
             barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
