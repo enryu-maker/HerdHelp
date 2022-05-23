@@ -68,9 +68,6 @@ export const images ={
     coin:require("../assets/Logo/coin.png"),
     gain:require("../assets/Logo/gain.png"),
     x:require("../assets/Logo/x.png"),
-
-
-
 }
 export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -121,9 +118,9 @@ export const SIZES = {
     width,
     height
 };
-const type = { base: (Platform.OS === "ios" ? "Helvetica Neue" : "monospace"), 
-bold: (Platform.OS === "ios" ? "HelveticaNeue-Bold" : "monospace"), 
-emphasis: (Platform.OS === "ios" ? "HelveticaNeue-Italic" : "monospace") }
+const type = { base: (Platform.OS === "ios" ? "Helvetica Neue" : 'Roboto'), 
+bold: (Platform.OS === "ios" ? "HelveticaNeue-Bold" : "Roboto"), 
+emphasis: (Platform.OS === "ios" ? "HelveticaNeue-Italic" : "Roboto") }
 export const FONTS = {
     largeTitle: { fontFamily: type.bold, fontSize: SIZES.largeTitle },
     h1: { fontFamily: type.bold, fontSize: SIZES.h1, lineHeight: 36, fontWeight:'bold'},

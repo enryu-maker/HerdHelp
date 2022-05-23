@@ -18,7 +18,7 @@ import {baseURL} from '../../helpers/helpers';
 import {ActivityIndicator} from 'react-native-paper';
 import {showMessage} from 'react-native-flash-message';
 
-export default function forgetPass({navigation}) {
+export default function ForgetPass({navigation}) {
   const [email, setEmail] = React.useState('');
   const [token, setToken] = React.useState('');
   const [password, setPassword] = React.useState('');

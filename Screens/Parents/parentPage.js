@@ -4,7 +4,7 @@ import {COLORS, SIZES, FONTS, images,formatter} from '../../Components/Constants
 import Header from '../../Components/Header';
 import Card from '../../Components/Card';
 import { ActivityIndicator } from 'react-native-paper';
-export default function parentPage({navigation,route}) {
+export default function ParentPage({navigation,route}) {
   const [selected, setSelected] = React.useState('Herd');
   const [Herd,setHerd] = React.useState([])
   const [Sold,setSold] = React.useState([])

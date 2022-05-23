@@ -206,7 +206,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <StripeProvider publishableKey={"pk_test_51KkRiWSCRjhQ59aV02LeMYb4qDlPbjYjDzNg6tkqbQaslExRye4QO9m1Do7FgnuAeKmVzpvTAjbVKQYnPANExl900000675L28"}>
+      {/* <StripeProvider publishableKey={"pk_test_51KkRiWSCRjhQ59aV02LeMYb4qDlPbjYjDzNg6tkqbQaslExRye4QO9m1Do7FgnuAeKmVzpvTAjbVKQYnPANExl900000675L28"}> */}
         <Permission.Provider value={PermissionResult}>
           <StatusBar
             barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
@@ -214,7 +214,7 @@ const App = () => {
           />
           <RootNavigation />
         </Permission.Provider>
-      </StripeProvider>
+      {/* </StripeProvider> */}
     </Provider>
   );
 };

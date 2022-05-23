@@ -41,8 +41,8 @@ import Confirm from '../Subscription/Confirm';
 import BillingAdd from '../Subscription/BillingAdd';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import forgetPass from '../ForgetPass/forgetPass';
-import parentPage from '../Parents/parentPage';
-const Stack = createSharedElementStackNavigator()
+import ParentPage from '../Parents/parentPage';
+const Stack = createNativeStackNavigator()
 
 const DrawerNav = () => {
   return (
@@ -143,7 +143,7 @@ fetchprofile = async () => {
         <Stack.Navigator screenOptions={({navigation})=>{
           return{
             detachPreviousScreen:!navigation.isFocused(),
-            headerShown: false
+            headerShown: false,
           }
         }}
           initialRouteName={'DrawNav'}>
@@ -175,9 +175,7 @@ fetchprofile = async () => {
           <Stack.Screen name='Details' component={SubDetails}/>
           <Stack.Screen name='Confirm' component={Confirm}/>
           <Stack.Screen name='Address' component={BillingAdd}/>
-          <Stack.Screen name='ParentPage' component={parentPage}/>
-
-
+          <Stack.Screen name='ParentPage' component={ParentPage}/>
         </Stack.Navigator>
       </>
     )

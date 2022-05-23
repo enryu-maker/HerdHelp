@@ -4,9 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../Auth/Login';
 import {Signup} from "../Auth/Signup"
 
-import forgetPass from '../ForgetPass/forgetPass';
+import ForgetPass from '../ForgetPass/forgetPass';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
-const Stack = createSharedElementStackNavigator()
+const Stack = createNativeStackNavigator()
 export default class Rootnav extends Component {
   render() {
     return (
@@ -20,7 +20,7 @@ export default class Rootnav extends Component {
           initialRouteName={'Login'} >
           <Stack.Screen name='Login' component={Login} />
           <Stack.Screen name='Signup' component={Signup} />
-          <Stack.Screen name='ForgetPass' component={forgetPass}/>
+          <Stack.Screen name='ForgetPass' component={ForgetPass}/>
         </Stack.Navigator>
       </>
     )

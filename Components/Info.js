@@ -310,11 +310,9 @@ export const Info = ({navigation, route}) => {
           alignSelf: 'center',
         }}
         onPress={() => {
-          navigation.navigate('Babies', {
-            label: 'Babies',
-            data: animal?.children,
-            cond: true,
-          });
+          navigation.navigate('ParentPage',{
+            data:animal?.children,
+          })
         }}
       />
     );

@@ -103,6 +103,7 @@ const Main = ({navigation}) => {
                 
               <Image
                 source={iconName}
+                resizeMode={"cover"}
                 style={{
                   alignSelf: 'center',
                   height:focused ? 30 : 25,
