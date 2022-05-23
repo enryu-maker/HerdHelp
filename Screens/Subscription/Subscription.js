@@ -181,7 +181,7 @@ export default function Subscription() {
       <Text style={{
         ...FONTS.h3,
         color:COLORS.Primary
-      }}>Hello!</Text>
+      }}>Hello! welcome to IAP</Text>
       {products.map(a=>(
         <View>
           <Text>{a.description}</Text>
