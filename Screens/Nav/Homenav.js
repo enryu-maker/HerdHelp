@@ -19,7 +19,6 @@ import Alerts from '../Alerts/Alerts';
 import FinanceInfo from '../Finance/FinanceInfo';
 import LoadAlert from '../Alerts/LoadAlert';
 import MedCard from '../../Components/MedCard';
-
 import Setting from '../Setting/Setting';
 import Report from '../Report/Report';
 import ReportOP from '../Report/ReportOP';
@@ -144,6 +143,7 @@ fetchprofile = async () => {
           return{
             detachPreviousScreen:!navigation.isFocused(),
             headerShown: false,
+            animation:"slide_from_right"
           }
         }}
           initialRouteName={'DrawNav'}>
@@ -184,6 +184,6 @@ fetchprofile = async () => {
 const styles = StyleSheet.create({
   drawerStyle: {
     backgroundColor:         COLORS.Primary,
-    width:                   '100%',
+    width:                   '90%',
 },
 })

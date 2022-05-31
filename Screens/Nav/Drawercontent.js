@@ -70,7 +70,7 @@ React.useEffect(()=>{
           <View style={styles.userInfoSection}>
             <View style={[styles.row, {flexDirection: 'row'}]}>
               <Image
-                source={{uri: User?.profile_picture==null?`https://ui-avatars.com/api/?name=${User?.username}`: User?.profile_picture}}
+                source={{uri:User?.profile_picture}}
                 resizeMode="cover"
                 style={{
                   width: 80,
@@ -198,13 +198,14 @@ React.useEffect(()=>{
             }}
           />
         </Drawer.Section>
-        <Drawer.Section>
+        {/* <Drawer.Section>
         <Text style={[FONTS.h3, {letterSpacing: 2, color: COLORS.white,alignSelf:"center"}]}>Herds OverView</Text>
         <FlatList
         style={{
           alignSelf:"center",
           margin:5
         }}
+        disableVirtualization={true}
         data={overView?.animals_overview}
       numColumns={2}
         showsVerticalScrollIndicator={false}
@@ -244,7 +245,7 @@ React.useEffect(()=>{
       )}
         />
         
-      </Drawer.Section>
+      </Drawer.Section> */}
       </DrawerContentScrollView>
       
 

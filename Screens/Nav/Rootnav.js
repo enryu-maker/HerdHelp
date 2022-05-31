@@ -14,7 +14,8 @@ export default class Rootnav extends Component {
         <Stack.Navigator screenOptions={({navigation})=>{
           return{
             detachPreviousScreen:!navigation.isFocused(),
-            headerShown: false
+            headerShown: false,
+            animation:"slide_from_right"
           }
         }}
           initialRouteName={'Login'} >

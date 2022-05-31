@@ -156,7 +156,7 @@ const RootNavigation = () => {
   };
 
   useEffect(() => {
-    enableScreens(false);
+    enableScreens(true);
     setTimeout(() => {
       SplashScreen.hide();
     }, 2000);
@@ -182,17 +182,6 @@ const RootNavigation = () => {
 export const Permission = React.createContext();
 export const Access = React.createContext();
 const App = () => {
-  async function getPubKey() {
-    let {data} = await axios.get(baseURL + 'payments/getpubkey/');
-    console.log(data)
-    return data;
-  }
-  React.useEffect(()=>{
-    getPubKey().then(data=>{
-      // console.log(data)
-      setPub(data)
-    })
-  },[])
   const [pub, setPub] = React.useState('');
   const [PermissionResult, setPermissionResult] = React.useState(null);
   requestMultiple(
@@ -206,7 +195,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      {/* <StripeProvider publishableKey={"pk_test_51KkRiWSCRjhQ59aV02LeMYb4qDlPbjYjDzNg6tkqbQaslExRye4QO9m1Do7FgnuAeKmVzpvTAjbVKQYnPANExl900000675L28"}> */}
+      <StripeProvider publishableKey={"pk_test_51KkRiWSCRjhQ59aV02LeMYb4qDlPbjYjDzNg6tkqbQaslExRye4QO9m1Do7FgnuAeKmVzpvTAjbVKQYnPANExl900000675L28"}>
         <Permission.Provider value={PermissionResult}>
           <StatusBar
             barStyle={Platform.OS == 'android' ? 'default' : 'dark-content'}
@@ -214,7 +203,7 @@ const App = () => {
           />
           <RootNavigation />
         </Permission.Provider>
-      {/* </StripeProvider> */}
+      </StripeProvider>
     </Provider>
   );
 };

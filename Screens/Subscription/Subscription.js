@@ -180,8 +180,11 @@ export default function Subscription() {
     }}>
       <Text style={{
         ...FONTS.h3,
-        color:COLORS.Primary
-      }}>Hello! welcome to IAP</Text>
+        color:COLORS.Primary,
+        alignSelf:"center"
+      }}>Hello! welcome to IAP {'\n'}
+        Platinum Tier
+      </Text>
       {products.map(a=>(
         <View>
           <Text>{a.description}</Text>
