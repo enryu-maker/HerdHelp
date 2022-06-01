@@ -18,6 +18,7 @@ import Update from '../Screens/Account/Update';
 import {useDispatch, useSelector} from 'react-redux';
 import { CleanAnimal, getAnimal, getMedical } from '../Store/actions';
 import ActivityIndicatorExample from './Loading';
+import { baseURL } from '../helpers/helpers';
 export const Info = ({navigation, route}) => {
   const [cond, setCond] = React.useState(false);
   const [show, setShow] = React.useState(false);
@@ -35,7 +36,7 @@ export const Info = ({navigation, route}) => {
   const dispatch = useDispatch()
   const animal = useSelector(state=>state.Reducers.animal)
   const med = useSelector(state=>state.Reducers.med)
-  console.log(animal)
+  // console.log(animal)
   React.useEffect(() => {
     let {value} = route.params;
     let {cond} = route.params;
@@ -81,7 +82,7 @@ export const Info = ({navigation, route}) => {
             alignSelf: 'center',
           }}>
           <Image
-            source={{uri: animal?.animal_image}}
+            source={{uri: baseURL + animal?.animal_image}}
             style={{
               width: 100,
               height: 100,
@@ -126,8 +127,7 @@ export const Info = ({navigation, route}) => {
             alignSelf: 'center',
           }}>
           <Image
-            // source={{uri:`https://ui-avatars.com/api/?name=${username}`}}
-            source={{uri: animal?.image}}
+            source={{uri: baseURL + animal?.image}}
             resizeMethod="auto"
             resizeMode="contain"
             style={{

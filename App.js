@@ -174,7 +174,6 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <FlashMessage position="top" />
-
       {token === null ? <Rootnav /> : <Homenav />}
     </NavigationContainer>
   );

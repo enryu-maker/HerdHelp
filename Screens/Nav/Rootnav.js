@@ -3,7 +3,6 @@ import { Text, StyleSheet, View,StatusBar ,Image} from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../Auth/Login';
 import {Signup} from "../Auth/Signup"
-
 import ForgetPass from '../ForgetPass/forgetPass';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 const Stack = createNativeStackNavigator()

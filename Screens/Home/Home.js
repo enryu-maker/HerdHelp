@@ -13,6 +13,7 @@ import ActivityIndicatorExample from '../../Components/Loading';
 export const Home = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const animals = useSelector(state=>state.Reducers.herds)
+  console.log(animals.length)
   const User = useSelector(state=>state.Reducers.userData)
   
   function renderHeader() {
