@@ -10,13 +10,13 @@ import {
 import React,{useContext} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {COLORS, SIZES, FONTS, images} from '../../Components/Constants';
-import CustomButton from '../Home/CustomButtom';
 import {Caption, Drawer, Title} from 'react-native-paper';
 import LineDivider from '../../Components/LineDivider';
 import axiosIns, { baseURL } from '../../helpers/helpers';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Logout, UserData } from '../../Store/actions';
+import { SafeAreaView } from 'react-native-safe-area-context';
 export default function Drawercontent(props) {
   const [overView,setoverView] = React.useState([])
   const fetchOverview = async () => {
@@ -198,7 +198,8 @@ React.useEffect(()=>{
             }}
           />
         </Drawer.Section>
-        {/* <Drawer.Section>
+        <Drawer.Section> 
+          <SafeAreaView>
         <Text style={[FONTS.h3, {letterSpacing: 2, color: COLORS.white,alignSelf:"center"}]}>Herds OverView</Text>
         <FlatList
         style={{
@@ -244,8 +245,9 @@ React.useEffect(()=>{
         </View>
       )}
         />
+        </SafeAreaView>
         
-      </Drawer.Section> */}
+      </Drawer.Section> 
       </DrawerContentScrollView>
       
 

@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../Auth/Login';
 import {Signup} from "../Auth/Signup"
 import ForgetPass from '../ForgetPass/forgetPass';
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 const Stack = createNativeStackNavigator()
 export default class Rootnav extends Component {
   render() {

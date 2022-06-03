@@ -16,7 +16,7 @@ export default function PickerType({
       width: 300,
       height: 300,
       cropping: true,
-      compressImageQuality:true
+      // compressImageQuality:true
     }).then(image => {
         const uriParts = image.path.split('.')
         const fileType = uriParts[uriParts.length - 1];
@@ -38,7 +38,7 @@ export default function PickerType({
         width: 300,
         height: 300,
         cropping: true,
-        compressImageQuality:true
+        // compressImageQuality:true
       }).then(image => {
         // console.log(image);
           const uriParts = image.path.split('.')

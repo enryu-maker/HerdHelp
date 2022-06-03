@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View,StatusBar ,Image} from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from '../Auth/Login';
-import {Signup} from "../Auth/Signup"
 import { Home } from '../Home/Home';
 import Add from '../Home/Add';
 import { COLORS, SIZES, FONTS, images } from '../../Components/Constants';
@@ -38,8 +35,6 @@ import Payment from '../Subscription/Payment';
 import SubDetails from '../Subscription/SubDetails';
 import Confirm from '../Subscription/Confirm';
 import BillingAdd from '../Subscription/BillingAdd';
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
-import forgetPass from '../ForgetPass/forgetPass';
 import ParentPage from '../Parents/parentPage';
 const Stack = createNativeStackNavigator()
 

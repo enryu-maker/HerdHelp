@@ -281,7 +281,7 @@ const Addanimals = ({navigation, route}) => {
           setLoading(false);
           console.log(err);
           showMessage({
-            message: `${err.response.data.msg}`,
+            message: `${err.response.data?.msg}`,
             type: 'default',
             backgroundColor: COLORS.red,
             color: COLORS.white,
